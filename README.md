@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 gvgai
 =====
 
@@ -34,3 +35,8 @@ This is likely because the ANT version that is installed with your version of Ec
 - Select the folder, which you extracted ANT into (e.g., /Users/gvgai/ant/apache-ant-1.9.4/)
 
 # gvgai_ui
+=======
+# gvgai_ui
+This repository is a wrapper parser for the GVGAI Framework. The goal of the parser is to create an independent layer able 
+to allow the development of portable graphical user interfaces for GVGAI.
+>>>>>>> 2c835d0be41ff35463ef0f54493509a53c754e55
