@@ -4,7 +4,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -52,18 +51,6 @@ public class SpriteContentParsed{
 		obj.put("parameters", parametersArray);
 		
 		return obj;
-	}
-	
-	public void writeAsAJSON(JSONObject obj)
-	{
-		try (FileWriter file = new FileWriter("JSONFiles/" + this.spriteContent.identifier + ".json")) {
-
-			file.write(obj.toJSONString());
-			file.flush();
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 	}
 	
 	public void childInheritParameters(SpriteContentParsed spriteContentParsed)
