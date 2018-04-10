@@ -106,7 +106,7 @@ public class ParserGameDescription extends VGDLParser{
 		
 		ParserGameDescription myParser = new ParserGameDescription();
 
-		String[] desc_lines = new IO().readFile("examples/gridphysics/assemblyline.txt");
+		String[] desc_lines = new IO().readFile("examples/gridphysics/zelda.txt");
 		if(desc_lines != null)
 		{
 			Node rootNode = myParser.indentTreeParser(desc_lines);
@@ -116,13 +116,7 @@ public class ParserGameDescription extends VGDLParser{
 			{
 				if(n.content.identifier.equals("SpriteSet"))
 				{
-					JSONArray spriteJSONArray = new JSONArray();
-					ArrayList<SpriteContentParsed> spriteContentParseds = myParser.parseSpriteSet(n);
-					for (SpriteContentParsed spriteContentParsed : spriteContentParseds) {
-						JSONObject obj = spriteContentParsed.exploreNode(spriteContentParsed);
-						spriteJSONArray.add(obj);
-					}
-					Utils.writeAsAJSON(spriteJSONArray, "sprtiteSet");
+					Utils.writeAsAJSON(myParser.generate(myParser, n), "sprtiteSet");
 					System.out.println();
 				}
 				else if(n.content.identifier.equals("InteractionSet"))
@@ -142,5 +136,19 @@ public class ParserGameDescription extends VGDLParser{
 			}
 
 		}
+	}
+
+	/**
+	 * @param myParser
+	 * @param n
+	 */
+	public JSONArray generate(ParserGameDescription myParser, Node n) {
+		JSONArray spriteJSONArray = new JSONArray();
+		ArrayList<SpriteContentParsed> spriteContentParseds = myParser.parseSpriteSet(n);
+		for (SpriteContentParsed spriteContentParsed : spriteContentParseds) {
+			JSONObject obj = spriteContentParsed.exploreNode(spriteContentParsed);
+			spriteJSONArray.add(obj);
+		}
+		return spriteJSONArray;
 	}
 }
