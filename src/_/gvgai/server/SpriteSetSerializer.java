@@ -24,18 +24,18 @@ public class SpriteSetSerializer implements HttpHandler{
 		// TODO Auto-generated method stub
     	String response = "";
     	JSONObject obj = new JSONObject();
-    	ParserGameDescription p = new ParserGameDescription();
+    	ParserGameDescription parser = new ParserGameDescription();
     	String[] desc_lines = new IO().readFile("examples/gridphysics/solarfox.txt");
     	if(desc_lines != null)
     	{
-    		Node rootNode = p.indentTreeParser(desc_lines);
+    		Node rootNode = parser.indentTreeParser(desc_lines);
 
     		//Parse here blocks of VGDL.
     		for(Node n : rootNode.children)
     		{
     			if(n.content.identifier.equals("SpriteSet"))
     			{
-    				JSONArray arr = p.generate(p, n);
+    				JSONArray arr = parser.generate(n);
     				response =  arr.toJSONString();
     			}
     		}

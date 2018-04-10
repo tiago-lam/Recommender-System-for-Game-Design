@@ -116,7 +116,7 @@ public class ParserGameDescription extends VGDLParser{
 			{
 				if(n.content.identifier.equals("SpriteSet"))
 				{
-					Utils.writeAsAJSON(myParser.generate(myParser, n), "sprtiteSet");
+					Utils.writeAsAJSON(myParser.generate(n), "sprtiteSet");
 					System.out.println();
 				}
 				else if(n.content.identifier.equals("InteractionSet"))
@@ -142,9 +142,9 @@ public class ParserGameDescription extends VGDLParser{
 	 * @param myParser
 	 * @param n
 	 */
-	public JSONArray generate(ParserGameDescription myParser, Node n) {
+	public JSONArray generate(Node n) {
 		JSONArray spriteJSONArray = new JSONArray();
-		ArrayList<SpriteContentParsed> spriteContentParseds = myParser.parseSpriteSet(n);
+		ArrayList<SpriteContentParsed> spriteContentParseds = this.parseSpriteSet(n);
 		for (SpriteContentParsed spriteContentParsed : spriteContentParseds) {
 			JSONObject obj = spriteContentParsed.exploreNode(spriteContentParsed);
 			spriteJSONArray.add(obj);
