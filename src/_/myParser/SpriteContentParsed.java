@@ -1,14 +1,18 @@
 package _.myParser;
 
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import core.content.SpriteContent;
 
+/**
+ * @author Tiago Machado
+ *
+ * Apr 10, 2018
+ */
 public class SpriteContentParsed{
 	
 	public SpriteContent spriteContent;

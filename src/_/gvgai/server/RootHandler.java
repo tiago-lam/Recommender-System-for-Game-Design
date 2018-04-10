@@ -9,6 +9,11 @@ import java.nio.file.Paths;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 
+/**
+ * @author Tiago Machado
+ *
+ * Apr 10, 2018
+ */
 public class RootHandler implements HttpHandler {
 
     @Override

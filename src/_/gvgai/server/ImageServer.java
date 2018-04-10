@@ -15,6 +15,11 @@ import com.sun.net.httpserver.HttpHandler;
 
 import sun.rmi.runtime.Log;
 
+/**
+ * @author Tiago Machado
+ *
+ * Apr 10, 2018
+ */
 public class ImageServer implements HttpHandler{
 
 	@Override
@@ -28,7 +33,7 @@ public class ImageServer implements HttpHandler{
 		parseQuery(query, parameters);
 		String imageToServe = (String) parameters.get("picture");
 
-		File file = new File("/Users/tiagomachado/Documents/cicero_branch/gvgai/sprites/" + 
+		File file = new File("sprites/" + 
 				imageToServe);
 		he.sendResponseHeaders(200, file.length());
 		he.getResponseHeaders().set("Content-Type", "image/png");

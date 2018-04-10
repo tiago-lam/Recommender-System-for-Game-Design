@@ -5,6 +5,11 @@ import java.net.InetSocketAddress;
 
 import com.sun.net.httpserver.HttpServer;
 
+/**
+ * @author Tiago Machado
+ *
+ * Apr 10, 2018
+ */
 public class MyServer {
 	
 	public static void main(String [] args) throws IOException

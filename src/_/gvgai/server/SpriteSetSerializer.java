@@ -17,6 +17,11 @@ import _.utils.Utils;
 import core.Node;
 import tools.IO;
 
+/**
+ * @author Tiago Machado
+ *
+ * Apr 10, 2018
+ */
 public class SpriteSetSerializer implements HttpHandler{
 
 	@Override
