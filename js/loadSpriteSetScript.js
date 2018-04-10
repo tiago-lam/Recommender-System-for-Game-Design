@@ -1,16 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Sprite Set</title>
-</head>
-<body>
-
-	<h1>Sprite Set</h1>
-	
-	<ul id="spriteList"></ul>
-
-<script>
-        var ul = document.getElementById("spriteList");
+var ul = document.getElementById("spriteList");
         
         //access the serve in order to get the sprite set of a game
         var xmlhttp = new XMLHttpRequest();
@@ -87,8 +75,3 @@
 
         request.send();
         console.log("finished");
-}
-</script>
-
-</body>
-</html>
