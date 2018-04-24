@@ -1,31 +1,43 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" type="text/css" href="css/spriteSetStyle.css">
-    <!-- <style>
-    .column {
-        float: left;
-        padding: 10px;
-        background-color: rgb(215, 226, 244);
-    }
+    <link rel="stylesheet" type="text/css" href="css/appearance.css">
+    <style type="text/css">
+        #spriteSetContainer{
+            float: left;
+        }
 
-    .boundary {
-        border-width: 4px;
-        border-style: solid;
-        border-color: rgb(92, 19, 165);
-    }
-</style> -->
+        #inspector{
+            float: left;
+        }
+
+        div{
+            margin-left:75px;
+        }
+    </style>
+    
 	<title>Sprite Set</title>
 </head>
 <body>
 
 	<h1>Sprite Set</h1>
 	
-    <div class="column boundary" id="spriteSetContainer">
-	   <ol id="spriteList"></ol>
+    <div class="dd" id="spriteSetContainer">
+	   <ul id="spriteList"></ul>
     </div>
 
+    <div id="inspector">
+      <p id="name">1</p>
+      <img id="image" src=""></img>
+    </div>
+
+<script
+  src="http://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+<script type="text/javascript" src="js/nestable.js"></script>
 <script type="text/javascript" src="js/showSpriteSetScript.js"></script>
+
 
 </body>
 </html>
