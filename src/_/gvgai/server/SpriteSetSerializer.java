@@ -29,6 +29,7 @@ public class SpriteSetSerializer implements HttpHandler{
 		// TODO Auto-generated method stub
     	String response = "";
     	JSONObject obj = new JSONObject();
+    	//START BY REFACTORING THIS PART
     	ParserGameDescription parser = new ParserGameDescription();
     	String[] desc_lines = new IO().readFile("examples/gridphysics/solarfox.txt");
     	if(desc_lines != null)

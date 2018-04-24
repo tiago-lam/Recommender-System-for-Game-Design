@@ -18,7 +18,7 @@ public class LoadSpriteSet implements HttpHandler{
 	public void handle(HttpExchange he) throws IOException {
 		// TODO Auto-generated method stub
 		byte[] encoded = Files.readAllBytes(
-				Paths.get("Views/loadSpriteSet.html"));
+				Paths.get("Views/loadSpriteSet2.html"));
 		String response =  new String(encoded, "UTF-8");
 		he.sendResponseHeaders(200, encoded.length);
 		he.getResponseHeaders().set("Content-Type", "text/html");

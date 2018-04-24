@@ -31,6 +31,8 @@ public class ImageServer implements HttpHandler{
 		
 		String query = requestedUri.getRawQuery();
 		parseQuery(query, parameters);
+		//picture is the key that comes from the client - 
+		//we use it to retrieve the image (value) it is requesting.
 		String imageToServe = (String) parameters.get("picture");
 
 		File file = new File("sprites/" + 

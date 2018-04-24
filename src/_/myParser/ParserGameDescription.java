@@ -104,6 +104,20 @@ public class ParserGameDescription extends VGDLParser{
 			}
 		}
 	}
+	
+	/**
+	 * @param myParser
+	 * @param n
+	 */
+	public JSONArray generate(Node n) {
+		JSONArray spriteJSONArray = new JSONArray();
+		ArrayList<SpriteContentParsed> spriteContentParseds = this.parseSpriteSet(n);
+		for (SpriteContentParsed spriteContentParsed : spriteContentParseds) {
+			JSONObject obj = spriteContentParsed.exploreNode(spriteContentParsed);
+			spriteJSONArray.add(obj);
+		}
+		return spriteJSONArray;
+	}
 
 	public static void main(String [] args){
 		
@@ -139,19 +153,5 @@ public class ParserGameDescription extends VGDLParser{
 			}
 
 		}
-	}
-
-	/**
-	 * @param myParser
-	 * @param n
-	 */
-	public JSONArray generate(Node n) {
-		JSONArray spriteJSONArray = new JSONArray();
-		ArrayList<SpriteContentParsed> spriteContentParseds = this.parseSpriteSet(n);
-		for (SpriteContentParsed spriteContentParsed : spriteContentParseds) {
-			JSONObject obj = spriteContentParsed.exploreNode(spriteContentParsed);
-			spriteJSONArray.add(obj);
-		}
-		return spriteJSONArray;
 	}
 }
