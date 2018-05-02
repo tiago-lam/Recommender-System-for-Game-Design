@@ -14,7 +14,6 @@
                 {
                     getObjectData(myObj[i], ul);
                 }
-                //setTimeout(applyStylesToTheSpriteSet,1000);
                 applyStylesToTheSpriteSet();
                 appendEvents();
             }
@@ -32,7 +31,8 @@
             $(".dd-item")
                .mousedown(function(e) {
                 console.log(e.target);
-                console.log(retrieveObjectByTarget(e.target))
+                var obj = retrieveObjectByTarget(e.target);
+                updateInspector(obj);
              });
         }
 
@@ -62,9 +62,6 @@
             div.appendChild(imgSrc);
             li.appendChild(div);
 
-            // div.addEventListener("click", function(e){
-            //     alert(currentObj);
-            // });
             mapListObject.set(li.childNodes[0].childNodes[0], currentObj);
             upperUl.appendChild(li);
 
@@ -115,6 +112,9 @@
         {
           obj =  mapListObject.get(target.childNodes[0]);
           document.getElementById("name").innerHTML = obj.identifier;
-          console.log(target.childNodes);
-          document.getElementById("image").src = target.childNodes[1].src;
+          var img = document.getElementById("image");
+          img.src = target.childNodes[1].src;
+          img.width = 60;
+          img.height = 60;
+          return obj;
         }

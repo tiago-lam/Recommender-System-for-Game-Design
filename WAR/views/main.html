@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="css/nestable/spriteSetStyle.css">
+    <link rel="stylesheet" type="text/css" href="css/panelLayout.css">
+    <link rel="stylesheet" type="text/css" href="css/inspectorStyles.css">
+    
+	<title>Sprite Set</title>
+</head>
+<body>
+
+	<h1>Sprite Set</h1>
+	
+    <div class="dd" id="spriteSetContainer">
+	   <ul id="spriteList"></ul>
+    </div>
+
+    <div id="inspector">
+      <p id="name">1</p>
+      <img id="image" src=""></img>
+    </div>
+
+<div id="analogueParameters">
+    
+    <div id="shrinkFactor" class="sliders">
+      <label id="shrinkLabel" for="shrinkLabel">Shrink Factor: <span id="shrinkValue">0.5</span></label>
+      <input class="bars" type="range" min="0.0" max="1.0" value="0.5" step="0.1" class="slider" id="shrinkControl" oninput="updateShrinkValue(this.value)">
+      
+    </div>
+    <div id="speed" class="sliders">
+      <label id="speedLabel" for="speedLabel">Speed: <span id="speedValue">5</span></label>
+      <input class="bars" type="range" min="0.0" max="10.0" value="1.0" step="0.05" class="slider" id="speedControl" oninput="updateSpeedValue(this.value)">
+      
+    </div>
+
+    <div id="cooldown" class="sliders">
+      <label id="cooldownLabel" for="cooldownLabel">cooldown: <span id="cooldownValue">5</span></label>
+      <input class="bars" type="range" min="1" max="10" value="1" step="1" class="slider" id="cooldownControl" oninput="updateCooldownValue(this.value)">
+      
+    </div>
+
+  </div>
+
+  <div id="staticParameters">
+    <div class="groupA">
+      <div id="invisible" class="checkers">
+        <input type="checkbox" name="gender" value="male"> Invisible
+        </input>
+      </div>
+      <div id="singleton" class="checkers">
+          <input type="checkbox">Singleton</input>
+        </div>
+      </div>
+      <div class="groupB">
+      <div id="rotateInPlace" class="checkers">
+        <input type="checkbox">RotateInPlace</input>
+      </div>
+        <div id="orientation" class="checkers">
+          <label id="orientation">Orientation: </label>
+          <select>
+            <option value="l">Left</option>
+            <option value="r">Right</option>
+            <option value="u">Up</option>
+          <option value="d">Down</option>
+        </select>
+        </div>
+      </div>
+    </div>
+
+  <script
+  src="http://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+<script type="text/javascript" src="js/nestable/nestable.js"></script>
+<script type="text/javascript" src="js/updateInspectorScript.js"></script>
+<script type="text/javascript" src="js/showSpriteSetScript.js"></script>
+
+</body>
+</html>

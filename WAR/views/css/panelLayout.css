@@ -1,0 +1,16 @@
+#spriteSetContainer {
+	float: left;
+}
+
+#inspector {
+	float: left; 
+	margin-left: 75px;
+}
+
+#name{
+	text-align: center;
+}
+
+/*div {
+	margin-left: 75px;
+}*/
