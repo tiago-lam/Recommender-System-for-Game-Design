@@ -1,4 +1,4 @@
-function updateShrinkValue(val) {
+        function updateShrinkValue(val) {
           document.getElementById('shrinkValue').textContent=val; 
         }
 
@@ -8,6 +8,37 @@ function updateShrinkValue(val) {
 
         function updateCooldownValue(val) {
           document.getElementById('cooldownValue').textContent=val; 
+        }
+
+        function assignValueToTheParameter(parametersArray, parameterValue, parameterControl, parameterMatch) {
+
+            for (var i = 0; i < parametersArray.length; i++) {
+                var hashMapObj = parametersArray[i];
+                if (parameterMatch in hashMapObj) {
+                    console.log(hashMapObj);
+                    parameterValue.value = hashMapObj[parameterMatch];
+                    parameterValue.textContent = parameterValue.value;
+                    parameterControl.value = parameterValue.value;
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        function manageParameterValues(parameterValue, parameterControl, parameters, value, parameterMatch) {
+
+            var hasParameter = assignValueToTheParameter(parameters, parameterValue, parameterControl, parameterMatch);
+            if(!hasParameter)
+            {
+                defaultValues(parameterValue, parameterControl, value);
+            }
+        }
+
+        function defaultValues(parameterValue, parameterControl, value)
+        {
+            parameterValue.value = value;
+            parameterValue.textContent = parameterValue.value;
+            parameterControl.value = parameterValue.value;
         }
 
         function updateAnalogueParameters(obj)
@@ -22,34 +53,17 @@ function updateShrinkValue(val) {
 
           if("parameters" in obj)
           {
-            var parameters = obj["parameters"];
-            parameters.forEach(function(map){
-              if("speed" in map)
-              {
-                speedValue.value = map["speed"];
-                speedValue.textContent = speedValue.value;
-                speedControl.value = speedValue.value;
-              }
-
-              if("shrinkfactor" in map)
-              {
-                shrinkValue.value = map["shrinkfactor"];
-                shrinkValue.textContent = shrinkValue.value;
-                shrinkControl.value = shrinkValue.value;
-              }
-
-              if("cooldown" in map)
-              {
-                cooldownValue.value = map["cooldown"];
-                cooldownValue.textContent = cooldownValue.value;
-                cooldownControl.value = cooldownValue.value;
-              }
-
-            });
+              var parameters = obj["parameters"];
+              manageParameterValues(speedValue, speedControl, parameters, 1, "speed");
+              manageParameterValues(shrinkValue, shrinkControl, parameters, 0, "shrinkfactor");
+              manageParameterValues(cooldownValue, cooldownControl, parameters, 1, "cooldown");
           }
+
         }
 
         function updateInspector(obj)
         {
-          updateAnalogueParameters(obj);
+            updateAnalogueParameters(obj);
         }
+
+

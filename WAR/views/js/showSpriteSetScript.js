@@ -28,7 +28,7 @@
 
         function appendEvents()
         {
-            $(".dd-item")
+            $(".dd-handle")
                .mousedown(function(e) {
                 console.log(e.target);
                 var obj = retrieveObjectByTarget(e.target);
@@ -111,10 +111,11 @@
         function retrieveObjectByTarget(target)
         {
           obj =  mapListObject.get(target.childNodes[0]);
+            console.log(obj);
           document.getElementById("name").innerHTML = obj.identifier;
           var img = document.getElementById("image");
           img.src = target.childNodes[1].src;
-          img.width = 60;
-          img.height = 60;
+          //img.width = 60;
+          //img.height = 60;
           return obj;
         }
