@@ -9,27 +9,43 @@ function retrieveObjects() {
     for(var i = 0; i < spriteSet.childNodes.length; i++)
     {
         var spriteLi = spriteSet.childNodes[i];
-        filterStypesWithoutChildren(spriteLi);
+        storingSpritesCompund(spriteLi);
+
+        storingSingleSprites(spriteLi);
     }
-    console.log("collection");
-    console.log(stypeCollection);
+
+    console.log(stypeCollection)
+
 }
 
-function filterStypesWithoutChildren(spriteLi)
+function storingSingleSprites(spriteLi) {
+    if (spriteLi.classList.contains("dd-item")) {
+        var spriteDiv = spriteLi.getElementsByClassName("dd-handle")[0];
+        var stypeName = spriteDiv.textContent;
+        var stypeImg = spriteDiv.childNodes[1];
+        if (stypeImg.currentSrc != "") {
+            var stypeObject = {name: stypeName, img: stypeImg};
+            stypeCollection.push(stypeObject);
+        }
+    }
+    return {spriteDiv: spriteDiv, stypeName: stypeName, stypeImg: stypeImg, stypeObject: stypeObject};
+}
+
+function storingSpritesCompund(spriteLi)
 {
 
-        var arrOl = [];
+        var arrSpriteOl = [];
         for(var i = 0; i < spriteLi.childNodes.length; i++)
         {
             if(spriteLi.childNodes[i].classList.contains("children"))
             {
-                arrOl.push(spriteLi.childNodes[i]);
+                arrSpriteOl.push(spriteLi.childNodes[i]);
             }
         }
 
-        for(var j = 0; j < arrOl.length; j++)
+        for(var j = 0; j < arrSpriteOl.length; j++)
         {
-            var ol = arrOl[j];
+            var ol = arrSpriteOl[j];
             var innerLi = ol.childNodes[0];
             console.log(innerLi);
             var spriteDiv = innerLi.getElementsByClassName("dd-handle")[0];
@@ -39,20 +55,8 @@ function filterStypesWithoutChildren(spriteLi)
                 var stypeObject = {name: stypeName, img: stypeImg};
                 stypeCollection.push(stypeObject);
             }
-            filterStypesWithoutChildren(innerLi);
+            storingSpritesCompund(innerLi);
         }
 
-    //else
-    //{
-        if(spriteLi.classList.contains("dd-item")) {
-            var spriteDiv = spriteLi.getElementsByClassName("dd-handle")[0];
-            var stypeName = spriteDiv.textContent;
-            var stypeImg = spriteDiv.childNodes[1];
-            if(stypeImg.currentSrc != "") {
-                var stypeObject = {name: stypeName, img: stypeImg};
-                stypeCollection.push(stypeObject);
-            }
-        }
-    //}
 }
 
