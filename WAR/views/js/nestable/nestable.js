@@ -124,6 +124,7 @@
                     e.preventDefault();
                     list.dragStop(e.touches ? e.touches[0] : e);
                 }
+
             };
 
             if (hasTouch) {

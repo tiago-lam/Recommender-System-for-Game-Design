@@ -18,8 +18,10 @@
   src="http://code.jquery.com/jquery-3.3.1.min.js"
   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
   crossorigin="anonymous"></script>
-	
-    <div class="dd" id="spriteSetContainer">
+
+    <script
+            src="js/refreshSpriteSet.js"></script>
+    <div class="dd" id="spriteSetContainer" onmouseup="mouseUp()">
 	   <ul id="spriteList"></ul>
     </div>
 
@@ -94,10 +96,15 @@
             </div>
         </div>
 
-        </div>><!--</div> &lt;!&ndash;end div static parameters&ndash;&gt;-->
+        <div id="specialParameters">
 
-<script src="js/rangeslider/rangeslider.min.js"></script>
+        </div>
+
+        </div><!--</div> &lt;!&ndash;end div static parameters&ndash;&gt;-->
 <script type="text/javascript" src="js/nestable/nestable.js"></script>
+<script type="text/javascript" src="js/constants/avatarTypes/avatarTypes.js"></script>
+<script type="text/javascript" src="js/specialParameter.js"></script>
+    <script type="text/javascript" src="js/retrieveObjectsForStypeList.js"></script>
 <script type="text/javascript" src="js/updateInspectorScript.js"></script>
 <script type="text/javascript" src="js/showSpriteSetScript.js"></script>
 

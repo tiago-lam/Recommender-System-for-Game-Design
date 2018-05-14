@@ -15,7 +15,6 @@
             for (var i = 0; i < parametersArray.length; i++) {
                 var hashMapObj = parametersArray[i];
                 if (parameterMatch in hashMapObj) {
-                    console.log(hashMapObj);
                     parameterValue.value = hashMapObj[parameterMatch];
                     parameterValue.textContent = parameterValue.value;
                     parameterControl.value = parameterValue.value;
@@ -64,6 +63,12 @@
         function updateInspector(obj)
         {
             updateAnalogueParameters(obj);
+
+            var type = obj["referenceClass"];
+
+            designSpecialTypesParameters("ShootAvatar");
+
+            retrieveObjects();
         }
 
 

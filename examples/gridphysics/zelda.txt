@@ -6,8 +6,8 @@ BasicGame
     sword > OrientedFlicker limit=5 singleton=True img=oryx/slash1
     movable >
       avatar  > ShootAvatar   stype=sword frameRate=8
-        nokey   > img=oryx/swordman1
-        withkey > color=ORANGE img=oryx/swordmankey1
+        nokey   > img=oryx/swordman1_0
+        withkey > color=ORANGE img=oryx/swordmankey1_0
       enemy >  
         monsterQuick > RandomNPC cooldown=2 cons=6 img=oryx/bat1
         monsterNormal > RandomNPC cooldown=4 cons=8 img=oryx/spider2

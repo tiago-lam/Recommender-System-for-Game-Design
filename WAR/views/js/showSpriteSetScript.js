@@ -8,8 +8,8 @@
         xmlhttp.onreadystatechange = function() {
 
             if (this.readyState == 4 && this.status == 200) {
-                console.log(this.responseText);
                 myObj = JSON.parse(this.responseText);
+                console.log(myObj);
                 for(var i = 0; i < myObj.length; i++)
                 {
                     getObjectData(myObj[i], ul);
@@ -30,7 +30,6 @@
         {
             $(".dd-handle")
                .mousedown(function(e) {
-                console.log(e.target);
                 var obj = retrieveObjectByTarget(e.target);
                 updateInspector(obj);
              });
@@ -62,7 +61,9 @@
             div.appendChild(imgSrc);
             li.appendChild(div);
 
-            mapListObject.set(li.childNodes[0].childNodes[0], currentObj);
+            var textElement = li.childNodes[0].childNodes[0];
+
+            mapListObject.set(textElement, currentObj);
             upperUl.appendChild(li);
 
             var objChildren = currentObj.children;
@@ -71,10 +72,13 @@
                 for(var j = 0; j < objChildren.length; j++)
                 {
                     var innerCurrentObj = objChildren[j];
-                    var innerUl = document.createElement("ul");
-                    innerUl.classList.add("dd-list");
-                    getObjectData(innerCurrentObj, innerUl);
-                    upperUl.appendChild(innerUl);
+
+                    var innerOl = document.createElement("ol");
+                    innerOl.classList.add("dd-list");
+                    innerOl.classList.add("children");
+
+                    getObjectData(innerCurrentObj, innerOl);
+                    li.appendChild(innerOl);
                 }
             }
 
@@ -111,11 +115,26 @@
         function retrieveObjectByTarget(target)
         {
           obj =  mapListObject.get(target.childNodes[0]);
-            console.log(obj);
           document.getElementById("name").innerHTML = obj.identifier;
           var img = document.getElementById("image");
           img.src = target.childNodes[1].src;
-          //img.width = 60;
-          //img.height = 60;
           return obj;
+        }
+
+        function retrieveObjectByName(objectName)
+        {
+            var objectContainers = document.getElementsByClassName('dd-handle');
+            for(var i = 0; i < objectContainers.length; i++)
+            {
+                if(objectContainers[i].childNodes[0].textContent == objectName)
+                {
+                    return retrieveObjectByTarget(objectContainers[i])
+                }
+            }
+            return "non-existent object with name " + objectName;
+        }
+
+        function getMapListObject()
+        {
+            return mapListObject;
         }
