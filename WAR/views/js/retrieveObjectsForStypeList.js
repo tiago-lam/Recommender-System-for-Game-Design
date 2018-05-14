@@ -5,6 +5,8 @@ var stypeCollection = [];
 
 function retrieveObjects() {
 
+    stypeCollection = [];
+
     var spriteSet = document.getElementById("spriteList");
     for(var i = 0; i < spriteSet.childNodes.length; i++)
     {
