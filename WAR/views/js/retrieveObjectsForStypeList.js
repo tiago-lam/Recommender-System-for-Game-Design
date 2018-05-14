@@ -3,7 +3,7 @@
  */
 var stypeCollection = [];
 
-function retrieveObjects() {
+function retrieveStypeOptions() {
 
     stypeCollection = [];
 
@@ -17,6 +17,7 @@ function retrieveObjects() {
     }
 
     console.log(stypeCollection)
+    return stypeCollection;
 
 }
 

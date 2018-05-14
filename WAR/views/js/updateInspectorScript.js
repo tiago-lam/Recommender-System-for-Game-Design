@@ -68,7 +68,7 @@
 
             designSpecialTypesParameters("ShootAvatar");
 
-            retrieveObjects();
+            //retrieveStypeOptions();
         }
 
 

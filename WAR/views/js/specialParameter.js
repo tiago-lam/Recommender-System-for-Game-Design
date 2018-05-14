@@ -22,6 +22,7 @@ function designSpecialTypesParameters(specialType)
     if(specialType == ShootAvatar)
     {
         createStype();
+        createSelectList();
         createAmmo();
     }
 
@@ -29,7 +30,9 @@ function designSpecialTypesParameters(specialType)
 
 function createStype() {
     var divStype = document.createElement('div');
+    divStype.id = 'divStype';
     var spanStype = document.createElement('span');
+    spanStype.id = "spanStype";
     spanStype.innerHTML = "stype";
     spanStype.classList.add("toggle_switch");
     spanStype.classList.add("spanCenteredText");
@@ -48,6 +51,33 @@ function createAmmo() {
     spanAmmo.classList.add("spanCenteredText");
     divAmmo.appendChild(spanAmmo);
     specialParameters.appendChild(divAmmo);
+}
+
+function createSelectList()
+{
+    var divStypeSelect = document.createElement("div");
+    divStypeSelect.classList.add("styled-select");
+    divStypeSelect.classList.add("blue");
+    divStypeSelect.classList.add("rounded");
+
+
+    var stypeCollection = retrieveStypeOptions();
+
+    var listStype = document.createElement("select");
+    listStype.id = "listStype";
+    divStypeSelect.appendChild(listStype);
+
+
+    for (var i = 0; i < stypeCollection.length; i++) {
+        var option = document.createElement("option");
+        stypeObject = stypeCollection[i];
+        option.value = stypeObject.name;
+        option.text = stypeObject.name;
+        listStype.appendChild(option);
+    }
+
+    divStype = document.getElementById('divStype');
+    divStype.appendChild(divStypeSelect);
 }
 
 function removeElements(parentElement)

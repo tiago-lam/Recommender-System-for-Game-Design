@@ -2,8 +2,7 @@
 /*div { margin: 20px; }*/
 /* -------------------- Select Box Styles: bavotasan.com Method (with special adaptations by ericrasch.com) */
 /* -------------------- Source: http://bavotasan.com/2011/style-select-box-using-only-css/ */
-.styled-select { background: url(http://i62.tinypic.com/15xvbd5.png) no-repeat 96% 0; height: 20px; overflow: hidden; width: 50%; height: 25px; font-family: "Lucida Console", Monaco, monospace; border: 1px; border-style: solid; border-color: lightsteelblue; border-radius: 7px; /*border: 6px solid black;*/
-    float: right; margin-left: -13px; margin-top: 2px;}
+.styled-select { background: url(http://i62.tinypic.com/15xvbd5.png) no-repeat 96% 0; height: 20px; overflow: hidden; width: 50%; height: 25px; font-family: "Lucida Console", Monaco, monospace; border: 1px; border-style: solid; border-color: lightsteelblue; border-radius: 7px; /*border: 6px solid black;*/ float: right; margin-left: -13px; margin-top: 2px; }
 
 .styled-select select { background: transparent; border: none; font-family: "Lucida Console", Monaco, monospace; font-size: 14px; height: 29px; padding: 5px; /* If you add too much padding here, the options won't show in IE */ width: 268px; }
 
@@ -44,10 +43,17 @@
 
 #mainselection { overflow: hidden; width: 350px; -moz-border-radius: 9px 9px 9px 9px; -webkit-border-radius: 9px 9px 9px 9px; border-radius: 9px 9px 9px 9px; box-shadow: 1px 1px 11px #330033; background: #58B14C url("http://i62.tinypic.com/15xvbd5.png") no-repeat scroll 319px center; }
 
-#divSelect { width: 100%; border: 1px; border-style: solid; border-color: lightsteelblue; border-width: 1px; border-radius: 7px;
-height: 30px;}
+#divSelect { width: 100%; border: 1px; border-style: solid; border-color: lightsteelblue; border-width: 1px; border-radius: 7px; height: 30px; }
 
+#specialParameters { width: 100%; border: 1px; border-style: solid; border-color: lightsteelblue; border-width: 1px; border-radius: 7px; height: 30px; }
+
+/*#divStype{*/
+/*width: 100%; border: 1px; border-style: solid; border-color: lightsteelblue; border-width: 1px; border-radius: 7px;*/
+/*height: 30px;*/
+/*}*/
 .spanCenteredText { float: left; position: relative; margin-top: 3px; }
+
+#spanStype { width: 105px; border: 1px solid #FFFFFF; }
 
 /* -------------------- Select Box Styles: stackoverflow.com Method */
 /* -------------------- Source: http://stackoverflow.com/a/5809186 */
