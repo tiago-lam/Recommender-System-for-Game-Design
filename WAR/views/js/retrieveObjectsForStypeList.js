@@ -78,7 +78,6 @@ function retrievingAmmoSprites(stypeCollection)
         {
             if(element.name != "none") {
                 var gameObj = retrieveObjectByName(element.name);
-                console.log(gameObj);
                 if (gameObj["referenceClass"] == "Resource") {
                     resourceSprites.push(element.name);
                 }

@@ -115,10 +115,12 @@
 
         function retrieveObjectByTarget(target)
         {
-          obj =  mapListObject.get(target.childNodes[0]);
-          document.getElementById("name").innerHTML = obj.identifier;
-          var img = document.getElementById("image");
-          img.src = target.childNodes[1].src;
+            obj =  mapListObject.get(target.childNodes[0]);
+            console.log('here')
+            console.log(obj);
+            document.getElementById("name").innerHTML = obj.identifier;
+            var img = document.getElementById("image");
+            img.src = target.childNodes[1].src;
           return obj;
         }
 
@@ -129,7 +131,10 @@
             {
                 if(objectContainers[i].childNodes[0].textContent == objectName)
                 {
-                    return retrieveObjectByTarget(objectContainers[i])
+                    var gameObj = mapListObject.get(objectContainers[i].childNodes[0]);
+                    console.log("kk");
+                    console.log(gameObj);
+                    return gameObj;
                 }
             }
             return "non-existent object with name " + objectName;

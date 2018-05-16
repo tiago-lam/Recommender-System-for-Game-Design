@@ -9,7 +9,7 @@ function createShootAvatarParameters() {
 
 function createFlakAvatarParameters() {
     createShootAvatarParameters();
-    createDivSpanElements('divMinAmmo', 'spanMinAmmo', 'min ammo');
+    createDivSpanElements('divMinAmmo', 'spanMinAmmo', 'minAmmo');
     createInput('divMinAmmo', 'number', 1, 100);
 }
 
