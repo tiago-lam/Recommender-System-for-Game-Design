@@ -63,6 +63,7 @@
 
             var textElement = li.childNodes[0].childNodes[0];
 
+            li.setAttribute('data-obj', currentObj);
             mapListObject.set(textElement, currentObj);
             upperUl.appendChild(li);
 

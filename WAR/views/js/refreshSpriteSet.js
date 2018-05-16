@@ -3,4 +3,5 @@
  */
 function mouseUp() {
     //console.log("Fire!");
+    //console.log(retrieveObjectByName("enemy"));
 }

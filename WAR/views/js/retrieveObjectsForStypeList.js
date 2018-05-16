@@ -7,16 +7,20 @@ function retrieveStypeOptions() {
 
     stypeCollection = [];
 
+    var stypeNull = {name: "none", img: undefined};//gives the user the option to choose nothing
+    stypeCollection.push(stypeNull);
+
     var spriteSet = document.getElementById("spriteList");
     for(var i = 0; i < spriteSet.childNodes.length; i++)
     {
         var spriteLi = spriteSet.childNodes[i];
-        storingSpritesCompund(spriteLi);
+        storingSpritesCompound(spriteLi);
 
         storingSingleSprites(spriteLi);
     }
 
-    console.log(stypeCollection)
+    console.log(stypeCollection);
+    console.log(retrievingAmmoSprites(stypeCollection));
     return stypeCollection;
 
 }
@@ -34,7 +38,7 @@ function storingSingleSprites(spriteLi) {
     return {spriteDiv: spriteDiv, stypeName: stypeName, stypeImg: stypeImg, stypeObject: stypeObject};
 }
 
-function storingSpritesCompund(spriteLi)
+function storingSpritesCompound(spriteLi)
 {
 
         var arrSpriteOl = [];
@@ -58,8 +62,30 @@ function storingSpritesCompund(spriteLi)
                 var stypeObject = {name: stypeName, img: stypeImg};
                 stypeCollection.push(stypeObject);
             }
-            storingSpritesCompund(innerLi);
+            storingSpritesCompound(innerLi);
         }
+
+}
+
+function retrievingAmmoSprites(stypeCollection)
+{
+
+    var resourceSprites = [];
+
+    resourceSprites.push("none");//gives the user the option to choose nothing
+
+    stypeCollection.forEach(function(element)
+        {
+            if(element.name != "none") {
+                var gameObj = retrieveObjectByName(element.name);
+                console.log(gameObj);
+                if (gameObj["referenceClass"] == "Resource") {
+                    resourceSprites.push(element.name);
+                }
+            }
+        });
+
+    return resourceSprites;
 
 }
 

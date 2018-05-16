@@ -1,40 +1,45 @@
+var specialParameters = document.getElementById("specialParameters");
+
+function createShootAvatarParameters() {
+    createDivSpanElements('divStype', 'spanStype', 'stype');
+    createStypeSelectList();
+    createDivSpanElements('divAmmo', 'spanAmmo', 'ammo');
+    createAmmoSelectList();
+}
+
+function createFlakAvatarParameters() {
+    createShootAvatarParameters();
+    createDivSpanElements('divMinAmmo', 'spanMinAmmo', 'min ammo');
+    createInput('divMinAmmo', 'number', 1, 100);
+}
+
 /**
  * Created by tiagomachado on 5/10/18.
  */
 function designSpecialTypesParameters(specialType)
 {
 
-//<span class="checkBoxSpan spanCenteredText">Orientation</span>
-//    <div class="styled-select blue rounded">
-//    <select>
-//    <option value="l">Left</option>
-//    <option value="r">Right</option>
-//    <option value="u">Up</option>
-//    <option value="d">Down</option>
-//    <option value="n">None</option>
-//    </select>
-//    </div>
-
     console.log(specialType);
-    var specialParameters = document.getElementById("specialParameters");
     removeElements(specialParameters);
 
     if(specialType == ShootAvatar)
     {
-        createStype();
-        createSelectList();
-        createAmmo();
+        createShootAvatarParameters();
+    }
+    else if(specialType == FlakAvatar)
+    {
+        createFlakAvatarParameters();
     }
 
 }
 
-function createStype() {
+function createDivSpanElements(divId, spanId, innerHtmlText)
+{
     var divStype = document.createElement('div');
-    divStype.id = 'divStype';
+    divStype.id = divId;
     var spanStype = document.createElement('span');
-    spanStype.id = "spanStype";
-    spanStype.innerHTML = "stype";
-    spanStype.classList.add("toggle_switch");
+    spanStype.id = spanId;
+    spanStype.innerHTML = innerHtmlText;
     spanStype.classList.add("spanCenteredText");
     spanStype.classList.add("checkBoxSpan");
     spanStype.classList.add("spanCenteredText");
@@ -42,24 +47,38 @@ function createStype() {
     specialParameters.appendChild(divStype);
 }
 
-function createAmmo() {
-    var divAmmo = document.createElement('div');
-    var spanAmmo = document.createElement('span');
-    spanAmmo.innerHTML = "ammo";
-    spanAmmo.classList.add("toggle_switch");
-    spanAmmo.classList.add("checkBoxSpan");
-    spanAmmo.classList.add("spanCenteredText");
-    divAmmo.appendChild(spanAmmo);
-    specialParameters.appendChild(divAmmo);
+function createAmmoSelectList()
+{
+    var divStypeAmmoSelect = document.createElement("div");
+    divStypeAmmoSelect.classList.add("styled-select");
+    divStypeAmmoSelect.classList.add("blue");
+    divStypeAmmoSelect.classList.add("rounded");
+
+    var ammoSpritesCollection = retrievingAmmoSprites(stypeCollection);
+
+    var listAmmoResource = document.createElement("select");
+    listAmmoResource.id = "listAmmoStype";
+    divStypeAmmoSelect.appendChild(listAmmoResource);
+
+    for (var i = 0; i < ammoSpritesCollection.length; i++) {
+        var option = document.createElement("option");
+        spriteName = ammoSpritesCollection[i];
+        option.value = spriteName;
+        option.text = spriteName;
+        listAmmoResource.appendChild(option);
+    }
+
+    divStype = document.getElementById('divAmmo');
+    divStype.appendChild(divStypeAmmoSelect);
+
 }
 
-function createSelectList()
+function createStypeSelectList()
 {
     var divStypeSelect = document.createElement("div");
     divStypeSelect.classList.add("styled-select");
     divStypeSelect.classList.add("blue");
     divStypeSelect.classList.add("rounded");
-
 
     var stypeCollection = retrieveStypeOptions();
 
@@ -78,6 +97,19 @@ function createSelectList()
 
     divStype = document.getElementById('divStype');
     divStype.appendChild(divStypeSelect);
+
+}
+
+function createInput(divToAddId, type, min, max)
+{
+    var inputNumber = document.createElement("input");
+    inputNumber.type = type;
+    inputNumber.min = min;
+    inputNumber.max = max;
+
+    var div = document.getElementById(divToAddId);
+    div.appendChild(inputNumber);
+
 }
 
 function removeElements(parentElement)

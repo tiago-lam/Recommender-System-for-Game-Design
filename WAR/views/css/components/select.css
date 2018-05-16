@@ -45,12 +45,6 @@
 
 #divSelect { width: 100%; border: 1px; border-style: solid; border-color: lightsteelblue; border-width: 1px; border-radius: 7px; height: 30px; }
 
-#specialParameters { width: 100%; border: 1px; border-style: solid; border-color: lightsteelblue; border-width: 1px; border-radius: 7px; height: 30px; }
-
-/*#divStype{*/
-/*width: 100%; border: 1px; border-style: solid; border-color: lightsteelblue; border-width: 1px; border-radius: 7px;*/
-/*height: 30px;*/
-/*}*/
 .spanCenteredText { float: left; position: relative; margin-top: 3px; }
 
 #spanStype { width: 105px; border: 1px solid #FFFFFF; }
