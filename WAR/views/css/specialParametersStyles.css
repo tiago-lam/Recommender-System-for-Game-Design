@@ -1,0 +1,31 @@
+#divSpecialParameters {
+  margin-top: 30px;
+}
+
+#divAmmo {
+  padding-top: 30px;
+}
+
+#divMinAmmo {
+  padding-top: 37px;
+}
+
+#divAmmoCost {
+  padding-top: 25px;
+  padding-left: 0px;
+  padding-right: 0px;
+  margin-right: 0px;
+  margin-left: 0px;
+}
+
+input[type='number'] {
+  float: right;
+  padding-left: -30px;
+  width: 10%;
+}
+
+span #divAmmoCost {
+  margin-right: 84px;
+  border-right: 90px solid #AD1818;
+  border: 1px solid #E03939;
+}

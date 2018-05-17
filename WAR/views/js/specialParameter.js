@@ -1,4 +1,4 @@
-var specialParameters = document.getElementById("specialParameters");
+var specialParameters = document.getElementById("divSpecialParameters");
 
 function createShootAvatarParameters() {
     createDivSpanElements('divStype', 'spanStype', 'stype');
@@ -10,7 +10,9 @@ function createShootAvatarParameters() {
 function createFlakAvatarParameters() {
     createShootAvatarParameters();
     createDivSpanElements('divMinAmmo', 'spanMinAmmo', 'minAmmo');
-    createInput('divMinAmmo', 'number', 1, 100);
+    createInput('divMinAmmo', 'number', 0, 100);
+    createDivSpanElements('divAmmoCost', 'spanAmmoCost', 'ammoCost');
+    createInput('divAmmoCost', 'number', 1, 100);
 }
 
 /**
@@ -24,7 +26,8 @@ function designSpecialTypesParameters(specialType)
 
     if(specialType == ShootAvatar)
     {
-        createShootAvatarParameters();
+        //createShootAvatarParameters();
+        createFlakAvatarParameters();
     }
     else if(specialType == FlakAvatar)
     {
@@ -35,16 +38,15 @@ function designSpecialTypesParameters(specialType)
 
 function createDivSpanElements(divId, spanId, innerHtmlText)
 {
-    var divStype = document.createElement('div');
-    divStype.id = divId;
-    var spanStype = document.createElement('span');
-    spanStype.id = spanId;
-    spanStype.innerHTML = innerHtmlText;
-    spanStype.classList.add("spanCenteredText");
-    spanStype.classList.add("checkBoxSpan");
-    spanStype.classList.add("spanCenteredText");
-    divStype.appendChild(spanStype);
-    specialParameters.appendChild(divStype);
+    var divElement = document.createElement('div');
+    divElement.id = divId;
+    var spanElement = document.createElement('span');
+    spanElement.id = spanId;
+    spanElement.innerHTML = innerHtmlText;
+    spanElement.classList.add("spanCenteredText");
+    spanElement.classList.add("checkBoxSpan");
+    divElement.appendChild(spanElement);
+    specialParameters.appendChild(divElement);
 }
 
 function createAmmoSelectList()
