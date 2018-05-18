@@ -1,4 +1,9 @@
+/**
+ * Created by tiagomachado on 5/10/18.
+ */
+
 var specialParameters = document.getElementById("divSpecialParameters");
+specialParameters.style.display
 
 function createShootAvatarParameters() {
     createDivSpanElements('divStype', 'spanStype', 'stype');
@@ -10,14 +15,11 @@ function createShootAvatarParameters() {
 function createFlakAvatarParameters() {
     createShootAvatarParameters();
     createDivSpanElements('divMinAmmo', 'spanMinAmmo', 'minAmmo');
-    createInput('divMinAmmo', 'number', 0, 100);
+    createInput('divMinAmmo', 'number', 0, 100, 0);
     createDivSpanElements('divAmmoCost', 'spanAmmoCost', 'ammoCost');
-    createInput('divAmmoCost', 'number', 1, 100);
+    createInput('divAmmoCost', 'number', 1, 100, 1);
 }
 
-/**
- * Created by tiagomachado on 5/10/18.
- */
 function designSpecialTypesParameters(specialType)
 {
 
@@ -39,6 +41,7 @@ function designSpecialTypesParameters(specialType)
 function createDivSpanElements(divId, spanId, innerHtmlText)
 {
     var divElement = document.createElement('div');
+    divElement.classList.add("distance");
     divElement.id = divId;
     var spanElement = document.createElement('span');
     spanElement.id = spanId;
@@ -102,12 +105,14 @@ function createStypeSelectList()
 
 }
 
-function createInput(divToAddId, type, min, max)
+function createInput(divToAddId, type, min, max, valueToShow)
 {
     var inputNumber = document.createElement("input");
+    inputNumber.classList.add('input-spacing');
     inputNumber.type = type;
     inputNumber.min = min;
     inputNumber.max = max;
+    inputNumber.value = valueToShow;
 
     var div = document.getElementById(divToAddId);
     div.appendChild(inputNumber);

@@ -1,31 +1,23 @@
-#divSpecialParameters {
-  margin-top: 30px;
+#divSpecialParameters
+{
+  margin-top: 10px;
+  border: 1px solid lightsteelblue;
+  border-radius: 7px;
 }
 
-#divAmmo {
-  padding-top: 30px;
+.distance
+{
+  margin-bottom: 10px;
+  padding-bottom: 20px;
 }
 
-#divMinAmmo {
-  padding-top: 37px;
-}
-
-#divAmmoCost {
-  padding-top: 25px;
-  padding-left: 0px;
-  padding-right: 0px;
-  margin-right: 0px;
-  margin-left: 0px;
-}
-
-input[type='number'] {
+.input-spacing
+{
+  margin-left: 70px;
+  margin-right: 6px;
+  height: 0%;
+  width: 16%;
   float: right;
-  padding-left: -30px;
-  width: 10%;
-}
-
-span #divAmmoCost {
-  margin-right: 84px;
-  border-right: 90px solid #AD1818;
-  border: 1px solid #E03939;
+  font-family: lucinda;
+  margin-top: 4px;
 }
