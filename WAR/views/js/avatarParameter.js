@@ -3,7 +3,7 @@
  */
 
 var specialParameters = document.getElementById("divSpecialParameters");
-specialParameters.style.display
+//specialParameters.style.display
 
 function createShootAvatarParameters() {
     createDivSpanElements('divStype', 'spanStype', 'stype');
@@ -22,14 +22,11 @@ function createFlakAvatarParameters() {
 
 function designSpecialTypesParameters(specialType)
 {
-
-    console.log(specialType);
     removeElements(specialParameters);
 
     if(specialType == ShootAvatar)
     {
-        //createShootAvatarParameters();
-        createFlakAvatarParameters();
+        createShootAvatarParameters();
     }
     else if(specialType == FlakAvatar)
     {

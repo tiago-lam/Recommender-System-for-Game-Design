@@ -66,7 +66,7 @@
 
             var type = obj["referenceClass"];
 
-            designSpecialTypesParameters("ShootAvatar");
+            designSpecialTypesParameters(type);
 
             //retrieveStypeOptions();
         }
