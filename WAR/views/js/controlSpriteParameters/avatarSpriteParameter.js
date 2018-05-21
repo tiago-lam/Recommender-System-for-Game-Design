@@ -20,8 +20,3 @@ function createFlakAvatarParameters() {
     createInputNumber('divAmmoCost', 'number', 1, 100, 1);
 }
 
-function designSpecialTypesParameters(specialType)
-{
-
-
-}
