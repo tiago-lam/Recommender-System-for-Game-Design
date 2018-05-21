@@ -1,40 +1,6 @@
 /**
- * Created by tiagomachado on 5/10/18.
+ * Created by tiagomachado on 5/21/18.
  */
-
-var specialParameters = document.getElementById("divSpecialParameters");
-//specialParameters.style.display
-
-function createShootAvatarParameters() {
-    createDivSpanElements('divStype', 'spanStype', 'stype');
-    createStypeSelectList();
-    createDivSpanElements('divAmmo', 'spanAmmo', 'ammo');
-    createAmmoSelectList();
-}
-
-function createFlakAvatarParameters() {
-    createShootAvatarParameters();
-    createDivSpanElements('divMinAmmo', 'spanMinAmmo', 'minAmmo');
-    createInput('divMinAmmo', 'number', 0, 100, 0);
-    createDivSpanElements('divAmmoCost', 'spanAmmoCost', 'ammoCost');
-    createInput('divAmmoCost', 'number', 1, 100, 1);
-}
-
-function designSpecialTypesParameters(specialType)
-{
-    removeElements(specialParameters);
-
-    if(specialType == ShootAvatar)
-    {
-        createShootAvatarParameters();
-    }
-    else if(specialType == FlakAvatar)
-    {
-        createFlakAvatarParameters();
-    }
-
-}
-
 function createDivSpanElements(divId, spanId, innerHtmlText)
 {
     var divElement = document.createElement('div');
@@ -49,7 +15,7 @@ function createDivSpanElements(divId, spanId, innerHtmlText)
     specialParameters.appendChild(divElement);
 }
 
-function createAmmoSelectList()
+function createAmmoSelectList(divToBePartOf)
 {
     var divStypeAmmoSelect = document.createElement("div");
     divStypeAmmoSelect.classList.add("styled-select");
@@ -70,12 +36,12 @@ function createAmmoSelectList()
         listAmmoResource.appendChild(option);
     }
 
-    divStype = document.getElementById('divAmmo');
-    divStype.appendChild(divStypeAmmoSelect);
+    div = document.getElementById(divToBePartOf);
+    div.appendChild(divStypeAmmoSelect);
 
 }
 
-function createStypeSelectList()
+function createStypeSelectList(divToBePartOf)
 {
     var divStypeSelect = document.createElement("div");
     divStypeSelect.classList.add("styled-select");
@@ -97,12 +63,39 @@ function createStypeSelectList()
         listStype.appendChild(option);
     }
 
-    divStype = document.getElementById('divStype');
-    divStype.appendChild(divStypeSelect);
+    divOrientation = document.getElementById(divToBePartOf);
+    divOrientation.appendChild(divStypeSelect);
 
 }
 
-function createInput(divToAddId, type, min, max, valueToShow)
+function createOrientationSelectList(divToBePartOf)
+{
+    var divOrientationSelect = document.createElement("div");
+    divOrientationSelect.classList.add("styled-select");
+    divOrientationSelect.classList.add("blue");
+    divOrientationSelect.classList.add("rounded");
+
+    var orientationCollection = ['NONE', 'LEFT', 'RIGHT', 'UP', 'DOWN'];
+
+    var listOrientation = document.createElement("select");
+    listOrientation.id = "listOrientation";
+    divOrientationSelect.appendChild(listOrientation);
+
+
+    for (var i = 0; i < orientationCollection.length; i++) {
+        var option = document.createElement("option");
+        var orientationObject = orientationCollection[i];
+        option.value = orientationObject.name;
+        option.text = orientationObject.name;
+        listOrientation.appendChild(option);
+    }
+
+    divOrientation = document.getElementById(divToBePartOf);
+    divOrientation.appendChild(divOrientationSelect);
+
+}
+
+function createInputNumber(divToAddId, type, min, max, valueToShow)
 {
     var inputNumber = document.createElement("input");
     inputNumber.classList.add('input-spacing');
@@ -113,7 +106,34 @@ function createInput(divToAddId, type, min, max, valueToShow)
 
     var div = document.getElementById(divToAddId);
     div.appendChild(inputNumber);
+}
 
+function createInputRange(divToAddId, type, min, max, step, spanId, valueToShow)
+{
+    var inputRange = document.createElement("input");
+    inputRange.classList.add('bars');
+    inputRange.classList.add('sliders');
+    inputRange.type = type;
+    inputRange.min = min;
+    inputRange.max = max;
+    inputRange.step = step;
+    inputRange.value = valueToShow;
+
+    var spanElement = document.createElement('span');
+    spanElement.id = spanId;
+    spanElement.style.cssFloat = 'right';
+    spanElement.innerHTML = '0.5';
+    spanElement.classList.add("spanCenteredText");
+    spanElement.classList.add("checkBoxSpan");
+
+    inputRange.addEventListener("input", function()
+    {
+        spanElement.innerHTML = inputRange.value;
+    });
+
+    var div = document.getElementById(divToAddId);
+    div.appendChild(spanElement);
+    div.appendChild(inputRange);
 }
 
 function removeElements(parentElement)

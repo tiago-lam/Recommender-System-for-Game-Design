@@ -67,9 +67,9 @@ function storingSpritesCompound(spriteLi)
 
 }
 
+//get all resource sprites type
 function retrievingAmmoSprites(stypeCollection)
 {
-
     var resourceSprites = [];
 
     resourceSprites.push("none");//gives the user the option to choose nothing
@@ -85,6 +85,26 @@ function retrievingAmmoSprites(stypeCollection)
         });
 
     return resourceSprites;
+
+}
+
+function retrievingSpawnSprites(stypeCollection)
+{
+    var spawnPointSprites = [];
+
+    spawnPointSprites.push("none");//gives the user the option to choose nothing
+
+    stypeCollection.forEach(function(element)
+    {
+        if(element.name != "none") {
+            var gameObj = retrieveObjectByName(element.name);
+            if (gameObj["referenceClass"] == "SpawnPoint") {
+                spawnPointSprites.push(element.name);
+            }
+        }
+    });
+
+    return spawnPointSprites;
 
 }
 
