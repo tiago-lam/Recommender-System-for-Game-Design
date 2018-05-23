@@ -10,17 +10,16 @@
           document.getElementById('cooldownValue').textContent=val; 
         }
 
-        function assignValueToTheParameter(parametersArray, parameterValue, parameterControl, parameterMatch) {
+        function assignValueToTheParameter(parameters, parameterValue, parameterControl, parameterMatch) {
 
-            for (var i = 0; i < parametersArray.length; i++) {
-                var hashMapObj = parametersArray[i];
-                if (parameterMatch in hashMapObj) {
-                    parameterValue.value = hashMapObj[parameterMatch];
+
+                if (parameterMatch in parameters) {
+                    parameterValue.value = parameters[parameterMatch];
                     parameterValue.textContent = parameterValue.value;
                     parameterControl.value = parameterValue.value;
                     return true;
                 }
-            }
+
             return false;
         }
 
@@ -65,8 +64,9 @@
             updateAnalogueParameters(obj);
 
             var type = obj["referenceClass"];
+            var parameters = obj.parameters;
 
-            designSpecialTypesParameters(type);
+            designSpecialTypesParameters(type, parameters);
 
             //retrieveStypeOptions();
         }

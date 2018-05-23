@@ -1,20 +1,19 @@
 /**
  * Created by tiagomachado on 5/21/18.
  */
-function designSpecialTypesParameters(specialType)
+function designSpecialTypesParameters(specialType, parameters)
 {
     removeElements(specialParameters);
 
     if(specialType == ShootAvatar)
     {
-        createShootAvatarParameters();
+        createShootAvatarParameters(parameters);
     }
     else if(specialType == FlakAvatar)
     {
         createFlakAvatarParameters();
     }
-
-    if(specialType == Flicker)
+    else if(specialType == Flicker)
     {
         createFlickerParameter();
     }

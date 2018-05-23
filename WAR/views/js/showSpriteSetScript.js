@@ -9,6 +9,7 @@
 
             if (this.readyState == 4 && this.status == 200) {
                 myObj = JSON.parse(this.responseText);
+                console.log("H");
                 console.log(myObj);
                 for(var i = 0; i < myObj.length; i++)
                 {
@@ -42,13 +43,13 @@
             var identifier = currentObj.identifier;
             var parameters = currentObj.parameters;
             var imgSrc = document.createElement("img");
-            for (var i = 0; i < parameters.length; i++) {
-                if("img" in parameters[i])
-                {
-                    var imgPathForUrlCreation = parameters[i]["img"] + ".png";
-                    fetchBlob(imgPathForUrlCreation, imgSrc);
-                }
+
+            if("img" in parameters)
+            {
+                var imgPathForUrlCreation = parameters["img"] + ".png";
+                fetchBlob(imgPathForUrlCreation, imgSrc);
             }
+
 
             var li = document.createElement("li");
             li.classList.add("dd-item");
@@ -116,8 +117,6 @@
         function retrieveObjectByTarget(target)
         {
             obj =  mapListObject.get(target.childNodes[0]);
-            console.log('here')
-            console.log(obj);
             document.getElementById("name").innerHTML = obj.identifier;
             var img = document.getElementById("image");
             img.src = target.childNodes[1].src;

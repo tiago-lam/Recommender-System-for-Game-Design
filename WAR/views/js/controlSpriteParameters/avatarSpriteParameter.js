@@ -5,11 +5,13 @@
 var specialParameters = document.getElementById("divSpecialParameters");
 //specialParameters.style.display
 
-function createShootAvatarParameters() {
-    createDivSpanElements('divOrientation', 'spanStype', 'stype');
-    createStypeSelectList('divOrientation');
+function createShootAvatarParameters(parameters) {
+    createDivSpanElements('divStype', 'spanStype', 'stype');
+    createStypeSelectList('divStype', 'selectStype');
     createDivSpanElements('divAmmo', 'spanAmmo', 'ammo');
-    createAmmoSelectList('divAmmo');
+    createAmmoSelectList('divAmmo', 'selectAmmo');
+
+    updateShootAvatarParameters(parameters);
 }
 
 function createFlakAvatarParameters() {
@@ -19,4 +21,15 @@ function createFlakAvatarParameters() {
     createDivSpanElements('divAmmoCost', 'spanAmmoCost', 'ammoCost');
     createInputNumber('divAmmoCost', 'number', 1, 100, 1);
 }
+
+function updateShootAvatarParameters(parameters)
+{
+   updateSelectParameter('selectStype', parameters.stype);
+    updateSelectParameter('selectAmmo', parameters.ammo);
+}
+
+
+
+
+
 

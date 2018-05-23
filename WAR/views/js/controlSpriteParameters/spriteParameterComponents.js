@@ -15,7 +15,7 @@ function createDivSpanElements(divId, spanId, innerHtmlText)
     specialParameters.appendChild(divElement);
 }
 
-function createAmmoSelectList(divToBePartOf)
+function createAmmoSelectList(divToBePartOf, listId)
 {
     var divStypeAmmoSelect = document.createElement("div");
     divStypeAmmoSelect.classList.add("styled-select");
@@ -25,7 +25,7 @@ function createAmmoSelectList(divToBePartOf)
     var ammoSpritesCollection = retrievingAmmoSprites(stypeCollection);
 
     var listAmmoResource = document.createElement("select");
-    listAmmoResource.id = "listAmmoStype";
+    listAmmoResource.id = listId;
     divStypeAmmoSelect.appendChild(listAmmoResource);
 
     for (var i = 0; i < ammoSpritesCollection.length; i++) {
@@ -41,7 +41,7 @@ function createAmmoSelectList(divToBePartOf)
 
 }
 
-function createStypeSelectList(divToBePartOf)
+function createStypeSelectList(divToBePartOf, listId)
 {
     var divStypeSelect = document.createElement("div");
     divStypeSelect.classList.add("styled-select");
@@ -51,7 +51,7 @@ function createStypeSelectList(divToBePartOf)
     var stypeCollection = retrieveStypeOptions();
 
     var listStype = document.createElement("select");
-    listStype.id = "listStype";
+    listStype.id = listId;
     divStypeSelect.appendChild(listStype);
 
 
@@ -140,5 +140,18 @@ function removeElements(parentElement)
 {
     while (parentElement.firstChild) {
         parentElement.removeChild(parentElement.firstChild);
+    }
+}
+
+function updateSelectParameter(selectId, parameterValue)
+{
+    var valueToSelect = parameterValue;
+    var select = document.getElementById(selectId);
+    var opts = select.options;
+    for (var opt, j = 0; opt = opts[j]; j++) {
+        if (opt.value == valueToSelect) {
+            select.selectedIndex = j;
+            break;
+        }
     }
 }

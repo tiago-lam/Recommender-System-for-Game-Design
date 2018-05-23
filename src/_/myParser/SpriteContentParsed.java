@@ -45,14 +45,13 @@ public class SpriteContentParsed{
 		obj.put("referenceClass", referenceClass);
 
 		HashMap<String, String> parameters = spriteContent.parameters;
-		JSONArray parametersArray = new JSONArray();
+		JSONObject parametersCollection = new JSONObject();
 		for (String key: parameters.keySet()) 
 		{
 			JSONObject paramObj = new JSONObject();
-			paramObj.put(key, parameters.get(key));
-			parametersArray.add(paramObj);
+			parametersCollection.put(key, parameters.get(key));
 		}
-		obj.put("parameters", parametersArray);
+		obj.put("parameters", parametersCollection);
 		
 		return obj;
 	}
