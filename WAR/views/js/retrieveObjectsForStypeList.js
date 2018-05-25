@@ -29,8 +29,9 @@ function storingSingleSprites(spriteLi) {
     if (spriteLi.classList.contains("dd-item")) {
         var spriteDiv = spriteLi.getElementsByClassName("dd-handle")[0];
         var stypeName = spriteDiv.textContent;
+        var objColor = retrieveObjectByName(stypeName).parameters.color;
         var stypeImg = spriteDiv.childNodes[1];
-        if (stypeImg.currentSrc != "") {
+        if (stypeImg.currentSrc != "" || objColor != "") {
             var stypeObject = {name: stypeName, img: stypeImg};
             stypeCollection.push(stypeObject);
         }

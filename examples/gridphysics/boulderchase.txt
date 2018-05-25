@@ -8,7 +8,7 @@ BasicGame
 		diamond > Resource color=YELLOW limit=10 shrinkfactor=0.75 img=oryx/diamond3
 		boulder > Missile orientation=DOWN color=GRAY speed=0.2 img=oryx/mineral1
 		moving >
-			avatar  > ShootAvatar   stype=sword frameRate=8 img=oryx/spelunky
+			avatar  > ShootAvatar   stype=sword frameRate=8 img=oryx/spelunky_0
 			enemy > Chaser stype=avatar speed=0.1
 				crab > color=RED img=oryx/scorpion2
 				butterfly > color=PINK img=oryx/bat2

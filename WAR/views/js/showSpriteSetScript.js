@@ -131,8 +131,8 @@
                 if(objectContainers[i].childNodes[0].textContent == objectName)
                 {
                     var gameObj = mapListObject.get(objectContainers[i].childNodes[0]);
-                    console.log("kk");
-                    console.log(gameObj);
+                    //console.log("kk");
+                    //console.log(gameObj);
                     return gameObj;
                 }
             }

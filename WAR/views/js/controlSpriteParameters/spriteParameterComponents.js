@@ -23,6 +23,7 @@ function createAmmoSelectList(divToBePartOf, listId)
     divStypeAmmoSelect.classList.add("rounded");
 
     var ammoSpritesCollection = retrievingAmmoSprites(stypeCollection);
+    console.log(ammoSpritesCollection);
 
     var listAmmoResource = document.createElement("select");
     listAmmoResource.id = listId;
@@ -68,7 +69,7 @@ function createStypeSelectList(divToBePartOf, listId)
 
 }
 
-function createOrientationSelectList(divToBePartOf)
+function createOrientationSelectList(divToBePartOf, selectId)
 {
     var divOrientationSelect = document.createElement("div");
     divOrientationSelect.classList.add("styled-select");
@@ -78,15 +79,15 @@ function createOrientationSelectList(divToBePartOf)
     var orientationCollection = ['NONE', 'LEFT', 'RIGHT', 'UP', 'DOWN'];
 
     var listOrientation = document.createElement("select");
-    listOrientation.id = "listOrientation";
+    listOrientation.id = selectId;
     divOrientationSelect.appendChild(listOrientation);
 
 
     for (var i = 0; i < orientationCollection.length; i++) {
         var option = document.createElement("option");
         var orientationObject = orientationCollection[i];
-        option.value = orientationObject.name;
-        option.text = orientationObject.name;
+        option.value = orientationObject;
+        option.text = orientationObject;
         listOrientation.appendChild(option);
     }
 
@@ -95,9 +96,10 @@ function createOrientationSelectList(divToBePartOf)
 
 }
 
-function createInputNumber(divToAddId, type, min, max, valueToShow)
+function createInputNumber(divToAddId, type, min, max, valueToShow, inputId)
 {
     var inputNumber = document.createElement("input");
+    inputNumber.id = inputId;
     inputNumber.classList.add('input-spacing');
     inputNumber.type = type;
     inputNumber.min = min;
@@ -108,9 +110,10 @@ function createInputNumber(divToAddId, type, min, max, valueToShow)
     div.appendChild(inputNumber);
 }
 
-function createInputRange(divToAddId, type, min, max, step, spanId, valueToShow)
+function createInputRange(divToAddId, type, min, max, step, spanId, valueToShow, inputId)
 {
     var inputRange = document.createElement("input");
+    inputRange.id = inputId;
     inputRange.classList.add('bars');
     inputRange.classList.add('sliders');
     inputRange.type = type;
@@ -122,7 +125,7 @@ function createInputRange(divToAddId, type, min, max, step, spanId, valueToShow)
     var spanElement = document.createElement('span');
     spanElement.id = spanId;
     spanElement.style.cssFloat = 'right';
-    spanElement.innerHTML = '0.5';
+    spanElement.innerHTML = valueToShow;
     spanElement.classList.add("spanCenteredText");
     spanElement.classList.add("checkBoxSpan");
 
@@ -136,6 +139,20 @@ function createInputRange(divToAddId, type, min, max, step, spanId, valueToShow)
     div.appendChild(inputRange);
 }
 
+function updateInputNumber(parameterValue, inputId)
+{
+    var input = document.getElementById(inputId);
+    input.value = parameterValue;
+}
+
+function updateInputRange(parameterValue, inputId, spanRangeId)
+{
+    var inputRange = document.getElementById(inputId);
+    var spanRange = document.getElementById(spanRangeId);
+    inputRange.value = parameterValue;
+    spanRange.innerHTML = parameterValue;
+}
+
 function removeElements(parentElement)
 {
     while (parentElement.firstChild) {
@@ -147,11 +164,11 @@ function updateSelectParameter(selectId, parameterValue)
 {
     var valueToSelect = parameterValue;
     var select = document.getElementById(selectId);
-    var opts = select.options;
-    for (var opt, j = 0; opt = opts[j]; j++) {
-        if (opt.value == valueToSelect) {
-            select.selectedIndex = j;
-            break;
+        var opts = select.options;
+        for (var opt, j = 0; opt = opts[j]; j++) {
+            if (opt.value == valueToSelect) {
+                select.selectedIndex = j;
+                break;
+            }
         }
-    }
 }

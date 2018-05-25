@@ -4,90 +4,118 @@
 var specialParameters = document.getElementById("divSpecialParameters");
 //specialParameters.style.display
 
-function createFlickerParameter() {
+//
+function createFlickerParameter(parameters) {
     createDivSpanElements('divLimit', 'spanLimit', 'limit');
-    createInputNumber('divLimit', 'number', 1, 100, 1);
+    createInputNumber('divLimit', 'number', 1, 100, 1, 'inputLimitId');
+    if(parameters.limit) {
+        updateInputNumber(parameters.limit, 'inputLimitId');
+    }
 }
 
-function createOrientedFlickerParameter()
+//
+function createOrientedFlickerParameter(parameters)
 {
-    createFlickerParameter();
+    createFlickerParameter(parameters);
 }
 
-function createChaserParameter()
+//
+function createChaserParameter(parameters)
 {
     createDivSpanElements('divStype', 'spanStype', 'stype');
-    createStypeSelectList('divStype');
+    createStypeSelectList('divStype', 'selectStype');
+    if(parameter.stype) {
+        updateSelectParameter('selectStype', parameters.stype);
+    }
 }
-
-function createFleeingParameter()
+//
+function createFleeingParameter(parameters)
 {
-    createChaserParameter();
+    createChaserParameter(parameters);
 }
 
-function createAlternateChaserParameter()
+//no games with this featture - AlternateChaser
+function createAlternateChaserParameter(parameters)
 {
     createDivSpanElements('divStype1', 'spanStype1', 'stype1');
-    createStypeSelectList('divStype1');
+    createStypeSelectList('divStype1', 'selectStype1');
+    updateSelectParameter('selectStype1', parameters.stype1);
     createDivSpanElements('divStype2', 'spanStype2', 'stype2');
-    createStypeSelectList('divStype2');
+    createStypeSelectList('divStype2', 'selectStype2');
+    updateSelectParameter('selectStype2', parameters.stype2);
 }
 
-function createRandomAltChaserParameter()
+//no games with this featture - RandomAltChaser
+function createRandomAltChaserParameter(parameters)
 {
-    createAlternateChaserParameter();
+    createAlternateChaserParameter(parameters);
     createDivSpanElements('divProb', 'spanProb', 'prob');
-    createInputRange('divProb', 'range', 0.0, 1.0, 0.1, 0.0);
-
+    //divToAddId, type, min, max, step, spanId, valueToShow, inputId)
+    createInputRange('divProb', 'range', 0.0, 1.0, 0.01, 'spanProbId', 0.0, 'inputProbId');
+    updateInputRange(parameters.prob, 'inputProbId', 'spanProbId');
 }
-
-function createSpawnPoint()
+//
+function createSpawnPoint(parameters)
 {
     createDivSpanElements('divStype', 'spanStype', 'stype');
-    createStypeSelectList('divStype');
+    createStypeSelectList('divStype', 'selectStype');
+    updateSelectParameter('selectStype', parameters.stype);
     createDivSpanElements('divTotal', 'spanTotal', 'total');
-    createInputNumber('divTotal', 'number', 0, 100, 0);
+    createInputNumber('divTotal', 'number', 0, 100, 0, 'totalInputId');
+    updateInputNumber(parameters.total, 'totalInputId');
     createDivSpanElements('divProb', 'spanProb', 'prob');
-    createInputRange('divProb', 'range', 0.0, 1.0, 0.1, 0.0);
-    createDivSpanElements('divOrientation', 'spanOrientation', 'spawnorientation');
-    createOrientationSelectList('divOrientation');
+    createInputRange('divProb', 'range', 0.0, 1.0, 0.1, 'spanProbId', 0.0, 'inputProbId');
+    if(parameters.prob) {
+        console.log("balacobaco");
+        updateInputRange(parameters.prob, 'inputProbId', 'spanProbId');
+    }
+    createDivSpanElements('divOrientation', 'selectOrientationId', 'spawnorientation');
+    createOrientationSelectList('divOrientation', 'selectOrientation');
+    if(parameters.spawnorientation) {
+        updateSelectParameter('selectOrientationId', parameters.spawnorientation);//feature not available in all gvgai versions
+    }
 }
-
-function createBomber()
+//
+function createBomber(parameters)
 {
-    createSpawnPoint();
+    createSpawnPoint(parameters);
 }
-
-function createRandomBomber()
+//
+function createRandomBomber(parameters)
 {
-    createBomber();
+    createBomber(parameters);
 }
 
 //todo
-function createBomberRandomMissile()
+function createBomberRandomMissile(parameters)
 {
 
 }
-
-function createSpreader()
+//
+function createSpreader(parameters)
 {
     createDivSpanElements('divStype', 'spanStype', 'stype');
-    createStypeSelectList('divStype');
+    createStypeSelectList('divStype', 'selectStype');
+    updateSelectParameter('selectStype', parameters.stype);
     createDivSpanElements('divProb', 'spanProb', 'spreadprob');
-    createInputRange('divProb', 'range', 0.0, 1.0, 0.1, 0.0);
+    createInputRange('divProb', 'range', 0.0, 1.0, 0.1, 'rangeSpanId', 0.0, 'rangeId');
+    updateInputRange(parameters.prob, 'rangeId', 'rangeSpanId');
 }
-
-function createPortal()
+//
+function createPortal(parameters)
 {
-    createChaserParameter();
+    createChaserParameter(parameters);
 }
-
-function createResource()
+//
+function createResource(parameters)
 {
     createDivSpanElements('divResource', 'spanResource', 'resource');
-    createAmmoSelectList('divResource')
+    createAmmoSelectList('divResource', 'ammoSelectId');
+    updateSelectParameter('ammoSelectId', parameters.ammo);
     createDivSpanElements('divValue', 'spanValue', 'value');
-    createInputNumber('divValue', 'number', 1, 100, 1);
+    createInputNumber('divValue', 'number', 1, 100, 1, 'valueId');
+    updateInputNumber(parameters.value, 'valueId');
     createDivSpanElements('divLimit', 'spanLimit', 'limit');
-    createInputNumber('divLimit', 'number', 1, 100, 1);
+    createInputNumber('divLimit', 'number', 1, 100, 1, 'limitId');
+    updateInputNumber(parameters.limit, 'limitId');
 }

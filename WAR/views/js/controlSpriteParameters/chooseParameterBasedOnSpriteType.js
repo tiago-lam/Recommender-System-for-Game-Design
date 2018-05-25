@@ -11,59 +11,55 @@ function designSpecialTypesParameters(specialType, parameters)
     }
     else if(specialType == FlakAvatar)
     {
-        createFlakAvatarParameters();
+        createFlakAvatarParameters(parameters);
     }
     else if(specialType == Flicker)
     {
-        createFlickerParameter();
+        createFlickerParameter(parameters);
     }
     else if(specialType == OrientedFlicker)
     {
-        createOrientedFlickerParameter();
+        createOrientedFlickerParameter(parameters);
     }
     else if(specialType == Chaser)
     {
-        createChaserParameter();
+        createChaserParameter(parameters);
     }
     else if(specialType == Fleeing)
     {
-        createFleeingParameter();
+        createFleeingParameter(parameters);
     }
     else if(specialType == AlternateChaser)
     {
-        createAlternateChaserParameter();
+        createAlternateChaserParameter(parameters);
     }
     else if(specialType == RandomAltChaser)
     {
-        createRandomAltChaserParameter();
+        createRandomAltChaserParameter(parameters);
     }
     else if(specialType == SpawnPoint)
     {
-        createSpawnPoint();
+        createSpawnPoint(parameters);
     }
     else if(specialType == Bomber)
     {
-        createBomber();
+        createBomber(parameters);
     }
     else if(specialType == RandomBomber)
     {
-        createRandomBomber();
+        createRandomBomber(parameters);
     }
     else if(specialType == Spreader)
     {
-        createSpreader();
+        createSpreader(parameters);
     }
     else if(specialType == Portal)
     {
-        createPortal();
-    }
-    else if(specialType == Portal)
-    {
-        createPortal();
+        createPortal(parameters);
     }
     else if(specialType == Resource)
     {
-        createResource();
+        createResource(parameters);
     }
 
 }

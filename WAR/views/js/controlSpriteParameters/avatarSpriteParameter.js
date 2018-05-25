@@ -9,23 +9,38 @@ function createShootAvatarParameters(parameters) {
     createDivSpanElements('divStype', 'spanStype', 'stype');
     createStypeSelectList('divStype', 'selectStype');
     createDivSpanElements('divAmmo', 'spanAmmo', 'ammo');
-    createAmmoSelectList('divAmmo', 'selectAmmo');
-
+    createAmmoSelectList('divAmmo','selectAmmo');
     updateShootAvatarParameters(parameters);
 }
 
-function createFlakAvatarParameters() {
-    createShootAvatarParameters();
+function createFlakAvatarParameters(parameters) {
+    createShootAvatarParameters(parameters);
     createDivSpanElements('divMinAmmo', 'spanMinAmmo', 'minAmmo');
-    createInputNumber('divMinAmmo', 'number', 0, 100, 0);
+    createInputNumber('divMinAmmo', 'number', 0, 100, 0, 'minAmmoId');
     createDivSpanElements('divAmmoCost', 'spanAmmoCost', 'ammoCost');
-    createInputNumber('divAmmoCost', 'number', 1, 100, 1);
+    createInputNumber('divAmmoCost', 'number', 1, 100, 1, 'ammoCostId');
+    updateFlakAvatarParameters(parameters)
 }
 
 function updateShootAvatarParameters(parameters)
 {
    updateSelectParameter('selectStype', parameters.stype);
     updateSelectParameter('selectAmmo', parameters.ammo);
+}
+
+function updateFlakAvatarParameters(parameters)
+{
+    updateShootAvatarParameters(parameters);
+    updateInputNumberParameter(parameters);
+}
+
+function updateInputNumberParameter(parameters)
+{
+    var inputMinAmmo = document.getElementById('minAmmoId');
+    inputMinAmmo.value = parameters.minAmmo;
+
+    var inputAmmoCost = document.getElementById('minAmmoId');
+    inputAmmoCost.value = parameters.ammoCost;
 }
 
 
