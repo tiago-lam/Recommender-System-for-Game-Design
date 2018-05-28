@@ -19,8 +19,6 @@ function retrieveStypeOptions() {
         storingSingleSprites(spriteLi);
     }
 
-    console.log(stypeCollection);
-    console.log(retrievingAmmoSprites(stypeCollection));
     return stypeCollection;
 
 }
@@ -55,7 +53,6 @@ function storingSpritesCompound(spriteLi)
         {
             var ol = arrSpriteOl[j];
             var innerLi = ol.childNodes[0];
-            console.log(innerLi);
             var spriteDiv = innerLi.getElementsByClassName("dd-handle")[0];
             var stypeName = spriteDiv.textContent;
             var stypeImg = spriteDiv.childNodes[1];

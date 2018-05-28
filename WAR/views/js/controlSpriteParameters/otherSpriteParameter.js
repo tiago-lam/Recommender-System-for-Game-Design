@@ -66,7 +66,6 @@ function createSpawnPoint(parameters)
     createDivSpanElements('divProb', 'spanProb', 'prob');
     createInputRange('divProb', 'range', 0.0, 1.0, 0.1, 'spanProbId', 0.0, 'inputProbId');
     if(parameters.prob) {
-        console.log("balacobaco");
         updateInputRange(parameters.prob, 'inputProbId', 'spanProbId');
     }
     createDivSpanElements('divOrientation', 'selectOrientationId', 'spawnorientation');

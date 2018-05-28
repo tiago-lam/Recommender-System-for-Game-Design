@@ -32,9 +32,9 @@
             }
         }
 
-        function defaultValues(parameterValue, parameterControl, value)
+        function defaultValues(parameterValue, parameterControl, defaultValue)
         {
-            parameterValue.value = value;
+            parameterValue.value = defaultValue;
             parameterValue.textContent = parameterValue.value;
             parameterControl.value = parameterValue.value;
         }
@@ -59,16 +59,78 @@
 
         }
 
+        function updateDigitalParameters(obj)
+        {
+            var invisibleCheckBoxControl =  document.getElementById("invisibleCheckBoxId");
+            var singletonCheckBoxControl =  document.getElementById("singletonCheckBoxId");
+            var rotateCheckBoxControl =  document.getElementById("rotateCheckBoxId");
+
+            if("parameters" in obj)
+            {
+                var parameters = obj["parameters"];
+                if("invisible" in parameters)
+                {
+                    invisibleCheckBoxControl.checked = parameters["invisible"];
+                }
+                else
+                {
+                    invisibleCheckBoxControl.checked = false;
+                }
+                if("singleton" in parameters)
+                {
+                    singletonCheckBoxControl.checked = parameters["singleton"];
+                }
+                else
+                {
+                    singletonCheckBoxControl.checked = false;
+                }
+                if("rotateInPlace" in parameters)
+                {
+                    rotateCheckBoxControl.checked = parameters["rotateInPlace"];
+                }
+                else
+                {
+                    rotateCheckBoxControl.checked = false;
+                }
+            }
+        }
+
         function updateInspector(obj)
         {
+            console.log("obj");
+            console.log(obj);
+
             updateAnalogueParameters(obj);
 
-            var type = obj["referenceClass"];
-            var parameters = obj.parameters;
+            updateDigitalParameters(obj)
 
-            designSpecialTypesParameters(type, parameters);
+            //var interval = setInterval(function(){
+            //    obj.identifier = "oi";
+            //    obj.parameters["speed"] = 1.45;
+            //    if("orientation" in obj.parameters)
+            //    {
+            //        obj.parameters["orientation"] = "RIGHT";
+            //    }
+            //    else
+            //    {
+            //        console.log("else");
+            //        obj.parameters["orientation"] = "UP";
+            //    }
+            //    updateAnalogueParameters(obj);
+            //    console.log(obj);
+            //     }, 2000);
+
+            //clearInterval(interval);
+            //
+            //var type = obj["referenceClass"];
+            //var parameters = obj.parameters;
+            //
+            //designSpecialTypesParameters(type, parameters);
 
             //retrieveStypeOptions();
         }
 
+        function updateObject()
+        {
 
+        }
