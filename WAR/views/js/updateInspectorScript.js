@@ -1,5 +1,13 @@
-        function updateShrinkValue(val) {
-          document.getElementById('shrinkValue').textContent=val; 
+        var currentObj;
+
+        function initializeCurrentObj(obj)
+        {
+            currentObj = obj;
+        }
+
+        function updateShrinkValue(val, updateFunction) {
+          document.getElementById('shrinkValue').textContent=val;
+            updateFunction(val);
         }
 
         function updateSpeedValue(val) {
@@ -8,6 +16,33 @@
 
         function updateCooldownValue(val) {
           document.getElementById('cooldownValue').textContent=val; 
+        }
+
+        function updateObjShrinkValue(val)
+        {
+            currentObj.parameters.shrinkFactor = val;
+            if("children" in currentObj)
+            {
+                var children = currentObj.children;
+
+                for(var i = 0; i < children.length; i++)
+                {
+                    children[i].parameters["shrinkFactor"] = val;
+                }
+            }
+
+            if(val > 0.5) {
+                var ul = document.getElementById("spriteList");
+                while (ul.firstChild) {
+                    ul.removeChild(ul.firstChild);
+                }
+                console.log(ul);
+                mapListObject.clear();
+                //buildTheSpriteSet(myObj, ul);
+                console.log(mapListObject.size);
+                console.log(mapListObject);
+            }
+
         }
 
         function assignValueToTheParameter(parameters, parameterValue, parameterControl, parameterMatch) {
@@ -97,8 +132,8 @@
 
         function updateInspector(obj)
         {
-            console.log("obj");
-            console.log(obj);
+
+            initializeCurrentObj(obj);
 
             updateAnalogueParameters(obj);
 

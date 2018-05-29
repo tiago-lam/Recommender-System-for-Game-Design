@@ -33,7 +33,7 @@
 
             <div id="shrinkFactor" class="contentSliders">
                 <label id="shrinkLabel" for="shrinkLabel">Shrink Factor: <span id="shrinkValue">0.5</span></label>
-                <input class="bars sliders" type="range" min="0.0" max="1.0" value="0.5" step="0.1" class="slider" id="shrinkControl" oninput="updateShrinkValue(this.value)">
+                <input class="bars sliders" type="range" min="0.0" max="1.0" value="0.5" step="0.1" class="slider" id="shrinkControl" oninput="updateShrinkValue(this.value, updateObjShrinkValue)">
             </div>
 
             <div id="speed" class="contentSliders">

@@ -5,16 +5,22 @@
         var xmlhttp = new XMLHttpRequest();
         var myObj;
 
+        function buildTheSpriteSet(spriteSetObj, ulElement) {
+            for (var i = 0; i < spriteSetObj.length; i++) {
+                getObjectData(spriteSetObj[i], ulElement);
+            }
+        }
+
+        console.log("list");
+        console.log(ul);
+
         xmlhttp.onreadystatechange = function() {
 
             if (this.readyState == 4 && this.status == 200) {
                 myObj = JSON.parse(this.responseText);
                 console.log("H");
                 console.log(myObj);
-                for(var i = 0; i < myObj.length; i++)
-                {
-                    getObjectData(myObj[i], ul);
-                }
+                buildTheSpriteSet(myObj, ul);
                 applyStylesToTheSpriteSet();
                 appendEvents();
             }
@@ -71,13 +77,13 @@
             var objChildren = currentObj.children;
             if(objChildren)
             {
+                var innerOl = document.createElement("ol");
+                innerOl.classList.add("dd-list");
+                innerOl.classList.add("children");
+                
                 for(var j = 0; j < objChildren.length; j++)
                 {
                     var innerCurrentObj = objChildren[j];
-
-                    var innerOl = document.createElement("ol");
-                    innerOl.classList.add("dd-list");
-                    innerOl.classList.add("children");
 
                     getObjectData(innerCurrentObj, innerOl);
                     li.appendChild(innerOl);
@@ -116,10 +122,11 @@
 
         function retrieveObjectByTarget(target)
         {
-            obj =  mapListObject.get(target.childNodes[0]);
+            var obj =  mapListObject.get(target.childNodes[0]);
             document.getElementById("name").innerHTML = obj.identifier;
             var img = document.getElementById("image");
             img.src = target.childNodes[1].src;
+            console.log(obj);
           return obj;
         }
 
@@ -132,7 +139,7 @@
                 {
                     var gameObj = mapListObject.get(objectContainers[i].childNodes[0]);
                     //console.log("kk");
-                    //console.log(gameObj);
+                    console.log(gameObj);
                     return gameObj;
                 }
             }
