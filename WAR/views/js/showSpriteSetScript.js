@@ -37,7 +37,7 @@
         {
             $(".dd-handle")
                .mousedown(function(e) {
-                var obj = retrieveObjectByTarget(e.target);
+                var obj = retrieveObjectByTarget(e.target.id);
                 updateInspector(obj);
              });
         }
@@ -49,6 +49,7 @@
             var identifier = currentObj.identifier;
             var parameters = currentObj.parameters;
             var imgSrc = document.createElement("img");
+            imgSrc.id = identifier + "ImgId";
 
             if("img" in parameters)
             {
@@ -56,19 +57,19 @@
                 fetchBlob(imgPathForUrlCreation, imgSrc);
             }
 
-
             var li = document.createElement("li");
             li.classList.add("dd-item");
             li.setAttribute('data-id', identifier);
 
             var div = document.createElement("div");
             div.classList.add("dd-handle");
+            div.id = identifier;
             var divText = document.createTextNode(identifier);
             div.appendChild(divText);
             div.appendChild(imgSrc);
             li.appendChild(div);
 
-            var textElement = li.childNodes[0].childNodes[0];
+            var textElement = identifier;
 
             li.setAttribute('data-obj', currentObj);
             mapListObject.set(textElement, currentObj);
@@ -80,7 +81,7 @@
                 var innerOl = document.createElement("ol");
                 innerOl.classList.add("dd-list");
                 innerOl.classList.add("children");
-                
+
                 for(var j = 0; j < objChildren.length; j++)
                 {
                     var innerCurrentObj = objChildren[j];
@@ -95,13 +96,14 @@
         //get the image of an specific sprite
         function fetchBlob(imgPath, imgElement) {
             // construct the URL path to the image file from the product.image property
-            var url = imgPath;
+            var urlSrc = null;
             // Use XHR to fetch the image, as a blob
             // Again, if any errors occur we report them in the console.
             var request = new XMLHttpRequest();
             var params = "picture=" + imgPath;
             request.open('GET', "http://localhost:9001/imgs" + "?" + params, true);
             request.responseType = 'blob';
+            var objectURL = null;
 
             request.onload = function() {
                 if(request.status === 200) {
@@ -111,21 +113,24 @@
                 objectURL = URL.createObjectURL(blob);
                 // invoke showProduct
                 imgElement.src = objectURL;
+                urlSrc = imgElement.src;
+                    return urlSrc;
+
                 } else {
                     alert('Network request for "' + product.name + '" image failed with response ' +     request.status + ': ' + request. statusText);
                 }
-            };  
+            };
 
             request.send();
-            console.log("finished");
+
         }
 
         function retrieveObjectByTarget(target)
         {
-            var obj =  mapListObject.get(target.childNodes[0]);
+            var obj =  mapListObject.get(target);
             document.getElementById("name").innerHTML = obj.identifier;
             var img = document.getElementById("image");
-            img.src = target.childNodes[1].src;
+            img.src = document.getElementById(obj.identifier + "ImgId").src;
             console.log(obj);
           return obj;
         }
@@ -138,7 +143,6 @@
                 if(objectContainers[i].childNodes[0].textContent == objectName)
                 {
                     var gameObj = mapListObject.get(objectContainers[i].childNodes[0]);
-                    //console.log("kk");
                     console.log(gameObj);
                     return gameObj;
                 }
