@@ -33,17 +33,17 @@
 
             <div id="shrinkFactor" class="contentSliders">
                 <label id="shrinkLabel" for="shrinkLabel">Shrink Factor: <span id="shrinkValue">0.5</span></label>
-                <input class="bars sliders" type="range" min="0.0" max="1.0" value="0.5" step="0.1" class="slider" id="shrinkControl" oninput="updateShrinkValue(this.value, updateObjShrinkValue)">
+                <input class="bars sliders" type="range" min="0.0" max="1.0" value="0.5" step="0.1" class="slider" id="shrinkControl" oninput="updateShrinkValue(this.value, updateObjParamValue)">
             </div>
 
             <div id="speed" class="contentSliders">
                 <label id="speedLabel" for="speedLabel">Speed: <span id="speedValue">5</span></label>
-                <input class="bars sliders" type="range" min="0.0" max="10.0" value="1.0" step="0.05" class="slider" id="speedControl" oninput="updateSpeedValue(this.value)">
+                <input class="bars sliders" type="range" min="0.0" max="10.0" value="1.0" step="0.05" class="slider" id="speedControl" oninput="updateSpeedValue(this.value, updateObjParamValue)">
             </div>
 
             <div id="cooldown" class="contentSliders">
                 <label id="cooldownLabel" for="cooldownLabel">cooldown: <span id="cooldownValue">5</span></label>
-                <input class="bars sliders" type="range" min="1" max="10" value="1" step="1" class="slider" id="cooldownControl" oninput="updateCooldownValue(this.value)">
+                <input class="bars sliders" type="range" min="1" max="10" value="1" step="1" class="slider" id="cooldownControl" oninput="updateCooldownValue(this.value, updateObjParamValue)">
             </div>
         </div><!-- end div anologue parameters -->
 
@@ -52,7 +52,7 @@
                 <div id="invisible">
                     <div class="toggle_switch">
                         <span class="checkBoxSpan">Invisible</span>
-                        <input id="invisibleCheckBoxId" type="checkbox" class="switch_3">
+                        <input id="invisibleCheckBoxId" type="checkbox" class="switch_3" oninput="updateInvisibleValue(this.checked, updateObjParamValue)">
                         <svg class="checkbox" xmlns="http://www.w3.org/2000/svg" style="isolation:isolate" viewBox="0 0 168 80">
                             <path class="outer-ring" d="M41.534 9h88.932c17.51 0 31.724 13.658 31.724 30.482 0 16.823-14.215 30.48-31.724 30.48H41.534c-17.51 0-31.724-13.657-31.724-30.48C9.81 22.658 24.025 9 41.534 9z" fill="none" stroke="#233043" stroke-width="3" stroke-linecap="square" stroke-miterlimit="3"/>
                             <path class="is_checked" d="M17 39.482c0-12.694 10.306-23 23-23s23 10.306 23 23-10.306 23-23 23-23-10.306-23-23z"/>
@@ -63,7 +63,7 @@
                 <div id="singleton">
                     <div class="toggle_switch">
                         <span class="checkBoxSpan">Singleton</span>
-                        <input id="singletonCheckBoxId" type="checkbox" class="switch_3">
+                        <input id="singletonCheckBoxId" type="checkbox" class="switch_3" oninput="">
                         <svg class="checkbox" xmlns="http://www.w3.org/2000/svg" style="isolation:isolate" viewBox="0 0 168 80">
                             <path class="outer-ring" d="M41.534 9h88.932c17.51 0 31.724 13.658 31.724 30.482 0 16.823-14.215 30.48-31.724 30.48H41.534c-17.51 0-31.724-13.657-31.724-30.48C9.81 22.658 24.025 9 41.534 9z" fill="none" stroke="#233043" stroke-width="3" stroke-linecap="square" stroke-miterlimit="3"/>
                             <path class="is_checked" d="M17 39.482c0-12.694 10.306-23 23-23s23 10.306 23 23-10.306 23-23 23-23-10.306-23-23z"/>

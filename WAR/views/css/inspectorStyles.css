@@ -64,6 +64,18 @@ span
 	font-family: "Lucida Console", Monaco, monospace;
 }
 
+.contentSlidersInnactive
+{
+	padding: 10px;
+	margin-bottom: 5px;
+	border-width: 2px;
+	border-style: solid;
+	border-color: lightsteelblue;
+	background-color: azure;
+	border-radius: 10px;
+	font-family: "Lucida Console", Monaco, monospace;
+}
+
 .sliders
 {
 	position: relative;
@@ -75,6 +87,7 @@ span
 {
 	width: 90%;
 }
+
 
 /*.checkers*/
 /*{*/
@@ -93,3 +106,4 @@ input[type="range"]
 	/*width: 50%;*/
 	margin-right: 30px;
 }
+

@@ -28,7 +28,7 @@ BasicGame square_size=20 obs=wall
                     orangeSc > Fleeing stype=pacman maxDistance=500 cooldown=2 img=oryx/ghost1
 
 
-            pacman > OrientedAvatar img=newset/pacman rotateInPlace=false speed=0.5
+            pacman > OrientedAvatar img=newset/pacman rotateInPlace=False speed=0.5
                 hungry  > color=YELLOW
                 powered > color=ORANGE            
         wall > Immovable img=oryx/wall3 autotiling=True

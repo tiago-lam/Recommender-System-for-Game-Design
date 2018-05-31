@@ -58,8 +58,8 @@
             }
 
             var li = document.createElement("li");
+            li.id = identifier;
             li.classList.add("dd-item");
-            li.setAttribute('data-id', identifier);
 
             var div = document.createElement("div");
             div.classList.add("dd-handle");

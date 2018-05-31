@@ -5,44 +5,38 @@
             currentObj = obj;
         }
 
+        function updateInvisibleValue(val, updateFunction)
+        {
+            console.log(val);
+            updateFunction(val, "invisible");
+        }
+
         function updateShrinkValue(val, updateFunction) {
           document.getElementById('shrinkValue').textContent=val;
-            updateFunction(val);
+            updateFunction(val, "shrinkfactor");
         }
 
-        function updateSpeedValue(val) {
-          document.getElementById('speedValue').textContent=val; 
+        function updateSpeedValue(val, updateFunction) {
+          document.getElementById('speedValue').textContent=val;
+            updateFunction(val, "speed");
         }
 
-        function updateCooldownValue(val) {
-          document.getElementById('cooldownValue').textContent=val; 
+        function updateCooldownValue(val, updateFunction) {
+          document.getElementById('cooldownValue').textContent=val;
+            updateFunction(val, "cooldown");
         }
 
-        function updateObjShrinkValue(val)
+        function updateObjParamValue(val, param)
         {
-            currentObj.parameters.shrinkFactor = val;
-            if("children" in currentObj)
-            {
+            currentObj.parameters[param] = val;
+            if ("children" in currentObj) {
                 var children = currentObj.children;
-
-                for(var i = 0; i < children.length; i++)
-                {
-                    children[i].parameters["shrinkFactor"] = val;
+                for (var i = 0; i < children.length; i++) {
+                    children[i].parameters[param] = val;
                 }
             }
-
-            if(val > 0.5) {
-                var ul = document.getElementById("spriteList");
-                while (ul.firstChild) {
-                    ul.removeChild(ul.firstChild);
-                }
-                console.log(ul);
-                mapListObject.clear();
-                //buildTheSpriteSet(myObj, ul);
-                console.log(mapListObject.size);
-                console.log(mapListObject);
-            }
-
+            mapListObject.set(currentObj.identfier, currentObj);
+            console.log(myObj);
         }
 
         function assignValueToTheParameter(parameters, parameterValue, parameterControl, parameterMatch) {
@@ -77,28 +71,33 @@
         function updateAnalogueParameters(obj)
         {
           var shrinkControl = document.getElementById("shrinkControl");
+            shrinkControl.disabled = checkIfItParentHasParam(obj, "shrinkfactor");
           var speedControl = document.getElementById('speedControl');
+            speedControl.disabled = checkIfItParentHasParam(obj, "speed");
           var cooldownControl = document.getElementById("cooldownControl");
+            cooldownControl.disabled = checkIfItParentHasParam(obj, "cooldown");
 
           var shrinkValue = document.getElementById("shrinkValue");
           var speedValue = document.getElementById('speedValue');
           var cooldownValue = document.getElementById("cooldownValue");
 
-          if("parameters" in obj)
-          {
-              var parameters = obj["parameters"];
-              manageParameterValues(speedValue, speedControl, parameters, 1, "speed");
-              manageParameterValues(shrinkValue, shrinkControl, parameters, 0, "shrinkfactor");
-              manageParameterValues(cooldownValue, cooldownControl, parameters, 1, "cooldown");
-          }
+            if (("parameters" in obj)) {
+                var parameters = obj["parameters"];
+                manageParameterValues(speedValue, speedControl, parameters, 1, "speed");
+                manageParameterValues(shrinkValue, shrinkControl, parameters, 0, "shrinkfactor");
+                manageParameterValues(cooldownValue, cooldownControl, parameters, 1, "cooldown");
+            }
 
         }
 
         function updateDigitalParameters(obj)
         {
             var invisibleCheckBoxControl =  document.getElementById("invisibleCheckBoxId");
-            var singletonCheckBoxControl =  document.getElementById("singletonCheckBoxId");
-            var rotateCheckBoxControl =  document.getElementById("rotateCheckBoxId");
+            invisibleCheckBoxControl.disabled = checkIfItParentHasParam(obj, "invisible");
+            //var singletonCheckBoxControl =  document.getElementById("singletonCheckBoxId");
+            //singletonCheckBoxControl.disabled = checkIfItParentHasParam(obj, "singleton");
+            //var rotateCheckBoxControl =  document.getElementById("rotateCheckBoxId");
+            //rotateCheckBoxControl.disabled = checkIfItParentHasParam(obj, "rotateInPlace");
 
             if("parameters" in obj)
             {
@@ -111,22 +110,22 @@
                 {
                     invisibleCheckBoxControl.checked = false;
                 }
-                if("singleton" in parameters)
-                {
-                    singletonCheckBoxControl.checked = parameters["singleton"];
-                }
-                else
-                {
-                    singletonCheckBoxControl.checked = false;
-                }
-                if("rotateInPlace" in parameters)
-                {
-                    rotateCheckBoxControl.checked = parameters["rotateInPlace"];
-                }
-                else
-                {
-                    rotateCheckBoxControl.checked = false;
-                }
+                //if("singleton" in parameters)
+                //{
+                //    singletonCheckBoxControl.checked = parameters["singleton"];
+                //}
+                //else
+                //{
+                //    singletonCheckBoxControl.checked = false;
+                //}
+                //if("rotateInPlace" in parameters)
+                //{
+                //    rotateCheckBoxControl.checked = parameters["rotateInPlace"];
+                //}
+                //else
+                //{
+                //    rotateCheckBoxControl.checked = false;
+                //}
             }
         }
 
@@ -139,33 +138,40 @@
 
             updateDigitalParameters(obj)
 
-            //var interval = setInterval(function(){
-            //    obj.identifier = "oi";
-            //    obj.parameters["speed"] = 1.45;
-            //    if("orientation" in obj.parameters)
-            //    {
-            //        obj.parameters["orientation"] = "RIGHT";
-            //    }
-            //    else
-            //    {
-            //        console.log("else");
-            //        obj.parameters["orientation"] = "UP";
-            //    }
-            //    updateAnalogueParameters(obj);
-            //    console.log(obj);
-            //     }, 2000);
-
-            //clearInterval(interval);
-            //
-            //var type = obj["referenceClass"];
-            //var parameters = obj.parameters;
-            //
-            //designSpecialTypesParameters(type, parameters);
-
-            //retrieveStypeOptions();
         }
 
-        function updateObject()
-        {
 
+        function checkIfItParentHasParam(obj, param)
+        {
+            var htmlElement = document.getElementById(obj.identifier);
+            console.log(htmlElement);
+            var parent = htmlElement.parentNode;
+
+            console.log(parent);
+            if(parent.id == 'spriteList') {
+                console.log("first cut");
+                return false;
+            }
+
+            while (parent.className != 'dd-item') {
+                console.log(parent);
+                parent = parent.parentNode;
+            }
+
+            if(parent.id != 'spriteList')
+            {
+                console.log("reached");
+                var parentObj = mapListObject.get(parent.id);
+                console.log(parentObj);
+                console.log(parentObj.parameters[param]);
+                if(param in parentObj.parameters){
+                    console.log(obj.identifier);
+                    console.log(parentObj.identifier);
+                    console.log(param);
+                    console.log("true cut");
+                    return true;
+                }
+            }
+            console.log("final cut");
+            return false;
         }
