@@ -11,6 +11,18 @@
             updateFunction(val, "invisible");
         }
 
+        function updateRotateValue(val, updateFunction)
+        {
+            console.log(val);
+            updateFunction(val, "rotateInPlace");
+        }
+
+        function updateSingletonValue(val, updateFunction)
+        {
+            console.log(val);
+            updateFunction(val, "singleton");
+        }
+
         function updateShrinkValue(val, updateFunction) {
           document.getElementById('shrinkValue').textContent=val;
             updateFunction(val, "shrinkfactor");
@@ -94,10 +106,10 @@
         {
             var invisibleCheckBoxControl =  document.getElementById("invisibleCheckBoxId");
             invisibleCheckBoxControl.disabled = checkIfItParentHasParam(obj, "invisible");
-            //var singletonCheckBoxControl =  document.getElementById("singletonCheckBoxId");
-            //singletonCheckBoxControl.disabled = checkIfItParentHasParam(obj, "singleton");
-            //var rotateCheckBoxControl =  document.getElementById("rotateCheckBoxId");
-            //rotateCheckBoxControl.disabled = checkIfItParentHasParam(obj, "rotateInPlace");
+            var singletonCheckBoxControl =  document.getElementById("singletonCheckBoxId");
+            singletonCheckBoxControl.disabled = checkIfItParentHasParam(obj, "singleton");
+            var rotateCheckBoxControl =  document.getElementById("rotateCheckBoxId");
+            rotateCheckBoxControl.disabled = checkIfItParentHasParam(obj, "rotateInPlace");
 
             if("parameters" in obj)
             {
@@ -110,22 +122,22 @@
                 {
                     invisibleCheckBoxControl.checked = false;
                 }
-                //if("singleton" in parameters)
-                //{
-                //    singletonCheckBoxControl.checked = parameters["singleton"];
-                //}
-                //else
-                //{
-                //    singletonCheckBoxControl.checked = false;
-                //}
-                //if("rotateInPlace" in parameters)
-                //{
-                //    rotateCheckBoxControl.checked = parameters["rotateInPlace"];
-                //}
-                //else
-                //{
-                //    rotateCheckBoxControl.checked = false;
-                //}
+                if("singleton" in parameters)
+                {
+                    singletonCheckBoxControl.checked = parameters["singleton"];
+                }
+                else
+                {
+                    singletonCheckBoxControl.checked = false;
+                }
+                if("rotateInPlace" in parameters)
+                {
+                    rotateCheckBoxControl.checked = parameters["rotateInPlace"];
+                }
+                else
+                {
+                    rotateCheckBoxControl.checked = false;
+                }
             }
         }
 
