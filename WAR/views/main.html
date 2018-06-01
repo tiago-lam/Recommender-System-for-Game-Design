@@ -87,12 +87,12 @@
         <div id="divSelect">
             <span class="checkBoxSpan spanCenteredText">Orientation</span>
             <div class="styled-select blue rounded">
-                <select>
-                    <option value="l">Left</option>
-                    <option value="r">Right</option>
-                    <option value="u">Up</option>
-                    <option value="d">Down</option>
-                    <option value="n">None</option>
+                <select id="orientationSelectId" oninput="updateSelectValue(this.selectedIndex, updateObjParamValue)">
+                    <option value="NONE">None</option>
+                    <option value="LEFT">Left</option>
+                    <option value="RIGHT">Right</option>
+                    <option value="UP">Up</option>
+                    <option value="DOWN">Down</option>
                 </select>
             </div>
         </div>

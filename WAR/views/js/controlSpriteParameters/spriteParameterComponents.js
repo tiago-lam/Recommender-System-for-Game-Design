@@ -164,11 +164,13 @@ function updateSelectParameter(selectId, parameterValue)
 {
     var valueToSelect = parameterValue;
     var select = document.getElementById(selectId);
-        var opts = select.options;
-        for (var opt, j = 0; opt = opts[j]; j++) {
-            if (opt.value == valueToSelect) {
-                select.selectedIndex = j;
-                break;
-            }
+    var opts = select.options;
+
+    for (var opt, j = 0; opt = opts[j]; j++) {
+        if (opt.value == valueToSelect) {
+            select.selectedIndex = j;
+            return;
         }
+    }
+    select.selectedIndex = 0;//None
 }

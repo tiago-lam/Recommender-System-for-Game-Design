@@ -21,7 +21,7 @@ public class GetSpriteSet extends HttpServlet
                           HttpServletResponse response ) throws ServletException,
                                                         IOException
     {
-		String toSend = getSpriteSetJSONObject("examples/gridphysics/pacman.txt");
+		String toSend = getSpriteSetJSONObject("examples/gridphysics/eggomania.txt");
 		
     	response.setContentType("text/html");
         response.setStatus(HttpServletResponse.SC_OK);

@@ -19,7 +19,7 @@
 
         function updateSingletonValue(val, updateFunction)
         {
-            console.log(val);
+            document.getElementById('shrinkValue').textContent=val;
             updateFunction(val, "singleton");
         }
 
@@ -36,6 +36,13 @@
         function updateCooldownValue(val, updateFunction) {
           document.getElementById('cooldownValue').textContent=val;
             updateFunction(val, "cooldown");
+        }
+
+        function updateSelectValue(val, updateFunction)
+        {
+            var selectComponent = document.getElementById('orientationSelectId');
+            var choice = selectComponent.options[val];
+            updateFunction(choice.value, "orientation");
         }
 
         function updateObjParamValue(val, param)
@@ -141,49 +148,52 @@
             }
         }
 
+        function updateOrientationParameter(obj)
+        {
+           var selectComponent = document.getElementById('orientationSelectId');
+           selectComponent.disabled = checkIfItParentHasParam(obj, 'orientation');
+           updateSelectParameter("orientationSelectId", obj.parameters["orientation"]);
+        }
+
         function updateInspector(obj)
         {
-
             initializeCurrentObj(obj);
 
             updateAnalogueParameters(obj);
 
             updateDigitalParameters(obj)
 
+            updateOrientationParameter(obj);
         }
 
 
         function checkIfItParentHasParam(obj, param)
         {
             var htmlElement = document.getElementById(obj.identifier);
-            console.log(htmlElement);
+
             var parent = htmlElement.parentNode;
 
             console.log(parent);
             if(parent.id == 'spriteList') {
-                console.log("first cut");
+
                 return false;
             }
 
             while (parent.className != 'dd-item') {
-                console.log(parent);
+
                 parent = parent.parentNode;
             }
 
             if(parent.id != 'spriteList')
             {
-                console.log("reached");
+
                 var parentObj = mapListObject.get(parent.id);
-                console.log(parentObj);
-                console.log(parentObj.parameters[param]);
+
                 if(param in parentObj.parameters){
-                    console.log(obj.identifier);
-                    console.log(parentObj.identifier);
-                    console.log(param);
-                    console.log("true cut");
+
                     return true;
                 }
             }
-            console.log("final cut");
+
             return false;
         }
