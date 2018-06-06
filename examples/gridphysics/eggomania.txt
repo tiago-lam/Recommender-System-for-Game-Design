@@ -13,7 +13,6 @@ BasicGame
                     #slowChickenR > orientation=RIGHT img=newset/chickenr
                     #slowChickenL > orientation=LEFT img=newset/chicken
             avatar  > FlakAvatar stype=sam ammo=explosiveegg minAmmo=5 ammoCost=5 img=newset/girl3
-            	avatarSon > speed=0.5
         missile > Missile
             sam  > orientation=UP    color=BLUE singleton=True img=oryx/fireup1
             egg  > orientation=DOWN  color=RED speed=0.2 img=newset/egg

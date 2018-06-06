@@ -16,7 +16,6 @@ BasicGame square_size=20 obs=wall
             ghost >
                 red > singleton=True
                     redOk > RandomPathAltChaser stype1=hungry stype2=powered cooldown=4 img=oryx/ghost3 cons=4
-                    	redOKson > speed=0.5
                     redSc > Fleeing stype=pacman maxDistance=500 cooldown=2 img=oryx/ghost1
                 blue > singleton=True
                     blueOk > RandomPathAltChaser stype1=hungry stype2=powered cooldown=4 img=oryx/ghost4 cons=4

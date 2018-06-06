@@ -145,7 +145,13 @@ function createInputRange(divToAddId, type, min, max, step, spanId, valueToShow,
 {
     var inputRange = document.createElement("input");
     inputRange.id = inputId;
-    inputRange.setAttribute("oninput", "updateInputRangeValue(this.value, updateObjParamValue)");
+    if(inputRange.id == "inputProbId") {
+        inputRange.setAttribute("oninput", "updateProbValue(this.value, updateObjParamValue)");
+    }
+    else if(inputRange.id == "spreadProbRangeId")
+    {
+        inputRange.setAttribute("oninput", "updateSpreadProbValue(this.value, updateObjParamValue)");
+    }
     inputRange.classList.add('bars');
     inputRange.classList.add('sliders');
     inputRange.type = type;

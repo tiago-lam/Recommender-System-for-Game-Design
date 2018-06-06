@@ -97,9 +97,11 @@ function createSpreader(parameters)
     createDivSpanElements('divStype', 'spanStype', 'stype');
     createStypeSelectList('divStype', 'selectStypeId');
     updateSelectParameter('selectStypeId', parameters.stype);
-    createDivSpanElements('divProb', 'spanProb', 'spreadprob');
-    createInputRange('divProb', 'range', 0.0, 1.0, 0.1, 'rangeSpanId', 0.0, 'rangeId');
-    updateInputRange(parameters.prob, 'rangeId', 'rangeSpanId');
+    createDivSpanElements('divSpreadProb', 'spanProb', 'spreadprob');
+    createInputRange('divSpreadProb', 'range', 0.0, 1.0, 0.1, 'spreadProbSpanId', 0.0, 'spreadProbRangeId');
+    if(parameters.spreadprob) {
+        updateInputRange(parameters.spreadprob, 'spreadProbRangeId', 'spreadProbSpanId');
+    }
 }
 //
 function createPortal(parameters)

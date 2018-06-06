@@ -7,9 +7,9 @@ BasicGame
         mana    > Resource color=GREEN limit=3 img=oryx/diamond3 shrinkfactor=0.5
         bullet > Missile color=RED speed=0.5 singleton=True img=oryx/bullet1
         fire   > Spreader color=ORANGE spreadprob=0.25 stype=spark img=oryx/fire1
+        	fireSon > speed=0.5
         spark  > SpawnPoint stype=fireAsh total=1 img=oryx/slash1
         avatar > ShootAvatar ammo=mana stype=bullet healthPoints=3 img=oryx/devil1 frameRate=8
-        	avatarSon > img=newset/chickenr
         wall > Immovable img=oryx/wall3 autotiling=True
 
     InteractionSet

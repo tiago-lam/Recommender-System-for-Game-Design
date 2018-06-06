@@ -186,6 +186,11 @@
                 updateAmmoCostParameter(obj);
             }
 
+            if("spreadprob" in obj.parameters)
+            {
+                updateSpreadProbParameter(obj);
+            }
+
         }
 
         function assignValueToTheParameter(parameters, parameterValue, parameterControl, parameterMatch) {

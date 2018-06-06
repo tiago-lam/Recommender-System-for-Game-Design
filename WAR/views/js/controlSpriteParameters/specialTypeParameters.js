@@ -30,7 +30,7 @@ function updateSpawnOrientationParameter(obj)
 }
 
 //prob
-function updateInputRangeValue(val, updateFunction)
+function updateProbValue(val, updateFunction)
 {
     document.getElementById('inputProbId').textContent=val;
     updateFunction(val, "prob");
@@ -152,4 +152,19 @@ function updateAmmoCostParameter(obj)
 {
     var inputNumberControl = document.getElementById("ammoCostId");
     inputNumberControl.disabled = checkIfItsParentHasParam(obj, "ammoCost");
+}
+
+//spreadprob
+function updateSpreadProbValue(val, updateFunction)
+{
+    document.getElementById('spreadProbRangeId').textContent=val;
+    updateFunction(val, "spreadprob");
+}
+
+function updateSpreadProbParameter(obj) {
+    var inputRangeControl = document.getElementById("spreadProbRangeId");
+    inputRangeControl.disabled = checkIfItsParentHasParam(obj, "spreadprob");
+
+    var spanValue = document.getElementById("spreadProbSpanId");
+    manageParameterValues(spanValue, inputRangeControl, obj.parameters, 0, "spreadprob");
 }
