@@ -156,6 +156,10 @@
                 updateTotalParameter(obj);
             }
 
+            if("ammo" in obj.parameters)
+            {
+                updateAmmoParameter(obj);
+            }
 
         }
 

@@ -57,5 +57,19 @@ function updateTotalParameter(obj)
     inputNumberControl.disabled = checkIfItsParentHasParam(obj, "total");
 }
 
-ammo
-// function update
+//ammo
+function updateSelectAmmoValue(val, updateFunction)
+{
+    var selectComponent = document.getElementById('selectAmmoId');
+    var choice = selectComponent.options[val];
+    updateFunction(choice.value, 'ammo');
+}
+
+function updateAmmoParameter(obj)
+{
+    var selectComponent = document.getElementById('selectAmmoId');
+    selectComponent.disabled = checkIfItsParentHasParam(obj, 'ammo');
+    updateSelectParameter("selectAmmoId", obj.parameters["ammo"]);
+}
+
+

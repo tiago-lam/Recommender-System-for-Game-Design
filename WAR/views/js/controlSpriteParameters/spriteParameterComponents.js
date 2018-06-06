@@ -27,6 +27,7 @@ function createAmmoSelectList(divToBePartOf, listId)
 
     var listAmmoResource = document.createElement("select");
     listAmmoResource.id = listId;
+    listAmmoResource.setAttribute("oninput", "updateSelectAmmoValue(this.selectedIndex, updateObjParamValue)");
     divStypeAmmoSelect.appendChild(listAmmoResource);
 
     for (var i = 0; i < ammoSpritesCollection.length; i++) {
@@ -50,7 +51,6 @@ function createStypeSelectList(divToBePartOf, listId)
     divStypeSelect.classList.add("rounded");
 
     var stypeCollection = retrieveStypeOptions();
-    //console.log(stypeCollection);
 
     var listStype = document.createElement("select");
     listStype.id = listId;
@@ -168,7 +168,6 @@ function updateSelectParameter(selectId, parameterValue)
 {
     var valueToSelect = parameterValue;
     var select = document.getElementById(selectId);
-    console.log(selectId);
     var opts = select.options;
 
     for (var opt, j = 0; opt = opts[j]; j++) {
