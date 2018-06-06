@@ -128,7 +128,6 @@
             document.getElementById("name").innerHTML = obj.identifier;
             var img = document.getElementById("image");
             img.src = document.getElementById(obj.identifier + "ImgId").currentSrc;
-            console.log(obj);
             return obj;
         }
 

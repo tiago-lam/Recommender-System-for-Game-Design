@@ -39,7 +39,7 @@ function updateInputNumberParameter(parameters)
    var inputMinAmmo = document.getElementById('minAmmoId');
    inputMinAmmo.value = parameters.minAmmo;
 
-   var inputAmmoCost = document.getElementById('minAmmoId');
+   var inputAmmoCost = document.getElementById('ammoCostId');
    inputAmmoCost.value = parameters.ammoCost;
 }
 

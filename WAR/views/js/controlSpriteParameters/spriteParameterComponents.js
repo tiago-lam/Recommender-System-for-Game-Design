@@ -129,6 +129,10 @@ function createInputNumber(divToAddId, type, min, max, valueToShow, inputId)
     {
         inputNumber.setAttribute('oninput', "updateValueValue(this.value, updateObjParamValue)");
     }
+    else if(inputNumber.id == "minAmmoId")
+    {
+        inputNumber.setAttribute('oninput', "updateMinAmmoValue(this.value, updateObjParamValue)");
+    }
     var div = document.getElementById(divToAddId);
     div.appendChild(inputNumber);
 }

@@ -127,3 +127,16 @@ function updateLimitParameter(obj)
     var inputNumberControl = document.getElementById("valueId");
     inputNumberControl.disabled = checkIfItsParentHasParam(obj, "value");
 }
+
+//minAmmo
+function updateMinAmmoValue(val, updateFunction)
+{
+    document.getElementById("minAmmoId").value = val;
+    updateFunction(val, "minAmmo");
+}
+
+function updateMinAmmoParameter(obj)
+{
+    var inputNumberControl = document.getElementById("minAmmoId");
+    inputNumberControl.disabled = checkIfItsParentHasParam(obj, "minAmmo");
+}

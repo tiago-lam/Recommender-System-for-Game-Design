@@ -176,6 +176,13 @@
                 updateLimitParameter(obj);
             }
 
+            if("minAmmo" in obj.parameters)
+            {
+                console.log("MIN AMMO ID");
+                console.log(obj);
+                updateMinAmmoParameter(obj);
+            }
+
         }
 
         function assignValueToTheParameter(parameters, parameterValue, parameterControl, parameterMatch) {
