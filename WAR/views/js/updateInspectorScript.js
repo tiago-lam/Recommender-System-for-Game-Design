@@ -54,51 +54,22 @@
                     children[i].parameters[param] = val;
                 }
             }
-            mapListObject.set(currentObj.identfier, currentObj);
+            mapIdentifierToObject.set(currentObj.identfier, currentObj);
             console.log(myObj);
-        }
-
-        function assignValueToTheParameter(parameters, parameterValue, parameterControl, parameterMatch) {
-
-
-                if (parameterMatch in parameters) {
-                    parameterValue.value = parameters[parameterMatch];
-                    parameterValue.textContent = parameterValue.value;
-                    parameterControl.value = parameterValue.value;
-                    return true;
-                }
-
-            return false;
-        }
-
-        function manageParameterValues(parameterValue, parameterControl, parameters, value, parameterMatch) {
-
-            var hasParameter = assignValueToTheParameter(parameters, parameterValue, parameterControl, parameterMatch);
-            if(!hasParameter)
-            {
-                defaultValues(parameterValue, parameterControl, value);
-            }
-        }
-
-        function defaultValues(parameterValue, parameterControl, defaultValue)
-        {
-            parameterValue.value = defaultValue;
-            parameterValue.textContent = parameterValue.value;
-            parameterControl.value = parameterValue.value;
         }
 
         function updateAnalogueParameters(obj)
         {
-          var shrinkControl = document.getElementById("shrinkControl");
-            shrinkControl.disabled = checkIfItParentHasParam(obj, "shrinkfactor");
-          var speedControl = document.getElementById('speedControl');
-            speedControl.disabled = checkIfItParentHasParam(obj, "speed");
-          var cooldownControl = document.getElementById("cooldownControl");
-            cooldownControl.disabled = checkIfItParentHasParam(obj, "cooldown");
+            var shrinkControl = document.getElementById("shrinkControl");
+            shrinkControl.disabled = checkIfItsParentHasParam(obj, "shrinkfactor");
+            var speedControl = document.getElementById('speedControl');
+            speedControl.disabled = checkIfItsParentHasParam(obj, "speed");
+            var cooldownControl = document.getElementById("cooldownControl");
+            cooldownControl.disabled = checkIfItsParentHasParam(obj, "cooldown");
 
-          var shrinkValue = document.getElementById("shrinkValue");
-          var speedValue = document.getElementById('speedValue');
-          var cooldownValue = document.getElementById("cooldownValue");
+            var shrinkValue = document.getElementById("shrinkValue");
+            var speedValue = document.getElementById('speedValue');
+            var cooldownValue = document.getElementById("cooldownValue");
 
             if (("parameters" in obj)) {
                 var parameters = obj["parameters"];
@@ -112,11 +83,11 @@
         function updateDigitalParameters(obj)
         {
             var invisibleCheckBoxControl =  document.getElementById("invisibleCheckBoxId");
-            invisibleCheckBoxControl.disabled = checkIfItParentHasParam(obj, "invisible");
+            invisibleCheckBoxControl.disabled = checkIfItsParentHasParam(obj, "invisible");
             var singletonCheckBoxControl =  document.getElementById("singletonCheckBoxId");
-            singletonCheckBoxControl.disabled = checkIfItParentHasParam(obj, "singleton");
+            singletonCheckBoxControl.disabled = checkIfItsParentHasParam(obj, "singleton");
             var rotateCheckBoxControl =  document.getElementById("rotateCheckBoxId");
-            rotateCheckBoxControl.disabled = checkIfItParentHasParam(obj, "rotateInPlace");
+            rotateCheckBoxControl.disabled = checkIfItsParentHasParam(obj, "rotateInPlace");
 
             if("parameters" in obj)
             {
@@ -150,9 +121,9 @@
 
         function updateOrientationParameter(obj)
         {
-           var selectComponent = document.getElementById('orientationSelectId');
-           selectComponent.disabled = checkIfItParentHasParam(obj, 'orientation');
-           updateSelectParameter("orientationSelectId", obj.parameters["orientation"]);
+            var selectComponent = document.getElementById('orientationSelectId');
+            selectComponent.disabled = checkIfItsParentHasParam(obj, 'orientation');
+            updateSelectParameter("orientationSelectId", obj.parameters["orientation"]);
         }
 
         function updateInspector(obj)
@@ -161,19 +132,67 @@
 
             updateAnalogueParameters(obj);
 
-            updateDigitalParameters(obj)
+            updateDigitalParameters(obj);
 
             updateOrientationParameter(obj);
+
+            designSpecialTypesParameters(obj.referenceClass, obj.parameters);
+
+            if("stype" in obj.parameters) {
+                updateStypeParameter(obj);
+            }
+
+            if("spawnorientation" in obj.parameters) {
+                updateSpawnOrientationParameter(obj);
+            }
+
+            if("prob" in obj.parameters)
+            {
+                updateProbParameter(obj);
+            }
+
+            if("total" in obj.parameters)
+            {
+                updateTotalParameter(obj);
+            }
+
+
         }
 
+        function assignValueToTheParameter(parameters, parameterValue, parameterControl, parameterMatch) {
 
-        function checkIfItParentHasParam(obj, param)
+                if (parameterMatch in parameters) {
+                    parameterValue.value = parameters[parameterMatch];
+                    parameterValue.textContent = parameterValue.value;
+                    parameterControl.value = parameterValue.value;
+                    return true;
+                }
+
+            return false;
+        }
+
+        function manageParameterValues(parameterValue, parameterControl, parameters, value, parameterMatch) {
+
+            var hasParameter = assignValueToTheParameter(parameters, parameterValue, parameterControl, parameterMatch);
+            if(!hasParameter)
+            {
+                defaultValues(parameterValue, parameterControl, value);
+            }
+        }
+
+        function defaultValues(parameterValue, parameterControl, defaultValue)
+        {
+            parameterValue.value = defaultValue;
+            parameterValue.textContent = parameterValue.value;
+            parameterControl.value = parameterValue.value;
+        }
+
+        function checkIfItsParentHasParam(obj, param)
         {
             var htmlElement = document.getElementById(obj.identifier);
 
             var parent = htmlElement.parentNode;
 
-            console.log(parent);
             if(parent.id == 'spriteList') {
 
                 return false;
@@ -187,7 +206,7 @@
             if(parent.id != 'spriteList')
             {
 
-                var parentObj = mapListObject.get(parent.id);
+                var parentObj = mapIdentifierToObject.get(parent.id);
 
                 if(param in parentObj.parameters){
 

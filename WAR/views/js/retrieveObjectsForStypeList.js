@@ -5,63 +5,29 @@ var stypeCollection = [];
 
 function retrieveStypeOptions() {
 
-    stypeCollection = [];
+    stypeCollection = [] //reset
 
     var stypeNull = {name: "none", img: undefined};//gives the user the option to choose nothing
+
     stypeCollection.push(stypeNull);
 
-    var spriteSet = document.getElementById("spriteList");
-    for(var i = 0; i < spriteSet.childNodes.length; i++)
-    {
-        var spriteLi = spriteSet.childNodes[i];
-        storingSpritesCompound(spriteLi);
-
-        storingSingleSprites(spriteLi);
-    }
-
-    return stypeCollection;
-
-}
-
-function storingSingleSprites(spriteLi) {
-    if (spriteLi.classList.contains("dd-item")) {
-        var spriteDiv = spriteLi.getElementsByClassName("dd-handle")[0];
-        var stypeName = spriteDiv.textContent;
-        var objColor = retrieveObjectByName(stypeName).parameters.color;
-        var stypeImg = spriteDiv.childNodes[1];
-        if (stypeImg.currentSrc != "" || objColor != "") {
-            var stypeObject = {name: stypeName, img: stypeImg};
+    mapIdentifierToObject.forEach(function (value, key) {
+        var gameObj = mapIdentifierToObject.get(key);
+        //console.log(gameObj);
+        var identifier = gameObj.identifier;
+        var img = document.getElementById(identifier + "ImgId");
+        var color = "";
+        if("color" in gameObj.parameters)
+        {
+            color = gameObj.parameters["color"];
+        }
+        if(img.currentSrc != "" || color != "") {
+            var stypeObject = {name: identifier, img: img};
             stypeCollection.push(stypeObject);
         }
-    }
-    return {spriteDiv: spriteDiv, stypeName: stypeName, stypeImg: stypeImg, stypeObject: stypeObject};
-}
+    });
 
-function storingSpritesCompound(spriteLi)
-{
-
-        var arrSpriteOl = [];
-        for(var i = 0; i < spriteLi.childNodes.length; i++)
-        {
-            if(spriteLi.childNodes[i].classList.contains("children"))
-            {
-                arrSpriteOl.push(spriteLi.childNodes[i]);
-            }
-        }
-
-        for(var j = 0; j < arrSpriteOl.length; j++)
-        {
-            var ol = arrSpriteOl[j];
-            var innerLi = ol.childNodes[0];
-            var spriteDiv = innerLi.getElementsByClassName("dd-handle")[0];
-            var stypeName = spriteDiv.textContent;
-            var stypeImg = spriteDiv.childNodes[1];
-            if(stypeImg.currentSrc != "") {
-                var stypeObject = {name: stypeName, img: stypeImg};
-                stypeCollection.push(stypeObject);
-            }
-            storingSpritesCompound(innerLi);
-        }
+    return stypeCollection;
 
 }
 
@@ -75,7 +41,7 @@ function retrievingAmmoSprites(stypeCollection)
     stypeCollection.forEach(function(element)
         {
             if(element.name != "none") {
-                var gameObj = retrieveObjectByTarget(element.name);
+                var gameObj = mapIdentifierToObject.get(element.name);
                 if (gameObj["referenceClass"] == "Resource") {
                     resourceSprites.push(element.name);
                 }
@@ -103,6 +69,4 @@ function retrievingSpawnSprites(stypeCollection)
     });
 
     return spawnPointSprites;
-
 }
-

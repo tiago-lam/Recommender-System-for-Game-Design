@@ -23,7 +23,7 @@ function createAmmoSelectList(divToBePartOf, listId)
     divStypeAmmoSelect.classList.add("rounded");
 
     var ammoSpritesCollection = retrievingAmmoSprites(stypeCollection);
-    console.log(ammoSpritesCollection);
+   //console.log(ammoSpritesCollection);
 
     var listAmmoResource = document.createElement("select");
     listAmmoResource.id = listId;
@@ -50,15 +50,16 @@ function createStypeSelectList(divToBePartOf, listId)
     divStypeSelect.classList.add("rounded");
 
     var stypeCollection = retrieveStypeOptions();
+    //console.log(stypeCollection);
 
     var listStype = document.createElement("select");
     listStype.id = listId;
+    listStype.setAttribute('oninput', "updateStypeValue(this.selectedIndex, updateObjParamValue)");
     divStypeSelect.appendChild(listStype);
-
 
     for (var i = 0; i < stypeCollection.length; i++) {
         var option = document.createElement("option");
-        stypeObject = stypeCollection[i];
+        var stypeObject = stypeCollection[i];
         option.value = stypeObject.name;
         option.text = stypeObject.name;
         listStype.appendChild(option);
@@ -80,6 +81,7 @@ function createOrientationSelectList(divToBePartOf, selectId)
 
     var listOrientation = document.createElement("select");
     listOrientation.id = selectId;
+    listOrientation.setAttribute('oninput', "updateSelectSpawnValue(this.selectedIndex, updateObjParamValue)");
     divOrientationSelect.appendChild(listOrientation);
 
 
@@ -104,7 +106,8 @@ function createInputNumber(divToAddId, type, min, max, valueToShow, inputId)
     inputNumber.type = type;
     inputNumber.min = min;
     inputNumber.max = max;
-    inputNumber.value = valueToShow;
+    inputNumber.setAttribute("value", valueToShow);
+    inputNumber.setAttribute('oninput', "updateInputNumberValue(this.value, updateObjParamValue)");
 
     var div = document.getElementById(divToAddId);
     div.appendChild(inputNumber);
@@ -114,6 +117,7 @@ function createInputRange(divToAddId, type, min, max, step, spanId, valueToShow,
 {
     var inputRange = document.createElement("input");
     inputRange.id = inputId;
+    inputRange.setAttribute("oninput", "updateInputRangeValue(this.value, updateObjParamValue)");
     inputRange.classList.add('bars');
     inputRange.classList.add('sliders');
     inputRange.type = type;
@@ -164,6 +168,7 @@ function updateSelectParameter(selectId, parameterValue)
 {
     var valueToSelect = parameterValue;
     var select = document.getElementById(selectId);
+    console.log(selectId);
     var opts = select.options;
 
     for (var opt, j = 0; opt = opts[j]; j++) {

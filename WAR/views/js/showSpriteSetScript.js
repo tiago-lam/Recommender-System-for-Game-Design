@@ -1,4 +1,4 @@
-        var mapListObject = new Map();
+        var mapIdentifierToObject = new Map();
         var ul = document.getElementById("spriteList");
         ul.classList.add("dd-list");
         //access the serve in order to get the sprite set of a game
@@ -11,14 +11,11 @@
             }
         }
 
-        console.log("list");
-        console.log(ul);
-
         xmlhttp.onreadystatechange = function() {
 
             if (this.readyState == 4 && this.status == 200) {
                 myObj = JSON.parse(this.responseText);
-                console.log("H");
+                //console.log("H");
                 console.log(myObj);
                 buildTheSpriteSet(myObj, ul);
                 applyStylesToTheSpriteSet();
@@ -72,7 +69,7 @@
             var textElement = identifier;
 
             li.setAttribute('data-obj', currentObj);
-            mapListObject.set(textElement, currentObj);
+            mapIdentifierToObject.set(textElement, currentObj);
             upperUl.appendChild(li);
 
             var objChildren = currentObj.children;
@@ -127,30 +124,30 @@
 
         function retrieveObjectByTarget(target)
         {
-            var obj =  mapListObject.get(target);
+            var obj =  mapIdentifierToObject.get(target);
             document.getElementById("name").innerHTML = obj.identifier;
             var img = document.getElementById("image");
-            img.src = document.getElementById(obj.identifier + "ImgId").src;
+            img.src = document.getElementById(obj.identifier + "ImgId").currentSrc;
             console.log(obj);
-          return obj;
+            return obj;
         }
 
-        function retrieveObjectByName(objectName)
-        {
-            var objectContainers = document.getElementsByClassName('dd-handle');
-            for(var i = 0; i < objectContainers.length; i++)
-            {
-                if(objectContainers[i].childNodes[0].textContent == objectName)
-                {
-                    var gameObj = mapListObject.get(objectContainers[i].childNodes[0]);
-                    console.log(gameObj);
-                    return gameObj;
-                }
-            }
-            return "non-existent object with name " + objectName;
-        }
+        // function retrieveObjectByName(objectName)
+        // {
+        //     var objectContainers = document.getElementsByClassName('dd-handle');
+        //     for(var i = 0; i < objectContainers.length; i++)
+        //     {
+        //         if(objectContainers[i].childNodes[0].textContent == objectName)
+        //         {
+        //             var gameObj = mapIdentifierToObject.get(objectContainers[i].childNodes[0]);
+        //             //console.log(gameObj);
+        //             return gameObj;
+        //         }
+        //     }
+        //     return "non-existent object with name " + objectName;
+        // }
 
         function getMapListObject()
         {
-            return mapListObject;
+            return mapIdentifierToObject;
         }

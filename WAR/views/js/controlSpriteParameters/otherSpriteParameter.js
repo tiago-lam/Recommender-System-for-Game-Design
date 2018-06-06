@@ -23,9 +23,9 @@ function createOrientedFlickerParameter(parameters)
 function createChaserParameter(parameters)
 {
     createDivSpanElements('divStype', 'spanStype', 'stype');
-    createStypeSelectList('divStype', 'selectStype');
+    createStypeSelectList('divStype', 'selectStypeId');
     if(parameter.stype) {
-        updateSelectParameter('selectStype', parameters.stype);
+        updateSelectParameter('selectStypeId', parameters.stype);
     }
 }
 //
@@ -38,11 +38,11 @@ function createFleeingParameter(parameters)
 function createAlternateChaserParameter(parameters)
 {
     createDivSpanElements('divStype1', 'spanStype1', 'stype1');
-    createStypeSelectList('divStype1', 'selectStype1');
-    updateSelectParameter('selectStype1', parameters.stype1);
+    createStypeSelectList('divStype1', 'selectStype1Id');
+    updateSelectParameter('selectStype1Id', parameters.stype1);
     createDivSpanElements('divStype2', 'spanStype2', 'stype2');
-    createStypeSelectList('divStype2', 'selectStype2');
-    updateSelectParameter('selectStype2', parameters.stype2);
+    createStypeSelectList('divStype2', 'selectStype2Id');
+    updateSelectParameter('selectStype2Id', parameters.stype2);
 }
 
 //no games with this featture - RandomAltChaser
@@ -58,8 +58,8 @@ function createRandomAltChaserParameter(parameters)
 function createSpawnPoint(parameters)
 {
     createDivSpanElements('divStype', 'spanStype', 'stype');
-    createStypeSelectList('divStype', 'selectStype');
-    updateSelectParameter('selectStype', parameters.stype);
+    createStypeSelectList('divStype', 'selectStypeId');
+    updateSelectParameter('selectStypeId', parameters.stype);
     createDivSpanElements('divTotal', 'spanTotal', 'total');
     createInputNumber('divTotal', 'number', 0, 100, 0, 'totalInputId');
     updateInputNumber(parameters.total, 'totalInputId');
@@ -68,10 +68,10 @@ function createSpawnPoint(parameters)
     if(parameters.prob) {
         updateInputRange(parameters.prob, 'inputProbId', 'spanProbId');
     }
-    createDivSpanElements('divOrientation', 'selectOrientationId', 'spawnorientation');
-    createOrientationSelectList('divOrientation', 'selectOrientation');
+    createDivSpanElements('divOrientation', 'spanOrientationId', 'spawnorientation');
+    createOrientationSelectList('divOrientation', 'selectSpawnOrientationId');
     if(parameters.spawnorientation) {
-        updateSelectParameter('selectOrientationId', parameters.spawnorientation);//feature not available in all gvgai versions
+        updateSelectParameter('selectSpawnOrientationId', parameters.spawnorientation);//feature not available in all gvgai versions
     }
 }
 //
@@ -94,8 +94,8 @@ function createBomberRandomMissile(parameters)
 function createSpreader(parameters)
 {
     createDivSpanElements('divStype', 'spanStype', 'stype');
-    createStypeSelectList('divStype', 'selectStype');
-    updateSelectParameter('selectStype', parameters.stype);
+    createStypeSelectList('divStype', 'selectStypeId');
+    updateSelectParameter('selectStypeId', parameters.stype);
     createDivSpanElements('divProb', 'spanProb', 'spreadprob');
     createInputRange('divProb', 'range', 0.0, 1.0, 0.1, 'rangeSpanId', 0.0, 'rangeId');
     updateInputRange(parameters.prob, 'rangeId', 'rangeSpanId');
@@ -118,3 +118,4 @@ function createResource(parameters)
     createInputNumber('divLimit', 'number', 1, 100, 1, 'limitId');
     updateInputNumber(parameters.limit, 'limitId');
 }
+

@@ -63,3 +63,15 @@ function designSpecialTypesParameters(specialType, parameters)
     }
 
 }
+
+function updateAllSpecialParams(obj)
+{
+    //for all the spcial params
+    //check if any of them belongs to this obj
+    //if they do
+    //for each one of them check if the parent already have them
+    //if it does
+    //block (disable) changes in this object
+    //otherwise update the val of the parameter
+    //and for each children, pass the param value of the parent
+}
