@@ -117,8 +117,18 @@ function createInputNumber(divToAddId, type, min, max, valueToShow, inputId)
     inputNumber.min = min;
     inputNumber.max = max;
     inputNumber.setAttribute("value", valueToShow);
-    inputNumber.setAttribute('oninput', "updateInputNumberValue(this.value, updateObjParamValue)");
-
+    if(inputNumber.id == "totalInputId")
+    {
+        inputNumber.setAttribute('oninput', "updateTotalValue(this.value, updateObjParamValue)");
+    }
+    else if(inputNumber.id == "limitId")
+    {
+        inputNumber.setAttribute('oninput', "updateLimitValue(this.value, updateObjParamValue)");
+    }
+    else if(inputNumber.id == "valueId")
+    {
+        inputNumber.setAttribute('oninput', "updateValueValue(this.value, updateObjParamValue)");
+    }
     var div = document.getElementById(divToAddId);
     div.appendChild(inputNumber);
 }

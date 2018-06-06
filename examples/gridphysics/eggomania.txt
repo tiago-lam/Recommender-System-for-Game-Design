@@ -3,7 +3,8 @@ BasicGame
     SpriteSet
         trunk   > Immovable    color=BROWN  img=newset/log
         brokenegg > Immovable    color=YELLOW img=newset/eggcracked
-        explosiveegg > Resource color=GOLD limit=20
+        explosiveegg > Resource color=GOLD limit=20 img=newset/eggcracked
+        	explosiveeggSon > speed=0.5
         movable >
             chicken  > Bomber stype=egg   img=newset/chicken
                 fastChicken > prob=0.2  cooldown=4 speed=0.8 frameRate=4

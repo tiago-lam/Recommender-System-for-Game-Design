@@ -45,7 +45,7 @@ function updateProbParameter(obj) {
 }
 
 //total
-function updateInputNumberValue(val, updateFunction)
+function updateTotalValue(val, updateFunction)
 {
     document.getElementById("totalInputId").value = val;
     updateFunction(val, "total");
@@ -102,3 +102,28 @@ function updateStype2Parameter(obj)
     updateSelectParameter("selectStype2Id", obj.parameters["stype2"]);
 }
 
+//limit
+function updateLimitValue(val, updateFunction)
+{
+    document.getElementById("limitId").value = val;
+    updateFunction(val, "limit");
+}
+
+function updateLimitParameter(obj)
+{
+    var inputNumberControl = document.getElementById("limitId");
+    inputNumberControl.disabled = checkIfItsParentHasParam(obj, "limit");
+}
+
+//value -- sorry for the redundancy
+function updateValueValue(val, updateFunction)
+{
+    document.getElementById("valueId").value = val;
+    updateFunction(val, "value");
+}
+
+function updateLimitParameter(obj)
+{
+    var inputNumberControl = document.getElementById("valueId");
+    inputNumberControl.disabled = checkIfItsParentHasParam(obj, "value");
+}

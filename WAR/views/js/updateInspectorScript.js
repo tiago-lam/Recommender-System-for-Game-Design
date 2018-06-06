@@ -171,6 +171,11 @@
                 updateStype2Parameter(obj);
             }
 
+            if("limit" in obj.parameters)
+            {
+                updateLimitParameter(obj);
+            }
+
         }
 
         function assignValueToTheParameter(parameters, parameterValue, parameterControl, parameterMatch) {
