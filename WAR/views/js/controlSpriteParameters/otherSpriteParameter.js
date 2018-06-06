@@ -24,7 +24,7 @@ function createChaserParameter(parameters)
 {
     createDivSpanElements('divStype', 'spanStype', 'stype');
     createStypeSelectList('divStype', 'selectStypeId');
-    if(parameter.stype) {
+    if(parameters.stype) {
         updateSelectParameter('selectStypeId', parameters.stype);
     }
 }
@@ -50,9 +50,10 @@ function createRandomAltChaserParameter(parameters)
 {
     createAlternateChaserParameter(parameters);
     createDivSpanElements('divProb', 'spanProb', 'prob');
-    //divToAddId, type, min, max, step, spanId, valueToShow, inputId)
-    createInputRange('divProb', 'range', 0.0, 1.0, 0.01, 'spanProbId', 0.0, 'inputProbId');
-    updateInputRange(parameters.prob, 'inputProbId', 'spanProbId');
+    createInputRange('divProb', 'range', 0.0, 1.0, 0.1, 'spanProbId', 0.0, 'inputProbId');
+    if(parameters.prob) {
+        updateInputRange(parameters.prob, 'inputProbId', 'spanProbId');
+    }
 }
 //
 function createSpawnPoint(parameters)

@@ -72,4 +72,33 @@ function updateAmmoParameter(obj)
     updateSelectParameter("selectAmmoId", obj.parameters["ammo"]);
 }
 
+//stype1
+function updateStype1Value(val, updateFunction)
+{
+    var selectComponent = document.getElementById('selectStype1Id');
+    var choice = selectComponent.options[val];
+    updateFunction(choice.value, 'stype1');
+}
+
+function updateStype1Parameter(obj)
+{
+    var selectComponent = document.getElementById('selectStype1Id');
+    selectComponent.disabled = checkIfItsParentHasParam(obj, 'stype1');
+    updateSelectParameter("selectStype1Id", obj.parameters["stype1"]);
+}
+
+//stype2
+function updateStype2Value(val, updateFunction)
+{
+    var selectComponent = document.getElementById('selectStype2Id');
+    var choice = selectComponent.options[val];
+    updateFunction(choice.value, 'stype2');
+}
+
+function updateStype2Parameter(obj)
+{
+    var selectComponent = document.getElementById('selectStype2Id');
+    selectComponent.disabled = checkIfItsParentHasParam(obj, 'stype2');
+    updateSelectParameter("selectStype2Id", obj.parameters["stype2"]);
+}
 

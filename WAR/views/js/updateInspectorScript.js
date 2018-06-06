@@ -161,6 +161,16 @@
                 updateAmmoParameter(obj);
             }
 
+            if("stype1" in obj.parameters)
+            {
+                updateStype1Parameter(obj);
+            }
+
+            if("stype2" in obj.parameters)
+            {
+                updateStype2Parameter(obj);
+            }
+
         }
 
         function assignValueToTheParameter(parameters, parameterValue, parameterControl, parameterMatch) {

@@ -54,7 +54,17 @@ function createStypeSelectList(divToBePartOf, listId)
 
     var listStype = document.createElement("select");
     listStype.id = listId;
-    listStype.setAttribute('oninput', "updateStypeValue(this.selectedIndex, updateObjParamValue)");
+    if(listStype.id == "selectStypeId") {
+        listStype.setAttribute('oninput', "updateStypeValue(this.selectedIndex, updateObjParamValue)");
+    }
+    else if(listStype.id == "selectStype1Id")
+    {
+        listStype.setAttribute('oninput', "updateStype1Value(this.selectedIndex, updateObjParamValue)");
+    }
+    else if(listStype.id == "selectStype2Id")
+    {
+        listStype.setAttribute('oninput', "updateStype2Value(this.selectedIndex, updateObjParamValue)");
+    }
     divStypeSelect.appendChild(listStype);
 
     for (var i = 0; i < stypeCollection.length; i++) {
@@ -124,12 +134,12 @@ function createInputRange(divToAddId, type, min, max, step, spanId, valueToShow,
     inputRange.min = min;
     inputRange.max = max;
     inputRange.step = step;
-    inputRange.value = valueToShow;
+    inputRange.value = "0.0";
 
     var spanElement = document.createElement('span');
     spanElement.id = spanId;
     spanElement.style.cssFloat = 'right';
-    spanElement.innerHTML = valueToShow;
+    spanElement.innerHTML = "0.0";
     spanElement.classList.add("spanCenteredText");
     spanElement.classList.add("checkBoxSpan");
 

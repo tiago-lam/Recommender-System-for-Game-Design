@@ -33,7 +33,7 @@ function designSpecialTypesParameters(specialType, parameters)
     {
         createAlternateChaserParameter(parameters);
     }
-    else if(specialType == RandomAltChaser)
+    else if(specialType == RandomPathAltChaser)
     {
         createRandomAltChaserParameter(parameters);
     }
