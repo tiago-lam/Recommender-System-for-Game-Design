@@ -140,3 +140,16 @@ function updateMinAmmoParameter(obj)
     var inputNumberControl = document.getElementById("minAmmoId");
     inputNumberControl.disabled = checkIfItsParentHasParam(obj, "minAmmo");
 }
+
+//ammoCost
+function updateAmmoCostValue(val, updateFunction)
+{
+    document.getElementById("ammoCostId").value = val;
+    updateFunction(val, "ammoCost");
+}
+
+function updateAmmoCostParameter(obj)
+{
+    var inputNumberControl = document.getElementById("ammoCostId");
+    inputNumberControl.disabled = checkIfItsParentHasParam(obj, "ammoCost");
+}

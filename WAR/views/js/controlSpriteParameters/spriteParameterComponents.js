@@ -133,6 +133,10 @@ function createInputNumber(divToAddId, type, min, max, valueToShow, inputId)
     {
         inputNumber.setAttribute('oninput', "updateMinAmmoValue(this.value, updateObjParamValue)");
     }
+    else if(inputNumber.id == "ammoCostId")
+    {
+        inputNumber.setAttribute('oninput', "updateAmmoCostValue(this.value, updateObjParamValue)");
+    }
     var div = document.getElementById(divToAddId);
     div.appendChild(inputNumber);
 }

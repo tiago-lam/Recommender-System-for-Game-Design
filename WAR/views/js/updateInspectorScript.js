@@ -178,9 +178,12 @@
 
             if("minAmmo" in obj.parameters)
             {
-                console.log("MIN AMMO ID");
-                console.log(obj);
                 updateMinAmmoParameter(obj);
+            }
+
+            if("ammoCost" in obj.parameters)
+            {
+                updateAmmoCostParameter(obj);
             }
 
         }
