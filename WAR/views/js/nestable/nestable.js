@@ -124,7 +124,8 @@
                     e.preventDefault();
                     list.dragStop(e.touches ? e.touches[0] : e);
                 }
-
+                /**every time the list is updated we update the sprite set description (json obj)**/
+                updateObj();
             };
 
             if (hasTouch) {
