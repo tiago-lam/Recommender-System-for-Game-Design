@@ -45,17 +45,22 @@
             updateFunction(choice.value, "orientation");
         }
 
-        function updateObjParamValue(val, param)
-        {
-            currentObj.parameters[param] = val;
-            if ("children" in currentObj) {
-                var children = currentObj.children;
+        function updateForAllObjectsInTheHierarchy(obj, param, val) {
+            obj.parameters[param] = val;
+            if ("children" in obj) {
+                var children = obj.children;
                 for (var i = 0; i < children.length; i++) {
                     children[i].parameters[param] = val;
+                    updateForAllObjectsInTheHierarchy(children[i], param, val);
                 }
             }
-            mapIdentifierToObject.set(currentObj.identfier, currentObj);
-            console.log(myObj);
+            mapIdentifierToObject.set(obj.identfier, currentObj);
+        }
+
+        function updateObjParamValue(val, param)
+        {
+            updateForAllObjectsInTheHierarchy(currentObj, param, val);
+            //console.log(myObj);
         }
 
         function updateAnalogueParameters(obj)
