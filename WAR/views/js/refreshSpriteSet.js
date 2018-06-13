@@ -52,8 +52,9 @@ function updateHierarchies(ddItem)
                     removeUnecessaryObjects(idCollection, parentObj);
                     if(parentObj.children.indexOf(childrenObj) == -1) {
                         parentObj.children.push(childrenObj);
+                        attributeRefClass(parentObj, childrenObj);
                         attributeImage(parentObj, childrenObj);
-                        attributeProperties(parentObj.parameters, childrenObj.parameters);
+                        attributeProperties(parentObj, childrenObj);
                         updateHierarchies(ddItemKids[j]);
                     }
                 }
@@ -83,12 +84,21 @@ function removeUnecessaryObjects(htmlIdCollection, obj)
     });
 }
 
-function attributeProperties(parentParams, childrenParams)
+function attributeProperties(parent, kid)
 {
-    for(param in parentParams)
+    for(param in parent["parameters"])
     {
-        childrenParams[param] = parentParams[param];
+        kid.parameters[param] = parent.parameters[param];
     }
+
+    if(kid.children.length > 0)
+    {
+        for(var i = 0; i < kid.children.length; i++)
+        {
+            attributeProperties(kid, kid.children[i]);
+        }
+    }
+
 }
 
 function attributeImage(parent, kid)
@@ -106,6 +116,22 @@ function attributeImage(parent, kid)
         for(var i = 0; i < kid.children.length; i++)
         {
             attributeImage(kid, kid.children[i]);
+        }
+    }
+}
+
+function attributeRefClass(parent, kid)
+{
+    if(parent["referenceClass"] != null)
+    {
+        kid["referenceClass"] = parent["referenceClass"];
+    }
+
+    if(kid.children.length > 0)
+    {
+        for(var i = 0; i < kid.children.length; i++)
+        {
+            attributeRefClass(kid, kid.children[i]);
         }
     }
 }
