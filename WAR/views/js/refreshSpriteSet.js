@@ -48,8 +48,7 @@ function updateHierarchies(ddItem)
                 for (var j = 0; j < ddItemKids.length; j++) {
                     var child = ddItemKids[j];
                     var childrenObj = retrieveObjectByTarget(child.id);
-                    console.log(parentObj.identifier);
-                    console.log(ddItemKids.length);
+
                     removeUnecessaryObjects(idCollection, parentObj);
                     if(parentObj.children.indexOf(childrenObj) == -1) {
                         parentObj.children.push(childrenObj);
@@ -92,13 +91,21 @@ function attributeProperties(parentParams, childrenParams)
     }
 }
 
-function attributeImage(parent, children)
+function attributeImage(parent, kid)
 {
     var parentImg = document.getElementById(parent.identifier + "ImgId");
-    var childrenImg = document.getElementById(children.identifier + "ImgId");
+    var childrenImg = document.getElementById(kid.identifier + "ImgId");
 
-    if(parentImg.src != null)
+    if(parentImg.src != "")
     {
         childrenImg.src = parentImg.src;
+    }
+
+    if(kid.children.length > 0)
+    {
+        for(var i = 0; i < kid.children.length; i++)
+        {
+            attributeImage(kid, kid.children[i]);
+        }
     }
 }
