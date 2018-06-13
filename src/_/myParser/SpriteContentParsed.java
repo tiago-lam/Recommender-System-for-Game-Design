@@ -123,6 +123,10 @@ public class SpriteContentParsed{
 			}
 			obj.put("children", array);
 		}
+		else
+		{
+			obj.put("children", new JSONArray());
+		}
 		return obj;
 	}
 	

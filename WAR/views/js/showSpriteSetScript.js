@@ -20,6 +20,7 @@
                 buildTheSpriteSet(myObj, ul);
                 applyStylesToTheSpriteSet();
                 appendEvents();
+                activateObjUpdate();
             }
         };
         xmlhttp.open("GET", "http://localhost:9001/spriteSet", true);
@@ -28,7 +29,7 @@
         function applyStylesToTheSpriteSet()
         {
                $('.dd').nestable('');
-        };
+        }
 
         function appendEvents()
         {
@@ -36,7 +37,15 @@
                .mousedown(function(e) {
                 var obj = retrieveObjectByTarget(e.target.id);
                 updateInspector(obj);
+                console.log(obj);
              });
+        }
+
+        function activateObjUpdate()
+        {
+            $('.dd').on('change', function() {
+                updateObj();
+            });
         }
 
         //Extracts all  information of a sprite and add it to a list element
@@ -125,26 +134,8 @@
         function retrieveObjectByTarget(target)
         {
             var obj =  mapIdentifierToObject.get(target);
-            document.getElementById("name").innerHTML = obj.identifier;
-            var img = document.getElementById("image");
-            img.src = document.getElementById(obj.identifier + "ImgId").currentSrc;
             return obj;
         }
-
-        // function retrieveObjectByName(objectName)
-        // {
-        //     var objectContainers = document.getElementsByClassName('dd-handle');
-        //     for(var i = 0; i < objectContainers.length; i++)
-        //     {
-        //         if(objectContainers[i].childNodes[0].textContent == objectName)
-        //         {
-        //             var gameObj = mapIdentifierToObject.get(objectContainers[i].childNodes[0]);
-        //             //console.log(gameObj);
-        //             return gameObj;
-        //         }
-        //     }
-        //     return "non-existent object with name " + objectName;
-        // }
 
         function getMapListObject()
         {
