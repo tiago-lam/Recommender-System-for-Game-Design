@@ -13,35 +13,35 @@ input[type="range"] {
 }
 
 ::-webkit-slider-runnable-track {
-    background: #DDD;
+    background: rgba(255, 132, 56, 0.75);
     height: 15px;
 }
 
 /*
  * 1. Set to 0 width and remove border for a slider without a thumb
  */
-::-webkit-slider-thumb  {
-     -webkit-appearance: none;
-     width: 14px;
-     height: 0px;
-     /* 1 */
-     height: 15px;
-     background: #FFF;
-     box-shadow: -100vw 0 40px 100vw rgb(128, 160, 217);
-     border: 2px solid #999;
-     /* 1 */
-     border-bottom-right-radius: 66px;
-     border-bottom-left-radius: 0px;
-     border-top-left-radius: 60px;
-     border-top-right-radius: 0px;
-     /*+border-radius: 187px;*/
-     -moz-border-radius: 187px;
-     -webkit-border-radius: 187px;
-     -khtml-border-radius: 187px;
-     border-radius: 187px;
- }
+::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 14px;
+    height: 0px;
+    /* 1 */
+    height: 15px;
+    background: #FFFFFF;
+    box-shadow: -100vw 0 40px 100vw rgb(213, 123, 101);
+    border: 2px solid #C17070;
+    /* 1 */
+    border-bottom-right-radius: 66px;
+    border-bottom-left-radius: 0px;
+    border-top-left-radius: 60px;
+    border-top-right-radius: 0px;
+    /*+border-radius: 187px;*/
+    -moz-border-radius: 187px;
+    -webkit-border-radius: 187px;
+    -khtml-border-radius: 187px;
+    border-radius: 187px;
+}
 
-input[type="range"]:disabled::-webkit-slider-thumb  {
+input[type="range"]:disabled::-webkit-slider-thumb {
     -webkit-appearance: none;
     width: 14px;
     height: 0px;

@@ -53,6 +53,7 @@ function updateHierarchies(ddItem)
                     removeUnecessaryObjects(idCollection, parentObj);
                     if(parentObj.children.indexOf(childrenObj) == -1) {
                         parentObj.children.push(childrenObj);
+                        attributeImage(parentObj, childrenObj);
                         attributeProperties(parentObj.parameters, childrenObj.parameters);
                         updateHierarchies(ddItemKids[j]);
                     }
@@ -88,5 +89,16 @@ function attributeProperties(parentParams, childrenParams)
     for(param in parentParams)
     {
         childrenParams[param] = parentParams[param];
+    }
+}
+
+function attributeImage(parent, children)
+{
+    var parentImg = document.getElementById(parent.identifier + "ImgId");
+    var childrenImg = document.getElementById(children.identifier + "ImgId");
+
+    if(parentImg.src != null)
+    {
+        childrenImg.src = parentImg.src;
     }
 }
