@@ -1,37 +1,73 @@
+        /**
+        * map that relates identifier to objects
+        * @type {Map}
+        */
         var mapIdentifierToObject = new Map();
-        var ul = document.getElementById("spriteList");
-        ul.classList.add("dd-list");
-        //access the serve in order to get the sprite set of a game
+        /**
+         * Stores the main Ul element responsible for the Sprite Set hierarchy
+         * @type {HTMLElement | null}
+         */
+        var spriteListUl = document.getElementById("spriteList");
+        /**
+         * Apply the dd-list nestable style to the spriteListUl
+         */
+        spriteListUl.classList.add("dd-list");
+
+        /**
+         * access the serve in order to get the sprite set of a game
+         * @type {XMLHttpRequest}
+         * */
         var xmlhttp = new XMLHttpRequest();
+
+        /**
+         * The sprite set obj
+         */
         var myObj;
 
+        /**
+         * Build the whole sprite set as an HTML hierarchy list
+         * @param spriteSetObj
+         * @param ulElement
+         */
         function buildTheSpriteSet(spriteSetObj, ulElement) {
             for (var i = 0; i < spriteSetObj.length; i++) {
                 getObjectData(spriteSetObj[i], ulElement);
             }
         }
 
+        /**
+         * Function responsible for perform the GET response
+         */
         xmlhttp.onreadystatechange = function() {
 
             if (this.readyState == 4 && this.status == 200) {
                 myObj = JSON.parse(this.responseText);
                 //console.log("H");
                 console.log(myObj);
-                buildTheSpriteSet(myObj, ul);
-                applyStylesToTheSpriteSet();
-                appendEvents();
-                activateObjUpdate();
+                buildTheSpriteSet(myObj, spriteListUl);
+                activateHierarchyListSort();
+                getObjectForUpdatingOnMouseClick();
+                updateObjectsAfterListChange();
             }
         };
+        /**
+         * Prepare and send the GET request to the server
+         */
         xmlhttp.open("GET", "http://localhost:9001/spriteSet", true);
         xmlhttp.send();
 
-        function applyStylesToTheSpriteSet()
+        /**
+         * Basically activates the nestable library
+         */
+        function activateHierarchyListSort()
         {
                $('.dd').nestable('');
         }
 
-        function appendEvents()
+        /**
+         * It shows the information of the sprite you clicked on
+         */
+        function getObjectForUpdatingOnMouseClick()
         {
             $(".dd-handle")
                .mousedown(function(e) {
@@ -41,14 +77,19 @@
              });
         }
 
-        function activateObjUpdate()
+        /**
+         * Updates the sprite set after any changes on the hierarchy
+         */
+        function updateObjectsAfterListChange()
         {
             $('.dd').on('change', function() {
                 updateObj();
             });
         }
 
-        //Extracts all  information of a sprite and add it to a list element
+        /**
+         * Extracts all  information of a sprite and add it to a list element
+         */
         function getObjectData(obj, upperUl)
         {
             var currentObj = obj;
@@ -99,7 +140,11 @@
 
         }
 
-        //get the image of an specific sprite
+        /**
+         * Get the image of an specific sprite
+         * @param imgPath
+         * @param imgElement
+         */
         function fetchBlob(imgPath, imgElement) {
             // construct the URL path to the image file from the product.image property
             var urlSrc = null;
@@ -131,6 +176,11 @@
 
         }
 
+        /**
+         * Returns a sprite obj, Given a target (name)
+         * @param target
+         * @returns {*}
+         */
         function retrieveObjectByTarget(target)
         {
             var obj =  mapIdentifierToObject.get(target);

@@ -1,10 +1,18 @@
 /**
  * Created by tiagomachado on 5/21/18.
  */
+
+/**
+ * Stores the div container responsible for organizing the special parameter
+ * @type {HTMLElement | null}
+ */
 var specialParameters = document.getElementById("divSpecialParameters");
 //specialParameters.style.display
 
-//
+/**
+ * Creates the Flicker parameters components
+ * @param parameters
+ */
 function createFlickerParameter(parameters) {
     createDivSpanElements('divLimit', 'spanLimit', 'limit');
     createInputNumber('divLimit', 'number', 1, 100, 1, 'inputLimitId');
@@ -13,13 +21,19 @@ function createFlickerParameter(parameters) {
     }
 }
 
-//
+/**
+ * Creates the OrientedFlicker parameters components
+ * @param parameters
+ */
 function createOrientedFlickerParameter(parameters)
 {
     createFlickerParameter(parameters);
 }
 
-//
+/**
+ * Creates the Chaser parameters components
+ * @param parameters
+ */
 function createChaserParameter(parameters)
 {
     createDivSpanElements('divStype', 'spanStype', 'stype');
@@ -28,13 +42,20 @@ function createChaserParameter(parameters)
         updateSelectParameter('selectStypeId', parameters.stype);
     }
 }
-//
+
+/**
+ * Creates the Fleeing parameters components
+ * @param parameters
+ */
 function createFleeingParameter(parameters)
 {
     createChaserParameter(parameters);
 }
 
-//no games with this featture - AlternateChaser
+/**
+ * Creates the AlternateChaser parameters components
+ * @param parameters
+ */
 function createAlternateChaserParameter(parameters)
 {
     createDivSpanElements('divStype1', 'spanStype1', 'stype1');
@@ -45,7 +66,10 @@ function createAlternateChaserParameter(parameters)
     updateSelectParameter('selectStype2Id', parameters.stype2);
 }
 
-//no games with this featture - RandomAltChaser
+/**
+ * Creates the RandomAltChaser parameters components
+ * @param parameters
+ */
 function createRandomAltChaserParameter(parameters)
 {
     createAlternateChaserParameter(parameters);
@@ -55,7 +79,11 @@ function createRandomAltChaserParameter(parameters)
         updateInputRange(parameters.prob, 'inputProbId', 'spanProbId');
     }
 }
-//
+
+/**
+ * Creates the SpawnPoint parameters components
+ * @param parameters
+ */
 function createSpawnPoint(parameters)
 {
     createDivSpanElements('divStype', 'spanStype', 'stype');
@@ -75,12 +103,20 @@ function createSpawnPoint(parameters)
         updateSelectParameter('selectSpawnOrientationId', parameters.spawnorientation);//feature not available in all gvgai versions
     }
 }
-//
+
+/**
+ * Creates the Bomber parameters components
+ * @param parameters
+ */
 function createBomber(parameters)
 {
     createSpawnPoint(parameters);
 }
-//
+
+/**
+ * Creates the RandomBomber parameters components
+ * @param parameters
+ */
 function createRandomBomber(parameters)
 {
     createBomber(parameters);
@@ -91,7 +127,11 @@ function createBomberRandomMissile(parameters)
 {
 
 }
-//
+
+/**
+ * Creates the Spreader parameters components
+ * @param parameters
+ */
 function createSpreader(parameters)
 {
     createDivSpanElements('divStype', 'spanStype', 'stype');
@@ -103,12 +143,20 @@ function createSpreader(parameters)
         updateInputRange(parameters.spreadprob, 'spreadProbRangeId', 'spreadProbSpanId');
     }
 }
-//
+
+/**
+ * Creates the Portal parameters components
+ * @param parameters
+ */
 function createPortal(parameters)
 {
     createChaserParameter(parameters);
 }
-//
+
+/**
+ * Creates the Resource parameters components
+ * @param parameters
+ */
 function createResource(parameters)
 {
     createDivSpanElements('divResource', 'spanResource', 'resource');
@@ -121,4 +169,3 @@ function createResource(parameters)
     createInputNumber('divLimit', 'number', 1, 100, 1, 'limitId');
     updateInputNumber(parameters.limit, 'limitId');
 }
-

@@ -1,50 +1,98 @@
+        /**
+        * Stores the current sprite set object
+        */
         var currentObj;
 
+        /**
+         * Initilizes the currentObj variable
+         * @param obj
+         */
         function initializeCurrentObj(obj)
         {
             currentObj = obj;
         }
 
+        /**
+         * Updates the invisible parameter
+         * @param val
+         * @param updateFunction
+         */
         function updateInvisibleValue(val, updateFunction)
         {
             console.log(val);
             updateFunction(val, "invisible");
         }
 
+        /**
+         * Updates the rotate in place parameter
+         * @param val
+         * @param updateFunction
+         */
         function updateRotateValue(val, updateFunction)
         {
             console.log(val);
             updateFunction(val, "rotateInPlace");
         }
 
+        /**
+         * Updates the singleton parameter
+         * @param val
+         * @param updateFunction
+         */
         function updateSingletonValue(val, updateFunction)
         {
             document.getElementById('shrinkValue').textContent=val;
             updateFunction(val, "singleton");
         }
 
+        /**
+         * Updates the shrinkfactor parameter
+         * @param val
+         * @param updateFunction
+         */
         function updateShrinkValue(val, updateFunction) {
           document.getElementById('shrinkValue').textContent=val;
             updateFunction(val, "shrinkfactor");
         }
 
+        /**
+         * Updates the speed parameter
+         * @param val
+         * @param updateFunction
+         */
         function updateSpeedValue(val, updateFunction) {
           document.getElementById('speedValue').textContent=val;
             updateFunction(val, "speed");
         }
 
+        /**
+         * Updates the cooldown parameter
+         * @param val
+         * @param updateFunction
+         */
         function updateCooldownValue(val, updateFunction) {
           document.getElementById('cooldownValue').textContent=val;
             updateFunction(val, "cooldown");
         }
 
-        function updateSelectValue(val, updateFunction)
+        /**
+         * Updates orientation select value
+         * @param val
+         * @param updateFunction
+         */
+        function updateOrientationSelectValue(val, updateFunction)
         {
             var selectComponent = document.getElementById('orientationSelectId');
             var choice = selectComponent.options[val];
             updateFunction(choice.value, "orientation");
         }
 
+        /**
+         * Updates object parameter values (for all objects in the hierarchy)
+         * @param obj
+         * @param param
+         * @param val
+         */
         function updateForAllObjectsInTheHierarchy(obj, param, val) {
             obj.parameters[param] = val;
             if ("children" in obj) {
@@ -57,12 +105,20 @@
             mapIdentifierToObject.set(obj.identfier, currentObj);
         }
 
+        /**
+         * Updates object parameter values
+         * @param val
+         * @param param
+         */
         function updateObjParamValue(val, param)
         {
             updateForAllObjectsInTheHierarchy(currentObj, param, val);
-            //console.log(myObj);
         }
 
+        /**
+         * Updates the analogue parameters
+         * @param obj
+         */
         function updateAnalogueParameters(obj)
         {
             var shrinkControl = document.getElementById("shrinkControl");
@@ -85,7 +141,42 @@
 
         }
 
-        function updateDigitalParameters(obj)
+        /**
+         * Updates the digital parameters
+         * @param obj
+         * @param invisibleCheckBoxControl
+         * @param singletonCheckBoxControl
+         * @param rotateCheckBoxControl
+         */
+        function updatingTheDigitalParameterValues(obj, invisibleCheckBoxControl, singletonCheckBoxControl, rotateCheckBoxControl) {
+            if ("parameters" in obj) {
+                var parameters = obj["parameters"];
+                if ("invisible" in parameters) {
+                    invisibleCheckBoxControl.checked = parameters["invisible"];
+                }
+                else {
+                    invisibleCheckBoxControl.checked = false;
+                }
+                if ("singleton" in parameters) {
+                    singletonCheckBoxControl.checked = parameters["singleton"];
+                }
+                else {
+                    singletonCheckBoxControl.checked = false;
+                }
+                if ("rotateInPlace" in parameters) {
+                    rotateCheckBoxControl.checked = parameters["rotateInPlace"];
+                }
+                else {
+                    rotateCheckBoxControl.checked = false;
+                }
+            }
+        }
+
+        /**
+         * Controling all the digital parameters
+         * @param obj
+         */
+        function controlingDigitalParameters(obj)
         {
             var invisibleCheckBoxControl =  document.getElementById("invisibleCheckBoxId");
             invisibleCheckBoxControl.disabled = checkIfItsParentHasParam(obj, "invisible");
@@ -94,36 +185,13 @@
             var rotateCheckBoxControl =  document.getElementById("rotateCheckBoxId");
             rotateCheckBoxControl.disabled = checkIfItsParentHasParam(obj, "rotateInPlace");
 
-            if("parameters" in obj)
-            {
-                var parameters = obj["parameters"];
-                if("invisible" in parameters)
-                {
-                    invisibleCheckBoxControl.checked = parameters["invisible"];
-                }
-                else
-                {
-                    invisibleCheckBoxControl.checked = false;
-                }
-                if("singleton" in parameters)
-                {
-                    singletonCheckBoxControl.checked = parameters["singleton"];
-                }
-                else
-                {
-                    singletonCheckBoxControl.checked = false;
-                }
-                if("rotateInPlace" in parameters)
-                {
-                    rotateCheckBoxControl.checked = parameters["rotateInPlace"];
-                }
-                else
-                {
-                    rotateCheckBoxControl.checked = false;
-                }
-            }
+            updatingTheDigitalParameterValues(obj, invisibleCheckBoxControl, singletonCheckBoxControl, rotateCheckBoxControl);
         }
 
+        /**
+         * Updates orientation value
+         * @param obj
+         */
         function updateOrientationParameter(obj)
         {
             var selectComponent = document.getElementById('orientationSelectId');
@@ -131,12 +199,70 @@
             updateSelectParameter("orientationSelectId", obj.parameters["orientation"]);
         }
 
+        /**
+         * Updates the name and the image of the object on the inspector window
+         * @param obj
+         */
         function updateNameAndImage(obj) {
             document.getElementById("name").innerHTML = obj.identifier;
             var img = document.getElementById("image");
             img.src = document.getElementById(obj.identifier + "ImgId").currentSrc;
         }
 
+        /**
+         * Updates the special parameter values (the ones presented on spcific reference classes - sprite types)
+         * @param obj
+         */
+        function updatingSpecialParameterValues(obj) {
+            if ("stype" in obj.parameters) {
+                updateStypeParameter(obj);
+            }
+
+            if ("spawnorientation" in obj.parameters) {
+                updateSpawnOrientationParameter(obj);
+            }
+
+            if ("prob" in obj.parameters) {
+                updateProbParameter(obj);
+            }
+
+            if ("total" in obj.parameters) {
+                updateTotalParameter(obj);
+            }
+
+            if ("ammo" in obj.parameters) {
+                updateAmmoParameter(obj);
+            }
+
+            if ("stype1" in obj.parameters) {
+                updateStype1Parameter(obj);
+            }
+
+            if ("stype2" in obj.parameters) {
+                updateStype2Parameter(obj);
+            }
+
+            if ("limit" in obj.parameters) {
+                updateLimitParameter(obj);
+            }
+
+            if ("minAmmo" in obj.parameters) {
+                updateMinAmmoParameter(obj);
+            }
+
+            if ("ammoCost" in obj.parameters) {
+                updateAmmoCostParameter(obj);
+            }
+
+            if ("spreadprob" in obj.parameters) {
+                updateSpreadProbParameter(obj);
+            }
+        }
+
+        /**
+         * Main function to update the object information on the inspector window
+         * @param obj
+         */
         function updateInspector(obj)
         {
             updateNameAndImage(obj);
@@ -145,67 +271,24 @@
 
             updateAnalogueParameters(obj);
 
-            updateDigitalParameters(obj);
+            controlingDigitalParameters(obj);
 
             updateOrientationParameter(obj);
 
             designSpecialTypesParameters(obj.referenceClass, obj.parameters);
 
-            if("stype" in obj.parameters) {
-                updateStypeParameter(obj);
-            }
-
-            if("spawnorientation" in obj.parameters) {
-                updateSpawnOrientationParameter(obj);
-            }
-
-            if("prob" in obj.parameters)
-            {
-                updateProbParameter(obj);
-            }
-
-            if("total" in obj.parameters)
-            {
-                updateTotalParameter(obj);
-            }
-
-            if("ammo" in obj.parameters)
-            {
-                updateAmmoParameter(obj);
-            }
-
-            if("stype1" in obj.parameters)
-            {
-                updateStype1Parameter(obj);
-            }
-
-            if("stype2" in obj.parameters)
-            {
-                updateStype2Parameter(obj);
-            }
-
-            if("limit" in obj.parameters)
-            {
-                updateLimitParameter(obj);
-            }
-
-            if("minAmmo" in obj.parameters)
-            {
-                updateMinAmmoParameter(obj);
-            }
-
-            if("ammoCost" in obj.parameters)
-            {
-                updateAmmoCostParameter(obj);
-            }
-
-            if("spreadprob" in obj.parameters)
-            {
-                updateSpreadProbParameter(obj);
-            }
+            updatingSpecialParameterValues(obj);
 
         }
 
+        /**
+         * Applies the specified value to the specified parameter
+         * @param parameters
+         * @param parameterValue
+         * @param parameterControl
+         * @param parameterMatch
+         * @returns {boolean}
+         */
         function assignValueToTheParameter(parameters, parameterValue, parameterControl, parameterMatch) {
 
                 if (parameterMatch in parameters) {
@@ -218,6 +301,14 @@
             return false;
         }
 
+        /**
+         * Applies the specified value to the specified parameter (if the parameter is included on the list)
+         * @param parameterValue
+         * @param parameterControl
+         * @param parameters
+         * @param value
+         * @param parameterMatch
+         */
         function manageParameterValues(parameterValue, parameterControl, parameters, value, parameterMatch) {
 
             var hasParameter = assignValueToTheParameter(parameters, parameterValue, parameterControl, parameterMatch);
@@ -227,6 +318,12 @@
             }
         }
 
+        /**
+         * Applies default values to the specified parameter
+         * @param parameterValue
+         * @param parameterControl
+         * @param defaultValue
+         */
         function defaultValues(parameterValue, parameterControl, defaultValue)
         {
             parameterValue.value = defaultValue;
@@ -234,6 +331,12 @@
             parameterControl.value = parameterValue.value;
         }
 
+        /**
+         * Returns true if this object has a parent
+         * @param obj
+         * @param param
+         * @returns {boolean}
+         */
         function checkIfItsParentHasParam(obj, param)
         {
             var htmlElement = document.getElementById(obj.identifier);

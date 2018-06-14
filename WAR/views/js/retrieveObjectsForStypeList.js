@@ -1,8 +1,17 @@
 /**
  * Created by tiagomachado on 5/10/18.
  */
+
+/**
+ * Stores the names of all the sprites (with images) to be used as a list for the stype parameter
+ * @type {Array}
+ */
 var stypeCollection = [];
 
+/**
+ * Uses the map (identifier, object) to return an array with all the sprites for being used on the stype parameter list
+ * @returns {Array}
+ */
 function retrieveStypeOptions() {
 
     stypeCollection = [] //reset
@@ -13,7 +22,6 @@ function retrieveStypeOptions() {
 
     mapIdentifierToObject.forEach(function (value, key) {
         var gameObj = mapIdentifierToObject.get(key);
-        //console.log(gameObj);
         var identifier = gameObj.identifier;
         var img = document.getElementById(identifier + "ImgId");
         var color = "";
@@ -31,7 +39,11 @@ function retrieveStypeOptions() {
 
 }
 
-//get all resource sprites type
+/**
+ * Uses the stype array and filters it to return a list with all the sprites of the type Resource
+ * @param stypeCollection
+ * @returns {Array}
+ */
 function retrievingAmmoSprites(stypeCollection)
 {
     var resourceSprites = [];
@@ -49,7 +61,6 @@ function retrievingAmmoSprites(stypeCollection)
         });
 
     return resourceSprites;
-
 }
 
 function retrievingSpawnSprites(stypeCollection)

@@ -1,34 +1,48 @@
 /**
  * Created by tiagomachado on 5/9/18.
  */
+
+/**
+ * Keeps every sprite name already accessed to avoid unecessary copies
+ * @type {Array}
+ */
 var verified = [];
 
+/**
+ * Update the object - both on its HTML hierarchy and its JSON representation
+ */
 function updateObj() {
 
     var spriteList = document.getElementById('spriteList');
 
     var ddItemArray = spriteList.getElementsByClassName('dd-item');
 
-    //console.log("h");
     for(var i = 0; i < ddItemArray.length; i++)
     {
         var ddItem = ddItemArray[i];
-        //does ddItem has children?
+
         updateHierarchies(ddItem);
     }
-    // console.log(verified);
-    // console.log(myObj);
+
     verified = [];
 
 }
 
-function storingItemIds(ddItemKids, idCollection) {
-    for (var i = 0; i < ddItemKids.length; i++) {
-        idCollection.push(ddItemKids[i].id);
+/**
+ * Stores all the li ids coming from ol elements
+ * @param liItemsFromOl - every li element that comes from an ol element
+ * @param idCollection - stores the li ids (which is equal to the object name)
+ */
+function storingItemIds(liItemsFromOl, idCollection) {
+    for (var i = 0; i < liItemsFromOl.length; i++) {
+        idCollection.push(liItemsFromOl[i].id);
     }
 }
 
-///////ADD CHILDREN
+/**
+ * Update the hierarchy both in HTML and Object form
+ * @param ddItem
+ */
 function updateHierarchies(ddItem)
 {
     if(!(ddItem.id in verified)) {
@@ -54,7 +68,7 @@ function updateHierarchies(ddItem)
                         parentObj.children.push(childrenObj);
                         attributeRefClass(parentObj, childrenObj);
                         attributeImage(parentObj, childrenObj);
-                        attributeProperties(parentObj, childrenObj);
+                        attributeParameterProperties(parentObj, childrenObj);
                         updateHierarchies(ddItemKids[j]);
                     }
                 }
@@ -70,6 +84,11 @@ function updateHierarchies(ddItem)
     }
 }
 
+/**
+ * Remove children objects (from an object) not presented in the same object HTML hierarchy
+ * @param htmlIdCollection
+ * @param obj
+ */
 function removeUnecessaryObjects(htmlIdCollection, obj)
 {
     var objChildren = obj.children;
@@ -84,7 +103,12 @@ function removeUnecessaryObjects(htmlIdCollection, obj)
     });
 }
 
-function attributeProperties(parent, kid)
+/**
+ * Attributes the same parameters through an hierarchy of elements
+ * @param parent
+ * @param kid
+ */
+function attributeParameterProperties(parent, kid)
 {
     for(param in parent["parameters"])
     {
@@ -95,12 +119,16 @@ function attributeProperties(parent, kid)
     {
         for(var i = 0; i < kid.children.length; i++)
         {
-            attributeProperties(kid, kid.children[i]);
+            attributeParameterProperties(kid, kid.children[i]);
         }
     }
-
 }
 
+/**
+ * Attributes the same image through an hierarchy of elements
+ * @param parent
+ * @param kid
+ */
 function attributeImage(parent, kid)
 {
     var parentImg = document.getElementById(parent.identifier + "ImgId");
@@ -120,6 +148,11 @@ function attributeImage(parent, kid)
     }
 }
 
+/**
+ * Attributes the same reference class through an hierarchy of elements
+ * @param parent
+ * @param kid
+ */
 function attributeRefClass(parent, kid)
 {
     if(parent["referenceClass"] != null)
