@@ -25,7 +25,6 @@ function updateObj() {
     }
 
     verified = [];
-
 }
 
 /**
@@ -82,6 +81,7 @@ function updateHierarchies(ddItem)
             }
         }
     }
+    console.log(obj);
 }
 
 /**

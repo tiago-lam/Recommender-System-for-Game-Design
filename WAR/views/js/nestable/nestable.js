@@ -38,8 +38,9 @@
             placeClass      : 'dd-placeholder',
             noDragClass     : 'dd-nodrag',
             emptyClass      : 'dd-empty',
-            expandBtnHTML   : '<button data-action="expand" type="button">Expand</button>',
-            collapseBtnHTML : '<button data-action="collapse" type="button">Collapse</button>',
+            expandBtnHTML   : '<button id="expandButton" data-action="expand" type="button">Expand</button>',
+            collapseBtnHTML : '<button id="collapseButton" data-action="collapse" type="button">Collapse</button>',
+            removeBtnHTML   : '<button id="removeButton" data-action="delete" type="button" style="float:right"></button>',
             group           : 0,
             maxDepth        : 5,
             threshold       : 20
@@ -71,7 +72,6 @@
 
             list.el.on('click', 'button', function(e) {
 
-                console.log("list.el");
                 if (list.dragEl) {
                     return;
                 }
@@ -84,6 +84,10 @@
                 }
                 if (action === 'expand') {
                     list.expandItem(item);
+                }
+                if(action === 'delete')
+                {
+                    list.removeWholeItem(item);
                 }
             });
 
@@ -218,6 +222,14 @@
             }
         },
 
+        removeWholeItem: function(li)
+        {
+            var result = confirm("Are you sure you want to remove this item?");
+            if(result == true) {
+                li.remove();
+            }
+        },
+
         expandAll: function()
         {
             var list = this;
@@ -236,6 +248,8 @@
 
         setParent: function(li)
         {
+            li.prepend($(this.options.removeBtnHTML));
+
             if (li.children(this.options.listNodeName).length) {
                 li.prepend($(this.options.expandBtnHTML));
                 li.prepend($(this.options.collapseBtnHTML));
@@ -255,8 +269,6 @@
             var mouse    = this.mouse,
                 target   = $(e.target),
                 dragItem = target.closest(this.options.itemNodeName);
-
-            //console.log(e.target);
 
             this.placeEl.css('height', dragItem.height());
 

@@ -29,7 +29,8 @@ function retrieveStypeOptions() {
         {
             color = gameObj.parameters["color"];
         }
-        if(img.currentSrc != "" || color != "") {
+
+        if((img != null && img.currentSrc != "") || color != "") {
             var stypeObject = {name: identifier, img: img};
             stypeCollection.push(stypeObject);
         }
