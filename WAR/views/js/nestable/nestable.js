@@ -40,7 +40,6 @@
             emptyClass      : 'dd-empty',
             expandBtnHTML   : '<button id="expandButton" data-action="expand" type="button">Expand</button>',
             collapseBtnHTML : '<button id="collapseButton" data-action="collapse" type="button">Collapse</button>',
-            // removeBtnHTML   : '<button id="removeButton" data-action="delete" type="button" style="float:right"></button>',
             group           : 0,
             maxDepth        : 5,
             threshold       : 20
@@ -85,12 +84,13 @@
                 if (action === 'expand') {
                     list.expandItem(item);
                 }
-                // if(action === 'delete')
-                // {
-                //     list.removeWholeItem(item);
-                // }
+
             });
 
+            /**
+             * Altered function to allow users remove elements with mouse right click button
+             * @param e
+             */
             var onStartEvent = function(e)
             {
 
@@ -240,14 +240,6 @@
             }
         },
 
-        removeWholeItem: function(li)
-        {
-            var result = confirm("Are you sure you want to remove this item?");
-            if(result == true) {
-                li.remove();
-            }
-        },
-
         expandAll: function()
         {
             var list = this;
@@ -266,8 +258,6 @@
 
         setParent: function(li)
         {
-            // li.prepend($(this.options.removeBtnHTML));
-
             if (li.children(this.options.listNodeName).length) {
                 li.prepend($(this.options.expandBtnHTML));
                 li.prepend($(this.options.collapseBtnHTML));
