@@ -40,7 +40,7 @@
             emptyClass      : 'dd-empty',
             expandBtnHTML   : '<button id="expandButton" data-action="expand" type="button">Expand</button>',
             collapseBtnHTML : '<button id="collapseButton" data-action="collapse" type="button">Collapse</button>',
-            removeBtnHTML   : '<button id="removeButton" data-action="delete" type="button" style="float:right"></button>',
+            // removeBtnHTML   : '<button id="removeButton" data-action="delete" type="button" style="float:right"></button>',
             group           : 0,
             maxDepth        : 5,
             threshold       : 20
@@ -85,33 +85,51 @@
                 if (action === 'expand') {
                     list.expandItem(item);
                 }
-                if(action === 'delete')
-                {
-                    list.removeWholeItem(item);
-                }
+                // if(action === 'delete')
+                // {
+                //     list.removeWholeItem(item);
+                // }
             });
 
             var onStartEvent = function(e)
             {
-                var handle = $(e.target);
-                if (!handle.hasClass(list.options.handleClass)) {
-                    if (handle.closest('.' + list.options.noDragClass).length) {
+
+                var isRightMB;
+                e = e || window.event;
+
+                if ("which" in e)  // Gecko (Firefox), WebKit (Safari/Chrome) & Opera
+                    isRightMB = e.which == 3;
+                else if ("button" in e)  // IE, Opera
+                    isRightMB = e.button == 2;
+
+                if(!isRightMB) {
+                    var handle = $(e.target);
+                    if (!handle.hasClass(list.options.handleClass)) {
+                        if (handle.closest('.' + list.options.noDragClass).length) {
+                            return;
+                        }
+                        handle = handle.closest('.' + list.options.handleClass);
+                    }
+
+                    if (!handle.length || list.dragEl) {
                         return;
                     }
-                    handle = handle.closest('.' + list.options.handleClass);
-                }
 
-                if (!handle.length || list.dragEl) {
-                    return;
-                }
+                    list.isTouch = /^touch/.test(e.type);
+                    if (list.isTouch && e.touches.length !== 1) {
+                        return;
+                    }
 
-                list.isTouch = /^touch/.test(e.type);
-                if (list.isTouch && e.touches.length !== 1) {
-                    return;
+                    e.preventDefault();
+                    list.dragStart(e.touches ? e.touches[0] : e);
                 }
-
-                e.preventDefault();
-                list.dragStart(e.touches ? e.touches[0] : e);
+                else
+                {
+                    var isOkToRemove = confirm("Are you sure yo want to remove this item?");
+                    if(isOkToRemove) {
+                        e.target.parentNode.remove();
+                    }
+                }
             };
 
             var onMoveEvent = function(e)
@@ -248,7 +266,7 @@
 
         setParent: function(li)
         {
-            li.prepend($(this.options.removeBtnHTML));
+            // li.prepend($(this.options.removeBtnHTML));
 
             if (li.children(this.options.listNodeName).length) {
                 li.prepend($(this.options.expandBtnHTML));

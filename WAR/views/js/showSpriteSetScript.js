@@ -106,6 +106,7 @@
 
             var li = document.createElement("li");
             li.id = identifier;
+            li.setAttribute("oncontextmenu", "return false");
             li.classList.add("dd-item");
 
             var div = document.createElement("div");
