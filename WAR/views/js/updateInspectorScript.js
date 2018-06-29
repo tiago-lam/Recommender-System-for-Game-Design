@@ -87,13 +87,52 @@
             updateFunction(choice.value, "orientation");
         }
 
+        function updateReferenceClassSelectValue(obj)
+        {
+            var v = document.getElementById('refClassSelectId');
+            v.disabled = false;
+            if(mapChildToParent.has(obj.identifier))
+            {
+                console.log("oi");
+                console.log(obj.identifier);
+                var parentObjIdentifier = mapChildToParent.get(obj.identifier);
+                console.log("PI");
+                console.log(parentObjIdentifier);
+                var parentObj = retrieveObjectByTarget(parentObjIdentifier);
+
+                if(parentObj.referenceClass != null)
+                {
+                    v.disabled = true;
+                }
+
+
+            }
+
+            updateSelectParameter('refClassSelectId', obj.referenceClass);
+        }
+
         /**
          * Updates object parameter values (for all objects in the hierarchy)
          * @param obj
          * @param param
          * @param val
          */
-        function updateForAllObjectsInTheHierarchy(obj, param, val) {
+        function updateForAllObjectsInTheHierarchy(obj, param, val) {var selectRefClass = document.getElementById('refClassSelectId');
+            // //gets this dd-item/li element
+            // var li = document.getElementById(obj.identifier);
+            // //check if this li/dd-item/obj has a parent
+            // var parentLi = li.parentNode;
+            // if(parentLi.id != "spriteList")
+            // {
+            //     if(parentLi.classList.contains("dd-list"))
+            //     {
+            //         parentLi = parentLi.parentNode;
+            //         var parentObj = retrieveObjectByTarget(parentLi.id);
+            //         if(parentObj.referenceClass != null) {
+            //             selectRefClass.disabled = true;
+            //         }
+            //     }
+            // }
             obj.parameters[param] = val;
             if ("children" in obj) {
                 var children = obj.children;
@@ -275,10 +314,11 @@
 
             updateOrientationParameter(obj);
 
-            designSpecialTypesParameters(obj.referenceClass, obj.parameters);
+            updateReferenceClassSelectValue(obj);
+
+            designSpecialTypesParameters(obj, obj.parameters);
 
             updatingSpecialParameterValues(obj);
-
         }
 
         /**
@@ -341,7 +381,9 @@
         {
             var htmlElement = document.getElementById(obj.identifier);
 
+
             var parent = htmlElement.parentNode;
+
 
             if(parent.id == 'spriteList') {
 

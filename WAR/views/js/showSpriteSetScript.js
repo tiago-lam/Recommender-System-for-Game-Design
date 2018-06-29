@@ -3,6 +3,13 @@
         * @type {Map}
         */
         var mapIdentifierToObject = new Map();
+
+        /**
+         * map that relates identifier to objects
+         * @type {Map}
+         */
+        var mapChildToParent = new Map();
+
         /**
          * Stores the main Ul element responsible for the Sprite Set hierarchy
          * @type {HTMLElement | null}
@@ -22,7 +29,7 @@
         /**
          * The sprite set obj
          */
-        var myObj;
+        var spriteSetObj;
 
         /**
          * Build the whole sprite set as an HTML hierarchy list
@@ -33,6 +40,7 @@
             for (var i = 0; i < spriteSetObj.length; i++) {
                 getObjectData(spriteSetObj[i], ulElement);
             }
+            console.log(mapChildToParent);
         }
 
         /**
@@ -41,10 +49,10 @@
         xmlhttp.onreadystatechange = function() {
 
             if (this.readyState == 4 && this.status == 200) {
-                myObj = JSON.parse(this.responseText);
+                spriteSetObj = JSON.parse(this.responseText);
                 //console.log("H");
-                console.log(myObj);
-                buildTheSpriteSet(myObj, spriteListUl);
+                console.log(spriteSetObj);
+                buildTheSpriteSet(spriteSetObj, spriteListUl);
                 activateHierarchyListSort();
                 getObjectForUpdatingOnMouseClick();
                 updateObjectsAfterListChange();
@@ -132,12 +140,11 @@
                 for(var j = 0; j < objChildren.length; j++)
                 {
                     var innerCurrentObj = objChildren[j];
-
+                    mapChildToParent.set(innerCurrentObj.identifier, currentObj.identifier);
                     getObjectData(innerCurrentObj, innerOl);
                     li.appendChild(innerOl);
                 }
             }
-
         }
 
         /**

@@ -121,7 +121,7 @@ function createInputNumber(divToAddId, type, min, max, valueToShow, inputId)
     {
         inputNumber.setAttribute('oninput', "updateTotalValue(this.value, updateObjParamValue)");
     }
-    else if(inputNumber.id == "limitId")
+    else if(inputNumber.id == "limitInputId")
     {
         inputNumber.setAttribute('oninput', "updateLimitValue(this.value, updateObjParamValue)");
     }
@@ -193,8 +193,14 @@ function updateInputRange(parameterValue, inputId, spanRangeId)
 
 function removeElements(parentElement)
 {
-    while (parentElement.firstChild) {
-        parentElement.removeChild(parentElement.firstChild);
+    // while (parentElement.firstChild) {
+    //         var elem = parentElement.firstChild;
+    //         if(elem.id != "refClassDivId") {
+    //             parentElement.removeChild(parentElement.firstChild);
+    //         }
+    // }
+    while (parentElement.lastChild.id !== 'refClassDivId') {
+        parentElement.removeChild(parentElement.lastChild);
     }
 }
 

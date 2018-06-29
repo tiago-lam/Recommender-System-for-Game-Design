@@ -14,10 +14,10 @@ var specialParameters = document.getElementById("divSpecialParameters");
  * @param parameters
  */
 function createFlickerParameter(parameters) {
-    createDivSpanElements('divLimit', 'spanLimit', 'limit');
-    createInputNumber('divLimit', 'number', 1, 100, 1, 'inputLimitId');
+    createDivSpanElements('limitDiv', 'limitSpan', 'limit');
+    createInputNumber('limitDiv', 'number', 1, 100, 1, 'limitInputId');
     if(parameters.limit) {
-        updateInputNumber(parameters.limit, 'inputLimitId');
+        updateInputNumber(parameters.limit, 'limitInputId');
     }
 }
 
@@ -36,10 +36,10 @@ function createOrientedFlickerParameter(parameters)
  */
 function createChaserParameter(parameters)
 {
-    createDivSpanElements('divStype', 'spanStype', 'stype');
-    createStypeSelectList('divStype', 'selectStypeId');
+    createDivSpanElements('stypeDiv', 'stypeSpan', 'stype');
+    createStypeSelectList('stypeDiv', 'stypeSelectId');
     if(parameters.stype) {
-        updateSelectParameter('selectStypeId', parameters.stype);
+        updateSelectParameter('stypeSelectId', parameters.stype);
     }
 }
 
@@ -58,12 +58,12 @@ function createFleeingParameter(parameters)
  */
 function createAlternateChaserParameter(parameters)
 {
-    createDivSpanElements('divStype1', 'spanStype1', 'stype1');
-    createStypeSelectList('divStype1', 'selectStype1Id');
-    updateSelectParameter('selectStype1Id', parameters.stype1);
-    createDivSpanElements('divStype2', 'spanStype2', 'stype2');
-    createStypeSelectList('divStype2', 'selectStype2Id');
-    updateSelectParameter('selectStype2Id', parameters.stype2);
+    createDivSpanElements('stype1Div', 'stype1Span', 'stype1');
+    createStypeSelectList('stype1Div', 'stype1SelectId');
+    updateSelectParameter('stype1SelectId', parameters.stype1);
+    createDivSpanElements('stype2Div', 'stype2Span', 'stype2');
+    createStypeSelectList('stype2Div', 'stype2SelectId');
+    updateSelectParameter('stype2SelectId', parameters.stype2);
 }
 
 /**
@@ -73,10 +73,10 @@ function createAlternateChaserParameter(parameters)
 function createRandomAltChaserParameter(parameters)
 {
     createAlternateChaserParameter(parameters);
-    createDivSpanElements('divProb', 'spanProb', 'prob');
-    createInputRange('divProb', 'range', 0.0, 1.0, 0.1, 'spanProbId', 0.0, 'inputProbId');
+    createDivSpanElements('probDiv', 'probSpan', 'prob');
+    createInputRange('probDiv', 'range', 0.0, 1.0, 0.1, 'probSpanId', 0.0, 'probInputid');
     if(parameters.prob) {
-        updateInputRange(parameters.prob, 'inputProbId', 'spanProbId');
+        updateInputRange(parameters.prob, 'probInputid', 'probSpanId');
     }
 }
 
@@ -86,21 +86,21 @@ function createRandomAltChaserParameter(parameters)
  */
 function createSpawnPoint(parameters)
 {
-    createDivSpanElements('divStype', 'spanStype', 'stype');
-    createStypeSelectList('divStype', 'selectStypeId');
-    updateSelectParameter('selectStypeId', parameters.stype);
-    createDivSpanElements('divTotal', 'spanTotal', 'total');
-    createInputNumber('divTotal', 'number', 0, 100, 0, 'totalInputId');
+    createDivSpanElements('stypeDiv', 'stypeSpan', 'stype');
+    createStypeSelectList('stypeDiv', 'stypeSelectId');
+    updateSelectParameter('stypeSelectId', parameters.stype);
+    createDivSpanElements('totalDiv', 'totalSpan', 'total');
+    createInputNumber('totalDiv', 'number', 0, 100, 0, 'totalInputId');
     updateInputNumber(parameters.total, 'totalInputId');
-    createDivSpanElements('divProb', 'spanProb', 'prob');
-    createInputRange('divProb', 'range', 0.0, 1.0, 0.1, 'spanProbId', 0.0, 'inputProbId');
+    createDivSpanElements('probDiv', 'probSpan', 'prob');
+    createInputRange('probDiv', 'range', 0.0, 1.0, 0.1, 'probSpanId', 0.0, 'probInputId');
     if(parameters.prob) {
-        updateInputRange(parameters.prob, 'inputProbId', 'spanProbId');
+        updateInputRange(parameters.prob, 'probInputId', 'probSpanId');
     }
-    createDivSpanElements('divOrientation', 'spanOrientationId', 'spawnorientation');
-    createOrientationSelectList('divOrientation', 'selectSpawnOrientationId');
+    createDivSpanElements('orientationDiv', 'orientationSpanId', 'spawnorientation');
+    createOrientationSelectList('OrientationDiv', 'spawnOrientationSelectId');
     if(parameters.spawnorientation) {
-        updateSelectParameter('selectSpawnOrientationId', parameters.spawnorientation);//feature not available in all gvgai versions
+        updateSelectParameter('spawnOrientationSelectId', parameters.spawnorientation);//feature not available in all gvgai versions
     }
 }
 
@@ -134,11 +134,11 @@ function createBomberRandomMissile(parameters)
  */
 function createSpreader(parameters)
 {
-    createDivSpanElements('divStype', 'spanStype', 'stype');
-    createStypeSelectList('divStype', 'selectStypeId');
-    updateSelectParameter('selectStypeId', parameters.stype);
-    createDivSpanElements('divSpreadProb', 'spanProb', 'spreadprob');
-    createInputRange('divSpreadProb', 'range', 0.0, 1.0, 0.1, 'spreadProbSpanId', 0.0, 'spreadProbRangeId');
+    createDivSpanElements('stypeDiv', 'stypeSpan', 'stype');
+    createStypeSelectList('stypeDiv', 'stypeSelectId');
+    updateSelectParameter('stypeSelectId', parameters.stype);
+    createDivSpanElements('spreadProbDiv', 'spreadprobSpan', 'spreadprob');
+    createInputRange('spreadProbDiv', 'range', 0.0, 1.0, 0.1, 'spreadProbSpanId', 0.0, 'spreadProbRangeId');
     if(parameters.spreadprob) {
         updateInputRange(parameters.spreadprob, 'spreadProbRangeId', 'spreadProbSpanId');
     }
@@ -159,13 +159,13 @@ function createPortal(parameters)
  */
 function createResource(parameters)
 {
-    createDivSpanElements('divResource', 'spanResource', 'resource');
-    createAmmoSelectList('divResource', 'ammoSelectId');
+    createDivSpanElements('resourceDiv', 'resourceSpan', 'resource');
+    createAmmoSelectList('resourceDiv', 'ammoSelectId');
     updateSelectParameter('ammoSelectId', parameters.ammo);
-    createDivSpanElements('divValue', 'spanValue', 'value');
-    createInputNumber('divValue', 'number', 1, 100, 1, 'valueId');
-    updateInputNumber(parameters.value, 'valueId');
-    createDivSpanElements('divLimit', 'spanLimit', 'limit');
-    createInputNumber('divLimit', 'number', 1, 100, 1, 'limitId');
-    updateInputNumber(parameters.limit, 'limitId');
+    createDivSpanElements('valueDiv', 'valueSpan', 'value');
+    createInputNumber('valueDiv', 'number', 1, 100, 1, 'valueInputId');
+    updateInputNumber(parameters.value, 'valueInputId');
+    createDivSpanElements('limitDiv', 'limitSpan', 'limit');
+    createInputNumber('limitDiv', 'number', 1, 100, 1, 'limitInputId');
+    updateInputNumber(parameters.limit, 'limitInputId');
 }

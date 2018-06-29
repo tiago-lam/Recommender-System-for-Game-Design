@@ -89,12 +89,6 @@ span
 	width: 90%;
 }
 
-/*.checkers*/
-/*{*/
-/*position: relative;*/
-/*height: 10%;*/
-/*margin: 10px;*/
-/*}*/
 #cooldownLabel
 {
 	padding-right: 26px;
@@ -104,4 +98,27 @@ input[type="range"]
 {
 	/*width: 50%;*/
 	margin-right: 30px;
+}
+
+#refClassSelectId
+{
+	width: 100%;
+	text-align-last: center;
+}
+
+#refClassDivId
+{
+	margin-left: 20%;
+	margin-right: 20%;
+}
+
+#divButtonConfirm
+{
+	width: 100%;
+}
+
+#inputButtonConfirmId
+{
+	margin: 0 30%;
+	width: 40%;
 }

@@ -25,6 +25,7 @@ function updateObj() {
     }
 
     verified = [];
+    console.log(mapChildToParent);
 }
 
 /**
@@ -60,6 +61,7 @@ function updateHierarchies(ddItem)
 
                 for (var j = 0; j < ddItemKids.length; j++) {
                     var child = ddItemKids[j];
+                    mapChildToParent.set(child.id, ddItem.id);
                     var childrenObj = retrieveObjectByTarget(child.id);
 
                     removeUnecessaryObjects(idCollection, parentObj);
@@ -81,7 +83,7 @@ function updateHierarchies(ddItem)
             }
         }
     }
-    console.log(obj);
+    // console.log(obj);
 }
 
 /**

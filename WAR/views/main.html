@@ -98,14 +98,43 @@
         </div>
 
         <div id="divSpecialParameters">
-
+            <!--<span id="refClassSpanId" class="checkBoxSpan">Regular</span>-->
+            <div id="refClassDivId">
+                <select id="refClassSelectId" onchange="updateParametersOfTheReferenceClass(retrieveObjectByTarget(document.getElementById('name').innerText) ,this.value)">
+                    <option value="Regular">Regular</option>
+                    <option value="Immovable">Immovable</option>
+                    <option value="Passive">Passive</option>
+                    <option value="ShootAvatar">ShootAvatar</option>
+                    <option value="FlakAvatar">FlakAvatar</option>
+                    <option value="Flicker">Flicker</option>
+                    <option value="OrientedFlicker">OrientedFlicker</option>
+                    <option value="Missile">Missile</option>
+                    <option value="RandomMissile">RandomMissile</option>
+                    <option value="RandomNPC">RandomNPC</option>
+                    <option value="Chaser">Chaser</option>
+                    <option value="Fleeing">Fleeing</option>
+                    <option value="AlternateChaser">AlternateChaser</option>
+                    <option value="RandomPathAltChaser">RandomPathAltChaser</option>
+                    <option value="SpawnPoint">SpawnPoint</option>
+                    <option value="Bomber">Bomber</option>
+                    <option value="RandomBomber">RandomBomber</option>
+                    <option value="Spreader">Spreader</option>
+                    <option value="Door">Door</option>
+                    <option value="Portal">Portal</option>
+                    <option value="Resource">Resource</option>
+                </select>
+            </div>
+        </div>
+        <div id="divButtonConfirm">
+            <button id="inputButtonConfirmId" type="button">Confirm</button>
         </div>
 
         </div><!--</div> &lt;!&ndash;end div static parameters&ndash;&gt;-->
 <script type="text/javascript" src="js/nestable/nestable.js"></script>
     <script type="text/javascript" src="js/showSpriteSetScript.js"></script>
-<script type="text/javascript" src="js/constants/avatarTypes/avatarTypes.js"></script>
+<script type="text/javascript" src="js/constants/AvatarTypes/avatarTypes.js"></script>
     <script type="text/javascript" src="js/constants/OtherTypes/otherTypes.js"></script>
+    <script type="text/javascript" src="js/constants/Parameters/emptyParameters.js"></script>
     <script type="text/javascript" src="js/controlSpriteParameters/spriteParameterComponents.js"></script>
 <script type="text/javascript" src="js/controlSpriteParameters/avatarSpriteParameter.js"></script>
     <script type="text/javascript" src="js/controlSpriteParameters/otherSpriteParameter.js"></script>

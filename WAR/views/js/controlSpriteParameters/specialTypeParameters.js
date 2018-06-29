@@ -105,13 +105,13 @@ function updateStype2Parameter(obj)
 //limit
 function updateLimitValue(val, updateFunction)
 {
-    document.getElementById("limitId").value = val;
+    document.getElementById("limitInputId").value = val;
     updateFunction(val, "limit");
 }
 
 function updateLimitParameter(obj)
 {
-    var inputNumberControl = document.getElementById("limitId");
+    var inputNumberControl = document.getElementById("limitInputId");
     inputNumberControl.disabled = checkIfItsParentHasParam(obj, "limit");
 }
 
@@ -122,7 +122,7 @@ function updateValueValue(val, updateFunction)
     updateFunction(val, "value");
 }
 
-function updateLimitParameter(obj)
+function updateValueParameter(obj)
 {
     var inputNumberControl = document.getElementById("valueId");
     inputNumberControl.disabled = checkIfItsParentHasParam(obj, "value");
