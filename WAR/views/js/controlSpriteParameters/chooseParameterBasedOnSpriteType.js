@@ -100,8 +100,6 @@ function changeElementType(newRefClass, update)
 function updateParametersOfTheReferenceClass(thisObj, newRefClass)
 {
 
-    var emptyParamList = getCorrectListOfEmptyParameters(newRefClass);
-
     var oldRefClass = thisObj.referenceClass;
 
     var listOldParams = returnParametersOfThisReference(oldRefClass);
@@ -130,6 +128,7 @@ function updateParametersOfTheReferenceClass(thisObj, newRefClass)
             var childrenObj = thisObj.children[i];
             //thisObj = childrenObj;
             updateParametersOfTheReferenceClass(childrenObj, newRefClass);
+            var emptyParamList = getCorrectListOfEmptyParameters(newRefClass);
             designSpecialTypesParameters(childrenObj, emptyParamList);
         }
     }

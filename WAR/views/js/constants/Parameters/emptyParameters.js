@@ -6,6 +6,8 @@
  * Serves Flicker and Oriented Flicker types
  * @type {{limit: string}}
  */
+const ShootAvatarParamList = {stype: "none", ammo: "none"};
+
 const FlickerParamList = {limit: "1"};
 
 const ChaserParamList = {stype: "none"};
@@ -39,6 +41,9 @@ const mapParameterToItsDefaultValue = new Map();
 
 function getCorrectListOfEmptyParameters(refClass)
 {
+    if(refClass == ShootAvatar) {
+        return ShootAvatarParamList;
+    }
     if(refClass == Flicker) {
         return FlickerParamList
     }
