@@ -29,11 +29,11 @@ const RandomBomberParamList = {stype: "none", total: "0", prob: "0.0", spawnorie
  */
 //const BomberRandomMissileParamList = {stypeMissile: "", total: "", prob: "", spawnorientation: ""};
 
-const SpreaderParamList = {stype: "",spreadprob: ""};
+const SpreaderParamList = {stype: "none",spreadprob: "0.0"};
 
-const PortalParamList = {stype: ""};
+const PortalParamList = {stype: "none"};
 
-const ResourceParamList = {resource: "", value: "", limit: ""};
+const ResourceParamList = {resource: "none", value: "0", limit: "1"};
 
 const mapReferenceToItsParameters = new Map();
 
@@ -149,7 +149,7 @@ function returnParametersOfThisReference(ref)
 
     else if(ref == Resource)
     {
-        return ["resource", "value", "limit"];
+        return ["value", "limit"];
     }
 
     else
@@ -204,6 +204,15 @@ function returnDefaultValuesOfThisParameter(param)
     {
         return "0";
     }
+    else if(param == "limit")
+    {
+        return "1";
+    }
+    // else if(param == "resource")
+    // {
+    //     return "none";
+    // }
+
 }
 
 

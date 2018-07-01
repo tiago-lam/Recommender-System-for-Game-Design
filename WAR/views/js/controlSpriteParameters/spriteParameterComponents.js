@@ -54,14 +54,14 @@ function createStypeSelectList(divToBePartOf, listId)
 
     var listStype = document.createElement("select");
     listStype.id = listId;
-    if(listStype.id == "selectStypeId") {
+    if(listStype.id == "stypeSelectId") {
         listStype.setAttribute('oninput', "updateStypeValue(this.selectedIndex, updateObjParamValue)");
     }
-    else if(listStype.id == "selectStype1Id")
+    else if(listStype.id == "stype1SelectId")
     {
         listStype.setAttribute('oninput', "updateStype1Value(this.selectedIndex, updateObjParamValue)");
     }
-    else if(listStype.id == "selectStype2Id")
+    else if(listStype.id == "stype2SelectId")
     {
         listStype.setAttribute('oninput', "updateStype2Value(this.selectedIndex, updateObjParamValue)");
     }
@@ -125,7 +125,7 @@ function createInputNumber(divToAddId, type, min, max, valueToShow, inputId)
     {
         inputNumber.setAttribute('oninput', "updateLimitValue(this.value, updateObjParamValue)");
     }
-    else if(inputNumber.id == "valueId")
+    else if(inputNumber.id == "valueInputId")
     {
         inputNumber.setAttribute('oninput', "updateValueValue(this.value, updateObjParamValue)");
     }
@@ -145,7 +145,7 @@ function createInputRange(divToAddId, type, min, max, step, spanId, valueToShow,
 {
     var inputRange = document.createElement("input");
     inputRange.id = inputId;
-    if(inputRange.id == "inputProbId") {
+    if(inputRange.id == "probInputId") {
         inputRange.setAttribute("oninput", "updateProbValue(this.value, updateObjParamValue)");
     }
     else if(inputRange.id == "spreadProbRangeId")

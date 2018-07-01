@@ -14,7 +14,7 @@ var specialParameters = document.getElementById("divSpecialParameters");
  */
 function createShootAvatarParameters(parameters) {
    createDivSpanElements('divStype', 'spanStype', 'stype');
-   createStypeSelectList('divStype', 'selectStypeId');
+   createStypeSelectList('divStype', 'stypeSelectId');
    createDivSpanElements('divAmmo', 'spanAmmo', 'ammo');
    createAmmoSelectList('divAmmo','selectAmmoId');
    updateShootAvatarParameters(parameters);
@@ -39,7 +39,7 @@ function createFlakAvatarParameters(parameters) {
  */
 function updateShootAvatarParameters(parameters)
 {
-   updateSelectParameter('selectStypeId', parameters.stype);
+   updateSelectParameter('stypeSelectId', parameters.stype);
    updateSelectParameter('selectAmmoId', parameters.ammo);
 }
 
@@ -57,7 +57,7 @@ function updateFlakAvatarParameters(parameters)
  * Updates min ammo parameters
  * @param parameters
  */
-function updateMinAmmoParameter(parameters) {
+function updateMinAmmoParameterAvatar(parameters) {
     var inputMinAmmo = document.getElementById('minAmmoId');
     inputMinAmmo.value = parameters.minAmmo;
 }
@@ -66,7 +66,7 @@ function updateMinAmmoParameter(parameters) {
  * Updates ammo cost parameters
  * @param parameters
  */
-function updateAmmoCostParameter(parameters) {
+function updateAmmoCostParameterAvatar(parameters) {
     var inputAmmoCost = document.getElementById('ammoCostId');
     inputAmmoCost.value = parameters.ammoCost;
 }
@@ -77,6 +77,6 @@ function updateAmmoCostParameter(parameters) {
  */
 function updateAmmoParameters(parameters)
 {
-    updateMinAmmoParameter(parameters);
-    updateAmmoCostParameter(parameters);
+    updateMinAmmoParameterAvatar(parameters);
+    updateAmmoCostParameterAvatar(parameters);
 }

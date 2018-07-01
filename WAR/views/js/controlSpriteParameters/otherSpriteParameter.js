@@ -74,9 +74,9 @@ function createRandomAltChaserParameter(parameters)
 {
     createAlternateChaserParameter(parameters);
     createDivSpanElements('probDiv', 'probSpan', 'prob');
-    createInputRange('probDiv', 'range', 0.0, 1.0, 0.1, 'probSpanId', 0.0, 'probInputid');
+    createInputRange('probDiv', 'range', 0.0, 1.0, 0.1, 'probSpanId', 0.0, 'probInputId');
     if(parameters.prob) {
-        updateInputRange(parameters.prob, 'probInputid', 'probSpanId');
+        updateInputRange(parameters.prob, 'probInputId', 'probSpanId');
     }
 }
 
@@ -98,7 +98,7 @@ function createSpawnPoint(parameters)
         updateInputRange(parameters.prob, 'probInputId', 'probSpanId');
     }
     createDivSpanElements('orientationDiv', 'orientationSpanId', 'spawnorientation');
-    createOrientationSelectList('OrientationDiv', 'spawnOrientationSelectId');
+    createOrientationSelectList('orientationDiv', 'spawnOrientationSelectId');
     if(parameters.spawnorientation) {
         updateSelectParameter('spawnOrientationSelectId', parameters.spawnorientation);//feature not available in all gvgai versions
     }
@@ -159,9 +159,9 @@ function createPortal(parameters)
  */
 function createResource(parameters)
 {
-    createDivSpanElements('resourceDiv', 'resourceSpan', 'resource');
-    createAmmoSelectList('resourceDiv', 'ammoSelectId');
-    updateSelectParameter('ammoSelectId', parameters.ammo);
+    //createDivSpanElements('resourceDiv', 'resourceSpan', 'resource');
+    // createAmmoSelectList('resourceDiv', 'ammoSelectId');
+    // updateSelectParameter('ammoSelectId', parameters.ammo);
     createDivSpanElements('valueDiv', 'valueSpan', 'value');
     createInputNumber('valueDiv', 'number', 1, 100, 1, 'valueInputId');
     updateInputNumber(parameters.value, 'valueInputId');

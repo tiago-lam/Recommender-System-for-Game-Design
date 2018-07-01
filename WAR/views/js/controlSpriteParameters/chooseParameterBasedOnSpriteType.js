@@ -127,12 +127,11 @@ function updateParametersOfTheReferenceClass(thisObj, newRefClass)
         {
             var childrenObj = thisObj.children[i];
             //thisObj = childrenObj;
+            //var emptyParamList = getCorrectListOfEmptyParameters(newRefClass);
             updateParametersOfTheReferenceClass(childrenObj, newRefClass);
-            var emptyParamList = getCorrectListOfEmptyParameters(newRefClass);
-            designSpecialTypesParameters(childrenObj, emptyParamList);
+            updateInspector(childrenObj);
         }
     }
-
     updateInspector(thisObj);
 }
 

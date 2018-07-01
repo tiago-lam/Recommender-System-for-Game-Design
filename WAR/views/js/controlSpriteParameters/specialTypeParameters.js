@@ -1,46 +1,46 @@
 //stype
 function updateStypeValue(val, updateFunction)
 {
-    var selectComponent = document.getElementById('selectStypeId');
+    var selectComponent = document.getElementById('stypeSelectId');
     var choice = selectComponent.options[val];
     updateFunction(choice.value, 'stype');
 }
 
 function updateStypeParameter(obj)
 {
-    var selectComponent = document.getElementById('selectStypeId');
+    var selectComponent = document.getElementById('stypeSelectId');
     selectComponent.disabled = checkIfItsParentHasParam(obj, 'stype');
-    updateSelectParameter("selectStypeId", obj.parameters["stype"]);
+    updateSelectParameter("stypeSelectId", obj.parameters["stype"]);
 }
 
 //spawnorientation
 function updateSelectSpawnValue(val, updateFunction)
 {
-    var selectComponent = document.getElementById('selectSpawnOrientationId');
+    var selectComponent = document.getElementById('spawnOrientationSelectId');
     var choice = selectComponent.options[val];
     updateFunction(choice.value, 'spawnorientation');
 }
 
 function updateSpawnOrientationParameter(obj)
 {
-    var selectComponent = document.getElementById('selectSpawnOrientationId');
+    var selectComponent = document.getElementById('spawnOrientationSelectId');
     selectComponent.disabled = checkIfItsParentHasParam(obj, 'spawnorientation');
-    var id = "selectSpawnOrientationId";
+    var id = "spawnOrientationSelectId";
     updateSelectParameter(id, obj.parameters["spawnorientation"]);
 }
 
 //prob
 function updateProbValue(val, updateFunction)
 {
-    document.getElementById('inputProbId').textContent=val;
+    document.getElementById('probInputId').textContent=val;
     updateFunction(val, "prob");
 }
 
 function updateProbParameter(obj) {
-    var inputRangeControl = document.getElementById("inputProbId");
+    var inputRangeControl = document.getElementById("probInputId");
     inputRangeControl.disabled = checkIfItsParentHasParam(obj, "prob");
 
-    var spanValue = document.getElementById("spanProbId");
+    var spanValue = document.getElementById("probSpanId");
     manageParameterValues(spanValue, inputRangeControl, obj.parameters, 0, "prob");
 }
 
@@ -60,46 +60,46 @@ function updateTotalParameter(obj)
 //ammo
 function updateSelectAmmoValue(val, updateFunction)
 {
-    var selectComponent = document.getElementById('selectAmmoId');
+    var selectComponent = document.getElementById('ammoSelectId');
     var choice = selectComponent.options[val];
     updateFunction(choice.value, 'ammo');
 }
 
 function updateAmmoParameter(obj)
 {
-    var selectComponent = document.getElementById('selectAmmoId');
+    var selectComponent = document.getElementById('ammoSelectId');
     selectComponent.disabled = checkIfItsParentHasParam(obj, 'ammo');
-    updateSelectParameter("selectAmmoId", obj.parameters["ammo"]);
+    updateSelectParameter("ammoSelectId", obj.parameters["ammo"]);
 }
 
 //stype1
 function updateStype1Value(val, updateFunction)
 {
-    var selectComponent = document.getElementById('selectStype1Id');
+    var selectComponent = document.getElementById('stype1SelectId');
     var choice = selectComponent.options[val];
     updateFunction(choice.value, 'stype1');
 }
 
 function updateStype1Parameter(obj)
 {
-    var selectComponent = document.getElementById('selectStype1Id');
+    var selectComponent = document.getElementById('stype1SelectId');
     selectComponent.disabled = checkIfItsParentHasParam(obj, 'stype1');
-    updateSelectParameter("selectStype1Id", obj.parameters["stype1"]);
+    updateSelectParameter("stype1SelectId", obj.parameters["stype1"]);
 }
 
 //stype2
 function updateStype2Value(val, updateFunction)
 {
-    var selectComponent = document.getElementById('selectStype2Id');
+    var selectComponent = document.getElementById('stype2SelectId');
     var choice = selectComponent.options[val];
     updateFunction(choice.value, 'stype2');
 }
 
 function updateStype2Parameter(obj)
 {
-    var selectComponent = document.getElementById('selectStype2Id');
+    var selectComponent = document.getElementById('stype2SelectId');
     selectComponent.disabled = checkIfItsParentHasParam(obj, 'stype2');
-    updateSelectParameter("selectStype2Id", obj.parameters["stype2"]);
+    updateSelectParameter("stype2SelectId", obj.parameters["stype2"]);
 }
 
 //limit
@@ -118,13 +118,14 @@ function updateLimitParameter(obj)
 //value -- sorry for the redundancy
 function updateValueValue(val, updateFunction)
 {
-    document.getElementById("valueId").value = val;
+    document.getElementById("valueInputId").value = val;
     updateFunction(val, "value");
 }
 
 function updateValueParameter(obj)
 {
-    var inputNumberControl = document.getElementById("valueId");
+    var inputNumberControl = document.getElementById("valueInputId");
+    console.log("oh!");
     inputNumberControl.disabled = checkIfItsParentHasParam(obj, "value");
 }
 

@@ -296,6 +296,11 @@
             if ("spreadprob" in obj.parameters) {
                 updateSpreadProbParameter(obj);
             }
+
+            if("value" in obj.parameters)
+            {
+                updateValueParameter(obj);
+            }
         }
 
         /**
@@ -381,30 +386,28 @@
         {
             var htmlElement = document.getElementById(obj.identifier);
 
-
             var parent = htmlElement.parentNode;
 
+                if (parent.id == 'spriteList') {
 
-            if(parent.id == 'spriteList') {
-
-                return false;
-            }
-
-            while (parent.className != 'dd-item') {
-
-                parent = parent.parentNode;
-            }
-
-            if(parent.id != 'spriteList')
-            {
-
-                var parentObj = mapIdentifierToObject.get(parent.id);
-
-                if(param in parentObj.parameters){
-
-                    return true;
+                    return false;
                 }
-            }
+
+                while (parent.className != 'dd-item') {
+
+                    parent = parent.parentNode;
+                }
+
+                if (parent.id != 'spriteList') {
+
+                    var parentObj = mapIdentifierToObject.get(parent.id);
+
+                    if (param in parentObj.parameters) {
+
+                        return true;
+                    }
+                }
+
 
             return false;
         }
