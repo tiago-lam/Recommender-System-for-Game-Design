@@ -309,6 +309,8 @@
          */
         function updateInspector(obj)
         {
+            console.log(obj);
+
             updateNameAndImage(obj);
 
             initializeCurrentObj(obj);

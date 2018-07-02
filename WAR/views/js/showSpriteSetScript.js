@@ -49,8 +49,8 @@
         xmlhttp.onreadystatechange = function() {
 
             if (this.readyState == 4 && this.status == 200) {
+                console.log(this.responseText);
                 spriteSetObj = JSON.parse(this.responseText);
-                //console.log("H");
                 console.log(spriteSetObj);
                 buildTheSpriteSet(spriteSetObj, spriteListUl);
                 activateHierarchyListSort();
@@ -81,7 +81,6 @@
                .mousedown(function(e) {
                 var obj = retrieveObjectByTarget(e.target.id);
                 updateInspector(obj);
-                console.log(obj);
              });
         }
 
@@ -197,4 +196,12 @@
         function getMapListObject()
         {
             return mapIdentifierToObject;
+        }
+
+        function removeObjectFromTheSpriteSet(obj)
+        {
+            var index = spriteSetObj.indexOf(obj);
+            if (index > -1) {
+                spriteSetObj.splice(index, 1);
+            }
         }
