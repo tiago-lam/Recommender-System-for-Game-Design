@@ -31,12 +31,12 @@ function createAmmoSelectList(divToBePartOf, listId)
     divStypeAmmoSelect.appendChild(listAmmoResource);
 
     for (var i = 0; i < ammoSpritesCollection.length; i++) {
-        var option = document.createElement("option");
-        spriteName = ammoSpritesCollection[i];
-        option.value = spriteName;
-        option.text = spriteName;
-        listAmmoResource.appendChild(option);
-    }
+    var option = document.createElement("option");
+    spriteName = ammoSpritesCollection[i];
+    option.value = spriteName;
+    option.text = spriteName;
+    listAmmoResource.appendChild(option);
+}
 
     div = document.getElementById(divToBePartOf);
     div.appendChild(divStypeAmmoSelect);

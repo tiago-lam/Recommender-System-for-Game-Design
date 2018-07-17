@@ -1,0 +1,62 @@
+.interactionDiv
+{
+    margin-bottom: 10px;
+    border: 1px solid black;
+    width: 100%;
+    margin-left: 0%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    /*+border-radius: 5px;*/
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -khtml-border-radius: 5px;
+    border-radius: 5px;
+    background-color: #E9E9D5;
+}
+
+#interactionList
+{
+    float: left;
+}
+
+#interactionInspector
+{
+    width: 600px;
+    height: 229px;
+    position: relative;
+    float: left;
+    margin-left: 10%;
+    border: 1px solid black;
+}
+
+#interactionSprite1Div
+{
+    width: 33%;
+    float: left;
+}
+
+#interactionDiv
+{
+    width: 33%;
+    float: left;
+}
+
+#interactionSelect
+{
+    margin-top: 99px;
+}
+
+#spritesToInteractDiv
+{
+    width: 33%;
+    height: 100%;
+    float: left;
+    display: grid;
+    overflow: scroll;
+}
+
+#sprite1SelectId
+{
+    margin-top: 99px;
+}

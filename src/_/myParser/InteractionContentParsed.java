@@ -6,6 +6,5 @@ package _.myParser;
  * Apr 10, 2018
  */
 public class InteractionContentParsed {
-
 	
 }

@@ -15,7 +15,10 @@ public class ContextualServer {
 
         ServletHandler spriteSerialize = new ServletHandler();
         spriteSerialize.addServletWithMapping(GetSpriteSet.class, "/spriteSet");
+        spriteSerialize.addServletWithMapping(GetInteractionSet.class, "/interactionSet");
         spriteSerialize.addServletWithMapping(GetImages.class, "/imgs");
+        spriteSerialize.addServletWithMapping(Processing.class, "/processing");
+        spriteSerialize.addServletWithMapping(UploadImage.class, "/uploadImage");
 
         ResourceHandler resource_handler = new ResourceHandler();
         resource_handler.setDirectoriesListed(true);

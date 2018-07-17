@@ -10,18 +10,19 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.simple.JSONArray;
 
 import _.myParser.ParserGameDescription;
+import _.utils.Utils;
 import core.Node;
 import tools.IO;
 
 @SuppressWarnings("serial")
-public class GetSpriteSet extends HttpServlet
+public class GetInteractionSet extends HttpServlet
 {
     @Override
     protected void doGet( HttpServletRequest request,
                           HttpServletResponse response ) throws ServletException,
                                                         IOException
     {
-		String toSend = getSpriteSetJSONObject("examples/gridphysics/zelda.txt");
+		String toSend = getInteractionSetJSONObject("examples/gridphysics/zelda.txt");
 		
     	response.setContentType("text/html");
         response.setStatus(HttpServletResponse.SC_OK);
@@ -31,7 +32,7 @@ public class GetSpriteSet extends HttpServlet
 	/**
 	 * @return
 	 */
-	public String getSpriteSetJSONObject(String gamePath) {
+	public String getInteractionSetJSONObject(String gamePath) {
 		String toSend = "";
 
 		ParserGameDescription parser = new ParserGameDescription();
@@ -43,14 +44,14 @@ public class GetSpriteSet extends HttpServlet
     		//Parse here blocks of VGDL.
     		for(Node n : rootNode.children)
     		{
-    			if(n.content.identifier.equals("SpriteSet"))
+    			if(n.content.identifier.equals("InteractionSet"))
     			{
-    				JSONArray arr = parser.generate(n);
+    				JSONArray arr = parser.parseInteractionSet(n);
     				toSend =  arr.toJSONString();
-    				
     			}
     		}
     	}
 		return toSend;
 	}
 }
+

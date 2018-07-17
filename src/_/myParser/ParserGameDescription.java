@@ -2,10 +2,8 @@ package _.myParser;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-
 import _.utils.Utils;
 import core.Node;
 import core.VGDLParser;

@@ -1,207 +1,74 @@
+        var mapIdToInteraction = new Map();
         /**
-        * map that relates identifier to objects
-        * @type {Map}
-        */
-        var mapIdentifierToObject = new Map();
-
-        /**
-         * map that relates identifier to objects
-         * @type {Map}
-         */
-        var mapChildToParent = new Map();
-
-        /**
-         * Stores the main Ul element responsible for the Sprite Set hierarchy
-         * @type {HTMLElement | null}
-         */
-        var spriteListUl = document.getElementById("spriteList");
-        /**
-         * Apply the dd-list nestable style to the spriteListUl
-         */
-        spriteListUl.classList.add("dd-list");
-
-        /**
-         * access the serve in order to get the sprite set of a game
-         * @type {XMLHttpRequest}
-         * */
-        var xmlhttp = new XMLHttpRequest();
-
-        /**
-         * The sprite set obj
-         */
-        var spriteSetObj;
-
-        /**
-         * Build the whole sprite set as an HTML hierarchy list
-         * @param spriteSetObj
-         * @param ulElement
-         */
-        function buildTheSpriteSet(spriteSetObj, ulElement) {
-            for (var i = 0; i < spriteSetObj.length; i++) {
-                getObjectData(spriteSetObj[i], ulElement);
-            }
-            console.log(mapChildToParent);
-        }
-
+        * access the serve in order to get the sprite set of a game
+        * @type {XMLHttpRequest}
+        * */
+        var xmlHttp = new XMLHttpRequest();
         /**
          * Function responsible for perform the GET response
          */
-        xmlhttp.onreadystatechange = function() {
+        xmlHttp.onreadystatechange = function() {
 
+            var interactionList = document.getElementById('interactionList');
             if (this.readyState == 4 && this.status == 200) {
                 console.log(this.responseText);
-                spriteSetObj = JSON.parse(this.responseText);
-                console.log(spriteSetObj);
-                buildTheSpriteSet(spriteSetObj, spriteListUl);
-                activateHierarchyListSort();
-                getObjectForUpdatingOnMouseClick();
-                updateObjectsAfterListChange();
+                var interactionSetObj = JSON.parse(this.responseText);
+                console.log(interactionSetObj);
+                buildTheInteractionSet(interactionSetObj, interactionList)
             }
         };
         /**
-         * Prepare and send the GET request to the server
+         * Prepare and send the GET request to the server -- get the interaction set
          */
-        xmlhttp.open("GET", "http://localhost:9001/spriteSet", true);
-        xmlhttp.send();
+        xmlHttp.open("GET", "http://localhost:9001/interactionSet", true);
+        xmlHttp.send();
 
-        /**
-         * Basically activates the nestable library
-         */
-        function activateHierarchyListSort()
+        function buildTheInteractionSet(interactionObj, unorderedList)
         {
-               $('.dd').nestable('');
-        }
 
-        /**
-         * It shows the information of the sprite you clicked on
-         */
-        function getObjectForUpdatingOnMouseClick()
-        {
-            $(".dd-handle")
-               .mousedown(function(e) {
-                var obj = retrieveObjectByTarget(e.target.id);
-                updateInspector(obj);
-             });
-        }
-
-        /**
-         * Updates the sprite set after any changes on the hierarchy
-         */
-        function updateObjectsAfterListChange()
-        {
-            $('.dd').on('change', function() {
-                updateObj();
-            });
-        }
-
-        /**
-         * Extracts all  information of a sprite and add it to a list element
-         */
-        function getObjectData(obj, upperUl)
-        {
-            var currentObj = obj;
-            var identifier = currentObj.identifier;
-            var parameters = currentObj.parameters;
-            var imgSrc = document.createElement("img");
-            imgSrc.id = identifier + "ImgId";
-
-            if("img" in parameters)
-            {
-                var imgPathForUrlCreation = parameters["img"] + ".png";
-                fetchBlob(imgPathForUrlCreation, imgSrc);
-            }
-
-            var li = document.createElement("li");
-            li.id = identifier;
-            li.classList.add("dd-item");
-
-            var div = document.createElement("div");
-            div.classList.add("dd-handle");
-            div.id = identifier;
-            var divText = document.createTextNode(identifier);
-            div.appendChild(divText);
-            div.appendChild(imgSrc);
-            li.appendChild(div);
-
-            var textElement = identifier;
-
-            li.setAttribute('data-obj', currentObj);
-            mapIdentifierToObject.set(textElement, currentObj);
-            upperUl.appendChild(li);
-
-            var objChildren = currentObj.children;
-            if(objChildren)
-            {
-                var innerOl = document.createElement("ol");
-                innerOl.classList.add("dd-list");
-                innerOl.classList.add("children");
-
-                for(var j = 0; j < objChildren.length; j++)
+                for(var i = 0; i < interactionObj.length; i++)
                 {
-                    var innerCurrentObj = objChildren[j];
-                    mapChildToParent.set(innerCurrentObj.identifier, currentObj.identifier);
-                    getObjectData(innerCurrentObj, innerOl);
-                    li.appendChild(innerOl);
+                    var textObj = convertObjectToText(interactionObj[i]);
+                    createDivForThisTextObj(textObj, unorderedList, "interaction" + i, interactionObj[i]);
                 }
-            }
+                createSprite1SelectList();
+                createInteractionSelectList();
+                createCheckBoxList();
         }
 
-        /**
-         * Get the image of an specific sprite
-         * @param imgPath
-         * @param imgElement
-         */
-        function fetchBlob(imgPath, imgElement) {
-            // construct the URL path to the image file from the product.image property
-            var urlSrc = null;
-            // Use XHR to fetch the image, as a blob
-            // Again, if any errors occur we report them in the console.
-            var request = new XMLHttpRequest();
-            var params = "picture=" + imgPath;
-            request.open('GET', "http://localhost:9001/imgs" + "?" + params, true);
-            request.responseType = 'blob';
-            var objectURL = null;
-
-            request.onload = function() {
-                if(request.status === 200) {
-                // Convert the blob to an object URL — this is basically an temporary internal  URL
-                // that points to an object stored inside the browser
-                var blob = request.response;
-                objectURL = URL.createObjectURL(blob);
-                // invoke showProduct
-                imgElement.src = objectURL;
-                urlSrc = imgElement.src;
-                    return urlSrc;
-
-                } else {
-                    alert('Network request for "' + product.name + '" image failed with response ' +     request.status + ': ' + request. statusText);
+        function convertObjectToText(obj)
+        {
+                var interaction = obj.interactionName;
+                var sprite1 = obj.sprite1;
+                var sprite2 = obj.sprite2; // this is a collection (array), not a single string;
+                var interactionText = interaction + " " +
+                    sprite1 + " ";
+                for(var i = 0; i < sprite2.length; i++)
+                {
+                    interactionText = interactionText + sprite2[i].spriteToInteract;
                 }
-            };
+                var parameters = obj.parameters; // this is a collection;
+                for(var i = 0; i < parameters.length; i++)
+                {
+                    interactionText = interactionText + parameters[i];
+                }
 
-            request.send();
-
+                return interactionText;
         }
 
-        /**
-         * Returns a sprite obj, Given a target (name)
-         * @param target
-         * @returns {*}
-         */
-        function retrieveObjectByTarget(target)
+        function createDivForThisTextObj(textToPutInTheDiv, parentElement, id, interactionObj)
         {
-            var obj =  mapIdentifierToObject.get(target);
-            return obj;
+            var div = document.createElement('div');
+            div.classList.add('interactionDiv');
+            div.id = id;
+            div.innerHTML = textToPutInTheDiv;
+            mapIdToInteraction.set(id, interactionObj);
+            div.setAttribute("onclick", "getInteractionForUpdatingOnMouseClick(this.id)");
+            parentElement.append(div);
         }
 
-        function getMapListObject()
+        function getInteractionForUpdatingOnMouseClick(e)
         {
-            return mapIdentifierToObject;
-        }
-
-        function removeObjectFromTheSpriteSet(obj)
-        {
-            var index = spriteSetObj.indexOf(obj);
-            if (index > -1) {
-                spriteSetObj.splice(index, 1);
-            }
+            var interactionObj = mapIdToInteraction.get(e);
+            showInfo(interactionObj, e);
         }

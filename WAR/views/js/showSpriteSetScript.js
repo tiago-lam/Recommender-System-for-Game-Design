@@ -11,6 +11,12 @@
         var mapChildToParent = new Map();
 
         /**
+         * Stores the names of all the sprites to be used as a list for the interactions
+         * @type {Array}
+         */
+        var spriteNameCollection = [];
+
+        /**
          * Stores the main Ul element responsible for the Sprite Set hierarchy
          * @type {HTMLElement | null}
          */
@@ -37,6 +43,7 @@
          * @param ulElement
          */
         function buildTheSpriteSet(spriteSetObj, ulElement) {
+            spriteNameCollection = [];
             for (var i = 0; i < spriteSetObj.length; i++) {
                 getObjectData(spriteSetObj[i], ulElement);
             }
@@ -53,6 +60,7 @@
                 spriteSetObj = JSON.parse(this.responseText);
                 console.log(spriteSetObj);
                 buildTheSpriteSet(spriteSetObj, spriteListUl);
+                console.log(spriteNameCollection);
                 activateHierarchyListSort();
                 getObjectForUpdatingOnMouseClick();
                 updateObjectsAfterListChange();
@@ -101,6 +109,7 @@
         {
             var currentObj = obj;
             var identifier = currentObj.identifier;
+            spriteNameCollection.push(identifier);
             var parameters = currentObj.parameters;
             var imgSrc = document.createElement("img");
             imgSrc.id = identifier + "ImgId";
