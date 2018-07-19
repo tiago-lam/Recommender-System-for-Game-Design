@@ -60,3 +60,14 @@
 {
     margin-top: 99px;
 }
+
+#scoreSpanId
+{
+    float: left;
+}
+
+#scoreInputId
+{
+    width: 20%;
+    margin-left: 38%;
+}

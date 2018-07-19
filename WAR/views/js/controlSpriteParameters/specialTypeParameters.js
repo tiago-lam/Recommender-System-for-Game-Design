@@ -125,7 +125,6 @@ function updateValueValue(val, updateFunction)
 function updateValueParameter(obj)
 {
     var inputNumberControl = document.getElementById("valueInputId");
-    console.log("oh!");
     inputNumberControl.disabled = checkIfItsParentHasParam(obj, "value");
 }
 

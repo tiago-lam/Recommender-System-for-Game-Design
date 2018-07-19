@@ -45,7 +45,7 @@
                     sprite1 + " ";
                 for(var i = 0; i < sprite2.length; i++)
                 {
-                    interactionText = interactionText + sprite2[i].spriteToInteract;
+                    interactionText = interactionText + sprite2[i] + ' ';
                 }
                 var parameters = obj.parameters; // this is a collection;
                 for(var i = 0; i < parameters.length; i++)

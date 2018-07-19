@@ -69,9 +69,9 @@ public class ParserGameDescription extends VGDLParser{
 			JSONArray sprite2Array = new JSONArray();
 			String [] spritesToInteract = interactionContent.object2;
 			for (int i = 0; i < spritesToInteract.length; i++) {
-				JSONObject objToInteract = new JSONObject();
-				objToInteract.put("spriteToInteract", spritesToInteract[i]);
-				sprite2Array.add(objToInteract);
+//				JSONObject objToInteract = new JSONObject();
+//				objToInteract.put("spriteToInteract", spritesToInteract[i]);
+				sprite2Array.add(spritesToInteract[i]);
 			}
 			interactionObj.put("sprite2", sprite2Array);
 			HashMap<String, String> parameters = interactionContent.parameters;

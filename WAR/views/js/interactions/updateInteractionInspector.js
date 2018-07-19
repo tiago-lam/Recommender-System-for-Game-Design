@@ -52,6 +52,8 @@ function createCheckBoxList()
         label.htmlFor = 'inputCheckBox.id';
         label.innerHTML = spriteNameCollection[i];
 
+        inputCheckBox.setAttribute('oninput', 'updateSpritesToInteractList(this.checked, this.id)');
+
         divForCheckBoxContents.append(inputCheckBox);
         divForCheckBoxContents.append(label);
 
@@ -67,6 +69,8 @@ function showInfo(interactionObj, interactionElementId)
     updateSelectParameter('interactionSelect', interactionObj.interactionName);
     var spritesToInteract = retrieveSpritesToInteract(interactionObj);
     updateCheckBox(spritesToInteract);
+
+    showParameters();
 }
 
 function retrieveSpritesToInteract(interactionObj)
@@ -75,7 +79,7 @@ function retrieveSpritesToInteract(interactionObj)
     var spritesToInteract = [];
     for(var i = 0; i < sprites.length; i++)
     {
-        spritesToInteract.push(sprites[i].spriteToInteract);
+        spritesToInteract.push(sprites[i]);
     }
     return spritesToInteract;
 }
@@ -113,8 +117,68 @@ function updateInteractionInsideTheObj(value)
     setTextOfDivElement(currentInteractionElementId);
 }
 
+function updateSpritesToInteractList(value, spriteName)
+{
+    spriteName = spriteName.replace('CheckBoxId', '');
+    var spriteNameToInteract = spriteName;
+    if(value == true)
+    {
+        currentInteractionObj.sprite2.push(spriteNameToInteract);
+    }
+    else
+    {
+        var index = currentInteractionObj.sprite2.indexOf(spriteNameToInteract);
+        if (index > -1) {
+            currentInteractionObj.sprite2.splice(index, 1);
+        }
+    }
+    setTextOfDivElement(currentInteractionElementId);
+}
+
 function setTextOfDivElement(divId)
 {
     var textObj = convertObjectToText(currentInteractionObj);
     document.getElementById(divId).innerHTML = textObj;
+}
+
+function showParameters()
+{
+    removeParameterContents();
+    var parameters = currentInteractionObj.parameters;
+    if("scoreChange" in parameters)
+    {
+        createScoreChangeField(parameters.scoreChange);
+    }
+}
+
+function createScoreChangeField(value)
+{
+    var div = document.getElementById('interactionDiv');
+
+    var scoreSpan = document.createElement('span');
+    scoreSpan.id = 'scoreSpanId';
+    scoreSpan.innerHTML = "score:";
+
+    var scoreInput = document.createElement('input');
+    scoreInput.setAttribute('oninput', 'updateScoreParameter(this.value)');
+    scoreInput.id = 'scoreInputId';
+    scoreInput.type = 'number';
+    scoreInput.value = value;
+
+    div.append(scoreSpan);
+    div.append(scoreInput);
+}
+
+function updateScoreParameter(value)
+{
+    currentInteractionObj.parameters.scoreChange = value;
+}
+
+function removeParameterContents()
+{
+    var interactionDiv = document.getElementById('interactionDiv');
+
+    while (interactionDiv.childNodes.length > 1) {
+        interactionDiv.removeChild(interactionDiv.lastChild);
+    }
 }
