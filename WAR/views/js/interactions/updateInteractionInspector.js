@@ -115,6 +115,8 @@ function updateInteractionInsideTheObj(value)
     currentInteractionObj.interactionName = value;
     console.log(currentInteractionObj);
     setTextOfDivElement(currentInteractionElementId);
+
+    updateInteractionParameterElements(value);
 }
 
 function updateSpritesToInteractList(value, spriteName)
@@ -141,13 +143,48 @@ function setTextOfDivElement(divId)
     document.getElementById(divId).innerHTML = textObj;
 }
 
+function managingElementsUpdating() {
+    removeParameterContents();
+    if ("scoreChange" in currentInteractionObj.parameters) {
+        createScoreChangeField(currentInteractionObj.parameters.scoreChange);
+    }
+    else {
+        createScoreChangeField(0);
+    }
+}
+
 function showParameters()
 {
-    removeParameterContents();
-    var parameters = currentInteractionObj.parameters;
-    if("scoreChange" in parameters)
+    managingElementsUpdating();
+
+    if("stype" in currentInteractionObj.parameters)
     {
-        createScoreChangeField(parameters.scoreChange);
+        createInteractionStypeParameter();
+        updateStypeParameterElement(currentInteractionObj.parameters.stype);
+    }
+
+    if("resource" in currentInteractionObj.parameters)
+    {
+        createInteractionResourceParameter();
+        updateResourceParameterElement(currentInteractionObj.parameters.resource);
+    }
+
+    if("stypeOther" in currentInteractionObj.parameters)
+    {
+        createInteractionStypeOtherParameter();
+        updateStypeOtherParameterElement(currentInteractionObj.parameters.stypeOther);
+    }
+
+    if("limit" in currentInteractionObj.parameters)
+    {
+        createInteractionLimitParameter();
+        updateLimitParameterElement(currentInteractionObj.parameters.limit);
+    }
+
+    if("value" in currentInteractionObj.parameters)
+    {
+        createInteractionValueParameter();
+        updateValueParameterElement(currentInteractionObj.parameters.value);
     }
 }
 

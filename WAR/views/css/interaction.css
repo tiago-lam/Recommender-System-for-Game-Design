@@ -71,3 +71,19 @@
     width: 20%;
     margin-left: 38%;
 }
+
+.spanForInteractionParameters
+{
+    float: left;
+}
+
+.forSelectParameters
+{
+    width: 39%;
+    float: right;
+}
+
+.interactionElementDiv
+{
+    width: 83%;
+}

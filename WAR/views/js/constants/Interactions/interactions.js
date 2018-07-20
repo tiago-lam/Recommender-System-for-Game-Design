@@ -10,9 +10,9 @@ const spawnIfHasMore = 'spawnIfHasMore';
 const spawnIfHasLess = 'spawnIfHasLess';
 const cloneSprite = 'cloneSprite';
 const transformTo = 'transformTo';
-const transformIfCounts = 'transformIfCounts';
+//const transformIfCounts = 'transformIfCounts';
 const transformToRandomChild = 'transformToRandomChild';
-const updateSpawnType = 'updateSpawnType';
+//const updateSpawnType = 'updateSpawnType';
 const removeScore = 'removeScore';
 const addHealthPoints = 'addHealthPoints';
 const addHealthPointsToMax = 'addHealthPointsToMax';
@@ -35,7 +35,7 @@ const collectResource = 'collectResource';
 const changeResource = 'changeResource';
 
 var interactionCollection = [killSprite, killAll, killIfHasMore, killIfHasLess, killIfFromAbove, killIfOtherHasMore,
-    transformToSingleton, spawnBehind, spawnIfHasMore, spawnIfHasLess, cloneSprite, transformTo, transformIfCounts,
-    transformToRandomChild, updateSpawnType, removeScore, addHealthPoints, addHealthPointsToMax, subtractHealthPoints,
+    transformToSingleton, spawnBehind, spawnIfHasMore, spawnIfHasLess, cloneSprite, transformTo,
+    transformToRandomChild, removeScore, addHealthPoints, addHealthPointsToMax, subtractHealthPoints,
     increaseSpeedToAll, decreaseSpeedToAll, setSpeedForAll, stepBack, undoAll, flipDirection, reverseDirection,
     attractGaze, align, turnAround, wrapAround, teleportToExit, pullWithIt, bounceForward, collectResource, changeResource];

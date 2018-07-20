@@ -53,10 +53,10 @@ function retrievingAmmoSprites(stypeCollection)
 
     stypeCollection.forEach(function(element)
         {
-            if(element.name != "none") {
-                var gameObj = mapIdentifierToObject.get(element.name);
+            if(element != "none") {
+                var gameObj = mapIdentifierToObject.get(element);
                 if (gameObj["referenceClass"] == "Resource") {
-                    resourceSprites.push(element.name);
+                    resourceSprites.push(element);
                 }
             }
         });
