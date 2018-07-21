@@ -113,8 +113,11 @@ function updateSprite1InsideTheObj(value)
 function updateInteractionInsideTheObj(value)
 {
     currentInteractionObj.interactionName = value;
-    console.log(currentInteractionObj);
     setTextOfDivElement(currentInteractionElementId);
+
+    var scoreValue = currentInteractionObj.parameters.scoreChange;
+    currentInteractionObj.parameters = {};
+    currentInteractionObj.parameters['scoreChange'] = scoreValue;
 
     updateInteractionParameterElements(value);
 }
