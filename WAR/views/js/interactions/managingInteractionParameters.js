@@ -57,7 +57,7 @@ function updateInteractionParameterElements(interaction)
 
     if(interaction == transformToSingleton || interaction == spawnBehind || interaction == spawnIfHasMore
         || interaction == spawnIfHasLess || interaction == transformTo || interaction == transformToRandomChild
-        || interaction == updateSpawnType || interaction == removeScore || interaction == subtractHealthPoints
+        || interaction == removeScore || interaction == subtractHealthPoints
         || interaction == increaseSpeedToAll || interaction == decreaseSpeedToAll || interaction == setSpeedForAll)
     {
         createInteractionStypeParameter();

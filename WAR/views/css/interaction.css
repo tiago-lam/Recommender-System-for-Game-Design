@@ -75,15 +75,18 @@
 .spanForInteractionParameters
 {
     float: left;
+    padding-right: 40px;
 }
 
 .forSelectParameters
 {
-    width: 39%;
+    width: 35%;
     float: right;
+    margin-right: 0px;
 }
 
 .interactionElementDiv
 {
     width: 83%;
+    display: inline-block;
 }
