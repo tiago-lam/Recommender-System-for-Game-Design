@@ -34,6 +34,7 @@
 {
     width: 33%;
     float: left;
+    display: inline;
 }
 
 #interactionDiv
@@ -72,6 +73,12 @@
     margin-left: 38%;
 }
 
+#sprite1InteractionImg
+{
+    margin: -86px 0px 0px 12px;
+    width: 30%;
+}
+
 .spanForInteractionParameters
 {
     float: left;
@@ -88,5 +95,14 @@
 .interactionElementDiv
 {
     width: 83%;
+    display: inline-block;
+}
+
+.spanLimitOverflow
+{
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 45px;
     display: inline-block;
 }

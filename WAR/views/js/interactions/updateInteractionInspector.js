@@ -1,11 +1,31 @@
 var currentInteractionObj;
 var currentInteractionElementId;
 
+function updateOrCreateImgSprite1(identifier)
+{
+    var divParent = document.getElementById('interactionSprite1Div');
+    var img = document.getElementById('sprite1InteractionImg');
+    if(divParent.contains(img))
+    {
+        img.src = document.getElementById(identifier + "ImgId").currentSrc;
+    }
+    else
+    {
+        img = document.createElement('img');
+        img.id = "sprite1InteractionImg";
+        img.src = document.getElementById(identifier + "ImgId").currentSrc;
+    }
+    divParent.append(img);
+}
+
 function createSprite1SelectList()
 {
     var divParent = document.getElementById('interactionSprite1Div');
     var sprite1Select = document.createElement('select');
     sprite1Select.id = "sprite1SelectId";
+    sprite1Select.classList.add('style-rounded');
+    sprite1Select.classList.add('blue');
+    sprite1Select.classList.add('rounded');
 
     for (var i = 0; i < spriteNameCollection.length; i++) {
         var option = document.createElement("option");
@@ -25,6 +45,9 @@ function createInteractionSelectList()
     var divParent = document.getElementById('interactionDiv');
     var interactionSelect = document.createElement('select');
     interactionSelect.id = "interactionSelect";
+    interactionSelect.classList.add('style-rounded');
+    interactionSelect.classList.add('blue');
+    interactionSelect.classList.add('rounded');
 
     for (var i = 0; i < interactionCollection.length; i++) {
         var option = document.createElement("option");
@@ -63,6 +86,7 @@ function createCheckBoxList()
 
 function showInfo(interactionObj, interactionElementId)
 {
+    updateOrCreateImgSprite1(interactionObj.sprite1);
     currentInteractionObj = interactionObj;
     currentInteractionElementId = interactionElementId;
     updateSelectParameter('sprite1SelectId', interactionObj.sprite1);
@@ -105,6 +129,7 @@ function deselectAllCheckboxes()
 
 function updateSprite1InsideTheObj(value)
 {
+    updateOrCreateImgSprite1(value);
     currentInteractionObj.sprite1 = value;
     console.log(currentInteractionObj);
     setTextOfDivElement(currentInteractionElementId);

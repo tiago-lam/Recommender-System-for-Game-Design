@@ -9,11 +9,15 @@ function createInteractionStypeParameter()
     var scoreSpan = document.createElement('span');
     scoreSpan.id = 'stypeInteractionSpanId';
     scoreSpan.classList.add('spanForInteractionParameters');
+    scoreSpan.classList.add('spanLimitOverflow');
     scoreSpan.innerHTML = "stype:";
 
     var stypeSelect = document.createElement('select');
     stypeSelect.id = "stypeSelectId";
     stypeSelect.classList.add('forSelectParameters');
+    stypeSelect.classList.add('styled-select');
+    stypeSelect.classList.add('blue');
+    stypeSelect.classList.add('rounded');
 
     for (var i = 0; i < spriteNameCollection.length; i++) {
         var option = document.createElement("option");
@@ -103,11 +107,15 @@ function createInteractionResourceParameter()
     var resourceSpan = document.createElement('span');
     resourceSpan.id = 'resourceInteractionSpanId';
     resourceSpan.classList.add('spanForInteractionParameters');
+    resourceSpan.classList.add('spanLimitOverflow');
     resourceSpan.innerHTML = "resource:";
 
     var resourceSelect = document.createElement('select');
     resourceSelect.id = "resourceSelectId";
     resourceSelect.classList.add('forSelectParameters');
+    resourceSelect.classList.add('styled-select');
+    resourceSelect.classList.add('blue');
+    resourceSelect.classList.add('rounded');
 
     var resourceSprites = retrievingAmmoSprites(spriteNameCollection);
     for (var i = 0; i < resourceSprites.length; i++) {
@@ -155,11 +163,15 @@ function createInteractionStypeOtherParameter()
     var stypeOtherSpan = document.createElement('span');
     stypeOtherSpan.id = 'stypeOtherInteractionSpanId';
     stypeOtherSpan.classList.add('spanForInteractionParameters');
+    stypeOtherSpan.classList.add('spanLimitOverflow');
     stypeOtherSpan.innerHTML = "stypeOther:";
 
     var stypeOtherSelect = document.createElement('select');
     stypeOtherSelect.id = "stypeOtherSelectId";
     stypeOtherSelect.classList.add('forSelectParameters');
+    stypeOtherSelect.classList.add('styled-select');
+    stypeOtherSelect.classList.add('blue');
+    stypeOtherSelect.classList.add('rounded');
 
     for (var i = 0; i < spriteNameCollection.length; i++) {
         var option = document.createElement("option");
@@ -206,6 +218,7 @@ function createInteractionLimitParameter()
     var limitSpan = document.createElement('span');
     limitSpan.id = 'limitInteractionSpanId';
     limitSpan.classList.add('spanForInteractionParameters');
+    limitSpan.classList.add('spanLimitOverflow');
     limitSpan.innerHTML = "limit:";
 
     var limitInput = document.createElement('input');
@@ -252,6 +265,7 @@ function createInteractionValueParameter()
     var valueSpan = document.createElement('span');
     valueSpan.id = 'valueInteractionSpanId';
     valueSpan.classList.add('spanForInteractionParameters');
+    valueSpan.classList.add('spanLimitOverflow');
     valueSpan.innerHTML = "value:";
 
     var valueInput = document.createElement('input');

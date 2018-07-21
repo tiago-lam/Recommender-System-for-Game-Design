@@ -25,12 +25,12 @@
 
         function buildTheInteractionSet(interactionObj, unorderedList)
         {
-
                 for(var i = 0; i < interactionObj.length; i++)
                 {
                     var textObj = convertObjectToText(interactionObj[i]);
                     createDivForThisTextObj(textObj, unorderedList, "interaction" + i, interactionObj[i]);
                 }
+
                 createSprite1SelectList();
                 createInteractionSelectList();
                 createCheckBoxList();
