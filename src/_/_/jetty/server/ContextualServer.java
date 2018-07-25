@@ -16,6 +16,7 @@ public class ContextualServer {
         ServletHandler spriteSerialize = new ServletHandler();
         spriteSerialize.addServletWithMapping(GetSpriteSet.class, "/spriteSet");
         spriteSerialize.addServletWithMapping(GetInteractionSet.class, "/interactionSet");
+        spriteSerialize.addServletWithMapping(GetTerminationSet.class, "/terminationSet");
         spriteSerialize.addServletWithMapping(GetImages.class, "/imgs");
         spriteSerialize.addServletWithMapping(Processing.class, "/processing");
         spriteSerialize.addServletWithMapping(UploadImage.class, "/uploadImage");

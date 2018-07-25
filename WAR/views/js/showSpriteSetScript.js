@@ -112,6 +112,7 @@ function getObjectData(obj, upperUl)
     spriteNameCollection.push(identifier);
     var parameters = currentObj.parameters;
     var imgSrc = document.createElement("img");
+    imgSrc.setAttribute('class', 'imgSprite');
     imgSrc.id = identifier + "ImgId";
 
     if("img" in parameters)

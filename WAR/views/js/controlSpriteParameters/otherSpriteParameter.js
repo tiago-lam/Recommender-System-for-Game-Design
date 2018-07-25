@@ -37,7 +37,7 @@ function createOrientedFlickerParameter(parameters)
 function createChaserParameter(parameters)
 {
     createDivSpanElements('stypeDiv', 'stypeSpan', 'stype');
-    createStypeSelectList('stypeDiv', 'stypeSelectId');
+    createStypeTerminationSelectList('stypeDiv', 'stypeSelectId');
     if(parameters.stype) {
         updateSelectParameter('stypeSelectId', parameters.stype);
     }
@@ -59,10 +59,10 @@ function createFleeingParameter(parameters)
 function createAlternateChaserParameter(parameters)
 {
     createDivSpanElements('stype1Div', 'stype1Span', 'stype1');
-    createStypeSelectList('stype1Div', 'stype1SelectId');
+    createStypeTerminationSelectList('stype1Div', 'stype1SelectId');
     updateSelectParameter('stype1SelectId', parameters.stype1);
     createDivSpanElements('stype2Div', 'stype2Span', 'stype2');
-    createStypeSelectList('stype2Div', 'stype2SelectId');
+    createStypeTerminationSelectList('stype2Div', 'stype2SelectId');
     updateSelectParameter('stype2SelectId', parameters.stype2);
 }
 
@@ -87,7 +87,7 @@ function createRandomAltChaserParameter(parameters)
 function createSpawnPoint(parameters)
 {
     createDivSpanElements('stypeDiv', 'stypeSpan', 'stype');
-    createStypeSelectList('stypeDiv', 'stypeSelectId');
+    createStypeTerminationSelectList('stypeDiv', 'stypeSelectId');
     updateSelectParameter('stypeSelectId', parameters.stype);
     createDivSpanElements('totalDiv', 'totalSpan', 'total');
     createInputNumber('totalDiv', 'number', 0, 100, 0, 'totalInputId');
@@ -135,7 +135,7 @@ function createBomberRandomMissile(parameters)
 function createSpreader(parameters)
 {
     createDivSpanElements('stypeDiv', 'stypeSpan', 'stype');
-    createStypeSelectList('stypeDiv', 'stypeSelectId');
+    createStypeTerminationSelectList('stypeDiv', 'stypeSelectId');
     updateSelectParameter('stypeSelectId', parameters.stype);
     createDivSpanElements('spreadProbDiv', 'spreadprobSpan', 'spreadprob');
     createInputRange('spreadProbDiv', 'range', 0.0, 1.0, 0.1, 'spreadProbSpanId', 0.0, 'spreadProbRangeId');

@@ -1,10 +1,10 @@
 var currentInteractionObj;
 var currentInteractionElementId;
 
-function updateOrCreateImgSprite1(identifier)
+function updateOrCreateImg(identifier, divToBeAppendedId, imgElementId)
 {
-    var divParent = document.getElementById('interactionSprite1Div');
-    var img = document.getElementById('sprite1InteractionImg');
+    var divParent = document.getElementById(divToBeAppendedId);
+    var img = document.getElementById(imgElementId);
     if(divParent.contains(img))
     {
         img.src = document.getElementById(identifier + "ImgId").currentSrc;
@@ -12,7 +12,7 @@ function updateOrCreateImgSprite1(identifier)
     else
     {
         img = document.createElement('img');
-        img.id = "sprite1InteractionImg";
+        img.id = imgElementId;
         img.src = document.getElementById(identifier + "ImgId").currentSrc;
     }
     divParent.append(img);
@@ -65,8 +65,10 @@ function createInteractionSelectList()
 function createCheckBoxList()
 {
     var divParent = document.getElementById('spritesToInteractDiv');
-    for (var i = 0; i < spriteNameCollection.length; i++) {
+    for (var i = 0; i < spriteNameCollection.length; i++)
+    {
         var divForCheckBoxContents = document.createElement('div');
+        divForCheckBoxContents.id = 'checkBoxContents' + i + 'Id';
         var inputCheckBox = document.createElement('input');
         inputCheckBox.type = 'checkbox';
         inputCheckBox.classList.add('interactionCheckBox');
@@ -75,10 +77,19 @@ function createCheckBoxList()
         label.htmlFor = 'inputCheckBox.id';
         label.innerHTML = spriteNameCollection[i];
 
+        var img = document.createElement('img');
+        img.id = 'imgOption' + i + 'Id';
+
+        // var identifier = spriteNameCollection[i];
+        // var imgSprite = document.getElementById('avatar' + "ImgId");
+        // imgSprite = imgs[15];
+        // img.src = imgs[15].src;
+
         inputCheckBox.setAttribute('oninput', 'updateSpritesToInteractList(this.checked, this.id)');
 
         divForCheckBoxContents.append(inputCheckBox);
         divForCheckBoxContents.append(label);
+        divForCheckBoxContents.append(img);
 
         divParent.append(divForCheckBoxContents);
     }
@@ -86,7 +97,7 @@ function createCheckBoxList()
 
 function showInfo(interactionObj, interactionElementId)
 {
-    updateOrCreateImgSprite1(interactionObj.sprite1);
+    updateOrCreateImg(interactionObj.sprite1, 'interactionSprite1Div', 'sprite1InteractionImg');
     currentInteractionObj = interactionObj;
     currentInteractionElementId = interactionElementId;
     updateSelectParameter('sprite1SelectId', interactionObj.sprite1);
@@ -129,7 +140,7 @@ function deselectAllCheckboxes()
 
 function updateSprite1InsideTheObj(value)
 {
-    updateOrCreateImgSprite1(value);
+    updateOrCreateImg(value, 'interactionSprite1Div', 'sprite1InteractionImg');
     currentInteractionObj.sprite1 = value;
     console.log(currentInteractionObj);
     setTextOfDivElement(currentInteractionElementId);

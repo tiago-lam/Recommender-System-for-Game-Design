@@ -1,0 +1,21 @@
+.terminationDiv
+{
+    margin-bottom: 10px;
+    border: 1px solid black;
+    width: 100%;
+    margin-left: 0%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    /*+border-radius: 5px;*/
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -khtml-border-radius: 5px;
+    border-radius: 5px;
+    background-color: #E9E9D5;
+}
+
+#terminationInspector
+{
+    float: left;
+}

@@ -14,7 +14,7 @@
                 console.log(this.responseText);
                 var interactionSetObj = JSON.parse(this.responseText);
                 console.log(interactionSetObj);
-                buildTheInteractionSet(interactionSetObj, interactionList)
+                buildTheInteractionSet(interactionSetObj, interactionList);
             }
         };
         /**

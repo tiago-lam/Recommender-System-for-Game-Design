@@ -14,7 +14,7 @@ var specialParameters = document.getElementById("divSpecialParameters");
  */
 function createShootAvatarParameters(parameters) {
    createDivSpanElements('divStype', 'spanStype', 'stype');
-   createStypeSelectList('divStype', 'stypeSelectId');
+   createStypeTerminationSelectList('divStype', 'stypeSelectId');
    createDivSpanElements('divAmmo', 'spanAmmo', 'ammo');
    createAmmoSelectList('divAmmo','selectAmmoId');
    updateShootAvatarParameters(parameters);

@@ -22,7 +22,7 @@ public class GetInteractionSet extends HttpServlet
                           HttpServletResponse response ) throws ServletException,
                                                         IOException
     {
-		String toSend = getInteractionSetJSONObject("examples/gridphysics/portals.txt");
+		String toSend = getInteractionSetJSONObject("examples/gridphysics/aliens.txt");
 		
     	response.setContentType("text/html");
         response.setStatus(HttpServletResponse.SC_OK);

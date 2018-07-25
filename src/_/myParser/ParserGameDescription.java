@@ -9,6 +9,7 @@ import core.Node;
 import core.VGDLParser;
 import core.content.InteractionContent;
 import core.content.SpriteContent;
+import core.content.TerminationContent;
 import tools.IO;
 
 /**
@@ -85,6 +86,26 @@ public class ParserGameDescription extends VGDLParser{
 		}
 		return interactionArray;
 	}
+	
+	public JSONArray parseTerminationSet(Node n)
+	{
+		JSONArray terminationArray = new JSONArray();
+		ArrayList<Node> terminationNodes = n.children;
+		for (Node node : terminationNodes) {
+			JSONObject terminationObj = new JSONObject();
+			TerminationContent terminationContent = (TerminationContent) node.content;
+			terminationObj.put("termination", terminationContent.identifier);
+			HashMap<String, String> parameters = terminationContent.parameters;
+			JSONObject paramObj = new JSONObject();
+			for (String key : parameters.keySet()) 
+			{
+				paramObj.put(key, parameters.get(key));
+			}
+			terminationObj.put("parameters", paramObj);
+			terminationArray.add(terminationObj);
+		}
+		return terminationArray;
+	}
 
 	/**
 	 * @param node
@@ -146,7 +167,9 @@ public class ParserGameDescription extends VGDLParser{
 				}
 				else if(n.content.identifier.equals("TerminationSet"))
 				{
-
+					JSONArray terminationArray = myParser.parseTerminationSet(n);
+					Utils.writeAsAJSON(terminationArray, "interactionSet");
+					System.out.println();
 				}
 			}
 
