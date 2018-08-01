@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel = "stylesheet" type ="text/css" href ="style.css">
+</head>
+<body>
+	<script type="text/javascript" src="code2.js"></script>
+	<ul>
+		<li id="yeti"><img src="yeti4.png" draggable ="true" ondragstart ="drag(event)" id="drag1"></li>
+		<li id="blank"><img src="blank.png" draggable ="true" ondragstart ="drag(event)" id="drag1"></li>
+	</ul>
+
+	<div id="inputRowDivId">
+		<span id="rowSpanId">number of rows</span>
+		<input id="rowInput" type="number">
+	</div>
+
+	<div id="inputColumnDivId">
+		<span id="colSpanId">number of columns</span>
+		<input id="colInput" type="number">
+	</div>
+	<div id="level"></div>
+	<script>
+        function createTableOnInput()
+        {
+            var level = document.getElementById('level');
+
+            while (level.childNodes.length > 0) {
+                level.removeChild(level.lastChild);
+            }
+
+            var nRow = document.getElementById('rowInput');
+            var nColumn = document.getElementById('colInput');
+
+            createTable(nRow.value, nColumn.value);
+        }
+	</script>
+	<input id="sendInput" name="create table" type="button" onclick="createTableOnInput()">create table</input>
+	<input id="cleanInput" name="create table" type="button" onclick="cleanTable()">clean</input>
+
+</body>
+</html>

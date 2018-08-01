@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel = "stylesheet" type ="text/css" href ="../style.css">
+</head>
+<body>
+	<script type="text/javascript" src="codeRP.js"></script>
+	<ul id="imgUl">
+		<li id="yetiLi"><img class="drag_yeti4" src="../yeti4.png" draggable ="true" ondragstart ="drag(event)" onmousedown="createImgId(this.classList[0])"></li>
+		<li id="blankLi"><img class="drag_blank" src="../blank.png" draggable ="true" ondragstart ="drag(event)" onmousedown="createImgId(this.classList[0])"></li>
+	</ul>
+
+	<input id="mapMode" type="button" onclick="changeMode()">map edit mode</input>
+
+	<div id="inputRowDivId">
+		<span id="rowSpanId">number of rows</span>
+		<input id="rowInput" type="number">
+	</div>
+
+	<div id="inputColumnDivId">
+		<span id="colSpanId">number of columns</span>
+		<input id="colInput" type="number">
+	</div>
+	<div id="level"></div>
+	<script>
+        function createTableOnInput()
+        {
+            var level = document.getElementById('level');
+
+            while (level.childNodes.length > 0) {
+                level.removeChild(level.lastChild);
+            }
+
+            var nRow = document.getElementById('rowInput');
+            var nColumn = document.getElementById('colInput');
+
+            createTable(nRow.value, nColumn.value);
+        }
+	</script>
+	<input id="sendInput" name="create table" type="button" onclick="createTableOnInput()">create table</input>
+
+
+</body>
+</html>

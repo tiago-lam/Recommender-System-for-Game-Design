@@ -87,7 +87,7 @@ function createRandomAltChaserParameter(parameters)
 function createSpawnPoint(parameters)
 {
     createDivSpanElements('stypeDiv', 'stypeSpan', 'stype');
-    createStypeTerminationSelectList('stypeDiv', 'stypeSelectId');
+    createStypeSelectList('stypeDiv', 'stypeSelectId');
     updateSelectParameter('stypeSelectId', parameters.stype);
     createDivSpanElements('totalDiv', 'totalSpan', 'total');
     createInputNumber('totalDiv', 'number', 0, 100, 0, 'totalInputId');

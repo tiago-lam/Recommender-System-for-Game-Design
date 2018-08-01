@@ -1,0 +1,112 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+
+<script>
+
+function allowDrop(ev) {
+    ev.preventDefault();
+}
+
+function drag(ev) {
+    ev.dataTransfer.setData("key", ev.target.id);
+
+}
+
+function drop(ev) {
+   ev.preventDefault();
+    var data = ev.dataTransfer.getData("key");
+    ev.target.appendChild(document.getElementById(data));
+}
+</script>
+</head>
+	<link rel = "stylesheet" type ="text/css" href ="style.css">
+<body>
+	<ul>
+		<li><img src = "yeti4.png" draggable ="true" ondragstart ="drag(event)" id = "drag1"></li>
+	</ul>
+
+<table id = "myTable">
+<tr>
+<td> 
+	<div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)" ></div> 
+	<div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)" ></div> 
+	<div id="div2" ondrop="drop(event)" ondragover="allowDrop(event)" ></div> 
+	<div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)" ></div> 
+	<div id="div2" ondrop="drop(event)" ondragover="allowDrop(event)" ></div> 
+	<div id="div2" ondrop="drop(event)" ondragover="allowDrop(event)" ></div> 
+</td>
+</tr>
+<tr>
+<td> 
+	<div id="div2" ondrop="drop(event)" ondragover="allowDrop(event)" ></div> 
+	<div id="div2" ondrop="drop(event)" ondragover="allowDrop(event)" ></div> 
+	<div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)" ></div> 
+	<div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)" ></div> 	
+	<div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)" ></div> 
+	<div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)" ></div> 	
+</td>
+</tr>
+<tr id = "clone">
+<td> 
+	<div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)" ></div> 
+	<div id="div2" ondrop="drop(event)" ondragover="allowDrop(event)" ></div> 
+	<div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)" ></div> 
+	<div id="div2" ondrop="drop(event)" ondragover="allowDrop(event)" ></div> 
+	<div id="div2" ondrop="drop(event)" ondragover="allowDrop(event)" ></div> 
+	<div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)" ></div> 		
+</td>
+</tr>
+<tr>
+<td> 
+	<div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)" ></div> 
+	<div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)" ></div> 
+	<div id="div2" ondrop="drop(event)" ondragover="allowDrop(event)" ></div> 
+	<div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)" ></div>
+	<div id="div2" ondrop="drop(event)" ondragover="allowDrop(event)" ></div> 
+	<div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)" ></div> 	 	
+</td>
+</tr>
+<tr>
+<td> 
+	<div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)" ></div> 
+	<div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)" ></div> 
+	<div id="div2" ondrop="drop(event)" ondragover="allowDrop(event)" ></div> 
+	<div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)" ></div> 
+	<div id="div2" ondrop="drop(event)" ondragover="allowDrop(event)" ></div> 
+	<div id="div2" ondrop="drop(event)" ondragover="allowDrop(event)" ></div> 		
+</td>
+</tr>
+</table>
+<br> 
+
+<button onclick="myFunction()">Delete Row</button>
+<button onclick="myCreateFunction()"> Create Row</button>
+
+<script>
+function myCreateFunction() {
+	var table =document.getElementById("myTable");
+	var row = document.getElementById("clone");
+	var clone = row.cloneNode(true); 
+	clone.id = "newID"; 
+	table.appendChild(clone); 
+
+}
+function createRow() {
+	var row = document.createElement('tr'); 
+	var col = document.createElement('td'); 
+	var col2 = document.createElement('td'); 
+	  row.appendChild(col); 
+      row.appendChild(col2); 
+      col.innerHTML = "qwe"; 
+      col2.innerHTML = "rty"; 
+      var table = document.getElementById("clone"); 
+
+}
+function myFunction() {
+    document.getElementById("myTable").deleteRow(0);
+}
+</script>
+
+</body>
+</html>

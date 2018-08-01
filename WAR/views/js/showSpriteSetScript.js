@@ -214,4 +214,11 @@ function removeObjectFromTheSpriteSet(obj)
     if (index > -1) {
         spriteSetObj.splice(index, 1);
     }
+
+
+    //todo - remove from mapIdentifierToObject
+    var index = spriteNameCollection.indexOf(obj.identifier);
+    if (index > -1) {
+        spriteNameCollection.splice(index, 1);
+    }
 }
