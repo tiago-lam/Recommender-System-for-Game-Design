@@ -26,7 +26,6 @@ function updateObj() {
 
     verified = [];
     console.log(mapChildToParent);
-    console.log(spriteSetObj);
 }
 
 /**

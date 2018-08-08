@@ -56,14 +56,11 @@ function buildTheSpriteSet(spriteSetObj, ulElement) {
 xmlhttp.onreadystatechange = function() {
 
     if (this.readyState == 4 && this.status == 200) {
+
         console.log(this.responseText);
         spriteSetObj = JSON.parse(this.responseText);
         console.log(spriteSetObj);
-        buildTheSpriteSet(spriteSetObj, spriteListUl);
-        console.log(spriteNameCollection);
-        activateHierarchyListSort();
-        getObjectForUpdatingOnMouseClick();
-        updateObjectsAfterListChange();
+        structureTheSpriteSetOnHtml();
     }
 };
 /**
@@ -71,6 +68,15 @@ xmlhttp.onreadystatechange = function() {
  */
 xmlhttp.open("GET", "http://localhost:9001/spriteSet", true);
 xmlhttp.send();
+
+function structureTheSpriteSetOnHtml()
+{
+    buildTheSpriteSet(spriteSetObj, spriteListUl);
+    console.log(spriteNameCollection);
+    activateHierarchyListSort();
+    getObjectForUpdatingOnMouseClick();
+    updateObjectsAfterListChange();
+}
 
 /**
  * Basically activates the nestable library
@@ -117,8 +123,16 @@ function getObjectData(obj, upperUl)
 
     if("img" in parameters)
     {
-        var imgPathForUrlCreation = parameters["img"] + ".png";
-        fetchBlob(imgPathForUrlCreation, imgSrc);
+        var imgPathForUrlCreation;
+
+        if(parameters['img'].includes(".png")) {
+            imgPathForUrlCreation = parameters["img"];
+        }
+        else
+        {
+            imgPathForUrlCreation = parameters["img"] + ".png";
+        }
+        imgSrc.src = imgPathForUrlCreation;
     }
 
     var li = document.createElement("li");
@@ -153,6 +167,12 @@ function getObjectData(obj, upperUl)
             getObjectData(innerCurrentObj, innerOl);
             li.appendChild(innerOl);
         }
+
+        // return Promise.all(objChildren.map(new Promise(function() {
+        //
+        //     apChildToParent.set(innerCurrentObj.identifier, currentObj.identifier);
+        //     getObjectData(innerCurrentObj, innerOl);
+        //     li.append(innerOl)})));
     }
 }
 
@@ -187,9 +207,7 @@ function fetchBlob(imgPath, imgElement) {
             alert('Network request for "' + product.name + '" image failed with response ' +     request.status + ': ' + request. statusText);
         }
     };
-
     request.send();
-
 }
 
 /**

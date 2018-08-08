@@ -8,6 +8,7 @@ import _.utils.Utils;
 import core.Node;
 import core.VGDLParser;
 import core.content.InteractionContent;
+import core.content.MappingContent;
 import core.content.SpriteContent;
 import core.content.TerminationContent;
 import tools.IO;
@@ -105,6 +106,26 @@ public class ParserGameDescription extends VGDLParser{
 			terminationArray.add(terminationObj);
 		}
 		return terminationArray;
+	}
+	
+	public JSONObject parseLevelMappingSet(Node n)
+	{
+		JSONObject mappingObject = new JSONObject();
+		ArrayList<Node> mappingNodes = n.children;
+		for(Node node : mappingNodes)
+		{
+			MappingContent mappingContent = (MappingContent) node.content;
+			String mappingComponent = mappingContent.line.replace(mappingContent.identifier + " > ", "");
+			String [] mappedComponents = mappingComponent.split(" ");
+			JSONArray mappedArray = new JSONArray();
+			JSONObject mappedObject = new JSONObject();
+			for(int i = 0; i < mappedComponents.length; i++)
+			{
+				mappedArray.add(mappedComponents[i]);
+			}
+			mappingObject.put(mappingContent.identifier, mappedArray);
+		}
+		return mappingObject;
 	}
 
 	/**

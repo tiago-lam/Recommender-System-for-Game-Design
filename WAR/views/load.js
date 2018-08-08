@@ -1,5 +1,12 @@
 var xmlhttp = new XMLHttpRequest();
-var counter = 0;
+
+var gotJSON = (responseText) =>{
+
+            console.log(responseText);
+            spriteSetObj = JSON.parse(responseText);
+            console.log(spriteSetObj);
+
+               return spriteSetObj; }
 /**
  * The sprite set obj
  */
@@ -13,6 +20,7 @@ function buildTheSpriteSet(spriteSetObj) {
         getObjectData(spriteSetObj[i], ulElement);
     }
 
+    return spriteSetObj;
 }
 
 /**
@@ -21,15 +29,26 @@ function buildTheSpriteSet(spriteSetObj) {
 xmlhttp.onreadystatechange = function() {
 
     if (this.readyState == 4 && this.status == 200) {
-        console.log(this.responseText);
-        spriteSetObj = JSON.parse(this.responseText);
-        console.log(spriteSetObj);
-        buildTheSpriteSet(spriteSetObj);
+        var response = this.responseText;
+
+        new Promise( function(resolve, reject){
+
+            resolve(
+            gotJSON(response))})
+
+                .then(
+                        (buildTheSpriteSet))
+
+                .then
+                    (fillHorizontalList);
     }
 };
 
 xmlhttp.open("GET", "http://localhost:8001/json", true);
 xmlhttp.send();
+
+
+
 
 function getObjectData(spriteSet, upperUl)
 {
@@ -39,18 +58,20 @@ function getObjectData(spriteSet, upperUl)
 
     var img = document.createElement('img');
     img.id = spriteSet['name'];
-    fetchBlob(spriteSet['img'], img);
+    // fetchBlob(spriteSet['img'], img);
+    img.src = spriteSet['img'];
 
     upperUl.appendChild(img);
 }
 
 function fillHorizontalList(spriteSet)
 {
+    console.log(spriteSet);
     var ulHorizontalElement = document.getElementById('horizontalImageList');
     for(var i = 0; i < spriteSet.length; i++)
     {
         var img = document.createElement('img');
-        img.src = document.getElementById(spriteSet[i].name).src;
+        img.src = spriteSet[i].img;
         ulHorizontalElement.append(img);
     }
 }
@@ -73,20 +94,10 @@ function fetchBlob(imgPath, imgElement) {
             var blob = request.response;
             objectURL = URL.createObjectURL(blob);
             // invoke showProduct
+            imgElement.src = objectURL;
 
         } else {
             alert('Network request for "' + product.name + '" image failed with response ' +     request.status + ': ' + request. statusText);
-        }
-
-        if(request.readyState == 4)
-        {
-            counter++;
-            imgElement.src = objectURL;
-        }
-
-        if(counter == 3)
-        {
-            fillHorizontalList(spriteSetObj);
         }
     };
 

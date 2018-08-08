@@ -20,6 +20,8 @@ public class ContextualServer {
         spriteSerialize.addServletWithMapping(GetImages.class, "/imgs");
         spriteSerialize.addServletWithMapping(Processing.class, "/processing");
         spriteSerialize.addServletWithMapping(UploadImage.class, "/uploadImage");
+        spriteSerialize.addServletWithMapping(LevelMatrix.class, "/levelMatrix");
+        spriteSerialize.addServletWithMapping(LevelMapping.class, "/levelMapping");
 
         ResourceHandler resource_handler = new ResourceHandler();
         resource_handler.setDirectoriesListed(true);
@@ -30,7 +32,8 @@ public class ContextualServer {
         				"WAR/views/js/showSpriteSetScript.js",
         				"WAR/views/css/spriteSetStyle.css",
         				"WAR/views/css/panelLayout.css",
-        				"WAR/views/css/inspectorStyles.css"
+        				"WAR/views/css/inspectorStyles.css",
+        				"sprites/"
         		});
         resource_handler.setResourceBase(".");
 

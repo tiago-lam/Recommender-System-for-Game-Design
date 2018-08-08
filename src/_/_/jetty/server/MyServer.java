@@ -23,6 +23,7 @@ public class MyServer
         resource_handler.setWelcomeFiles(new String[]
         		{ 
         				"WAR/views/entryPoint.html",
+        				"sprites/"
         		});
         resource_handler.setResourceBase(".");
 

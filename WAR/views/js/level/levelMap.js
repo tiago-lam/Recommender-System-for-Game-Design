@@ -2,12 +2,15 @@ var parentId = '';
 var paintMode = true;
 
 var imgSrc = '';
-var imgLogicClass = '';
+var imgLogicClass = [];
 
 function extractImageFrom(ev) {
     var img = document.createElement('img');
     img.id = "drag_" + ev.target.id;
-    img.classList.add(imgLogicClass);
+    for(var j = 0; j < imgLogicClass.length; j++)
+    {
+        img.classList.add(imgLogicClass[j]);
+    }
     img.src = imgSrc;
     img.draggable = true;
     img.setAttribute('ondragstart', "drag(event)");
@@ -37,7 +40,10 @@ function allowDrop(ev) {
 function drag(ev) {
     ev.dataTransfer.setData("key", ev.target.id);
     imgSrc = ev.target.src;
-    imgLogicClass = ev.target.classList[0];
+    for(var i = 0; i < ev.target.classList.length; i++)
+    {
+        imgLogicClass[i] = ev.target.classList[i];
+    }
     parentId = ev.target.parentNode.id;
 }
 
@@ -59,9 +65,13 @@ function drop(ev) {
             newImg.draggable = true;
             newImg.setAttribute('ondragstart', "drag(event)");
             newImg.setAttribute('onmousedown', "createImgId(this.classList[0])");
-            newImg.classList.add(img.classList[0]);
 
-            var ul = document.getElementById('imgUl');
+            for(var i = 0; i < img.classList.length; i++)
+            {
+                newImg.classList.add(img.classList[i]);
+            }
+
+            var ul = document.getElementById('imageListUl');
 
             var liCollection = ul.getElementsByTagName('li');
 
@@ -128,20 +138,71 @@ function changeMode()
 function createImgList()
 {
     var spriteSetContainer = document.getElementById('spriteList');
-    var imgCollection = spriteSetContainer.getElementsByTagName('img');
-    for (var i = 0; i < imgCollection.length; i++)
+    console.log(spriteSetContainer);
+
+    for (var i = 0; i < spriteSetObj.length; i++)
     {
+        configureImages(spriteSetObj[i]);
+    }
+}
+
+function configureImages(sprite)
+{
         var li = document.createElement('li');
-        li.id = imgCollection[i].id + 'Li';
+        li.id = sprite.identifier + 'DragLi';
         var imgCopy = document.createElement('img');
-        imgCopy.src = imgCollection[i].src;
-        imgCopy.id = imgCollection[i].id;
+        var imgPath = sprite.parameters["img"];
+        if(imgPath != undefined && !imgPath.includes(".png"))
+        {
+            imgPath = imgPath + ".png";
+        }
+        imgCopy.src = imgPath;
+        imgCopy.id = sprite.identifier + "DragImgId";
         imgCopy.draggable = true;
-        imgCopy.setAttribute('ondragstart', "drag(event)");
-        imgCopy.setAttribute('onmousedown', "createImgId(this.classList[0])");
         imgCopy.classList.add('drag_' + imgCopy.id);
 
-        li.append(imgCopy);
-        document.getElementById('imageListUl').append(li);
+        var symbol = String(getSymbol(sprite.identifier));
+        if(symbol != "")
+        {
+            imgCopy.classList.add(symbol);
+        }
+        imgCopy.setAttribute('ondragstart', "drag(event)");
+        imgCopy.setAttribute('onmousedown', "createImgId(this.classList[0])");
+
+        if("img" in sprite.parameters) {
+            li.append(imgCopy);
+            document.getElementById('imageListUl').append(li);
+        }
+
+
+        if(sprite.children.length > 0)
+        {
+            for(var i = 0; i < sprite.children.length; i++)
+            {
+                configureImages(sprite.children[i]);
+            }
+        }
+}
+
+function getSymbol(identifier)
+{
+    for(key in mappingObj)
+    {
+        if(mappingObj[key].length > 1)
+        {
+            if(mappingObj[key][1] == identifier)
+            {
+                return key;
+            }
+        }
+        else
+        {
+            if(mappingObj[key][0] == identifier)
+            {
+                return key;
+            }
+        }
     }
+
+    return "";
 }

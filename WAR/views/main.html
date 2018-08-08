@@ -12,6 +12,7 @@
     <link rel="stylesheet" type="text/css" href="css/interaction.css">
     <link rel="stylesheet" type="text/css" href="css/termination.css">
     <link rel="stylesheet" type="text/css" href="css/levelMap.css">
+    <link rel="stylesheet" type="text/css" href="css/tabs/tabs.css">
 
 	<title>Sprite Set</title>
 </head>
@@ -22,173 +23,213 @@
 
     <script src="js/refreshSpriteSet.js"></script>
 
-    <div id="levelDivId">
-        <ul id="imageListUl"></ul>
-        <div id="inputRowDivId">
-            <span id="rowSpanId">number of rows</span>
-            <input id="rowInput" type="number">
-        </div>
+    <div class="tabbed" id="levelDivId">
+        <input type="radio" name="tabs" id="levelMap" checked>
+        <label for="levelMap">Level Map</label>
+        <input type="radio" name="tabs" id="spriteSet">
+        <label for="spriteSet">Sprite Set</label>
+        <input type="radio" name="tabs" id="interactionSet">
+        <label for="interactionSet">Interaction Set</label>
+        <input type="radio" name="tabs" id="terminationSet">
+        <label for="terminationSet">Termination Set</label>
 
-        <div id="inputColumnDivId">
-            <span id="colSpanId">number of columns</span>
-            <input id="colInput" type="number">
-        </div>
-        <div id="level"></div>
-
-        <script>
-            function createTableOnInput()
-            {
-                var level = document.getElementById('level');
-
-                while (level.childNodes.length > 0) {
-                    level.removeChild(level.lastChild);
-                }
-
-                var nRow = document.getElementById('rowInput');
-                var nColumn = document.getElementById('colInput');
-
-                createTable(nRow.value, nColumn.value);
-                createImgList();
-            }
-        </script>
-        <input id="sendInput" name="create table" type="button" onclick="createTableOnInput()">create table</input>
-        <input id="sendInput" name="create table" type="button" onclick="changeMode()">paint mode</input>
-    </div>
-
-    <div class="dd" id="spriteSetContainer" oncontextmenu="return false">
-	   <ul id="spriteList"></ul>
-    </div><!--End div spriteSetContainer-->
-
-    <div id="inspector">
-      <p id="name">1</p> <img id="image" src="">
-
-        <div id="analogueParameters">
-
-            <div id="shrinkFactor" class="contentSliders">
-                <label id="shrinkLabel" for="shrinkLabel">Shrink Factor: <span id="shrinkValue">0.5</span></label>
-                <input class="bars sliders" type="range" min="0.0" max="1.0" value="0.5" step="0.1" class="slider" id="shrinkControl" oninput="updateShrinkValue(this.value, updateObjParamValue)">
-            </div>
-
-            <div id="speed" class="contentSliders">
-                <label id="speedLabel" for="speedLabel">Speed: <span id="speedValue">5</span></label>
-                <input class="bars sliders" type="range" min="0.0" max="10.0" value="1.0" step="0.05" class="slider" id="speedControl" oninput="updateSpeedValue(this.value, updateObjParamValue)">
-            </div>
-
-            <div id="cooldown" class="contentSliders">
-                <label id="cooldownLabel" for="cooldownLabel">cooldown: <span id="cooldownValue">5</span></label>
-                <input class="bars sliders" type="range" min="1" max="10" value="1" step="1" class="slider" id="cooldownControl" oninput="updateCooldownValue(this.value, updateObjParamValue)">
-            </div>
-        </div><!-- end div anologue parameters -->
-
-        <!--<div id="staticParameters">-->
-
-                <div id="invisible">
-                    <div class="toggle_switch">
-                        <span class="checkBoxSpan">Invisible</span>
-                        <input id="invisibleCheckBoxId" type="checkbox" class="switch_3" oninput="updateInvisibleValue(this.checked, updateObjParamValue)">
-                        <svg class="checkbox" xmlns="http://www.w3.org/2000/svg" style="isolation:isolate" viewBox="0 0 168 80">
-                            <path class="outer-ring" d="M41.534 9h88.932c17.51 0 31.724 13.658 31.724 30.482 0 16.823-14.215 30.48-31.724 30.48H41.534c-17.51 0-31.724-13.657-31.724-30.48C9.81 22.658 24.025 9 41.534 9z" fill="none" stroke="#233043" stroke-width="3" stroke-linecap="square" stroke-miterlimit="3"/>
-                            <path class="is_checked" d="M17 39.482c0-12.694 10.306-23 23-23s23 10.306 23 23-10.306 23-23 23-23-10.306-23-23z"/>
-                            <path class="is_unchecked" d="M132.77 22.348c7.705 10.695 5.286 25.617-5.417 33.327-2.567 1.85-5.38 3.116-8.288 3.812 7.977 5.03 18.54 5.024 26.668-.83 10.695-7.706 13.122-22.634 5.418-33.33-5.855-8.127-15.88-11.474-25.04-9.23 2.538 1.582 4.806 3.676 6.66 6.25z"/>
-                        </svg>
+        <div class="tabs">
+            <div><h2>Level Map</h2>
+                <div>
+                    <ul id="imageListUl"></ul>
+                    <div id="inputRowDivId">
+                        <span id="rowSpanId">number of rows</span>
+                        <input id="rowInput" type="number">
                     </div>
+                    <div id="inputColumnDivId">
+                        <span id="colSpanId">number of columns</span>
+                        <input id="colInput" type="number">
+                    </div>
+                    <div id="level"></div>
+                    <!--<input id="sendInput" name="create table" type="button" onclick="createTableOnInput()">create table</input>-->
+                    <!--<input id="sendInput" name="create table" type="button" onclick="changeMode()">paint mode</input>-->
                 </div>
-                <div id="singleton">
-                    <div class="toggle_switch">
-                        <span class="checkBoxSpan">Singleton</span>
-                        <input id="singletonCheckBoxId" type="checkbox" class="switch_3" oninput="updateSingletonValue(this.checked, updateObjParamValue)">
-                        <svg class="checkbox" xmlns="http://www.w3.org/2000/svg" style="isolation:isolate" viewBox="0 0 168 80">
-                            <path class="outer-ring" d="M41.534 9h88.932c17.51 0 31.724 13.658 31.724 30.482 0 16.823-14.215 30.48-31.724 30.48H41.534c-17.51 0-31.724-13.657-31.724-30.48C9.81 22.658 24.025 9 41.534 9z" fill="none" stroke="#233043" stroke-width="3" stroke-linecap="square" stroke-miterlimit="3"/>
-                            <path class="is_checked" d="M17 39.482c0-12.694 10.306-23 23-23s23 10.306 23 23-10.306 23-23 23-23-10.306-23-23z"/>
-                            <path class="is_unchecked" d="M132.77 22.348c7.705 10.695 5.286 25.617-5.417 33.327-2.567 1.85-5.38 3.116-8.288 3.812 7.977 5.03 18.54 5.024 26.668-.83 10.695-7.706 13.122-22.634 5.418-33.33-5.855-8.127-15.88-11.474-25.04-9.23 2.538 1.582 4.806 3.676 6.66 6.25z"/>
-                        </svg>
+            </div>
+
+            <div><h2>Sprite Set</h2>
+
+                <div class="dd" id="spriteSetContainer" oncontextmenu="return false">
+                    <ul id="spriteList"></ul>
+                </div><!--End div spriteSetContainer-->
+
+                <div id="inspector">
+                    <p id="name">1</p> <img id="image" src="">
+
+                    <div id="analogueParameters">
+
+                        <div id="shrinkFactor" class="contentSliders">
+                            <label id="shrinkLabel" for="shrinkLabel">Shrink Factor: <span id="shrinkValue">0.5</span></label>
+                            <input class="bars sliders" type="range" min="0.0" max="1.0" value="0.5" step="0.1" class="slider" id="shrinkControl" oninput="updateShrinkValue(this.value, updateObjParamValue)">
+                        </div>
+
+                        <div id="speed" class="contentSliders">
+                            <label id="speedLabel" for="speedLabel">Speed: <span id="speedValue">5</span></label>
+                            <input class="bars sliders" type="range" min="0.0" max="10.0" value="1.0" step="0.05" class="slider" id="speedControl" oninput="updateSpeedValue(this.value, updateObjParamValue)">
+                        </div>
+
+                        <div id="cooldown" class="contentSliders">
+                            <label id="cooldownLabel" for="cooldownLabel">cooldown: <span id="cooldownValue">5</span></label>
+                            <input class="bars sliders" type="range" min="1" max="10" value="1" step="1" class="slider" id="cooldownControl" oninput="updateCooldownValue(this.value, updateObjParamValue)">
+                        </div>
+                    </div><!-- end div anologue parameters -->
+
+                    <!--<div id="staticParameters">-->
+
+                    <div id="invisible">
+                        <div class="toggle_switch">
+                            <span class="checkBoxSpan">Invisible</span>
+                            <input id="invisibleCheckBoxId" type="checkbox" class="switch_3" oninput="updateInvisibleValue(this.checked, updateObjParamValue)">
+                            <svg class="checkbox" xmlns="http://www.w3.org/2000/svg" style="isolation:isolate" viewBox="0 0 168 80">
+                                <path class="outer-ring" d="M41.534 9h88.932c17.51 0 31.724 13.658 31.724 30.482 0 16.823-14.215 30.48-31.724 30.48H41.534c-17.51 0-31.724-13.657-31.724-30.48C9.81 22.658 24.025 9 41.534 9z" fill="none" stroke="#233043" stroke-width="3" stroke-linecap="square" stroke-miterlimit="3"/>
+                                <path class="is_checked" d="M17 39.482c0-12.694 10.306-23 23-23s23 10.306 23 23-10.306 23-23 23-23-10.306-23-23z"/>
+                                <path class="is_unchecked" d="M132.77 22.348c7.705 10.695 5.286 25.617-5.417 33.327-2.567 1.85-5.38 3.116-8.288 3.812 7.977 5.03 18.54 5.024 26.668-.83 10.695-7.706 13.122-22.634 5.418-33.33-5.855-8.127-15.88-11.474-25.04-9.23 2.538 1.582 4.806 3.676 6.66 6.25z"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div id="singleton">
+                        <div class="toggle_switch">
+                            <span class="checkBoxSpan">Singleton</span>
+                            <input id="singletonCheckBoxId" type="checkbox" class="switch_3" oninput="updateSingletonValue(this.checked, updateObjParamValue)">
+                            <svg class="checkbox" xmlns="http://www.w3.org/2000/svg" style="isolation:isolate" viewBox="0 0 168 80">
+                                <path class="outer-ring" d="M41.534 9h88.932c17.51 0 31.724 13.658 31.724 30.482 0 16.823-14.215 30.48-31.724 30.48H41.534c-17.51 0-31.724-13.657-31.724-30.48C9.81 22.658 24.025 9 41.534 9z" fill="none" stroke="#233043" stroke-width="3" stroke-linecap="square" stroke-miterlimit="3"/>
+                                <path class="is_checked" d="M17 39.482c0-12.694 10.306-23 23-23s23 10.306 23 23-10.306 23-23 23-23-10.306-23-23z"/>
+                                <path class="is_unchecked" d="M132.77 22.348c7.705 10.695 5.286 25.617-5.417 33.327-2.567 1.85-5.38 3.116-8.288 3.812 7.977 5.03 18.54 5.024 26.668-.83 10.695-7.706 13.122-22.634 5.418-33.33-5.855-8.127-15.88-11.474-25.04-9.23 2.538 1.582 4.806 3.676 6.66 6.25z"/>
+                            </svg>
                         </div>
                     </div>
 
-                <div id="rotateInPlace">
-                    <div class="toggle_switch">
-                        <span class="checkBoxSpan">Rotate In Place</span>
-                        <input id="rotateCheckBoxId" type="checkbox" class="switch_3" oninput="updateRotateValue(this.checked, updateObjParamValue)">
-                        <svg class="checkbox" xmlns="http://www.w3.org/2000/svg" style="isolation:isolate" viewBox="0 0 168 80">
-                            <path class="outer-ring" d="M41.534 9h88.932c17.51 0 31.724 13.658 31.724 30.482 0 16.823-14.215 30.48-31.724 30.48H41.534c-17.51 0-31.724-13.657-31.724-30.48C9.81 22.658 24.025 9 41.534 9z" fill="none" stroke="#233043" stroke-width="3" stroke-linecap="square" stroke-miterlimit="3"/>
-                            <path class="is_checked" d="M17 39.482c0-12.694 10.306-23 23-23s23 10.306 23 23-10.306 23-23 23-23-10.306-23-23z"/>
-                            <path class="is_unchecked" d="M132.77 22.348c7.705 10.695 5.286 25.617-5.417 33.327-2.567 1.85-5.38 3.116-8.288 3.812 7.977 5.03 18.54 5.024 26.668-.83 10.695-7.706 13.122-22.634 5.418-33.33-5.855-8.127-15.88-11.474-25.04-9.23 2.538 1.582 4.806 3.676 6.66 6.25z"/>
-                        -</svg>
+                    <div id="rotateInPlace">
+                        <div class="toggle_switch">
+                            <span class="checkBoxSpan">Rotate In Place</span>
+                            <input id="rotateCheckBoxId" type="checkbox" class="switch_3" oninput="updateRotateValue(this.checked, updateObjParamValue)">
+                            <svg class="checkbox" xmlns="http://www.w3.org/2000/svg" style="isolation:isolate" viewBox="0 0 168 80">
+                                <path class="outer-ring" d="M41.534 9h88.932c17.51 0 31.724 13.658 31.724 30.482 0 16.823-14.215 30.48-31.724 30.48H41.534c-17.51 0-31.724-13.657-31.724-30.48C9.81 22.658 24.025 9 41.534 9z" fill="none" stroke="#233043" stroke-width="3" stroke-linecap="square" stroke-miterlimit="3"/>
+                                <path class="is_checked" d="M17 39.482c0-12.694 10.306-23 23-23s23 10.306 23 23-10.306 23-23 23-23-10.306-23-23z"/>
+                                <path class="is_unchecked" d="M132.77 22.348c7.705 10.695 5.286 25.617-5.417 33.327-2.567 1.85-5.38 3.116-8.288 3.812 7.977 5.03 18.54 5.024 26.668-.83 10.695-7.706 13.122-22.634 5.418-33.33-5.855-8.127-15.88-11.474-25.04-9.23 2.538 1.582 4.806 3.676 6.66 6.25z"/>
+                                -</svg>
+                        </div>
                     </div>
+                    <!--</div>-->
+                    <div id="divSelect">
+                        <span class="checkBoxSpan spanCenteredText">Orientation</span>
+                        <div class="styled-select blue rounded">
+                            <select id="orientationSelectId" oninput="updateOrientationSelectValue(this.selectedIndex, updateObjParamValue)">
+                                <option value="NONE">None</option>
+                                <option value="LEFT">Left</option>
+                                <option value="RIGHT">Right</option>
+                                <option value="UP">Up</option>
+                                <option value="DOWN">Down</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div id="divSpecialParameters">
+                        <!--<span id="refClassSpanId" class="checkBoxSpan">Regular</span>-->
+                        <div id="refClassDivId">
+                            <select id="refClassSelectId" onchange="updateParametersOfTheReferenceClass(retrieveObjectByTarget(document.getElementById('name').innerText) ,this.value)">
+                                <option value="Regular">Regular</option>
+                                <option value="Immovable">Immovable</option>
+                                <option value="Passive">Passive</option>
+                                <option value="ShootAvatar">ShootAvatar</option>
+                                <option value="FlakAvatar">FlakAvatar</option>
+                                <option value="Flicker">Flicker</option>
+                                <option value="OrientedFlicker">OrientedFlicker</option>
+                                <option value="Missile">Missile</option>
+                                <option value="RandomMissile">RandomMissile</option>
+                                <option value="RandomNPC">RandomNPC</option>
+                                <option value="Chaser">Chaser</option>
+                                <option value="Fleeing">Fleeing</option>
+                                <option value="AlternateChaser">AlternateChaser</option>
+                                <option value="RandomPathAltChaser">RandomPathAltChaser</option>
+                                <option value="SpawnPoint">SpawnPoint</option>
+                                <option value="Bomber">Bomber</option>
+                                <option value="RandomBomber">RandomBomber</option>
+                                <option value="Spreader">Spreader</option>
+                                <option value="Door">Door</option>
+                                <option value="Portal">Portal</option>
+                                <option value="Resource">Resource</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div id="divButtonConfirm">
+                        <button id="inputButtonConfirmId" type="button" onclick="action(spriteSetObj)">Confirm</button>
+                    </div>
+
+                </div><!--End div inspector-->
+
+            </div>
+
+            <div><h2>Interaction Set</h2>
+
+                <div id="interactionSetContainer">
+                    <ul id="interactionList"></ul>
                 </div>
-                <!--</div>-->
-        <div id="divSelect">
-            <span class="checkBoxSpan spanCenteredText">Orientation</span>
-            <div class="styled-select blue rounded">
-                <select id="orientationSelectId" oninput="updateOrientationSelectValue(this.selectedIndex, updateObjParamValue)">
-                    <option value="NONE">None</option>
-                    <option value="LEFT">Left</option>
-                    <option value="RIGHT">Right</option>
-                    <option value="UP">Up</option>
-                    <option value="DOWN">Down</option>
-                </select>
+
+                <div hidden id="interactionInspector">
+
+                    <div id="interactionSprite1Div"></div>
+
+                    <div id="interactionDiv"></div>
+
+                    <div id="spritesToInteractDiv"></div>
+
+                </div>
+
             </div>
-        </div>
 
-        <div id="divSpecialParameters">
-            <!--<span id="refClassSpanId" class="checkBoxSpan">Regular</span>-->
-            <div id="refClassDivId">
-                <select id="refClassSelectId" onchange="updateParametersOfTheReferenceClass(retrieveObjectByTarget(document.getElementById('name').innerText) ,this.value)">
-                    <option value="Regular">Regular</option>
-                    <option value="Immovable">Immovable</option>
-                    <option value="Passive">Passive</option>
-                    <option value="ShootAvatar">ShootAvatar</option>
-                    <option value="FlakAvatar">FlakAvatar</option>
-                    <option value="Flicker">Flicker</option>
-                    <option value="OrientedFlicker">OrientedFlicker</option>
-                    <option value="Missile">Missile</option>
-                    <option value="RandomMissile">RandomMissile</option>
-                    <option value="RandomNPC">RandomNPC</option>
-                    <option value="Chaser">Chaser</option>
-                    <option value="Fleeing">Fleeing</option>
-                    <option value="AlternateChaser">AlternateChaser</option>
-                    <option value="RandomPathAltChaser">RandomPathAltChaser</option>
-                    <option value="SpawnPoint">SpawnPoint</option>
-                    <option value="Bomber">Bomber</option>
-                    <option value="RandomBomber">RandomBomber</option>
-                    <option value="Spreader">Spreader</option>
-                    <option value="Door">Door</option>
-                    <option value="Portal">Portal</option>
-                    <option value="Resource">Resource</option>
-                </select>
+            <div><h2>Termination Set</h2>
+
+                <div id="terminationContainer">
+                    <ul id="terminationList"></ul>
+                </div>
+
+                <div id="terminationInspector">
+
+                    <div id="terminationSelectDiv"></div>
+
+                </div>
+
             </div>
+
         </div>
-        <div id="divButtonConfirm">
-            <button id="inputButtonConfirmId" type="button" onclick="action(spriteSetObj)">Confirm</button>
-        </div>
-
-        </div><!--End div inspector-->
-
-    <div hidden id="interactionSetContainer">
-        <ul id="interactionList"></ul>
-    </div>
-
-    <div hidden id="interactionInspector">
-
-        <div id="interactionSprite1Div"></div>
-
-        <div id="interactionDiv"></div>
-
-        <div id="spritesToInteractDiv"></div>
-
-    </div>
-
-    <div hidden id="terminationContainer">
-        <ul id="terminationList"></ul>
-    </div>
-
-    <div hidden id="terminationInspector">
-
-        <div id="terminationSelectDiv"></div>
-
     </div>
 
 
+
+
+
+
+        <!--<script>-->
+            <!--function createTableOnInput()-->
+            <!--{-->
+                <!--var level = document.getElementById('level');-->
+
+                <!--while (level.childNodes.length > 0) {-->
+                    <!--level.removeChild(level.lastChild);-->
+                <!--}-->
+
+                <!--var nRow = document.getElementById('rowInput');-->
+                <!--var nColumn = document.getElementById('colInput');-->
+
+                <!--createTable(nRow.value, nColumn.value);-->
+                <!--createImgList();-->
+            <!--}-->
+        <!--</script>-->
+
+
+
+
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.6/prefixfree.min.js"></script>
+    <script type="text/javascript" src="js/nestable/nestable.js"></script>
+    <script type="text/javascript" src="js/mapping/mapping.js"></script>
     <script type="text/javascript" src="js/nestable/nestable.js"></script>
     <script type="text/javascript" src="js/constants/Interactions/interactions.js"></script>
     <script type="text/javascript" src="js/constants/Terminations/terminations.js"></script>
@@ -211,6 +252,7 @@
     <script type="text/javascript" src="js/updateInspectorScript.js"></script>
     <script type="text/javascript" src="js/refreshSpriteSet.js"></script>
     <script type="text/javascript" src="js/level/levelMap.js"></script>
+    <script type="text/javascript" src="js/level/showLevelMap.js"></script>
 
 </body>
 </html>
