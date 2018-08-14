@@ -22,7 +22,7 @@ public class GetTerminationSet extends HttpServlet
                           HttpServletResponse response ) throws ServletException,
                                                         IOException
     {
-		String toSend = getTerminationSetJSONObject("examples/gridphysics/aliens.txt");
+		String toSend = getTerminationSetJSONObject("examples/gridphysics/cakybaky.txt");
 		
     	response.setContentType("text/html");
         response.setStatus(HttpServletResponse.SC_OK);

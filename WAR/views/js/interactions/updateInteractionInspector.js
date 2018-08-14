@@ -64,11 +64,12 @@ function createInteractionSelectList()
 
 function createCheckBoxList()
 {
+    addNoneAndEosOptions();
     var divParent = document.getElementById('spritesToInteractDiv');
-    for (var i = 0; i < spriteNameCollection.length; i++)
-    {
+    for (var i = 0; i < spriteNameCollection.length; i++) {
         var divForCheckBoxContents = document.createElement('div');
         divForCheckBoxContents.id = 'checkBoxContents' + i + 'Id';
+        divForCheckBoxContents.classList.add('checkboxImgDiv');
         var inputCheckBox = document.createElement('input');
         inputCheckBox.type = 'checkbox';
         inputCheckBox.classList.add('interactionCheckBox');
@@ -77,22 +78,28 @@ function createCheckBoxList()
         label.htmlFor = 'inputCheckBox.id';
         label.innerHTML = spriteNameCollection[i];
 
-        var img = document.createElement('img');
-        img.id = 'imgOption' + i + 'Id';
-
-        // var identifier = spriteNameCollection[i];
-        // var imgSprite = document.getElementById('avatar' + "ImgId");
-        // imgSprite = imgs[15];
-        // img.src = imgs[15].src;
-
         inputCheckBox.setAttribute('oninput', 'updateSpritesToInteractList(this.checked, this.id)');
 
         divForCheckBoxContents.append(inputCheckBox);
         divForCheckBoxContents.append(label);
-        divForCheckBoxContents.append(img);
+
+        var obj = mapIdentifierToObject.get(spriteNameCollection[i]);
+        if(obj != undefined) {
+            if ("img" in obj.parameters) {
+                var img = document.createElement('img');
+                img.id = 'imgOption' + i + 'Id';
+                var imgPath = obj.parameters['img'];
+                if (!imgPath.includes('.png')) {
+                    imgPath = imgPath + '.png';
+                }
+                img.src = imgPath;
+                divForCheckBoxContents.append(img);
+            }
+        }
 
         divParent.append(divForCheckBoxContents);
     }
+
 }
 
 function showInfo(interactionObj, interactionElementId)

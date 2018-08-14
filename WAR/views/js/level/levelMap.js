@@ -107,6 +107,7 @@ function createDiv(id)
 function createTable(nRow, nColumn)
 {
     var table = document.createElement('table');
+    table.id = 'gridTableId';
     for (var i = 0; i < nRow; i++)
     {
         var row = document.createElement('tr');
@@ -120,8 +121,49 @@ function createTable(nRow, nColumn)
         table.append(row);
     }
 
-    document.getElementById('level').append(table);
+    document.getElementById('tableGridContainer').append(table);
     console.log("here");
+}
+
+function removeTable()
+{
+    var level = document.getElementById('tableGridContainer');
+    for(var i = 0; i < level.childNodes.length; i++)
+    {
+        if(level.childNodes[i].id == 'gridTableId')
+        {
+            level.removeChild(level.childNodes[i]);
+            return;
+        }
+    }
+}
+
+function createTableByInput()
+{
+    if (confirm("This will override all your level information. Press OK if you want to proceed?"))
+    {
+        removeTable();
+        var nRow = document.getElementById('rowInput').value;
+        var nColumn = document.getElementById('colInput').value;
+
+        var table = document.createElement('table');
+        table.id = 'gridTableId';
+        for (var i = 0; i < nRow; i++)
+        {
+            var row = document.createElement('tr');
+            for (var j = 0; j < nColumn; j++)
+            {
+                var column = document.createElement('td');
+                var div = createDiv(i + " " + j);
+                column.append(div);
+                row.append(column);
+            }
+            table.append(row);
+        }
+
+        document.getElementById('tableGridContainer').append(table);
+        console.log("here");
+    }
 }
 
 function createImgId(className)
@@ -184,25 +226,124 @@ function configureImages(sprite)
         }
 }
 
+/////////////
+
 function getSymbol(identifier)
 {
-    for(key in mappingObj)
+    var keys = Object.keys(mappingObj);
+    for(var k = 0; k < keys.length; k++)
     {
-        if(mappingObj[key].length > 1)
+        var code = keys[k];
+        if(mappingObj[code].length > 1)
         {
-            if(mappingObj[key][1] == identifier)
+            // if(mappingObj[key][1] == identifier)
+            // {
+            //     return key;
+            // }
+
+            var position = getPositionOfTheLevelBackground(code)
             {
-                return key;
+                if(position == 0)
+                {
+                    if(mappingObj[code][1] == identifier)
+                    {
+                        return code;
+                    }
+                }
+                else if(position == mappingObj[code].length - 1)
+                {
+                    if(mappingObj[code][0] == identifier)
+                    {
+                        return code;
+                    }
+                }
             }
         }
         else
         {
-            if(mappingObj[key][0] == identifier)
+            if(mappingObj[code][0] == identifier)
             {
-                return key;
+                return code;
             }
         }
     }
 
     return "";
+}
+
+function findObjectsWithoutSymbols()
+{
+    for(key in mapIdentifierToObject)
+    {
+        var obj = mapIdentifierToObject.get(key);
+        if('img' in obj.parameters)
+        {
+           if(!doesThisIdentifierHasSymbol(obj.identifier))
+           {
+               appendSymbol();
+           }
+        }
+    }
+}
+
+function doesThisIdentifierHasSymbol(identifier)
+{
+    var symbol = getSymbol(identifier);
+    if(symbol == "")
+    {
+        return true;
+    }
+    return false;
+}
+
+function appendSymbol(identifier)
+{
+    var symbol = symbols[pointer];
+    pointer++;
+    if(doesThisMapHasBackground())
+    {
+        mappingObj.set(symbol, [])
+    }
+}
+
+function doesThisMapHasBackground()
+{
+    for(key in mappingObj)
+    {
+        if(mappingObj[key].length > 1)
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+function getLevelBackgroundIdentifierForThisLevel()
+{
+    for(key in mappingObj)
+    {
+        if(mappingObj[key].length == 1)
+        {
+            return mappingObj[key];
+        }
+    }
+
+    return "this level has no background"
+}
+
+function getPositionOfTheLevelBackground(key)
+{
+    var levelBG = getLevelBackgroundIdentifierForThisLevel();
+
+    if(levelBG != "this level has no background")
+    {
+        var identifiers = mappingObj[key];
+        for(var i = 0; i < identifiers.length; i++)
+        {
+            if(identifiers[i] == levelBG)
+            {
+                return i;
+            }
+        }
+    }return -1;
 }

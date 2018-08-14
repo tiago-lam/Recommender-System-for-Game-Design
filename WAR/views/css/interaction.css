@@ -106,3 +106,29 @@
     width: 45px;
     display: inline-block;
 }
+
+#spritesToInteractDiv
+{
+    display: inline;
+}
+
+.checkboxImgDiv
+{
+    width: 100%;
+    display: block;
+    border: 1px solid black;
+    margin: 4px 0px 0px;
+}
+
+.checkboxImgDiv input
+{
+    margin: 5px;
+}
+
+.checkboxImgDiv img
+{
+    margin: 1% 2% 1px 0px;
+    float: right;
+    height: 100%;
+    width: 11%;
+}

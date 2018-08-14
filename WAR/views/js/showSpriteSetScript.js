@@ -72,10 +72,15 @@ xmlhttp.send();
 function structureTheSpriteSetOnHtml()
 {
     buildTheSpriteSet(spriteSetObj, spriteListUl);
-    console.log(spriteNameCollection);
     activateHierarchyListSort();
     getObjectForUpdatingOnMouseClick();
     updateObjectsAfterListChange();
+}
+
+function addNoneAndEosOptions()
+{
+    spriteNameCollection.push("none");
+    spriteNameCollection.push("EOS");
 }
 
 /**
@@ -233,10 +238,5 @@ function removeObjectFromTheSpriteSet(obj)
         spriteSetObj.splice(index, 1);
     }
 
-
-    //todo - remove from mapIdentifierToObject
-    var index = spriteNameCollection.indexOf(obj.identifier);
-    if (index > -1) {
-        spriteNameCollection.splice(index, 1);
-    }
+    mapIdentifierToObject.delete(obj.identifier);
 }

@@ -20,7 +20,7 @@ public class LevelMatrix extends HttpServlet
                           HttpServletResponse response ) throws ServletException,
                                                         IOException
     {
-		String toSend = getLevelMatrixJSONObject("examples/gridphysics/aliens_lvl0.txt");
+		String toSend = getLevelMatrixJSONObject("examples/gridphysics/cakybaky_lvl0.txt");
 		
     	response.setContentType("text/html");
         response.setStatus(HttpServletResponse.SC_OK);

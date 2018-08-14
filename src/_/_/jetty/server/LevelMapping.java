@@ -20,7 +20,7 @@ public class LevelMapping extends HttpServlet
                           HttpServletResponse response ) throws ServletException,
                                                         IOException
     {
-		String toSend = getLevelMappingJSONObject("examples/gridphysics/aliens.txt");
+		String toSend = getLevelMappingJSONObject("examples/gridphysics/cakybaky.txt");
 		
     	response.setContentType("text/html");
         response.setStatus(HttpServletResponse.SC_OK);

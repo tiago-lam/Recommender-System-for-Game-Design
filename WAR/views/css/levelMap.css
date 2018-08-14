@@ -34,21 +34,78 @@ li {
 }
 
 table {
-    width: 0%;
-    height: 0%;
     border: 1px solid #DC6969;
 }
 
-#levelDivId
-{
+#levelDivId {
     float: left;
-    width: 50%;
+    width: 80%;
 }
 
 #level {
     overflow-y: auto;
     overflow-x: auto;
-    height: 300px;
-    width: 40%;
+    height: 70%;
+    width: 100%;
     float: left;
+    margin-left: 25px;
+}
+
+#imageListDiv {
+    width: 100%;
+}
+
+#imageListUl {
+    float: left;
+}
+
+#imageListUl li {
+    display: inline-block;
+    zoom: 1;
+    margin: 0 0 0 9px;
+    float: left;
+}
+
+#createTableDiv {
+    width: 30%;
+    display: inline-flex;
+    border: 1px solid black;
+    float: left;
+}
+
+#createTableDiv span {
+    float: left;
+}
+
+#paintModeDiv {
+    float: right;
+    width: 10%;
+}
+
+#paintModeInput {
+    width: 25%;
+    border: 1px solid #EA3B3B;
+    float: right;
+}
+
+#createTableDiv label {
+    width: 29%;
+    float: left;
+}
+
+#tableGridContainer {
+    border: 1px solid #161FCB;
+    float: left;
+    margin: 1% 0 0 18%;
+}
+
+#imageListDiv {
+    float: left;
+    margin: 1% 0 0 20%;
+    width: 50%;
+    display: run-in;
+}
+
+#imageListDiv ul {
+    margin: 0px 0px 0px 23%;
 }

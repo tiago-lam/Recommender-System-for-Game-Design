@@ -3,6 +3,8 @@
         * access the serve in order to get the sprite set of a game
         * @type {XMLHttpRequest}
         * */
+        var interactionSetObj;
+
         var xmlHttp = new XMLHttpRequest();
         /**
          * Function responsible for perform the GET response
@@ -12,7 +14,7 @@
             var interactionList = document.getElementById('interactionList');
             if (this.readyState == 4 && this.status == 200) {
                 console.log(this.responseText);
-                var interactionSetObj = JSON.parse(this.responseText);
+                interactionSetObj = JSON.parse(this.responseText);
                 console.log(interactionSetObj);
                 buildTheInteractionSet(interactionSetObj, interactionList);
             }
@@ -71,4 +73,15 @@
         {
             var interactionObj = mapIdToInteraction.get(e);
             showInfo(interactionObj, e);
+        }
+
+        function removeObjectFromTheInteractionSet(obj)
+        {
+            var index = interactionSetObj.indexOf(obj);
+            if (index > -1) {
+                interactionSetObj.splice(index, 1);
+            }
+
+            //todo - we a need a target to get the interaction id from it
+            mapIdToInteraction.delete()
         }

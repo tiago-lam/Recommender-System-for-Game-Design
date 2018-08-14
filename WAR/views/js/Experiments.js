@@ -7,6 +7,16 @@ function addNewSpriteToSpriteSet(spriteSet) {
     spriteSet.unshift(object);
 }
 
+function addNewInteractionToInteractionSet(interactionSet)
+{
+
+}
+
+function addNewTerminationToTerminationSet(interactionSet)
+{
+
+}
+
 function rebuildSpriteSetAndDependencies(spriteSet, upperUl) {
     buildTheSpriteSet(spriteSet, upperUl);
     console.log(spriteSet);

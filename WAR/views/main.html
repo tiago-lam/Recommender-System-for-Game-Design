@@ -36,18 +36,37 @@
         <div class="tabs">
             <div><h2>Level Map</h2>
                 <div>
-                    <ul id="imageListUl"></ul>
-                    <div id="inputRowDivId">
-                        <span id="rowSpanId">number of rows</span>
-                        <input id="rowInput" type="number">
+
+                    <div id="createTableDiv">
+                        <div id="inputRowDivId">
+                            <span id="rowSpanId">number of rows</span>
+                            <input id="rowInput" type="number">
+                        </div>
+                        <div id="inputColumnDivId">
+                            <span id="colSpanId">number of columns</span>
+                            <input id="colInput" type="number">
+                        </div>
+                        <div id="createTableButtonDivId">
+                            <span id="createTableSpanId">Create Level Grid</span>
+                            <input id="createTabeleInputId" type="button" onclick="createTableByInput()">OK</input>
+                        </div>
                     </div>
-                    <div id="inputColumnDivId">
-                        <span id="colSpanId">number of columns</span>
-                        <input id="colInput" type="number">
+
+                    <div id="paintModeDiv">
+                        <input id="paintModeInput" name="paint mode" type="checkbox" onclick="changeMode()">
+                       <label for="paintModeInput">Paint Mode</label>
                     </div>
-                    <div id="level"></div>
+
+                    <div id="level">
+                        <div id="imageListDiv">
+                            <ul id="imageListUl"></ul>
+                        </div>
+                        <div id="tableGridContainer">
+
+                        </div>
+                    </div>
+
                     <!--<input id="sendInput" name="create table" type="button" onclick="createTableOnInput()">create table</input>-->
-                    <!--<input id="sendInput" name="create table" type="button" onclick="changeMode()">paint mode</input>-->
                 </div>
             </div>
 
@@ -170,7 +189,7 @@
                     <ul id="interactionList"></ul>
                 </div>
 
-                <div hidden id="interactionInspector">
+                <div id="interactionInspector">
 
                     <div id="interactionSprite1Div"></div>
 
@@ -198,34 +217,6 @@
 
         </div>
     </div>
-
-
-
-
-
-
-        <!--<script>-->
-            <!--function createTableOnInput()-->
-            <!--{-->
-                <!--var level = document.getElementById('level');-->
-
-                <!--while (level.childNodes.length > 0) {-->
-                    <!--level.removeChild(level.lastChild);-->
-                <!--}-->
-
-                <!--var nRow = document.getElementById('rowInput');-->
-                <!--var nColumn = document.getElementById('colInput');-->
-
-                <!--createTable(nRow.value, nColumn.value);-->
-                <!--createImgList();-->
-            <!--}-->
-        <!--</script>-->
-
-
-
-
-
-
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.6/prefixfree.min.js"></script>
     <script type="text/javascript" src="js/nestable/nestable.js"></script>

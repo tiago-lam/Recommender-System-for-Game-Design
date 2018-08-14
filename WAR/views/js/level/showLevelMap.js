@@ -45,12 +45,15 @@ function drawLevel()
 
         for(var j = 0; j < rowElements.length; j++)
         {
+            //todo - deal with 'w' symbol wall not in the levelMapping
             var symbol = levelMatrixObject.map[i][j];
             var div = document.getElementById(i + " " + j);
             var img = document.getElementsByClassName(symbol)[0];
-            var dropImg = img.cloneNode(true);
-            dropImg.id = 'drag_' + i + ' ' + j;
-            div.appendChild(dropImg);
+            if(img != undefined) {
+                var dropImg = img.cloneNode(true);
+                dropImg.id = 'drag_' + i + ' ' + j;
+                div.appendChild(dropImg);
+            }
         }
     }
 }
