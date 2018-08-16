@@ -1,36 +1,36 @@
-/**
- * access the serve in order to get the level matrix of a game
- * @type {XMLHttpRequest}
- * */
-var xmlhttp = new XMLHttpRequest();
-
-/**
- * The level matrix obj
- */
-var levelMatrixObject;
-
-/**
- * Function responsible for perform the GET response
- */
-xmlhttp.onreadystatechange = function() {
-
-    if (this.readyState == 4 && this.status == 200) {
-
-        levelMatrixObject = JSON.parse(this.responseText);
-        console.log(levelMatrixObject);
-
-        var rows = levelMatrixObject.rows;
-        var columns = levelMatrixObject.columns;
-        createTable(rows, columns);
-        createImgList();
-        drawLevel();
-    }
-};
-/**
- * Prepare and send the GET request to the server
- */
-xmlhttp.open("GET", "http://localhost:9001/levelMatrix", true);
-xmlhttp.send();
+// /**
+//  * access the serve in order to get the level matrix of a game
+//  * @type {XMLHttpRequest}
+//  * */
+// var xmlhttp = new XMLHttpRequest();
+//
+// /**
+//  * The level matrix obj
+//  */
+// var levelMatrixObject;
+//
+// /**
+//  * Function responsible for perform the GET response
+//  */
+// xmlhttp.onreadystatechange = function() {
+//
+//     if (this.readyState == 4 && this.status == 200) {
+//
+//         levelMatrixObject = JSON.parse(this.responseText);
+//         console.log(levelMatrixObject);
+//
+//         var rows = levelMatrixObject.rows;
+//         var columns = levelMatrixObject.columns;
+//         createTable(rows, columns);
+//         createImgList();
+//         drawLevel();
+//     }
+// };
+// /**
+//  * Prepare and send the GET request to the server
+//  */
+// xmlhttp.open("GET", "http://localhost:9001/levelMatrix", true);
+// xmlhttp.send();
 
 /**
  * Draw the map
@@ -57,3 +57,6 @@ function drawLevel()
         }
     }
 }
+
+
+

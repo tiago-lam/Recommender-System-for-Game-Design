@@ -3,30 +3,31 @@
         * access the serve in order to get the sprite set of a game
         * @type {XMLHttpRequest}
         * */
-        var interactionSetObj;
+        // var interactionSetObj;
+        //
+        // var xmlHttp = new XMLHttpRequest();
+        // /**
+        //  * Function responsible for perform the GET response
+        //  */
+        // xmlHttp.onreadystatechange = function() {
+        //
+        //     var interactionList = document.getElementById('interactionList');
+        //     if (this.readyState == 4 && this.status == 200) {
+        //         console.log(this.responseText);
+        //         interactionSetObj = JSON.parse(this.responseText);
+        //         console.log(interactionSetObj);
+        //         buildTheInteractionSet(interactionSetObj, interactionList);
+        //     }
+        // };
+        // /**
+        //  * Prepare and send the GET request to the server -- get the interaction set
+        //  */
+        // xmlHttp.open("GET", "http://localhost:9001/interactionSet", true);
+        // xmlHttp.send();
 
-        var xmlHttp = new XMLHttpRequest();
-        /**
-         * Function responsible for perform the GET response
-         */
-        xmlHttp.onreadystatechange = function() {
-
-            var interactionList = document.getElementById('interactionList');
-            if (this.readyState == 4 && this.status == 200) {
-                console.log(this.responseText);
-                interactionSetObj = JSON.parse(this.responseText);
-                console.log(interactionSetObj);
-                buildTheInteractionSet(interactionSetObj, interactionList);
-            }
-        };
-        /**
-         * Prepare and send the GET request to the server -- get the interaction set
-         */
-        xmlHttp.open("GET", "http://localhost:9001/interactionSet", true);
-        xmlHttp.send();
-
-        function buildTheInteractionSet(interactionObj, unorderedList)
+        function buildTheInteractionSet(interactionObj)
         {
+                var unorderedList = document.getElementById('interactionList');;
                 for(var i = 0; i < interactionObj.length; i++)
                 {
                     var textObj = convertObjectToText(interactionObj[i]);

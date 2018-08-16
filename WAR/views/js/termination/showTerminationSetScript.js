@@ -1,29 +1,30 @@
 var mapIdToTermination = new Map();
-/**
- * access the serve in order to get the sprite set of a game
- * @type {XMLHttpRequest}
- * */
-var xmlHttp = new XMLHttpRequest();
-/**
- * Function responsible for perform the GET response
- */
-xmlHttp.onreadystatechange = function() {
+// /**
+//  * access the serve in order to get the sprite set of a game
+//  * @type {XMLHttpRequest}
+//  * */
+// var xmlHttp = new XMLHttpRequest();
+// /**
+//  * Function responsible for perform the GET response
+//  */
+// xmlHttp.onreadystatechange = function() {
+//
+//     var terminationList = document.getElementById('terminationList');
+//     if (this.readyState == 4 && this.status == 200) {
+//         console.log(this.responseText);
+//         var terminationSetObj = JSON.parse(this.responseText);
+//         buildTerminationSet(terminationSetObj, terminationList);
+//     }
+// };
+// /**
+//  * Prepare and send the GET request to the server -- get the interaction set
+//  */
+// xmlHttp.open("GET", "http://localhost:9001/terminationSet", true);
+// xmlHttp.send();
 
-    var terminationList = document.getElementById('terminationList');
-    if (this.readyState == 4 && this.status == 200) {
-        console.log(this.responseText);
-        var terminationSetObj = JSON.parse(this.responseText);
-        buildTerminationSet(terminationSetObj, terminationList);
-    }
-};
-/**
- * Prepare and send the GET request to the server -- get the interaction set
- */
-xmlHttp.open("GET", "http://localhost:9001/terminationSet", true);
-xmlHttp.send();
-
-function buildTerminationSet(terminationSetObj, ulElement)
+function buildTerminationSet(terminationSetObj)
 {
+    var ulElement = document.getElementById('terminationList');
     for(var i = 0; i < terminationSetObj.length; i++)
     {
         var htmlText = convertTerminationObjectToText(terminationSetObj[i]);

@@ -16,6 +16,8 @@ var mapChildToParent = new Map();
  */
 var spriteNameCollection = [];
 
+var levelStates = {count: 0, levelMap: []};
+
 /**
  * Stores the main Ul element responsible for the Sprite Set hierarchy
  * @type {HTMLElement | null}
@@ -26,16 +28,38 @@ var spriteListUl = document.getElementById("spriteList");
  */
 spriteListUl.classList.add("dd-list");
 
-/**
- * access the serve in order to get the sprite set of a game
- * @type {XMLHttpRequest}
- * */
-var xmlhttp = new XMLHttpRequest();
+var gameObj;
 
 /**
  * The sprite set obj
  */
 var spriteSetObj;
+
+/**
+ * The level mapping set obj
+ */
+var mappingObj;
+
+/**
+ * The interaction set obj
+ */
+var interactionSetObj;
+
+/**
+ * The termination set obj
+ */
+var terminationSetObj;
+
+/**
+ * The sample level of the game (usually lvl0)
+ */
+var levelMatrixObject;
+
+/**
+ * access the serve in order to get the sprite set of a game
+ * @type {XMLHttpRequest}
+ * */
+var xmlhttp = new XMLHttpRequest();
 
 /**
  * Build the whole sprite set as an HTML hierarchy list
@@ -58,15 +82,38 @@ xmlhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
 
         console.log(this.responseText);
-        spriteSetObj = JSON.parse(this.responseText);
+
+        gameObj = JSON.parse(this.responseText);
+
+        spriteSetObj = gameObj["SpriteSet"];
+        mappingObj = gameObj["LevelMapping"];
+        interactionSetObj = gameObj["InteractionSet"];
+        terminationSetObj = gameObj["TerminationSet"];
+        levelMatrixObject = gameObj["Level"];
         console.log(spriteSetObj);
+        console.log(mappingObj);
+        console.log(interactionSetObj);
+        console.log(terminationSetObj);
+        console.log(levelMatrixObject);
         structureTheSpriteSetOnHtml();
+        buildTheInteractionSet(interactionSetObj);
+        buildTerminationSet(terminationSetObj);
+        appendWallToMappingObj();
+        findObjectsWithoutSymbols();
+        var rows = levelMatrixObject.rows;
+        var columns = levelMatrixObject.columns;
+        createTable(rows, columns);
+        createImgList();
+        drawLevel();
+        saveLevelMapProcedure();
+        startLevelObserver();
+        document.onkeydown = redoLevelByPressingCtrlZ;
     }
 };
 /**
  * Prepare and send the GET request to the server
  */
-xmlhttp.open("GET", "http://localhost:9001/spriteSet", true);
+xmlhttp.open("GET", "http://localhost:9001/getGame", true);
 xmlhttp.send();
 
 function structureTheSpriteSetOnHtml()

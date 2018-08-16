@@ -3,8 +3,10 @@ var paintMode = true;
 
 var imgSrc = '';
 var imgLogicClass = [];
+var isDragEnabled = false;
 
 function extractImageFrom(ev) {
+
     var img = document.createElement('img');
     img.id = "drag_" + ev.target.id;
     for(var j = 0; j < imgLogicClass.length; j++)
@@ -18,6 +20,7 @@ function extractImageFrom(ev) {
 }
 
 function allowDrop(ev) {
+
     ev.preventDefault();
 
     if(paintMode)
@@ -30,11 +33,22 @@ function allowDrop(ev) {
         else
         {
             var imgToModify = document.getElementById('drag_' + ev.target.id);
-            imgToModify.src = imgSrc;
-            imgToModify.classList[0] = imgLogicClass;
-        }
-    }
 
+            if(imgToModify.src != imgSrc) {
+
+                imgToModify.src = imgSrc;
+
+                while (imgToModify.classList.length > 0) {
+                    imgToModify.classList.remove(imgToModify.classList[imgToModify.classList.length - 1]);
+                }
+
+                for (var i = 0; i < imgLogicClass.length; i++) {
+                    imgToModify.classList.add(imgLogicClass[i]);
+                }
+            }
+        }
+
+    }
 }
 
 function drag(ev) {
@@ -45,6 +59,7 @@ function drag(ev) {
         imgLogicClass[i] = ev.target.classList[i];
     }
     parentId = ev.target.parentNode.id;
+    isDragEnabled = !isDragEnabled;
 }
 
 //<li id="li"><img src="yeti4.png" draggable ="true" ondragstart ="drag(event)" id="drag1"></li>
@@ -83,14 +98,17 @@ function drop(ev) {
                     }
                 }
             }
-        }else{
+        }
+        else{
             ev.target.src = img.src;
+            ev.target.classList = img.classList;
             var parentElement = document.getElementById(parentId);
             if(parentElement.nodeName == 'DIV')
             {
                 parentElement.removeChild(parentElement.childNodes[0]);
             }
         }
+
     }
 }
 
@@ -120,9 +138,29 @@ function createTable(nRow, nColumn)
         }
         table.append(row);
     }
-
     document.getElementById('tableGridContainer').append(table);
     console.log("here");
+}
+
+function saveLevelState()
+{
+    console.log('save');
+    var rows = levelMatrixObject.rows;
+    var columns = levelMatrixObject.columns;
+    var map = []
+
+    for(var i = 0; i < rows; i++)
+    {
+        var components = []
+        for(var j = 0; j < columns; j++)
+        {
+            var img = document.getElementById('drag_' + i + ' ' + j);
+            var imgSymbol = img.classList[1];
+            components.push(imgSymbol);
+        }
+        map.push(components)
+    }
+    return map;
 }
 
 function removeTable()
@@ -179,9 +217,6 @@ function changeMode()
 
 function createImgList()
 {
-    var spriteSetContainer = document.getElementById('spriteList');
-    console.log(spriteSetContainer);
-
     for (var i = 0; i < spriteSetObj.length; i++)
     {
         configureImages(spriteSetObj[i]);
@@ -236,11 +271,6 @@ function getSymbol(identifier)
         var code = keys[k];
         if(mappingObj[code].length > 1)
         {
-            // if(mappingObj[key][1] == identifier)
-            // {
-            //     return key;
-            // }
-
             var position = getPositionOfTheLevelBackground(code)
             {
                 if(position == 0)
@@ -273,14 +303,14 @@ function getSymbol(identifier)
 
 function findObjectsWithoutSymbols()
 {
-    for(key in mapIdentifierToObject)
+    for(var key of mapIdentifierToObject.keys())
     {
         var obj = mapIdentifierToObject.get(key);
         if('img' in obj.parameters)
         {
            if(!doesThisIdentifierHasSymbol(obj.identifier))
            {
-               appendSymbol();
+               appendSymbol(obj.identifier);
            }
         }
     }
@@ -291,9 +321,9 @@ function doesThisIdentifierHasSymbol(identifier)
     var symbol = getSymbol(identifier);
     if(symbol == "")
     {
-        return true;
+        return false;
     }
-    return false;
+    return true;
 }
 
 function appendSymbol(identifier)
@@ -302,7 +332,19 @@ function appendSymbol(identifier)
     pointer++;
     if(doesThisMapHasBackground())
     {
-        mappingObj.set(symbol, [])
+        var levelBG = getLevelBackgroundIdentifierForThisLevel();
+        if(levelBG !=  "this level has no background")
+        {
+            var whereToPut = whereDoesTheLevelBGAppearsInTheArray();
+            if(whereToPut == 0)
+            {
+                mappingObj[symbol] = [levelBG, identifier];
+            }
+            else if(whereToPut > 0)
+            {
+                mappingObj[symbol] = [identifier, levelBG];
+            }
+        }
     }
 }
 
@@ -322,9 +364,9 @@ function getLevelBackgroundIdentifierForThisLevel()
 {
     for(key in mappingObj)
     {
-        if(mappingObj[key].length == 1)
+        if(mappingObj[key].length == 1 && mappingObj[key][0] != 'wall')
         {
-            return mappingObj[key];
+            return mappingObj[key][0];
         }
     }
 
@@ -346,4 +388,43 @@ function getPositionOfTheLevelBackground(key)
             }
         }
     }return -1;
+}
+
+function doesThisGameHaveWall()
+{
+    var keys = mapIdentifierToObject.keys();
+    for(var key of keys)
+    {
+        if(key == 'wall')
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+function appendWallToMappingObj()
+{
+    if(doesThisGameHaveWall()) {
+        if(!('w' in mappingObj)) {
+            mappingObj['w'] = ['wall'];
+        }
+    }
+}
+
+function whereDoesTheLevelBGAppearsInTheArray()
+{
+    var levelBG = getLevelBackgroundIdentifierForThisLevel();
+
+    var keys = Object.keys(mappingObj);
+    for(var k = 0; k < keys.length; k++)
+    {
+        var code = keys[k];
+        if(mappingObj[code].length > 1)
+        {
+            return getPositionOfTheLevelBackground(code);
+        }
+    }
+
+    return -1;
 }

@@ -14,14 +14,15 @@ public class ContextualServer {
         Server server = new Server(9001);
 
         ServletHandler spriteSerialize = new ServletHandler();
-        spriteSerialize.addServletWithMapping(GetSpriteSet.class, "/spriteSet");
-        spriteSerialize.addServletWithMapping(GetInteractionSet.class, "/interactionSet");
-        spriteSerialize.addServletWithMapping(GetTerminationSet.class, "/terminationSet");
+        spriteSerialize.addServletWithMapping(GetGame.class, "/getGame");
+        //spriteSerialize.addServletWithMapping(GetSpriteSet.class, "/spriteSet");
+        //spriteSerialize.addServletWithMapping(GetInteractionSet.class, "/interactionSet");
+        //spriteSerialize.addServletWithMapping(GetTerminationSet.class, "/terminationSet");
         spriteSerialize.addServletWithMapping(GetImages.class, "/imgs");
         spriteSerialize.addServletWithMapping(Processing.class, "/processing");
         spriteSerialize.addServletWithMapping(UploadImage.class, "/uploadImage");
-        spriteSerialize.addServletWithMapping(LevelMatrix.class, "/levelMatrix");
-        spriteSerialize.addServletWithMapping(LevelMapping.class, "/levelMapping");
+        //spriteSerialize.addServletWithMapping(LevelMatrix.class, "/levelMatrix");
+        //spriteSerialize.addServletWithMapping(LevelMapping.class, "/levelMapping");
 
         ResourceHandler resource_handler = new ResourceHandler();
         resource_handler.setDirectoriesListed(true);

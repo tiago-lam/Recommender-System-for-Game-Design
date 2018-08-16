@@ -20,7 +20,7 @@ public class LevelMatrix extends HttpServlet
                           HttpServletResponse response ) throws ServletException,
                                                         IOException
     {
-		String toSend = getLevelMatrixJSONObject("examples/gridphysics/cakybaky_lvl0.txt");
+		String toSend = getLevelMatrixJSONObject("examples/gridphysics/aliens_lvl0.txt");
 		
     	response.setContentType("text/html");
         response.setStatus(HttpServletResponse.SC_OK);
@@ -33,7 +33,19 @@ public class LevelMatrix extends HttpServlet
 	public String getLevelMatrixJSONObject(String gameLevelPath) {
 		String toSend = "";
 
-    	String[] mapLines = new IO().readFile(gameLevelPath);
+    	JSONObject mapObject = getObjectLevelMatrix(gameLevelPath);
+    	
+    	toSend = mapObject.toJSONString();
+    	
+		return toSend;
+	}
+
+	/**
+	 * @param gameLevelPath
+	 * @return
+	 */
+	public JSONObject getObjectLevelMatrix(String gameLevelPath) {
+		String[] mapLines = new IO().readFile(gameLevelPath);
     	
     	int rows = mapLines.length;
     	int columns = mapLines[0].length();
@@ -47,10 +59,7 @@ public class LevelMatrix extends HttpServlet
     		mapLinesJson.add(mapLines[i]);
     	}
     	mapObject.put("map", mapLinesJson);
-    	
-    	toSend = mapObject.toJSONString();
-    	
-		return toSend;
+		return mapObject;
 	}
 	
 //	public static void main(String[] args) {
