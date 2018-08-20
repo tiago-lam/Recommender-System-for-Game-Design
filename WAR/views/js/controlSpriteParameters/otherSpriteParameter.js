@@ -37,7 +37,7 @@ function createOrientedFlickerParameter(parameters)
 function createChaserParameter(parameters)
 {
     createDivSpanElements('stypeDiv', 'stypeSpan', 'stype');
-    createStypeTerminationSelectList('stypeDiv', 'stypeSelectId');
+    createStypeSelectList('stypeDiv', 'stypeSelectId');
     if(parameters.stype) {
         updateSelectParameter('stypeSelectId', parameters.stype);
     }
@@ -59,10 +59,10 @@ function createFleeingParameter(parameters)
 function createAlternateChaserParameter(parameters)
 {
     createDivSpanElements('stype1Div', 'stype1Span', 'stype1');
-    createStypeTerminationSelectList('stype1Div', 'stype1SelectId');
+    createStypeSelectList('stype1Div', 'stype1SelectId');
     updateSelectParameter('stype1SelectId', parameters.stype1);
     createDivSpanElements('stype2Div', 'stype2Span', 'stype2');
-    createStypeTerminationSelectList('stype2Div', 'stype2SelectId');
+    createStypeSelectList('stype2Div', 'stype2SelectId');
     updateSelectParameter('stype2SelectId', parameters.stype2);
 }
 
@@ -135,7 +135,7 @@ function createBomberRandomMissile(parameters)
 function createSpreader(parameters)
 {
     createDivSpanElements('stypeDiv', 'stypeSpan', 'stype');
-    createStypeTerminationSelectList('stypeDiv', 'stypeSelectId');
+    createStypeSelectList('stypeDiv', 'stypeSelectId');
     updateSelectParameter('stypeSelectId', parameters.stype);
     createDivSpanElements('spreadProbDiv', 'spreadprobSpan', 'spreadprob');
     createInputRange('spreadProbDiv', 'range', 0.0, 1.0, 0.1, 'spreadProbSpanId', 0.0, 'spreadProbRangeId');

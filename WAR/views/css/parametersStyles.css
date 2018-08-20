@@ -4,7 +4,7 @@
   border: 1px solid lightsteelblue;
   border-radius: 7px;
   height:100%;
-  background-color: azure;
+  background-color: #3d5858;
   display: block;
 }
 
@@ -22,5 +22,6 @@
   width: 16%;
   float: right;
   font-family: lucinda;
+  color: black;
   margin-top: 4px;
 }

@@ -21,7 +21,18 @@ public class GetGame extends HttpServlet
                           HttpServletResponse response ) throws ServletException,
                                                         IOException
     {
-		String toSend = getGameSONObject("examples/gridphysics/aliens.txt");
+    	String gameToServe = request.getParameter("game");
+		System.out.println(gameToServe);
+		
+		String toSend = "";
+		if(gameToServe == null)
+		{
+			toSend = getGameSONObject("examples/gridphysics/" + "aliens" + ".txt");
+		}
+		else
+		{
+			toSend = getGameSONObject("examples/gridphysics/" + gameToServe + ".txt");
+		}
 		
     	response.setContentType("text/html");
         response.setStatus(HttpServletResponse.SC_OK);

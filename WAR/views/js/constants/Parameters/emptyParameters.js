@@ -132,6 +132,11 @@ function returnParametersOfThisReference(ref)
         return ["stype", "total", "prob", "spawnorientation"];
     }
 
+    else if(ref == Bomber)
+    {
+        return ["stype", "total", "prob", "spawnorientation"];
+    }
+
     else if(ref == RandomBomber)
     {
         return ["stype", "total", "prob", "spawnorientation"];

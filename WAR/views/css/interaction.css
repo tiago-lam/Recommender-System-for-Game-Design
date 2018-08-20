@@ -12,7 +12,7 @@
     -webkit-border-radius: 5px;
     -khtml-border-radius: 5px;
     border-radius: 5px;
-    background-color: #E9E9D5;
+    background-color: rgba(61, 88, 88, 0.316);
 }
 
 #interactionList
@@ -22,30 +22,33 @@
 
 #interactionInspector
 {
-    width: 600px;
+    width: 69%;
     height: 229px;
     position: relative;
     float: left;
     margin-left: 10%;
     border: 1px solid black;
+    background: rgba(61, 88, 88, 0.316);
 }
 
 #interactionSprite1Div
 {
-    width: 33%;
+    width: 20%;
     float: left;
     display: inline;
 }
 
 #interactionDiv
 {
-    width: 33%;
+    width: 46%;
     float: left;
+    /*background: rgba(61, 88, 88, 0.316);*/
 }
 
 #interactionSelect
 {
     margin-top: 99px;
+    width: 100%;
 }
 
 #spritesToInteractDiv
@@ -69,8 +72,10 @@
 
 #scoreInputId
 {
-    width: 20%;
-    margin-left: 38%;
+    width: 30%;
+    /*margin-left: 38%;*/
+    float: right;
+    margin-top: 3%;
 }
 
 #sprite1InteractionImg
@@ -82,19 +87,19 @@
 .spanForInteractionParameters
 {
     float: left;
-    padding-right: 40px;
+    /*padding-right: 40px;*/
 }
 
 .forSelectParameters
 {
-    width: 35%;
+    width: 60%;
     float: right;
     margin-right: 0px;
 }
 
 .interactionElementDiv
 {
-    width: 83%;
+    width: 100%;
     display: inline-block;
 }
 
@@ -103,7 +108,8 @@
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-    width: 45px;
+    width: 30%;
+    margin-top: 2%;
     display: inline-block;
 }
 
@@ -131,4 +137,15 @@
     float: right;
     height: 100%;
     width: 11%;
+}
+
+#scoreInteractionDivId
+{
+    width: 100%;
+}
+
+#interactionContainerDiv
+{
+    width: 80%;
+    margin-left: 7%;
 }

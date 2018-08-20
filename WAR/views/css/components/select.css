@@ -45,7 +45,7 @@
 
 #divSelect { width: 100%; border: 1px; border-style: solid; border-color: lightsteelblue; border-width: 1px; border-radius: 7px; height: 30px; }
 
-.spanCenteredText { float: left; position: relative; margin-top: 3px; }
+.spanCenteredText { float: left; position: relative; margin-top: 3px;}
 
 /* -------------------- Select Box Styles: stackoverflow.com Method */
 /* -------------------- Source: http://stackoverflow.com/a/5809186 */

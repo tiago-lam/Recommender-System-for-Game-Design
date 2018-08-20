@@ -199,9 +199,27 @@ function removeElements(parentElement)
     //             parentElement.removeChild(parentElement.firstChild);
     //         }
     // }
+    var storeSpecialParameters = [];
     while (parentElement.lastChild.id !== 'refClassDivId') {
-        parentElement.removeChild(parentElement.lastChild);
+        var elem = parentElement.lastChild;
+        if(elem.childNodes.length > 0) {
+
+                var span = elem.childNodes[0].innerText;
+                storeSpecialParameters.push(span);
+
+        }
+        parentElement.removeChild(elem);
     }
+
+    // for(var i = 0; i < storeSpecialParameters.length; i++)
+    // {
+    //     if(storeSpecialParameters[i] in currentObj.parameters)
+    //     {
+    //         delete currentObj.parameters[storeSpecialParameters[i]];
+    //     }
+    // }
+    //
+    // console.log(currentObj);
 }
 
 function updateSelectParameter(selectId, parameterValue)

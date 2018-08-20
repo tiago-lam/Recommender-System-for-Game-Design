@@ -60,9 +60,10 @@ span
 	border-width: 2px;
 	border-style: solid;
 	border-color: #DD7C7C;
-	background-color: #FBDAC3;
+	background-color: #684931;
 	border-radius: 10px;
 	font-family: "Lucida Console", Monaco, monospace;
+	color:white;
 }
 
 .contentSlidersInnactive

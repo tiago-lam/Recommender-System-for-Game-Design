@@ -16,7 +16,7 @@ function createShootAvatarParameters(parameters) {
    createDivSpanElements('divStype', 'spanStype', 'stype');
    createStypeSelectList('divStype', 'stypeSelectId');
    createDivSpanElements('divAmmo', 'spanAmmo', 'ammo');
-   createAmmoSelectList('divAmmo','selectAmmoId');
+   createAmmoSelectList('divAmmo','ammoSelectId');
    updateShootAvatarParameters(parameters);
 }
 
@@ -40,7 +40,7 @@ function createFlakAvatarParameters(parameters) {
 function updateShootAvatarParameters(parameters)
 {
    updateSelectParameter('stypeSelectId', parameters.stype);
-   updateSelectParameter('selectAmmoId', parameters.ammo);
+   updateSelectParameter('ammoSelectId', parameters.ammo);
 }
 
 /**

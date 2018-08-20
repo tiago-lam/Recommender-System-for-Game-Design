@@ -1,6 +1,6 @@
 function createInteractionStypeParameter()
 {
-    var div = document.getElementById('interactionDiv');
+    var div = document.getElementById('interactionContainerDiv');
 
     var divContainer = document.createElement('div');
     divContainer.id = 'stypeInteractionDivId';
@@ -26,7 +26,6 @@ function createInteractionStypeParameter()
         option.text = spriteName;
         stypeSelect.appendChild(option);
     }
-
 
     stypeSelect.setAttribute('oninput', 'updateStypeParameterInsideObject(this.value)');
     divContainer.append(scoreSpan);
@@ -102,7 +101,7 @@ function createInteractionResourceParameter()
     var divContainer = document.createElement('div');
     divContainer.id = 'stypeResourceInteractionDivId';
     divContainer.classList.add('interactionElementDiv');
-    var div = document.getElementById('interactionDiv');
+    var div = document.getElementById('interactionContainerDiv');
 
     var resourceSpan = document.createElement('span');
     resourceSpan.id = 'resourceInteractionSpanId';
@@ -158,7 +157,7 @@ function createInteractionStypeOtherParameter()
     var divContainer = document.createElement('div');
     divContainer.id = 'stypeOtherInteractionDivId';
     divContainer.classList.add('interactionElementDiv');
-    var div = document.getElementById('interactionDiv');
+    var div = document.getElementById('interactionContainerDiv');
 
     var stypeOtherSpan = document.createElement('span');
     stypeOtherSpan.id = 'stypeOtherInteractionSpanId';
@@ -213,7 +212,7 @@ function createInteractionLimitParameter()
     var divContainer = document.createElement('div');
     divContainer.id = 'limitInteractionDivId';
     divContainer.classList.add('interactionElementDiv');
-    var div = document.getElementById('interactionDiv');
+    var div = document.getElementById('interactionContainerDiv');
 
     var limitSpan = document.createElement('span');
     limitSpan.id = 'limitInteractionSpanId';
@@ -260,7 +259,7 @@ function createInteractionValueParameter()
     var divContainer = document.createElement('div');
     divContainer.id = 'valueInteractionDivId';
     divContainer.classList.add('interactionElementDiv');
-    var div = document.getElementById('interactionDiv');
+    var div = document.getElementById('interactionContainerDiv');
 
     var valueSpan = document.createElement('span');
     valueSpan.id = 'valueInteractionSpanId';
@@ -301,5 +300,3 @@ function updateValueParameterElement(value)
     var valueInput = document.getElementById('valueInputId');
     valueInput.value = value;
 }
-
-

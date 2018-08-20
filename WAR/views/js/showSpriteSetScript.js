@@ -74,6 +74,8 @@ function buildTheSpriteSet(spriteSetObj, ulElement) {
     console.log(mapChildToParent);
 }
 
+var getGameParam = localStorage.getItem("varGetGameParam");
+
 /**
  * Function responsible for perform the GET response
  */
@@ -113,7 +115,7 @@ xmlhttp.onreadystatechange = function() {
 /**
  * Prepare and send the GET request to the server
  */
-xmlhttp.open("GET", "http://localhost:9001/getGame", true);
+xmlhttp.open("GET", "http://localhost:9001/getGame" + "?" + getGameParam, true);
 xmlhttp.send();
 
 function structureTheSpriteSetOnHtml()

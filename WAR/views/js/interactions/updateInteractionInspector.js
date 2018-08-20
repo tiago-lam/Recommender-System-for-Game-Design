@@ -42,7 +42,7 @@ function createSprite1SelectList()
 
 function createInteractionSelectList()
 {
-    var divParent = document.getElementById('interactionDiv');
+    var divParent = document.getElementById('interactionContainerDiv');
     var interactionSelect = document.createElement('select');
     interactionSelect.id = "interactionSelect";
     interactionSelect.classList.add('style-rounded');
@@ -236,11 +236,16 @@ function showParameters()
 
 function createScoreChangeField(value)
 {
-    var div = document.getElementById('interactionDiv');
+    var div = document.getElementById('interactionContainerDiv');
+
+    var scoreDiv = document.createElement('div');
+    scoreDiv.id = 'scoreInteractionDivId';
+    scoreDiv.classList.add('interactionElementDiv');
 
     var scoreSpan = document.createElement('span');
     scoreSpan.id = 'scoreSpanId';
     scoreSpan.innerHTML = "score:";
+    scoreSpan.classList.add('spanLimitOverflow');
 
     var scoreInput = document.createElement('input');
     scoreInput.setAttribute('oninput', 'updateScoreParameter(this.value)');
@@ -248,8 +253,9 @@ function createScoreChangeField(value)
     scoreInput.type = 'number';
     scoreInput.value = value;
 
-    div.append(scoreSpan);
-    div.append(scoreInput);
+    scoreDiv.append(scoreSpan);
+    scoreDiv.append(scoreInput);
+    div.append(scoreDiv);
 }
 
 function updateScoreParameter(value)
@@ -259,7 +265,7 @@ function updateScoreParameter(value)
 
 function removeParameterContents()
 {
-    var interactionDiv = document.getElementById('interactionDiv');
+    var interactionDiv = document.getElementById('interactionContainerDiv');
 
     while (interactionDiv.childNodes.length > 1) {
         interactionDiv.removeChild(interactionDiv.lastChild);

@@ -32,6 +32,8 @@
         <label for="interactionSet">Interaction Set</label>
         <input type="radio" name="tabs" id="terminationSet">
         <label for="terminationSet">Termination Set</label>
+        <input type="radio" name="tabs" id="load">
+        <label for="load">Load</label>
 
         <div class="tabs">
             <div><h2>Level Map</h2>
@@ -193,7 +195,9 @@
 
                     <div id="interactionSprite1Div"></div>
 
-                    <div id="interactionDiv"></div>
+                    <div id="interactionDiv">
+                        <div id="interactionContainerDiv"></div>
+                    </div>
 
                     <div id="spritesToInteractDiv"></div>
 
@@ -202,17 +206,32 @@
             </div>
 
             <div><h2>Termination Set</h2>
-
                 <div id="terminationContainer">
                     <ul id="terminationList"></ul>
                 </div>
-
                 <div id="terminationInspector">
-
                     <div id="terminationSelectDiv"></div>
-
                 </div>
+            </div>
 
+            <div><h2>Load</h2>
+               <div id="selectGameDiv">
+                   <select id="chooseGameSelect">
+                       <option value="zelda">zelda</option>
+                       <option value="pacman">pacman</option>
+                       <option value="aliens">aliens</option>
+                   </select>
+                   <script>
+                       function loadGame()
+                       {
+                           var gameSelect = document.getElementById('chooseGameSelect');
+                           getGameParam = "game=" + gameSelect.value;
+                           localStorage.setItem("varGetGameParam", getGameParam);
+                           location.reload();
+                       }
+                   </script>
+                   <input type="button" onclick="loadGame()">ok</input>
+               </div>
             </div>
 
         </div>
