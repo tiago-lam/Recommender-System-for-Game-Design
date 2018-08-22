@@ -78,14 +78,18 @@
             showInfo(interactionObj, e);
         }
 
-        function removeObjectFromTheInteractionSet(e)
-        {
-            var objID = e.target.id;
-            var obj = mapIdToInteraction.get(objID);
+        function deleteObjectInTheInteractionSet(obj) {
             var index = interactionSetObj.indexOf(obj);
             if (index > -1) {
                 interactionSetObj.splice(index, 1);
             }
+        }
+
+        function removeObjectFromTheInteractionSet(e)
+        {
+            var objID = e.target.id;
+            var obj = mapIdToInteraction.get(objID);
+            deleteObjectInTheInteractionSet(obj);
 
             //todo - we a need a target to get the interaction id from it
             mapIdToInteraction.delete(objID);
@@ -105,5 +109,18 @@
             //removeParameterContents()//remove from interactionContainerDiv
             var spritesToInteractDiv = document.getElementById('spritesToInteractDiv');
             deleteElementsFrom(spritesToInteractDiv);
+        }
 
+        function removeInteractionObjectWithThisSprite(sprite)
+        {
+            for(var key of mapIdToInteraction.keys())
+            {
+                var interactionObj = mapIdToInteraction.get(key);
+                if(interactionObj.sprite1 == sprite || sprite in interactionObj.sprite2)
+                {
+                    deleteObjectInTheInteractionSet(interactionObj);
+                    mapIdToInteraction.delete(key);
+                    removeObjectFromTheInteractionList(key);
+                }
+            }
         }
