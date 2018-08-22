@@ -72,7 +72,7 @@
                 </div>
             </div>
 
-            <div><h2>Sprite Set</h2>
+            <div id="spriteSetDiv"><h2>Sprite Set</h2>
 
                 <div class="dd" id="spriteSetContainer" oncontextmenu="return false">
                     <ul id="spriteList"></ul>
@@ -177,8 +177,11 @@
                             </select>
                         </div>
                     </div>
-                    <div id="divButtonConfirm">
-                        <button id="inputButtonConfirmId" type="button" onclick="action(spriteSetObj)">Confirm</button>
+                    <!--<div id="divButtonConfirm">-->
+                        <!--<button id="inputButtonConfirmId" type="button" onclick="action(spriteSetObj)">Confirm</button>-->
+                    <!--</div>-->
+                    <div id="saveSpriteSetDiv">
+                        <button id="saveSpriteSetButtonId" type="button" onclick="saveGameState()">Save Sprite Set</button>
                     </div>
 
                 </div><!--End div inspector-->
@@ -244,6 +247,7 @@
     <script type="text/javascript" src="js/constants/Interactions/interactions.js"></script>
     <script type="text/javascript" src="js/constants/Terminations/terminations.js"></script>
     <script type="text/javascript" src="js/observers/levelObserver.js"></script>
+    <script type="text/javascript" src="js/observers/spriteSetObserver.js"></script>
     <script type="text/javascript" src="js/showSpriteSetScript.js"></script>
     <script type="text/javascript" src="js/interactions/updateInteractionInspector.js" ></script>
     <script type="text/javascript" src="js/interactions/showInteractionSetScript.js" ></script>
@@ -263,9 +267,11 @@
     <script type="text/javascript" src="js/updateInspectorScript.js"></script>
     <script type="text/javascript" src="js/refreshSpriteSet.js"></script>
     <script type="text/javascript" src="js/level/symbols.js"></script>
-    <script type="text/javascript" src="js/level/redoLevel.js"></script>
+    <script type="text/javascript" src="js/redo/redo.js"></script>
     <script type="text/javascript" src="js/level/levelMap.js"></script>
     <script type="text/javascript" src="js/level/showLevelMap.js"></script>
+    <script type="text/javascript" src="js/convertToVGDL/interactionSetVGDLForm.js"></script>
+    <script type="text/javascript" src="js/utils/util.js"></script>
 
 
 

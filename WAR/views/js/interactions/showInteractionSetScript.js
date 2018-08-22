@@ -6,7 +6,7 @@
 
         function buildTheInteractionSet(interactionObj)
         {
-                var unorderedList = document.getElementById('interactionList');;
+                var unorderedList = document.getElementById('interactionList');
                 for(var i = 0; i < interactionObj.length; i++)
                 {
                     var textObj = convertObjectToText(interactionObj[i]);
@@ -14,7 +14,8 @@
                 }
 
                 createSprite1SelectList();
-                createInteractionSelectList();
+                if(document.getElementById('interactionContainerDiv') == null)
+                {    createInteractionSelectList(); }
                 createCheckBoxList();
         }
 
@@ -63,5 +64,17 @@
             }
 
             //todo - we a need a target to get the interaction id from it
-            mapIdToInteraction.delete()
+            mapIdToInteraction.delete();
+        }
+
+        function deleteInteractionList()
+        {
+            var unorderedList = document.getElementById('interactionList');
+            deleteElementsFrom(unorderedList);
+            var interactionSprite1Div = document.getElementById('interactionSprite1Div');
+            deleteElementsFrom(interactionSprite1Div);
+            //removeParameterContents()//remove from interactionContainerDiv
+            var spritesToInteractDiv = document.getElementById('spritesToInteractDiv');
+            deleteElementsFrom(spritesToInteractDiv);
+
         }

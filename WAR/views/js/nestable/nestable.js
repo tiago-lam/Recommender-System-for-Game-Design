@@ -127,6 +127,7 @@
                 {
                     var isOkToRemove = confirm("Are you sure yo want to remove this item?");
                     if(isOkToRemove) {
+                        saveGameState();
                         e.target.parentNode.remove();
                         var obj = retrieveObjectByTarget(e.target.id);
                         removeObjectFromTheSpriteSet(obj);

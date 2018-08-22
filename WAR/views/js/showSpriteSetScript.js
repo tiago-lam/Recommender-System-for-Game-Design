@@ -2,13 +2,13 @@
  * map that relates identifier to objects
  * @type {Map}
  */
-var mapIdentifierToObject = new Map();
+var mapIdentifierToObject;
 
 /**
  * map that relates identifier to objects
  * @type {Map}
  */
-var mapChildToParent = new Map();
+var mapChildToParent;
 
 /**
  * Stores the names of all the sprites to be used as a list for the interactions
@@ -68,6 +68,8 @@ var xmlhttp = new XMLHttpRequest();
  */
 function buildTheSpriteSet(spriteSetObj, ulElement) {
     spriteNameCollection = [];
+    mapIdentifierToObject = new Map();
+    mapChildToParent = new Map();
     for (var i = 0; i < spriteSetObj.length; i++) {
         getObjectData(spriteSetObj[i], ulElement);
     }
@@ -288,4 +290,14 @@ function removeObjectFromTheSpriteSet(obj)
     }
 
     mapIdentifierToObject.delete(obj.identifier);
+}
+
+function deleteSpriteHierarchyList()
+{
+    var spriteList = document.getElementById('spriteList');
+
+    while(spriteList.childNodes.length > 0)
+    {
+        spriteList.removeChild(spriteList.lastChild);
+    }
 }
