@@ -111,7 +111,7 @@ xmlhttp.onreadystatechange = function() {
         drawLevel();
         saveLevelMapProcedure();
         startLevelObserver();
-        document.onkeydown = redoLevelByPressingCtrlZ;
+        document.onkeydown = redoProcedureByPressingCtrlZ;
     }
 };
 /**

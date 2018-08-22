@@ -14,7 +14,7 @@
                 }
 
                 createSprite1SelectList();
-                if(document.getElementById('interactionContainerDiv') == null)
+                if(document.getElementById('interactionContainerDiv').childNodes.length == 0)
                 {    createInteractionSelectList(); }
                 createCheckBoxList();
         }

@@ -51,11 +51,11 @@ function redoGame() {
         redoSpriteSet(game);
         redoInteractionSet(game);
     } else {
-        alert("no game states saved");
+        alert("no game state saved");
     }
 }
 
-function redoLevelByPressingCtrlZ(e) {
+function redoProcedureByPressingCtrlZ(e) {
 
     var levelMapTab = document.getElementById('levelMap');
     var spriteSetTab = document.getElementById('spriteSet');
@@ -63,7 +63,6 @@ function redoLevelByPressingCtrlZ(e) {
 
     var evtobj = window.event ? event : e
     if (evtobj.keyCode == 90 && evtobj.ctrlKey) {
-
 
         if(levelMapTab.checked) {
             redoMap();
