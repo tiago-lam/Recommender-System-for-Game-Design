@@ -289,7 +289,7 @@ function removeObjectFromTheSpriteSet(obj)
         spriteSetObj.splice(index, 1);
     }
 
-    mapIdentifierToObject.delete(obj.identifier);
+    removeSpriteNamesFromArraysAndMaps(obj);
 }
 
 function deleteSpriteHierarchyList()
@@ -299,5 +299,28 @@ function deleteSpriteHierarchyList()
     while(spriteList.childNodes.length > 0)
     {
         spriteList.removeChild(spriteList.lastChild);
+    }
+}
+
+function storeNamesOfThisObjAndItsKids(obj, familyNames)
+{
+    familyNames.push(obj.identifier);
+    if(obj.children.length > 0)
+    {
+        for(var i = 0; i < obj.children.length; i++)
+        {
+            storeNamesOfThisObjAndItsKids(obj.children[i], familyNames);
+        }
+    }
+    return familyNames;
+}
+
+function removeSpriteNamesFromArraysAndMaps(obj)
+{
+    var familyMNames = storeNamesOfThisObjAndItsKids(obj, []);
+    for(var i = 0; i < familyMNames.length; i++)
+    {
+        removeItemFrom(spriteNameCollection, familyMNames[i]);
+        mapIdentifierToObject.delete(familyMNames[i]);
     }
 }

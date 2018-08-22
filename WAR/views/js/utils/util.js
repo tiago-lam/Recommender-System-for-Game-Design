@@ -5,3 +5,10 @@ function deleteElementsFrom(htmlObject) {
     }
 }
 
+function removeItemFrom(array, obj)
+{
+    var index = array.indexOf(obj);
+    if (index > -1) {
+        array.splice(index, 1);
+    }
+}

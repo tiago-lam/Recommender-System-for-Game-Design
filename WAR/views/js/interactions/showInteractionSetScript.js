@@ -79,10 +79,7 @@
         }
 
         function deleteObjectInTheInteractionSet(obj) {
-            var index = interactionSetObj.indexOf(obj);
-            if (index > -1) {
-                interactionSetObj.splice(index, 1);
-            }
+           removeItemFrom(interactionSetObj, obj);
         }
 
         function removeObjectFromTheInteractionSet(e)
