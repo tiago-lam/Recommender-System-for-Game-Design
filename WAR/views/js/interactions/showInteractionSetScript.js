@@ -47,7 +47,29 @@
             div.innerHTML = textToPutInTheDiv;
             mapIdToInteraction.set(id, interactionObj);
             div.setAttribute("onclick", "getInteractionForUpdatingOnMouseClick(this.id)");
+            div.setAttribute("onmousedown", "rightButton(event)");
             parentElement.append(div);
+        }
+
+        function rightButton(e)
+        {
+            var isRightMB;
+            e = e || window.event;
+
+            if ("which" in e)  // Gecko (Firefox), WebKit (Safari/Chrome) & Opera
+                isRightMB = e.which == 3;
+            else if ("button" in e)  // IE, Opera
+                isRightMB = e.button == 2;
+
+            if(isRightMB)
+            {
+                var isOkToRemove = confirm("Are you sure yo want to remove this item?");
+                if(isOkToRemove) {
+                    saveGameState();
+                    removeObjectFromTheInteractionSet(e);
+                    removeObjectFromTheInteractionList(e.target.id);
+                }
+            }
         }
 
         function getInteractionForUpdatingOnMouseClick(e)
@@ -56,15 +78,22 @@
             showInfo(interactionObj, e);
         }
 
-        function removeObjectFromTheInteractionSet(obj)
+        function removeObjectFromTheInteractionSet(e)
         {
+            var objID = e.target.id;
+            var obj = mapIdToInteraction.get(objID);
             var index = interactionSetObj.indexOf(obj);
             if (index > -1) {
                 interactionSetObj.splice(index, 1);
             }
 
             //todo - we a need a target to get the interaction id from it
-            mapIdToInteraction.delete();
+            mapIdToInteraction.delete(objID);
+        }
+
+        function removeObjectFromTheInteractionList(id)
+        {
+            document.getElementById(id).remove();
         }
 
         function deleteInteractionList()

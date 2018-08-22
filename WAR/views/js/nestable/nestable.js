@@ -93,7 +93,6 @@
              */
             var onStartEvent = function(e)
             {
-
                 var isRightMB;
                 e = e || window.event;
 
