@@ -130,7 +130,7 @@
                         e.target.parentNode.remove();
                         var obj = retrieveObjectByTarget(e.target.id);
                         removeObjectFromTheSpriteSet(obj);
-                        removeInteractionObjectWithThisSprite(e.target.id);
+
                         removeItemFrom(spriteNameCollection, e.target.id);
                         updateObj();
                     }

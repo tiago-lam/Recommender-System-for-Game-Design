@@ -323,5 +323,7 @@ function removeSpriteNamesFromArraysAndMaps(obj)
         removeItemFrom(spriteNameCollection, familyMNames[i]);
         mapIdentifierToObject.delete(familyMNames[i]);
         removeSelectItemFrom(document.getElementById('sprite1SelectId'), familyMNames[i]);
+        removeInteractionObjectWithThisSprite(familyMNames[i]);
+        removeFromTheSpriteCheckBoxList(familyMNames[i]);
     }
 }

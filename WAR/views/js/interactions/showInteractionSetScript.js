@@ -121,3 +121,20 @@
                 }
             }
         }
+
+        function removeFromTheSpriteCheckBoxList(sprite)
+        {
+            var spritesToInteractDiv = document.getElementById('spritesToInteractDiv');
+            var spriteCheckBoxes = spritesToInteractDiv.getElementsByTagName('div');
+            for(var i = 0; spriteCheckBoxes.length; i++)
+            {
+                var input = spriteCheckBoxes[i].getElementsByTagName('input');
+                var id = input[0].id;
+                
+                if(id.includes(sprite))
+                {
+                    spriteCheckBoxes[i].remove();
+                    return;
+                }
+            }
+        }
