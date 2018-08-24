@@ -12,7 +12,7 @@ var callback = function(mutationsList) {
         // }
         if (mutation.type == 'attributes') {
             console.log('The ' + mutation.attributeName + ' attribute was modified.');
-            saveLevelMapProcedure();
+            saveGameState();
         }
     }
 };
@@ -29,7 +29,8 @@ function startLevelObserver()
 
 function saveLevelMapProcedure()
 {
-    var map = saveLevelState();
-    levelStates.count++;
-    levelStates.levelMap.push(map);
+    // var map = saveLevelState();
+    // levelStates.count++;
+    // levelStates.levelMap.push(map);
+    saveProcedure();
 }

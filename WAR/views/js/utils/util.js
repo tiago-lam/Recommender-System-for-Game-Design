@@ -32,3 +32,16 @@ function removeSelectItemFrom(selectElement, item)
         selectElement.remove(index);
     }
 }
+
+function storeNamesOfThisObjAndItsKids(obj, familyNames)
+{
+    familyNames.push(obj.identifier);
+    if(obj.children.length > 0)
+    {
+        for(var i = 0; i < obj.children.length; i++)
+        {
+            storeNamesOfThisObjAndItsKids(obj.children[i], familyNames);
+        }
+    }
+    return familyNames;
+}

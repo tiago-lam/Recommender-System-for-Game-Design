@@ -4,22 +4,18 @@ function cleanLevel()
     var divCollection = table.getElementsByTagName('div');
     for(var i = 0; i < divCollection.length; i++)
     {
-        divCollection[i].removeChild(divCollection[i].childNodes[0]);
+        if(divCollection[i].childNodes.length > 0)
+        {
+            divCollection[i].removeChild(divCollection[i].childNodes[0]);
+        }
     }
 }
 
-function redoMap()
+function redoMap(game)
 {
-    if(levelStates.count == 0)
-    {
-        levelStates.count = levelStates.levelMap.length;
-    }
-    var mapToDraw = levelStates.levelMap[levelStates.count - 1];
-    levelMatrixObject.map = mapToDraw;
+    levelMatrixObject.map = game["Level"];
     cleanLevel();
     drawLevel();
-    levelStates.count--;
-
 }
 
 function redoSpriteSet(game)
@@ -30,6 +26,8 @@ function redoSpriteSet(game)
     activateHierarchyListSort();
     getObjectForUpdatingOnMouseClick();
     updateObjectsAfterListChange();
+    removeAllElementsFromTheImgList();
+    createImgList(sprites);
 }
 
 function redoInteractionSet(game)
@@ -40,39 +38,24 @@ function redoInteractionSet(game)
 }
 
 function redoGame() {
-    if (gameStates.count == 0) {
-        gameStates.count = gameStates.states.length;
-    }
 
-    if (gameStates.count >= 1) {
+    if(gameStates.count > 0) {
         var game = gameStates.states[gameStates.count - 1];
         gameStates.count--;
+        if(gameStates.count == 0) { gameStates.count = gameStates.capacity};
         game = JSON.parse(game);
         redoSpriteSet(game);
+        redoMap(game);
         redoInteractionSet(game);
-    } else {
-        alert("no game state saved");
     }
+
 }
 
 function redoProcedureByPressingCtrlZ(e) {
 
-    var levelMapTab = document.getElementById('levelMap');
-    var spriteSetTab = document.getElementById('spriteSet');
-    var interactionSetTab = document.getElementById('interactionSet');
-
     var evtobj = window.event ? event : e
     if (evtobj.keyCode == 90 && evtobj.ctrlKey) {
-
-        if(levelMapTab.checked) {
-            redoMap();
-        }
-
-        if(spriteSetTab.checked || interactionSetTab.checked)
-        {
-            redoGame();
-        }
-
+        redoGame();
     }
 
 }

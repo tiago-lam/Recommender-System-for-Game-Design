@@ -62,7 +62,6 @@ function drag(ev) {
     isDragEnabled = !isDragEnabled;
 }
 
-//<li id="li"><img src="yeti4.png" draggable ="true" ondragstart ="drag(event)" id="drag1"></li>
 function drop(ev) {
     ev.preventDefault();
     if(!paintMode)
@@ -155,8 +154,15 @@ function saveLevelState()
         for(var j = 0; j < columns; j++)
         {
             var img = document.getElementById('drag_' + i + ' ' + j);
-            var imgSymbol = img.classList[1];
-            components.push(imgSymbol);
+            if(img != null)
+            {
+                var imgSymbol = img.classList[1];
+                components.push(imgSymbol);
+            }
+            else
+            {
+                components.push("");
+            }
         }
         map.push(components)
     }
@@ -215,11 +221,113 @@ function changeMode()
     paintMode = !paintMode;
 }
 
-function createImgList()
+// function removeImagesNotInThis(imgList, spriteSet)
+// {
+//     var liCollection = imgList.getElementsByTagName('li');
+//     for(var i = 0; i < liCollection.length; i++)
+//     {
+//        var image = liCollection[i].id;
+//        image = image.replace("drag_", "");
+//        image = image.replace("DragLi", "");
+//
+//
+//            if (!doesThisImgBelongsToAnySpriteInTheSet(image,spriteSet))
+//            {
+//                 imgList.removeChild(liCollection[i]);
+//                 return;
+//            }
+//
+//     }
+// }
+
+// function doesThisImgBelongsToAnySpriteInTheSet(image, spriteSet)
+// {
+//     for(var i = 0; i < spriteSet.length; i++)
+//     {
+//         if(doesThisImgBelongsToThiSprite(image, spriteSet[i]))
+//         {
+//             return true;
+//         }
+//     }
+//     return false;
+// }
+
+// function doesThisImgBelongsToThiSprite(image, sprite)
+// {
+//     var spriteNameList = storeNamesOfThisObjAndItsKids(sprite, []);
+//
+//     if(spriteNameList.includes(image))
+//     {
+//         return true;
+//     }
+//
+//     return false;
+// }
+
+// function updateImgForTheWholeSprite(spriteSetObj)
+// {
+//     removeImagesNotInThis(document.getElementById('imageListUl'), spriteSetObj);
+//     for(var i = 0; i < spriteSetObj.length; i++)
+//     {
+//         updateImgLisForThis(spriteSetObj[i]);
+//     }
+// }
+
+// function updateImgLisForThis(sprite)
+// {
+//
+//     if('img' in sprite.parameters)
+//     {
+//         updateImgList(sprite);
+//     }
+//     if(sprite.children.length > 0)
+//     {
+//         var childs = sprite.children;
+//         for(var j = 0; j < childs.length; j++)
+//         {
+//             updateImgLisForThis(childs[j]);
+//         }
+//     }
+//
+// }
+
+// function updateImgList(singleSprite)
+// {
+//     var imgListUl = document.getElementById('imageListUl');
+//     var liCollection = imgListUl.getElementsByTagName('li');
+//     for(var i = 0; i < liCollection.length; i++)
+//     {
+//         if(!doesThisListHasTheImage(imageListUl, singleSprite.identifier))
+//         {
+//             configureImages(singleSprite);
+//             return;
+//         }
+//     }
+// }
+
+// function doesThisListHasTheImage(imgList, sprite)
+// {
+//     var liCollection = imgList.getElementsByTagName('li');
+//     for(var i = 0; i < liCollection.length; i++)
+//     {
+//         if(liCollection[i].id.includes(sprite))
+//         {
+//             return true;
+//         }
+//     }
+//     return false;
+// }
+
+function removeAllElementsFromTheImgList()
 {
-    for (var i = 0; i < spriteSetObj.length; i++)
+    deleteElementsFrom(document.getElementById('imageListUl'));
+}
+
+function createImgList(sprites)
+{
+    for (var i = 0; i < sprites.length; i++)
     {
-        configureImages(spriteSetObj[i]);
+        configureImages(sprites[i]);
     }
 }
 
@@ -427,4 +535,37 @@ function whereDoesTheLevelBGAppearsInTheArray()
     }
 
     return -1;
+}
+
+function removeSpriteFromLevelSpriteList(sprite)
+{
+    var imageListUl = document.getElementById('imageListUl');
+    var liCollection = imageListUl.getElementsByTagName('li');
+    for(var i = 0; i < liCollection.length; i++)
+    {
+        if(liCollection[i].id.includes(sprite))
+        {
+            liCollection[i].remove();
+            return;
+        }
+    }
+}
+
+function removeSpriteInTheGridLevel(sprite)
+{
+    var rows = levelMatrixObject.rows;
+    var columns = levelMatrixObject.columns;
+
+    for (var i = 0; i < rows; i++)
+    {
+        for(var j = 0; j < columns; j++)
+        {
+            var div = document.getElementById(i + " " + j);
+            var img = div.getElementsByClassName("drag_" + sprite + "DragImgId");
+            if(img[0] != undefined)
+            {
+                img[0].parentNode.removeChild(img[0]);
+            }
+        }
+    }
 }

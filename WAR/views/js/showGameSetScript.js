@@ -107,9 +107,9 @@ xmlhttp.onreadystatechange = function() {
         var rows = levelMatrixObject.rows;
         var columns = levelMatrixObject.columns;
         createTable(rows, columns);
-        createImgList();
+        createImgList(spriteSetObj);
         drawLevel();
-        saveLevelMapProcedure();
+        saveGameState();
         startLevelObserver();
         document.onkeydown = redoProcedureByPressingCtrlZ;
     }
@@ -174,6 +174,7 @@ function getObjectData(obj, upperUl)
     spriteNameCollection.push(identifier);
     var parameters = currentObj.parameters;
     var imgSrc = document.createElement("img");
+    imgSrc.draggable = true;
     imgSrc.setAttribute('class', 'imgSprite');
     imgSrc.id = identifier + "ImgId";
 
@@ -302,19 +303,6 @@ function deleteSpriteHierarchyList()
     }
 }
 
-function storeNamesOfThisObjAndItsKids(obj, familyNames)
-{
-    familyNames.push(obj.identifier);
-    if(obj.children.length > 0)
-    {
-        for(var i = 0; i < obj.children.length; i++)
-        {
-            storeNamesOfThisObjAndItsKids(obj.children[i], familyNames);
-        }
-    }
-    return familyNames;
-}
-
 function removeSpriteNamesFromArraysAndMaps(obj)
 {
     var familyMNames = storeNamesOfThisObjAndItsKids(obj, []);
@@ -325,5 +313,7 @@ function removeSpriteNamesFromArraysAndMaps(obj)
         removeSelectItemFrom(document.getElementById('sprite1SelectId'), familyMNames[i]);
         removeInteractionObjectWithThisSprite(familyMNames[i]);
         removeFromTheSpriteCheckBoxList(familyMNames[i]);
+        removeSpriteFromLevelSpriteList(familyMNames[i]);
+        removeSpriteInTheGridLevel(familyMNames[i]);
     }
 }
