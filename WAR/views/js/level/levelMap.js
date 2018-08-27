@@ -478,24 +478,7 @@ function getLevelBackgroundIdentifierForThisLevel()
         }
     }
 
-    return "this level has no background"
-}
-
-function getPositionOfTheLevelBackground(key)
-{
-    var levelBG = getLevelBackgroundIdentifierForThisLevel();
-
-    if(levelBG != "this level has no background")
-    {
-        var identifiers = mappingObj[key];
-        for(var i = 0; i < identifiers.length; i++)
-        {
-            if(identifiers[i] == levelBG)
-            {
-                return i;
-            }
-        }
-    }return -1;
+    return "this level has no background";
 }
 
 function doesThisGameHaveWall()
@@ -568,4 +551,21 @@ function removeSpriteInTheGridLevel(sprite)
             }
         }
     }
+}
+
+function getPositionOfTheLevelBackground(key)
+{
+    var levelBG = getLevelBackgroundIdentifierForThisLevel();
+
+    if(levelBG != "this level has no background")
+    {
+        var identifiers = mappingObj[key];
+        for(var i = 0; i < identifiers.length; i++)
+        {
+            if(identifiers[i] == levelBG)
+            {
+                return i;
+            }
+        }
+    }return -1;
 }

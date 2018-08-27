@@ -1,10 +1,42 @@
 function addNewSpriteToSpriteSet(spriteSet) {
     var object = new Object();
-    object.identifier = 'bob';
-    object.children = [];
-    object.parameters = {img: "oryx/scorpion1"};
-    object.referenceClass = "Immovable";
-    spriteSet.unshift(object);
+    object.identifier = defineIdentifier();
+    if(object.identifier != null && object.identifier != "")
+    {
+        object.children = [];
+        object.parameters = {img: "oryx/scorpion1"};
+        object.referenceClass = "Immovable";
+
+        if("img" in object.parameters) {
+            var background = getLevelBackgroundIdentifierForThisLevel();
+            var mapEntry;
+            if (background != "this level has no background") {
+                var position = whereDoesTheLevelBGAppearsInTheArray();
+
+                if (position == 0) {
+                    mapEntry = [background, object.identifier];
+                }
+                else {
+                    mapEntry = [object.identifier, background];
+                }
+            }
+            else {
+                mapEntry = [object.identifier];
+            }
+            mappingObj[symbols[pointer++]] = mapEntry;
+        }
+        spriteSet.push(object);
+        refreshGame(gameObj);
+    }
+}
+
+function defineIdentifier() {
+    var identifier = prompt("Please enter sprite's name:");
+    while(spriteNameCollection.includes(identifier))
+    {
+        identifier = prompt("name already exists, please try again");
+    }
+    return identifier;
 }
 
 function addNewInteractionToInteractionSet(interactionSet)

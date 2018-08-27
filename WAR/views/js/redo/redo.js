@@ -44,11 +44,16 @@ function redoGame() {
         gameStates.count--;
         if(gameStates.count == 0) { gameStates.count = gameStates.capacity};
         game = JSON.parse(game);
-        redoSpriteSet(game);
-        redoMap(game);
-        redoInteractionSet(game);
+        refreshGame(game);
     }
 
+}
+
+function refreshGame(game)
+{
+    redoSpriteSet(game);
+    redoMap(game);
+    redoInteractionSet(game);
 }
 
 function redoProcedureByPressingCtrlZ(e) {
