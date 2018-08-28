@@ -41,7 +41,14 @@ function defineIdentifier() {
 
 function addNewInteractionToInteractionSet(interactionSet)
 {
-
+    var object = new Object();
+    var lastInteraction = interactionSet[interactionSet.length - 1];
+    object.interactionName = lastInteraction.interactionName;
+    object.parameters = lastInteraction.parameters;
+    object.sprite2 = lastInteraction.sprite2;
+    object.sprite1 = lastInteraction.sprite1;
+    interactionSet.push(object);
+    refreshGame(gameObj);
 }
 
 function addNewTerminationToTerminationSet(interactionSet)

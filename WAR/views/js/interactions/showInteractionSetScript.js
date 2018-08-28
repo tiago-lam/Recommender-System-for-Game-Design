@@ -138,3 +138,51 @@
                 }
             }
         }
+
+        function stringfyInteractionSet()
+        {
+            var stringInteraction = [];
+            var interactionSet = gameObj["InteractionSet"];
+            for(var i = 0; i < interactionSet.length; i++)
+            {
+                var interactionToString = JSON.stringify(interactionSet[i]);
+                stringInteraction.push(interactionToString);
+            }
+            return stringInteraction;
+        }
+
+        function objectifyInteractionSet(interactionStringArray)
+        {
+            var objectInteraction = [];
+            for(var i = 0; i < interactionStringArray.length; i++)
+            {
+                var interactionToObject = JSON.parse(interactionStringArray[i]);
+                objectInteraction.push(interactionToObject);
+            }
+            return objectInteraction;
+        }
+
+
+        function eliminateDuplicates(arr)
+        {
+            var i,
+                len = arr.length,
+                out = [],
+                obj = {};
+
+            for (i = 0; i < len; i++) {
+                obj[arr[i]] = 0;
+            }
+            for (i in obj) {
+                out.push(i);
+            }
+            return out;
+        }
+
+        function removeDuplicateInteractions()
+        {
+            var interactionsStringfyeid = stringfyInteractionSet();
+            interactionsStringfyeid = eliminateDuplicates(interactionsStringfyeid);
+            gameObj["InteractionSet"] = objectifyInteractionSet(interactionsStringfyeid);
+            refreshGame(gameObj);
+        }
