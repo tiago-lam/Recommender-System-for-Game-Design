@@ -21,6 +21,7 @@ public class ContextualServer {
         spriteSerialize.addServletWithMapping(GetImages.class, "/imgs");
         spriteSerialize.addServletWithMapping(Processing.class, "/processing");
         spriteSerialize.addServletWithMapping(UploadImage.class, "/uploadImage");
+        spriteSerialize.addServletWithMapping(LoadImages.class, "/loadImages");
         //spriteSerialize.addServletWithMapping(LevelMatrix.class, "/levelMatrix");
         //spriteSerialize.addServletWithMapping(LevelMapping.class, "/levelMapping");
 

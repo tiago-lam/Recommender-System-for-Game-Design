@@ -271,3 +271,8 @@ function removeParameterContents()
         interactionDiv.removeChild(interactionDiv.lastChild);
     }
 }
+
+function openImagePicker()
+{
+    document.getElementById('imagePickerDiv').style.display = "block";
+}

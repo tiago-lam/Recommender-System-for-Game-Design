@@ -80,7 +80,7 @@
                 </div><!--End div spriteSetContainer-->
 
                 <div id="inspector">
-                    <p id="name">1</p> <img id="image" src="">
+                    <p id="name">1</p> <img id="image" onclick="openImagePicker()" src="">
 
                     <div id="analogueParameters">
 
@@ -184,13 +184,15 @@
                     <div id="saveSpriteSetDiv">
                         <button id="saveSpriteSetButtonId" type="button" onclick="saveGameState()">Save Sprite Set</button>
                     </div>
-
                 </div><!--End div inspector-->
+                <div id="imagePickerDiv">
+                    <input type="button" onclick="closeImagePicker()">
+                </div>
 
             </div>
 
             <div><h2>Interaction Set</h2>
-                <div><input type="button" onclick="addNewInteractionToInteractionSet(interactionSetObj)"></div>
+                <div><input type="button" onclick="addNewInteractionToInteractionSet(interactionSetObj)">Add Interaction</input></div>
                 <div id="interactionSetContainer">
                     <ul id="interactionList"></ul>
                 </div>
@@ -275,6 +277,7 @@
     <script type="text/javascript" src="js/convertToVGDL/interactionSetVGDLForm.js"></script>
     <script type="text/javascript" src="js/save/save.js"></script>
     <script type="text/javascript" src="js/Experiments.js"></script>
+    <script type="text/javascript" src="js/imageLoader/imageLoader.js"></script>
 
 
 </body>

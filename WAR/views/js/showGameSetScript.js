@@ -16,8 +16,6 @@ var mapChildToParent;
  */
 var spriteNameCollection = [];
 
-var levelStates = {count: 0, levelMap: []};
-
 /**
  * Stores the main Ul element responsible for the Sprite Set hierarchy
  * @type {HTMLElement | null}

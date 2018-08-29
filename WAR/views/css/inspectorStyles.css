@@ -63,7 +63,7 @@ span
 	background-color: #684931;
 	border-radius: 10px;
 	font-family: "Lucida Console", Monaco, monospace;
-	color:white;
+	color: white;
 }
 
 .contentSlidersInnactive
@@ -122,4 +122,31 @@ input[type="range"]
 {
 	margin: 0 30%;
 	width: 40%;
+}
+
+#imagePickerDiv
+{
+	float: left;
+	width: 25%;
+	height: 30%;
+	margin-left: 15%;
+}
+
+.singleImgPickerDiv
+{
+	border: 1px solid #4EC6DE;
+	border-style: solid;
+	border-radius: 7px;
+	margin-top: 30px;
+	width: 80%;
+}
+
+.singleImgPickerDiv span
+{
+	float: left;
+}
+
+.singleImgPickerDiv img
+{
+	float: right;
 }
