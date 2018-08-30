@@ -351,6 +351,10 @@ function configureImages(sprite)
         {
             imgCopy.classList.add(symbol);
         }
+        else
+        {
+            appendSymbol(sprite.identifier);
+        }
         imgCopy.setAttribute('ondragstart', "drag(event)");
         imgCopy.setAttribute('onmousedown', "createImgId(this.classList[0])");
 

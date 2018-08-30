@@ -275,4 +275,5 @@ function removeParameterContents()
 function openImagePicker()
 {
     document.getElementById('imagePickerDiv').style.display = "block";
+    document.getElementById('hideImgPickerInput').style.display = "block";
 }

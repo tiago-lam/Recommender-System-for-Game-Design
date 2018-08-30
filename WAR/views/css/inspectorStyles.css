@@ -127,9 +127,17 @@ input[type="range"]
 #imagePickerDiv
 {
 	float: left;
-	width: 25%;
-	height: 30%;
-	margin-left: 15%;
+	width: 20%;
+	height: 360px;
+	margin-left: 5%;
+
+}
+
+#imagePickerListDiv
+{
+	width: 100%;
+	height: 100%;
+	overflow-y: scroll;
 }
 
 .singleImgPickerDiv
@@ -138,7 +146,7 @@ input[type="range"]
 	border-style: solid;
 	border-radius: 7px;
 	margin-top: 30px;
-	width: 80%;
+	width: 85%;
 }
 
 .singleImgPickerDiv span
@@ -149,4 +157,22 @@ input[type="range"]
 .singleImgPickerDiv img
 {
 	float: right;
+}
+
+#hideImgPickerInput
+{
+	background-image: url("cancel.png");
+	background-repeat: no-repeat;
+	background-position: 50% 50%;
+	/* put the height and width of your image here */
+	height: 24px;
+	width: 24px;
+	border: none;
+	display: block;
+	float: right;
+}
+
+#imgPickerInputDiv
+{
+	width: 50%;
 }

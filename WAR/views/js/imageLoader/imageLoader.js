@@ -42,7 +42,7 @@ function createDivForImg(imgAddress,idNumber)
     div.append(img);
     div.setAttribute("onclick", "transferImgToInspector(this.id)");
 
-    var divContainer = document.getElementById('imagePickerDiv');
+    var divContainer = document.getElementById('imagePickerListDiv');
     divContainer.append(div);
 }
 
@@ -86,5 +86,7 @@ function load()
 function closeImagePicker()
 {
     var imgPicker = document.getElementById('imagePickerDiv');
+    var imgPickerInput = document.getElementById('hideImgPickerInput');
     imgPicker.style.display = "none";
+    imgPickerInput.style.display = "none"
 }
