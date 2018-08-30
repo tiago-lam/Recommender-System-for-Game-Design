@@ -48,8 +48,11 @@ function createDivForImg(imgAddress,idNumber)
 
 function transferImgToInspector(id)
 {
+    console.log(currentObj);
     var img = document.getElementById(id).childNodes[1];
     document.getElementById('image').src = img.src;
+    currentObj.parameters['img'] = img.src;
+    refreshGame(gameObj);
 }
 
 function getImageNameFrom(imgAdrress)

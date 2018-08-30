@@ -4,7 +4,7 @@ function addNewSpriteToSpriteSet(spriteSet) {
     if(object.identifier != null && object.identifier != "")
     {
         object.children = [];
-        object.parameters = {img: "oryx/scorpion1"};
+        object.parameters = {};
         object.referenceClass = "Immovable";
 
         if("img" in object.parameters) {
