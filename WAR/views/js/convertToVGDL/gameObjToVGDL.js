@@ -1,9 +1,10 @@
 function spriteSetToString(spriteSet)
 {
-    var string = "SpriteSet" + "\n";
+    var string = "BasicGame" + "\n";
+    string += "    " + "SpriteSet" + "\n";
     for(var i = 0; i < spriteSet.length; i++)
     {
-        string = string + JSONtoString(spriteSet[i], 4);
+        string = string + JSONtoString(spriteSet[i], 8);
     }
 
     string += "\n";
@@ -12,9 +13,18 @@ function spriteSetToString(spriteSet)
 }
 
 function JSONtoString(obj, ident) {
-    var objString =
 
-        obj['identifier'] + ' > ' + obj['referenceClass'];
+    var objString;
+
+    if(obj['referenceClass'] == "Regular" || obj['referenceClass'] == null)
+    {
+        objString =  obj['identifier'] + ' >';
+    }
+    else
+    {
+        objString = obj['identifier'] + ' > ' + obj['referenceClass'];
+    }
+
     for (key in obj.parameters) {
         objString = objString + " " + key + "=" + obj.parameters[key];
     }
@@ -36,7 +46,7 @@ function JSONtoString(obj, ident) {
 
 function mappingObjToString(mappingSet)
 {
-    var string = "LevelMapping" + "\n" + "    ";
+    var string = "    " + "LevelMapping" + "\n" + "        ";
 
     for(key in mappingSet)
     {
@@ -46,7 +56,7 @@ function mappingObjToString(mappingSet)
         {
             string += " " + mapObjects[i];
         }
-        string += "\n" + "    ";
+        string += "\n" + "        ";
     }
 
     string += "\n";
@@ -56,24 +66,26 @@ function mappingObjToString(mappingSet)
 
 function interactionSetToString(interactionSet)
 {
-    var string = "InteractionSet" + "\n" + "    ";
+    var string = "    " + "InteractionSet" + "\n" + "        ";
 
     for(var i = 0; i < interactionSet.length; i++)
     {
         let interactionObj = interactionSet[i];
-        string += interactionObj.interactionName + " > " + interactionObj.sprite1 + " ";
+        string += interactionObj.sprite1 + " ";
         let spritesToCollide = interactionObj.sprite2;
         for(var j = 0; j < spritesToCollide.length; j++)
         {
-            string +=  spritesToCollide[j];
+            string +=  spritesToCollide[j] + " ";
         }
+
+        string+= "> " + interactionObj.interactionName;
 
         let params = interactionObj.parameters;
         for(key in params)
         {
             string += " " + key + "=" + params[key];
         }
-        string += "\n" + "    ";
+        string += "\n" + "        ";
     }
 
     string += "\n";
@@ -83,7 +95,7 @@ function interactionSetToString(interactionSet)
 
 function terminationSetToString(terminationSet)
 {
-    var string = "TerminationSet" + "\n" + "    ";
+    var string = "    " + "TerminationSet" + "\n" + "        ";
 
     for(var i = 0; i < terminationSet.length; i++)
     {
@@ -95,7 +107,7 @@ function terminationSetToString(terminationSet)
         {
             string += " " + key + "=" + params[key];
         }
-        string += "\n" + "    ";
+        string += "\n" + "        ";
     }
 
     string += "\n";
@@ -111,6 +123,8 @@ function levelObjToString(levelMap)
         string += levelMap[i] + "\n";
     }
 
+    string = string.replace(/,/g, "");
+
     return string;
 }
 
@@ -120,5 +134,25 @@ function fromObjToString()
     string += mappingObjToString(gameObj["LevelMapping"]);
     string += interactionSetToString(gameObj["InteractionSet"]);
     string += terminationSetToString(gameObj["TerminationSet"]);
-    return string;
+
+    var description = {game: string, level: levelObjToString(gameObj["Level"])};
+    return description;
+}
+
+function play()
+{
+    console.log("play");
+    xhr = new XMLHttpRequest();
+    var url = "http://localhost:9001/play";
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader("Content-type", "text/plain");
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            var resp = xhr.responseText;
+            console.log(resp);
+        }
+    }
+    var data = fromObjToString();
+    data = JSON.stringify(data);
+    xhr.send(data);
 }

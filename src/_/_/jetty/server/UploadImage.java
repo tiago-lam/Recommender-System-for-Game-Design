@@ -25,7 +25,7 @@ public class UploadImage extends HttpServlet
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//super.doPost(req, resp);
-		System.out.println("img");
+		System.out.println("play");
 		
 		InputStream in = req.getInputStream();
 		String urlPath = getStringFromInputStream(in);

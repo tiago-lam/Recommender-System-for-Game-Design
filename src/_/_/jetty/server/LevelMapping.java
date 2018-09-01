@@ -45,7 +45,7 @@ public class LevelMapping extends HttpServlet
     			if(n.content.identifier.equals("LevelMapping"))
     			{
     				JSONObject obj = parser.parseLevelMappingSet(n);
-    				toSend =  obj.toJSONString();
+    				toSend =  obj.toJSONString(); 
     			}
     		}
     	}
