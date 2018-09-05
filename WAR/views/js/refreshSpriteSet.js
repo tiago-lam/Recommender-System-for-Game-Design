@@ -40,7 +40,7 @@ function storingItemIds(liItemsFromOl, idCollection) {
 }
 
 /**
- * Update the hierarchy both in HTML and Object form
+ * Update the hierarchy both in HTML
  * @param ddItem
  */
 function updateHierarchies(ddItem)
@@ -83,7 +83,26 @@ function updateHierarchies(ddItem)
             }
         }
     }
-    // console.log(obj);
+    console.log(obj);
+}
+
+function lookingForAndReplace(identifier, obj, spriteSet)
+{
+    for(var i = 0; i < spriteSet.length; i++)
+    {
+        if(spriteSet[i].identifier == identifier)
+        {
+            spriteSet[i] = obj;
+        }
+
+        if(spriteSet[i].children.length > 0)
+        {
+            for(var j = 0; j < spriteSet[i].children.length; j++)
+            {
+                lookingForAndReplace(identifier, obj, spriteSet[i].children[j]);
+            }
+        }
+    }
 }
 
 /**

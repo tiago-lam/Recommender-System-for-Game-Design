@@ -80,7 +80,7 @@
             <div id="spriteSetDiv">
                 <h2>Sprite Set</h2>
                 <div><input type="button" onclick="addNewSpriteToSpriteSet(spriteSetObj)">Add Sprite</input></div>
-                <div class="dd" id="spriteSetContainer" oncontextmenu="return false">
+                <div class="dd" id="spriteSetContainer" oncontextmenu="return false" onchange="updateObj();">
                     <ul id="spriteList"></ul>
                 </div><!--End div spriteSetContainer-->
 
@@ -191,7 +191,7 @@
                     </div>
                 </div><!--End div inspector-->
                 <div id="imgPickerInputDiv">
-                    <input id="hideImgPickerInput"type="button" onclick="closeImagePicker()">
+                    <input id="hideImgPickerInput" type="button" onclick="closeImagePicker()">
                     <div id="imagePickerDiv">
                         <div id="imagePickerListDiv"></div>
                     </div>

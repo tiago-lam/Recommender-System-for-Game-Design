@@ -30,10 +30,10 @@ public class Play extends HttpServlet{
 		JSONParser parser = new JSONParser(); 
 		try {
 			JSONObject json = (JSONObject) parser.parse(descriptions);
-//			String game = json.get("game").toString();
-//			String level = json.get("level").toString();
-//			generateVGDLFile("game.txt", game);
-//			generateVGDLFile("level.txt", level);
+			String game = json.get("game").toString();
+			String level = json.get("level").toString();
+			generateVGDLFile("game.txt", game);
+			generateVGDLFile("level.txt", level);
 			GameRun gameRun = new GameRun();
 			gameRun.run("game.txt", "level.txt");
 		} catch (ParseException e) {
@@ -50,7 +50,6 @@ public class Play extends HttpServlet{
 	public void generateVGDLFile(String fileName, String fileContent) throws IOException {
 		File file = new File(fileName);
 		//Create the file
-		file.delete();
 		if (file.createNewFile())
 		{
 		    System.out.println("File is created!");
