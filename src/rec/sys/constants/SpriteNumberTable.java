@@ -17,7 +17,7 @@ public abstract class SpriteNumberTable
 				new SpriteNumberTuple("FlakAvatar", 8),
 				new SpriteNumberTuple("Chaser" , 9),
 				new SpriteNumberTuple("Fleeing" , 10),
-				new SpriteNumberTuple("RandomAltChaser" , 11),
+				new SpriteNumberTuple("RandomPathAltChaser" , 11),
 				new SpriteNumberTuple("RandomNPC" , 12),
 				new SpriteNumberTuple("Bomber" , 13),
 				new SpriteNumberTuple("Door" , 14),

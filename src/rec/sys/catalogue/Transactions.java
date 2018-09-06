@@ -43,6 +43,7 @@ public class Transactions {
 			 	for (int j2 = 0; j2 < idTrans.length; j2++) {
 					transNumbers += " " + idTrans[j2];
 				}
+			 	transNumbers = transNumbers.replaceFirst(" ", "");
 			    writer.println(transNumbers);
 		}
 		writer.close();
