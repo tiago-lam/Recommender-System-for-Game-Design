@@ -36,7 +36,7 @@ function updateObj() {
 function storingItemIds(liItemsFromOl, idCollection) {
     for (var i = 0; i < liItemsFromOl.length; i++) {
         idCollection.push(liItemsFromOl[i].id);
-    }
+    }//
 }
 
 /**
