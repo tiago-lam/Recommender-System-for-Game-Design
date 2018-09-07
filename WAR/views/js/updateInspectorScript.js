@@ -118,21 +118,7 @@
          * @param val
          */
         function updateForAllObjectsInTheHierarchy(obj, param, val) {var selectRefClass = document.getElementById('refClassSelectId');
-            // //gets this dd-item/li element
-            // var li = document.getElementById(obj.identifier);
-            // //check if this li/dd-item/obj has a parent
-            // var parentLi = li.parentNode;
-            // if(parentLi.id != "spriteList")
-            // {
-            //     if(parentLi.classList.contains("dd-list"))
-            //     {
-            //         parentLi = parentLi.parentNode;
-            //         var parentObj = retrieveObjectByTarget(parentLi.id);
-            //         if(parentObj.referenceClass != null) {
-            //             selectRefClass.disabled = true;
-            //         }
-            //     }
-            // }
+
             obj.parameters[param] = val;
             if ("children" in obj) {
                 var children = obj.children;

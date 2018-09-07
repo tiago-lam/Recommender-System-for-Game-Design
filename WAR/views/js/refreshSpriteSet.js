@@ -25,7 +25,8 @@ function updateObj() {
     }
 
     verified = [];
-    console.log(mapChildToParent);
+    // console.log(mapChildToParent);
+    updateSpriteSetAfterHierarchyChanges();
 }
 
 /**
@@ -86,23 +87,23 @@ function updateHierarchies(ddItem)
     console.log(obj);
 }
 
-function lookingForAndReplace(identifier, obj, spriteSet)
+function updateSpriteSetAfterHierarchyChanges()
 {
-    for(var i = 0; i < spriteSet.length; i++)
-    {
-        if(spriteSet[i].identifier == identifier)
-        {
-            spriteSet[i] = obj;
-        }
+    var spriteSet = [];
 
-        if(spriteSet[i].children.length > 0)
+    var spriteList = document.getElementById('spriteList');
+
+    for(var i = 0; i < spriteList.childNodes.length; i++)
+    {
+        var spriteLi = spriteList.childNodes[i];
+        if(spriteLi.parentNode.id == "spriteList")
         {
-            for(var j = 0; j < spriteSet[i].children.length; j++)
-            {
-                lookingForAndReplace(identifier, obj, spriteSet[i].children[j]);
-            }
+            var spriteObj = retrieveObjectByTarget(spriteLi.id);
+            spriteSet.push(spriteObj);
         }
     }
+
+    gameObj["SpriteSet"] = spriteSet;
 }
 
 /**
@@ -120,6 +121,7 @@ function removeUnecessaryObjects(htmlIdCollection, obj)
         if(!htmlIdCollection.includes(identifier))
         {
             object.splice(index, 1);
+            mapChildToParent.delete(identifier);
         }
     });
 }
