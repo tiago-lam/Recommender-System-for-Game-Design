@@ -176,16 +176,19 @@ public class ParserGameDescription extends VGDLParser{
 					Utils.writeAsAJSON(myParser.generate(n), "sprtiteSet");
 					System.out.println();
 				}
+				
 				else if(n.content.identifier.equals("InteractionSet"))
 				{
 					JSONArray interactionJSONArray = myParser.parseInteractionSet(n);
 					Utils.writeAsAJSON(interactionJSONArray, "interactionSet");
 					System.out.println();
 				}
+				
 				else if(n.content.identifier.equals("LevelMapping"))
 				{
 
 				}
+				
 				else if(n.content.identifier.equals("TerminationSet"))
 				{
 					JSONArray terminationArray = myParser.parseTerminationSet(n);

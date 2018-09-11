@@ -8,7 +8,7 @@ public class Tests {
 
 	public static void main(String[] args) throws ParseException {
 		GetGame g = new GetGame();
-		String jsonGame = g.getGameSONObject("examples/gridphysics/zelda.txt");
+		String jsonGame = g.getGameJSONObject("examples/gridphysics/zelda.txt");
 		JSONParser p = new JSONParser();
 		JSONObject o = (JSONObject) p.parse(jsonGame);
 		System.out.println(o);

@@ -28,7 +28,7 @@ public class Transactions {
 	
 	public void printTransactions() throws IOException
 	{
-		PrintWriter writer = new PrintWriter("input.txt", "UTF-8");
+		PrintWriter writer = new PrintWriter("recommender/input.txt", "UTF-8");
 		for(Integer i: gameTransaction.keySet())
 		{
 			 	Set<String> transaction = gameTransaction.get(i);
@@ -90,7 +90,6 @@ public class Transactions {
 		HashSet<String> arr = t.getGameTransactions((JSONArray)obj.get("SpriteSet"), new HashSet<String>());
 		t.allTransactions();
 		t.printTransactions();
-		
 		System.out.println();
 	}
 

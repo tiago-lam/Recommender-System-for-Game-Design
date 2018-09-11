@@ -11,7 +11,7 @@ public class GameDesignBreakdown {
 	public JSONObject gameJSON(String gamePath)
 	{
 		GetGame g = new GetGame();
-		String jsonGame = g.getGameSONObject(gamePath);
+		String jsonGame = g.getGameJSONObject(gamePath);
 		JSONParser p = new JSONParser();
 		JSONObject o = null;
 		try {

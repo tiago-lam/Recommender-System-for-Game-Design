@@ -12,6 +12,8 @@ import tools.IO;
 
 public class Catalogue {
 	
+	public ArrayList<JSONObject> allGames;
+	
 	public Catalogue()
 	{
 		
@@ -23,8 +25,6 @@ public class Catalogue {
 		fillList(gamesDirectory);
 	}
 	
-	public ArrayList<JSONObject> allGames;
-	
 	public ArrayList<String> getGameNames(String gameDirectoryPath)
 	{
 		ArrayList<String> gameNames = new ArrayList<String>();
@@ -34,9 +34,7 @@ public class Catalogue {
 		for (int i = 0; i < listOfFiles.length; i++) {
 			if (listOfFiles[i].isFile() && (!listOfFiles[i].getName().contains("_lvl") 
 					&& (!listOfFiles[i].getName().contains("DS_Store")))) {
-				
 					gameNames.add(listOfFiles[i].getName());
-				
 			}
 		}
 		return gameNames;

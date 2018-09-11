@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 import _.myParser.ParserGameDescription;
 import core.Node;
@@ -27,11 +29,11 @@ public class GetGame extends HttpServlet
 		String toSend = "";
 		if(gameToServe == null)
 		{
-			toSend = getGameSONObject("examples/gridphysics/" + "aliens" + ".txt");
+			toSend = getGameJSONObject("examples/gridphysics/" + "aliens" + ".txt");
 		}
 		else
 		{
-			toSend = getGameSONObject("examples/gridphysics/" + gameToServe + ".txt");
+			toSend = getGameJSONObject("examples/gridphysics/" + gameToServe + ".txt");
 		}
 		
     	response.setContentType("text/html");
@@ -42,7 +44,7 @@ public class GetGame extends HttpServlet
 	/**
 	 * @return
 	 */
-	public String getGameSONObject(String gamePath) {
+	public String getGameJSONObject(String gamePath) {
 		String toSend = "";
 		
 		JSONArray spriteSet = null;
@@ -100,6 +102,42 @@ public class GetGame extends HttpServlet
 		LevelMatrix levelMatrix = new LevelMatrix();
 		JSONObject level = levelMatrix.getObjectLevelMatrix(gameLevelPath);
 		return level;
+	}
+	
+	public String findIdentifierType(String identifier, JSONArray spriteSet)
+	{
+		for(int i = 0; i < spriteSet.size(); i++)
+		{
+			JSONObject obj = (JSONObject) spriteSet.get(i);
+			
+			if(obj.get("identifier").equals(identifier))
+				return (String) obj.get("referenceClass");
+			
+			JSONArray arr = (JSONArray) obj.get("children");
+			return findIdentifierType(identifier, arr);
+		}
+		
+		return "";
+	}
+	
+	public static void main(String[] args) {
+		GetGame gg = new GetGame();
+		String gameString = gg.getGameJSONObject("examples/gridphysics/zelda.txt");
+		JSONParser parser = new JSONParser();
+		try {
+			JSONObject gameObj = (JSONObject) parser.parse(gameString);
+			JSONArray spriteSet = (JSONArray) gameObj.get("SpriteSet");
+			
+			JSONArray interactionSet = (JSONArray) gameObj.get("InteractionSet");
+			for (int i = 0; i < interactionSet.size(); i++) 
+			{
+				JSONObject interaction = (JSONObject) interactionSet.get(i);
+				String identifier = (String) interaction.get("sprite1");
+			}
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }
