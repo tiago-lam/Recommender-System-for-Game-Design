@@ -155,4 +155,12 @@ function play()
     var data = fromObjToString();
     data = JSON.stringify(data);
     xhr.send(data);
+
+    setInterval(getImage(), 200);
+}
+
+function getImage()
+{
+    frameXmlhttp.open("GET", "http://localhost:9001/frames", true);
+    frameXmlhttp.send();
 }

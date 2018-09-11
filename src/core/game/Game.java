@@ -1,10 +1,23 @@
 package core.game;
 
 import java.awt.Color;
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Rectangle;
-import java.util.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Random;
+import java.util.Set;
+import java.util.TreeSet;
 
+import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 
 import core.SpriteGroup;
@@ -26,7 +39,14 @@ import ontology.avatar.MovingAvatar;
 import ontology.effects.Effect;
 import ontology.effects.TimeEffect;
 import ontology.sprites.Resource;
-import tools.*;
+import tools.Direction;
+import tools.JEasyFrame;
+import tools.KeyHandler;
+import tools.KeyInput;
+import tools.KeyPulse;
+import tools.Pair;
+import tools.Vector2d;
+import tools.WindowInput;
 import tools.pathfinder.Node;
 import tools.pathfinder.PathFinder;
 
@@ -259,6 +279,8 @@ public abstract class Game
     public int no_players = 1; //default to single player
 
     public static KeyHandler ki;
+    
+    public static int frameNumber = 0;
 
     /**
      * Default constructor.
@@ -892,6 +914,7 @@ public abstract class Game
 
             //Update the frame title to reflect current score and tick.
             this.setTitle(frame);
+            storeFrame(frame);
             
             if(firstRun && isHuman){
             	if(CompetitionParameters.dialogBoxOnStartAndEnd){
@@ -928,6 +951,22 @@ public abstract class Game
 
         return handleResult();
     }
+
+	/**
+	 * @param frame
+	 */
+	public void storeFrame(JEasyFrame frame) {
+		Container c = frame.getContentPane();
+		BufferedImage im = new BufferedImage(c.getWidth(), c.getHeight(), BufferedImage.TYPE_INT_ARGB);
+		c.paint(im.getGraphics());
+		try {
+			ImageIO.write(im, "PNG", new File("images/frame" + frameNumber + ".png"));
+			frameNumber++;
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
     /**
      * Sets the title of the game screen, depending on the game ending state.
