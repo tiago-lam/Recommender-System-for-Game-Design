@@ -5,28 +5,29 @@ function addNewSpriteToSpriteSet(spriteSet) {
     {
         object.children = [];
         object.parameters = {};
-        object.referenceClass = "Immovable";
+        object.referenceClass = defineRefClass();
 
-        if("img" in object.parameters) {
-            var background = getLevelBackgroundIdentifierForThisLevel();
-            var mapEntry;
-            if (background != "this level has no background") {
-                var position = whereDoesTheLevelBGAppearsInTheArray();
-
-                if (position == 0) {
-                    mapEntry = [background, object.identifier];
-                }
-                else {
-                    mapEntry = [object.identifier, background];
-                }
-            }
-            else {
-                mapEntry = [object.identifier];
-            }
-            mappingObj[symbols[pointer++]] = mapEntry;
-        }
+        // if("img" in object.parameters) {
+        //     var background = getLevelBackgroundIdentifierForThisLevel();
+        //     var mapEntry;
+        //     if (background != "this level has no backnd") {
+        //         var position = whereDoesTheLevelBGAppearsInTheArray();
+        //
+        //         if (position == 0) {
+        //             mapEntry = [background, object.identifier];
+        //         }
+        //         else {
+        //             mapEntry = [object.identifier, background];
+        //         }
+        //     }
+        //     else {
+        //         mapEntry = [object.identifier];
+        //     }
+        //     mappingObj[symbols[pointer++]] = mapEntry;
+        // }
         spriteSet.push(object);
         refreshGame(gameObj);
+        askForRecommendations(object.referenceClass);
     }
 }
 
@@ -37,6 +38,11 @@ function defineIdentifier() {
         identifier = prompt("name already exists, please try again");
     }
     return identifier;
+}
+
+function defineRefClass() {
+    var refClass = prompt("Please enter sprite's type:");
+    return refClass;
 }
 
 function addNewInteractionToInteractionSet(interactionSet)

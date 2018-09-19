@@ -44,4 +44,14 @@ public abstract class SpriteNumberTable
 		}
 		return -1;
 	}
+	
+	public static final String retrieveSpriteNameID(int sprite)
+	{
+		for (SpriteNumberTuple spriteNumberTuple : table) 
+		{
+			if(spriteNumberTuple.number == (sprite))
+				return spriteNumberTuple.spriteName;
+		}
+		return "";
+	}
 }

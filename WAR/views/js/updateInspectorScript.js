@@ -104,8 +104,6 @@
                 {
                     v.disabled = true;
                 }
-
-
             }
 
             updateSelectParameter('refClassSelectId', obj.referenceClass);
@@ -147,10 +145,11 @@
         function updateAnalogueParameters(obj)
         {
             var shrinkControl = document.getElementById("shrinkControl");
-            shrinkControl.disabled = checkIfItsParentHasParam(obj, "shrinkfactor");
             var speedControl = document.getElementById('speedControl');
-            speedControl.disabled = checkIfItsParentHasParam(obj, "speed");
             var cooldownControl = document.getElementById("cooldownControl");
+
+            shrinkControl.disabled = checkIfItsParentHasParam(obj, "shrinkfactor");
+            speedControl.disabled = checkIfItsParentHasParam(obj, "speed");
             cooldownControl.disabled = checkIfItsParentHasParam(obj, "cooldown");
 
             var shrinkValue = document.getElementById("shrinkValue");
@@ -231,7 +230,9 @@
         function updateNameAndImage(obj) {
             document.getElementById("name").innerHTML = obj.identifier;
             var img = document.getElementById("image");
-            img.src = document.getElementById(obj.identifier + "ImgId").currentSrc;
+            if('img' in obj.parameters) {
+                img.src = obj.parameters['img'] + ".png";
+            }
         }
 
         /**

@@ -22,9 +22,6 @@ function designSpecialTypesParameters(obj, parameters)
 
     removeElements(specialParameters);
 
-    //updateRefClass(obj);
-    //createRefClass();
-
     if(specialType == ShootAvatar)
     {
         createShootAvatarParameters(parameters);

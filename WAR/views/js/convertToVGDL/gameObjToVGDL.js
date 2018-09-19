@@ -25,8 +25,11 @@ function JSONtoString(obj, ident) {
         objString = obj['identifier'] + ' > ' + obj['referenceClass'];
     }
 
-    for (key in obj.parameters) {
-        objString = objString + " " + key + "=" + obj.parameters[key];
+    for (var paramKey in obj.parameters) {
+        if(paramKey == "img") {
+            obj.parameters[paramKey] = obj.parameters[paramKey].replace("http://localhost:9001/WAR/views/", "")
+        }
+        objString = objString + " " + paramKey + "=" + obj.parameters[paramKey];
     }
 
     for (var i = 0; i < ident; i++) {
@@ -143,7 +146,8 @@ function play()
 {
     console.log("play");
     xhr = new XMLHttpRequest();
-    var url = "http://localhost:9001/play";
+    var agent = document.getElementById('agentGameSelect');
+    var url = "http://localhost:9001/play?" + "agent=" + agent.options[agent.selectedIndex].value;
     xhr.open("POST", url, true);
     xhr.setRequestHeader("Content-type", "text/plain");
     xhr.onreadystatechange = function () {

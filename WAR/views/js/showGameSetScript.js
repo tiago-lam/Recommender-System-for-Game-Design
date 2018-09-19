@@ -76,6 +76,31 @@ function buildTheSpriteSet(spriteSetObj, ulElement) {
 
 var getGameParam = localStorage.getItem("varGetGameParam");
 
+function initializeGameObject(response) {
+    gameObj = JSON.parse(response);
+
+    if (gameObj == undefined) {
+        gameObj["SpriteSet"] = [];
+        gameObj["LevelMapping"] = new Object();
+        gameObj["InteractionSet"] = [];
+        gameObj["TerminationSet"] = [];
+        gameObj["Level"] = [];
+    }
+
+    else {
+        spriteSetObj = gameObj["SpriteSet"];
+        mappingObj = gameObj["LevelMapping"];
+        interactionSetObj = gameObj["InteractionSet"];
+        terminationSetObj = gameObj["TerminationSet"];
+        levelMatrixObject = gameObj["Level"];
+    }
+    console.log(spriteSetObj);
+    console.log(mappingObj);
+    console.log(interactionSetObj);
+    console.log(terminationSetObj);
+    console.log(levelMatrixObject);
+}
+
 /**
  * Function responsible for perform the GET response
  */
@@ -85,18 +110,7 @@ xmlhttp.onreadystatechange = function() {
 
         console.log(this.responseText);
 
-        gameObj = JSON.parse(this.responseText);
-
-        spriteSetObj = gameObj["SpriteSet"];
-        mappingObj = gameObj["LevelMapping"];
-        interactionSetObj = gameObj["InteractionSet"];
-        terminationSetObj = gameObj["TerminationSet"];
-        levelMatrixObject = gameObj["Level"];
-        console.log(spriteSetObj);
-        console.log(mappingObj);
-        console.log(interactionSetObj);
-        console.log(terminationSetObj);
-        console.log(levelMatrixObject);
+        initializeGameObject(this.responseText);
         structureTheSpriteSetOnHtml();
         buildTheInteractionSet(interactionSetObj);
         buildTerminationSet(terminationSetObj);

@@ -13,6 +13,7 @@
     <link rel="stylesheet" type="text/css" href="css/termination.css">
     <link rel="stylesheet" type="text/css" href="css/levelMap.css">
     <link rel="stylesheet" type="text/css" href="css/tabs/tabs.css">
+    <link rel="stylesheet" type="text/css" href="css/recommendation.css">
 
 	<title>Sprite Set</title>
 </head>
@@ -39,7 +40,7 @@
             <div><h2>Level Map</h2>
                 <div>
 
-                    <div id="createTableDiv">
+                    <div id="createTableDiv" style="display: none">
                         <div id="inputRowDivId">
                             <span id="rowSpanId">number of rows</span>
                             <input id="rowInput" type="number">
@@ -60,7 +61,15 @@
                     </div>
 
                     <div id="playDiv">
-                        <input id="playInput" name="play" type="button" onclick="play()">Play</input>
+                        <div id="agentSelectionDiv">
+                            <span>Select Agent</span>
+                            <select id="agentGameSelect">
+                                <option value="Human">Human</option>
+                                <option value="MCTS">MCTS</option>
+                                <option value="Genetic">Genetic</option>
+                            </select>
+                        </div>
+                        <input id="playInput" name="play" type="button" onclick="play()">Play!</input>
                         <!--<label for="playInput">Paint Mode</label>-->
                     </div>
 
@@ -70,7 +79,7 @@
                         </div>
                         <div id="tableGridContainer">
                         </div>
-                        <div id="gameRunWindowDiv">
+                        <div id="gameRunWindowDiv" style="display: none">
                             <img id="gameRunImg">
                         </div>
                     </div>
@@ -81,7 +90,7 @@
 
             <div id="spriteSetDiv">
                 <h2>Sprite Set</h2>
-                <div><input type="button" onclick="addNewSpriteToSpriteSet(spriteSetObj)">Add Sprite</input></div>
+                <div><input type="button" onclick="addNewSpriteToSpriteSet(gameObj['SpriteSet'])">Add Sprite</input></div>
                 <div class="dd" id="spriteSetContainer" oncontextmenu="return false" onchange="updateObj();">
                     <ul id="spriteList"></ul>
                 </div><!--End div spriteSetContainer-->
@@ -192,11 +201,16 @@
                         <button id="saveSpriteSetButtonId" type="button" onclick="saveGameState()">Save Sprite Set</button>
                     </div>
                 </div><!--End div inspector-->
+
                 <div id="imgPickerInputDiv">
                     <input id="hideImgPickerInput" type="button" onclick="closeImagePicker()">
                     <div id="imagePickerDiv">
                         <div id="imagePickerListDiv"></div>
                     </div>
+                </div>
+
+                <div id="recommenderDiv">
+                    <ul id="recommenderUl"></ul>
                 </div>
 
             </div>
@@ -231,12 +245,16 @@
             </div>
 
             <div><h2>Load</h2>
-               <div id="selectGameDiv">
-                   <select id="chooseGameSelect">
-                       <option value="zelda">zelda</option>
-                       <option value="pacman">pacman</option>
-                       <option value="aliens">aliens</option>
-                   </select>
+               <div id="gameSelectDiv">
+                   <div id="gameSelectionDiv">
+                        <span>Select Game</span>
+                        <select id="chooseGameSelect">
+                            <option value="zelda">zelda</option>
+                            <option value="pacman">pacman</option>
+                            <option value="aliens">aliens</option>
+                        </select>
+                   </div>
+
                    <script>
                        function loadGame()
                        {
@@ -246,7 +264,7 @@
                            location.reload();
                        }
                    </script>
-                   <input type="button" onclick="loadGame()">ok</input>
+                   <input type="button" onclick="loadGame()">Load Game</input>
                </div>
             </div>
 
@@ -290,6 +308,7 @@
     <script type="text/javascript" src="js/imageLoader/imageLoader.js"></script>
     <script type="text/javascript" src="js/convertToVGDL/gameObjToVGDL.js"></script>
     <script type="text/javascript" src="js/gettingImages/gettingimages.js"></script>
+    <script type="text/javascript" src="js/recommendations/getRecommendations.js"></script>
 
 </body>
 </html>

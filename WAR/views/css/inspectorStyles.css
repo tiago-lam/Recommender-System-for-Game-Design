@@ -176,3 +176,23 @@ input[type="range"]
 {
 	width: 50%;
 }
+
+#gameSelectDiv span
+{
+	width: 100px;
+}
+
+#agentSelectionDiv span
+{
+	width: 100px;
+}
+
+#gameSelectDiv span
+{
+	float: left;
+}
+
+#agentSelectionDiv span
+{
+	float: left;;
+}

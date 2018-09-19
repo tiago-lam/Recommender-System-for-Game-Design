@@ -1,0 +1,19 @@
+#recommenderDiv
+{
+    width: 100%;
+}
+
+.recLiClass
+{
+    margin-bottom: 10px;
+}
+
+.recDivClass
+{
+    background: #25aaff;
+    margin-bottom: 10px;
+    border: white;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 3px;
+}

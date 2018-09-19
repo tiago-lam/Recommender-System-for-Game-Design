@@ -7,6 +7,8 @@ import org.eclipse.jetty.server.handler.ResourceHandler;
 import org.eclipse.jetty.servlet.ServletHandler;
 import org.eclipse.jetty.webapp.WebAppContext;
 
+import rec.sys.sprite.recommender.SpriteRecommender;
+
 public class ContextualServer {
 	
 	public static void main( String[] args ) throws Exception
@@ -21,8 +23,7 @@ public class ContextualServer {
         spriteSerialize.addServletWithMapping(LoadImages.class, "/loadImages");
         spriteSerialize.addServletWithMapping(Play.class, "/play");
         spriteSerialize.addServletWithMapping(GetFrames.class, "/frames");
-        
-        
+        spriteSerialize.addServletWithMapping(GetRecommendations.class, "/recc");
 
         ResourceHandler resource_handler = new ResourceHandler();
         resource_handler.setDirectoriesListed(true);

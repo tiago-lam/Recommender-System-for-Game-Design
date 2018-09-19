@@ -52,6 +52,7 @@ function transferImgToInspector(id)
     var img = document.getElementById(id).childNodes[1];
     document.getElementById('image').src = img.src;
     currentObj.parameters['img'] = img.src;
+    createLevelMappingForThisImage(currentObj.identifier);
     refreshGame(gameObj);
 }
 
@@ -89,4 +90,25 @@ function closeImagePicker()
     var imgPickerInput = document.getElementById('hideImgPickerInput');
     imgPicker.style.display = "none";
     imgPickerInput.style.display = "none"
+}
+
+function createLevelMappingForThisImage(identifier)
+{
+    var background = getLevelBackgroundIdentifierForThisLevel();
+    var mapEntry;
+    if (background != "this level has no background")
+    {
+        var position = whereDoesTheLevelBGAppearsInTheArray();
+
+        if (position == 0) {
+            mapEntry = [background, identifier];
+        }
+        else {
+            mapEntry = [identifier, background];
+        }
+    }
+    else {
+        mapEntry = [identifier];
+    }
+    gameObj["LevelMapping"][symbols[pointer++]] = mapEntry;
 }
