@@ -23,11 +23,19 @@ BasicGame
         w > wall
         + > floor key
         . > floor
+<<<<<<< HEAD
         ¡ > floor sword
         ¢ > floor withkey
         £ > floor movable
         ¤ > floor avatar
         ¥ > floor enemy
+=======
+        ! > floor sword
+        @ > floor withkey
+        $ > floor movable
+        % > floor avatar
+        ^ > floor enemy
+>>>>>>> c383135515f29017a6ec7a5d761d5aa761683c0d
         
     InteractionSet
         movable wall > stepBack
