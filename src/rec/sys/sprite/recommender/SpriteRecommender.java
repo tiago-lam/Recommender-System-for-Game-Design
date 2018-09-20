@@ -2,6 +2,7 @@ package rec.sys.sprite.recommender;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -11,12 +12,10 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Scanner;
-
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-
 import _.myParser.ParserGameDescription;
 import rec.sys.constants.SpriteNumberTable;
 import rec.sys.constants.TableIDGame;
@@ -30,7 +29,7 @@ public class SpriteRecommender {
 	public TransactionTable transactionTable;
 	public GameTable gameTable;
 	public ArrayList<Transaction> transactionsInUse;
-	public ArrayList<Integer> itemsInUse;
+	public HashSet<Integer> itemsInUse;
 	private int MAX_PROTOCOL_REPS = 100;
 	
 	public SpriteRecommender()
@@ -38,7 +37,7 @@ public class SpriteRecommender {
 		transactionTable = new TransactionTable();
 		gameTable = new GameTable();
 		transactionsInUse = new ArrayList<>();
-		itemsInUse = new ArrayList<>();
+		itemsInUse = new HashSet<Integer>();
 	}
 	
 	public SpriteRecommender(String itemsInUseFile, String transactionsInUseFile)
@@ -52,7 +51,7 @@ public class SpriteRecommender {
 	
 	public void initializeItemsInUse(String itemsInUseFile)
 	{
-		itemsInUse = new ArrayList<>();
+		itemsInUse = new HashSet<Integer>();
 		addAvatarSpritesToTheItemsInUse();
 		String line = null;
 
@@ -119,24 +118,22 @@ public class SpriteRecommender {
         }
 	}
 	
-	public void updateItemsInUseFile(String itemsInUseFile) throws FileNotFoundException
+	public void updateItemsInUseFile(String itemsInUseFile) throws IOException
 	{
-		PrintWriter pw = new PrintWriter(itemsInUseFile);
-		pw.write("");
-		for(Integer i : itemsInUse)
-		{
-			try (FileWriter fw = new FileWriter(itemsInUseFile, true)) {
-
-				String content = String.valueOf(i) + "\n";
-
-				fw.write(content);
-
-			} catch (IOException e) {
-
-				e.printStackTrace();
-
-			}
+		File f = new File(itemsInUseFile);
+		if (!f.exists()) {
+			f.createNewFile();
 		}
+		        
+		FileWriter fw = new FileWriter(f); 
+		BufferedWriter bw = new BufferedWriter(fw);
+		
+		for(Integer i : itemsInUse)
+		{	
+			String content = String.valueOf(i) + "\n";
+			bw.write(content);	
+		}
+		bw.close();
 	}
 	
 	public void updateTransactionsInUseFile(String transactionsInUseFile)
@@ -181,7 +178,7 @@ public class SpriteRecommender {
 		return null;
 	}
 	
-	public int recommendSprite(int spriteTypeInUse, Transaction trans) throws FileNotFoundException
+	public int recommendSprite(int spriteTypeInUse, Transaction trans) throws IOException
 	{
 		List<Integer> items = trans.spriteItems;
 		items.remove(new Integer(spriteTypeInUse));
@@ -193,7 +190,7 @@ public class SpriteRecommender {
 		return -1;
 	}
 
-	public int getTheRightItemToRecommend(Transaction trans, List<Integer> items) throws FileNotFoundException 
+	public int getTheRightItemToRecommend(Transaction trans, List<Integer> items) throws IOException 
 	{
 		for(Integer type : items)
 		{
@@ -221,7 +218,7 @@ public class SpriteRecommender {
 		}
 	}
 	
-	public int protocol(int spriteTypeNumber) throws FileNotFoundException
+	public int protocol(int spriteTypeNumber) throws IOException
 	{
 		for(int i = 0; i < MAX_PROTOCOL_REPS; i++)
 		{
@@ -325,7 +322,7 @@ public class SpriteRecommender {
 		return retrieveObjectsWithThisType(type, spriteSet, new ArrayList<>());
 	}
 	
-	public ArrayList<JSONObject> recommend(int type) throws ParseException, FileNotFoundException
+	public ArrayList<JSONObject> recommend(int type) throws ParseException, IOException
 	{
 		int stype = protocol(type);
 		ArrayList<Integer> sprites = new ArrayList<>(); sprites.add(type); sprites.add(stype);
@@ -334,12 +331,35 @@ public class SpriteRecommender {
 		return recommendations;
 	}
 	
+	
+	
 	public static void main(String[] args) throws ParseException, FileNotFoundException 
 	{
-		SpriteRecommender spriteRecommender = new SpriteRecommender();
-		spriteRecommender.addAvatarSpritesToTheItemsInUse();
-		int type = spriteRecommender.protocol(6);
-		System.out.println();
+//		SpriteRecommender spriteRecommender = new SpriteRecommender();
+//		spriteRecommender.addAvatarSpritesToTheItemsInUse();
+//		int type = spriteRecommender.protocol(6);
+//		System.out.println();
+		
+		try{
+		    String test = "Test string !";
+		    File file = new File("simulation/ho.txt");
+
+		    // if file doesnt exists, then create it
+		    if (!file.exists()) {
+		        file.createNewFile();
+		    }else{
+
+		    }
+
+		    FileWriter fw = new FileWriter(file.getAbsoluteFile());
+		    BufferedWriter bw = new BufferedWriter(fw);
+		    bw.write(test);
+		    bw.close();
+
+		    System.out.println("Done");
+		}catch(IOException e){
+		    e.printStackTrace();
+		}
 	}
 
 }

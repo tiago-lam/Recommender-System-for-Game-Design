@@ -17,8 +17,21 @@ public class GameRun {
     String repeatOLETS = "controllers.singlePlayer.repeatOLETS.Agent";
     
     
-    public void run(String game, String level)
+    public void run(String game, String level, String agent)
     {
-    	ArcadeMachine.playOneGame(game, level, null, new Random().nextInt());
+    	if(agent.equals("Human"))
+    	{
+    		ArcadeMachine.playOneGame(game, level, null, new Random().nextInt());
+    	}
+    	
+    	if(agent.equals("MCTS"))
+    	{
+    		ArcadeMachine.runOneGame(game, level, true, sampleMCTSController, null, 0, 0);
+    	}
+    	
+    	if(agent.equals("Genetic"))
+    	{
+    		ArcadeMachine.runOneGame(game, level, true, sampleGAController, null, 0, 0);
+    	}
     }
 }

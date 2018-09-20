@@ -1,0 +1,19 @@
+BasicGame
+    SpriteSet
+        a > OrientedAvatar img=oryx/dragon3.png
+        sky > Immovable img=oryx/backLBlue
+        mediumR > Missile frameRate=6 orientation=RIGHT img=newset/camel3 color=BROWN speed=0.3
+        burgerhole > SpawnPoint prob=0.15 total=5 img=newset/fastfoodtrolley2 color=LIGHTGRAY stype=power cooldown=8 portal=True
+        power > Resource img=oryx/orb2 shrinkfactor=0.8 color=LIGHTGREEN
+
+    LevelMapping
+        ¢ > sky
+        ¤ > mediumR sky
+        ¥ > a sky
+        ¦ > burgerhole sky
+        § > power sky
+        
+    InteractionSet
+        
+    TerminationSet
+        

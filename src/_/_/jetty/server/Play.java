@@ -23,7 +23,7 @@ public class Play extends HttpServlet{
 		// TODO Auto-generated method stub
 		//super.doPost(req, resp);
 		System.out.println("play");
-		
+		String agent = req.getParameter("agent");
 		InputStream in = req.getInputStream();
 		String descriptions = getStringFromInputStream(in);
 		
@@ -32,10 +32,10 @@ public class Play extends HttpServlet{
 			JSONObject json = (JSONObject) parser.parse(descriptions);
 			String game = json.get("game").toString();
 			String level = json.get("level").toString();
-			generateVGDLFile("game.txt", game);
-			generateVGDLFile("level.txt", level);
+			generateVGDLFile("simulation/game.txt", "simulation/level.txt", game, level);
+			
 			GameRun gameRun = new GameRun();
-			gameRun.run("game.txt", "level.txt");
+			gameRun.run("simulation/game.txt", "simulation/level.txt", agent);
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -47,19 +47,19 @@ public class Play extends HttpServlet{
 	 * @param game
 	 * @throws IOException
 	 */
-	public void generateVGDLFile(String fileName, String fileContent) throws IOException {
-		File file = new File(fileName);
-		//Create the file
-		if (file.createNewFile())
-		{
-		    System.out.println("File is created!");
-		} else {
-		    System.out.println("File already exists.");
-		}
-		//Write Content
-		FileWriter writer = new FileWriter(file);
-		writer.write(fileContent);
-		writer.close();
+	public void generateVGDLFile(String gameFile, String levelFile, String gameContent, String levelContent) throws IOException {
+
+		purgeDirectory(new File("simulation/"));
+		File fileGameDescription = new File(gameFile);
+		
+		FileWriter gameWriter = new FileWriter(fileGameDescription);
+		gameWriter.write(gameContent);
+		gameWriter.close();
+		
+		File fileLevelDescription = new File(levelFile);
+		FileWriter levelWriter = new FileWriter(fileLevelDescription);
+		levelWriter.write(levelContent);
+		levelWriter.close();
 	}
 	
 	// convert InputStream to String
@@ -90,5 +90,13 @@ public class Play extends HttpServlet{
 
 			return sb.toString();
 
+		}
+		
+		void purgeDirectory(File dir) {
+		    for (File file: dir.listFiles()) {
+		        if (file.isDirectory())
+		            purgeDirectory(file);
+		        file.delete();
+		    }
 		}
 }

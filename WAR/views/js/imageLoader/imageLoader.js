@@ -94,21 +94,37 @@ function closeImagePicker()
 
 function createLevelMappingForThisImage(identifier)
 {
-    var background = getLevelBackgroundIdentifierForThisLevel();
-    var mapEntry;
-    if (background != "this level has no background")
+    if(!isIdentifierAlreadyInTheLevelMapping(identifier))
     {
-        var position = whereDoesTheLevelBGAppearsInTheArray();
+        var background = getLevelBackgroundIdentifierForThisLevel();
+        var mapEntry;
+        if (background != "this level has no background") {
+            var position = whereDoesTheLevelBGAppearsInTheArray();
 
-        if (position == 0) {
-            mapEntry = [background, identifier];
+            if (position == 0) {
+                mapEntry = [background, identifier];
+            }
+            else {
+                mapEntry = [identifier, background];
+            }
         }
         else {
-            mapEntry = [identifier, background];
+            mapEntry = [identifier];
+        }
+        gameObj["LevelMapping"][symbols[pointer++]] = mapEntry;
+    }
+}
+
+function isIdentifierAlreadyInTheLevelMapping(identifier)
+{
+    var entries = gameObj["LevelMapping"];
+    for(var entry in entries)
+    {
+        var elements = entries[entry];
+        if(elements.includes(identifier))
+        {
+            return true;
         }
     }
-    else {
-        mapEntry = [identifier];
-    }
-    gameObj["LevelMapping"][symbols[pointer++]] = mapEntry;
+    return false;
 }

@@ -77,6 +77,7 @@ function addToSpriteSet(obj)
 {
     if (confirm("Add to sprite set?")) {
         gameObj["SpriteSet"].push(obj);
+        createLevelMappingForThisImage(obj.identifier);
         refreshGame(gameObj);
         askForRecommendations(obj.referenceClass);
     }
