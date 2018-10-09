@@ -15,11 +15,44 @@ xmlhttp.onreadystatechange = function() {
 /**
  * Prepare and send the GET request to the server
  */
-function askForRecommendations(type) {
-    if(type != "Regular") {
-        xmlhttp.open("GET", "http://localhost:9001/recc" + "?type=" + type, true);
+function askForRecommendations(sendSet) {
+    if(sendSet != "") {
+        xmlhttp.open("GET", "http://localhost:9001/recc" + "?askForRecommendations=" + sendSet, true);
         xmlhttp.send();
     }
+}
+
+var types = [];
+function sendSpriteTypesToTheServe(spriteSet)
+{
+    for(var i = 0; i < spriteSet.length; i++)
+    {
+        var obj = spriteSet[i];
+        if(obj.referenceClass)
+        {
+            if(!types.includes(obj.referenceClass))
+            {
+                types.push(obj.referenceClass);
+            }
+        }
+
+        if(obj.children.length > 0)
+        {
+            var childs = obj.children;
+            for(var j = 0; j < childs.length; j++)
+            {
+                sendSpriteTypesToTheServe(childs[j]);
+            }
+        }
+    }
+
+    var send = "";
+    for(var i = 0; i < types.length; i++)
+    {
+        send = types[i] + " " + send;
+    }
+    types = [];
+    askForRecommendations(send);
 }
 
 function createReccomendationList(recommendationList)
@@ -28,37 +61,139 @@ function createReccomendationList(recommendationList)
     var ul = document.getElementById("recommenderUl");
     for(var i = 0; i < recommendationList.length; i++)
     {
-        var recommendation = recommendationList[i];
-        var gameName = recommendation["game"];
-        var sprite = recommendation["sprites"];
+        var r = recommendationList[i];
+        var confidence = r['confidence'];
+        var type = r['type'];
+        var specObj = r['specialized'];
+        var commObj = r['common'];
 
-        var li = document.createElement('li');
-        li.classList.add('recLiClass');
+        var containerDiv = document.createElement('div');
+        containerDiv.id = "containerDiv";
 
-        var span = document.createElement('span');
-        span.classList.add("recSpanClass");
-        span.innerHTML = "from " + gameName;
+        var groupSpanDiv = document.createElement('div');
+        groupSpanDiv.id = "groupSpanDiv";
 
-        var div = document.createElement('div');
-        div.id = sprite.identifier + "Rec" + i;
-        div.classList.add("recDivClass");
-        div.innerHTML = sprite.identifier;
-        div.setAttribute('onmousedown', 'getRecObj(this.id)');
+        var confDiv = document.createElement('div');
+        confDiv.id = "confDiv";
 
-        if('img' in sprite.parameters)
-        {
-            var img = document.createElement('img');
-            img.classList.add('recImgClass');
-            img.src = sprite.parameters["img"] + ".png";
-            div.appendChild(img);
-        }
+        var confSpan = document.createElement('span');
+        confSpan.id = "confSpan";
+        confSpan.innerHTML = "Confidence";
+        confSpan.classList.add('descriptionSpan');
 
-        span.appendChild(div);
-        li.appendChild(span);
-        ul.appendChild(li);
+        var confSpanValue = document.createElement('span');
+        confSpanValue.innerHTML = confidence;
+        confSpanValue.classList.add('spanValue');
 
-        mapRecommendationToObj.set(div.id, sprite);
+        var typeDiv = document.createElement('div');
+        typeDiv.id = "typeDiv";
+
+        var typeSpan = document.createElement('span');
+        typeSpan.id = 'typeSpan';
+        typeSpan.classList.add('descriptionSpan');
+        typeSpan.innerHTML = "Type";
+
+        var typeSpanValue = document.createElement('span');
+        typeSpanValue.innerHTML = type;
+        typeSpanValue.classList.add('spanValue');
+
+        var spriteContainerDiv = document.createElement('div');
+        spriteContainerDiv.id = 'spriteContainerDiv';
+        var spanSpecialized = document.createElement('div');
+        spanSpecialized.innerHTML = "Specialized";
+
+        var specializedDiv = document.createElement('div');
+        specializedDiv.id = "specializedDiv" + i;
+        specializedDiv.classList.add('specializedDiv');
+        mapRecommendationToObj.set(specializedDiv.id, specObj);
+
+        var specializedSpan = document.createElement('span');
+        specializedSpan.id = 'specializedSpan';
+        specializedSpan.innerHTML = 'Specialized';
+
+        var commonSpan = document.createElement('span');
+        commonSpan.id = 'commonSpan';
+        commonSpan.innerHTML = 'Common';
+
+        var specializedSpriteImg = document.createElement('img');
+        specializedSpriteImg.src = specObj.parameters['img'] + ".png";
+
+        var commonDiv = document.createElement('div');
+        commonDiv.id = "commonDiv" + i;
+        commonDiv.classList.add("commonDiv");
+        //commonDiv.setAttribute("onmouseover", "retrieveRecommendationObj(this.id)");
+        mapRecommendationToObj.set(commonDiv.id, commObj);
+
+        var commonSpriteImg = document.createElement('img');
+        commonSpriteImg.src = commObj.parameters['img'] + ".png";
+
+        confDiv.appendChild(confSpan);
+        confDiv.appendChild(confSpanValue);
+
+        typeDiv.appendChild(typeSpan);
+        typeDiv.appendChild(typeSpanValue);
+
+        groupSpanDiv.appendChild(confDiv);
+        groupSpanDiv.appendChild(typeDiv);
+
+        specializedDiv.appendChild(specializedSpriteImg);
+        var specObj = retrieveRecommendationObj(specializedDiv.id);
+        var specInfoDiv = divObj(specObj);
+        specializedDiv.appendChild(specInfoDiv);
+
+        commonDiv.appendChild(commonSpriteImg);
+        var obj = retrieveRecommendationObj(commonDiv.id);
+        var commonInfoDiv = divObj(obj);
+        commonDiv.appendChild(commonInfoDiv);
+
+        spriteContainerDiv.appendChild(specializedSpan);
+        spriteContainerDiv.appendChild(specializedDiv);
+        spriteContainerDiv.appendChild(commonSpan);
+        spriteContainerDiv.appendChild(commonDiv);
+
+        containerDiv.appendChild(groupSpanDiv);
+        containerDiv.appendChild(spriteContainerDiv);
+
+        ul.appendChild(containerDiv);
     }
+}
+
+function divObj(obj)
+{
+    var parContainerDiv = document.createElement('div');
+    parContainerDiv.id = 'parContainerDiv';
+
+    var nameDiv = document.createElement('div');
+    nameDiv.id = 'nameDiv';
+
+    var nameSpan = document.createElement('span');
+    nameSpan.id = 'nameSpan';
+    nameSpan.innerHTML = 'id: ' + obj.identifier;
+
+    nameDiv.appendChild(nameSpan);
+    parContainerDiv.appendChild(nameDiv);
+
+    for(var par in obj.parameters)
+    {
+        if(par != "img") {
+            var div = document.createElement('div');
+            div.classList.add('parDiv');
+
+            var keySpan = document.createElement('span');
+            keySpan.classList.add('parKeySpan');
+            keySpan.innerHTML = par;
+
+            var valSpan = document.createElement('span');
+            valSpan.classList.add('parKeyValue');
+            valSpan.innerHTML = obj.parameters[par];
+
+            div.appendChild(keySpan);
+            div.appendChild(valSpan);
+            parContainerDiv.appendChild(div);
+        }
+    }
+
+    return parContainerDiv;
 }
 
 function retrieveRecommendationObj(id)
@@ -79,7 +214,6 @@ function addToSpriteSet(obj)
         gameObj["SpriteSet"].push(obj);
         createLevelMappingForThisImage(obj.identifier);
         refreshGame(gameObj);
-        askForRecommendations(obj.referenceClass);
     }
 }
 

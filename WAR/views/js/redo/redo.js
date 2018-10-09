@@ -30,7 +30,7 @@ function redoSpriteSet(game)
     createImgList(sprites);
 }
 
-function redoInteractionSet(game)
+function redoInteractionSet(game) 
 {
     var interactions = game["InteractionSet"];
     deleteInteractionList();

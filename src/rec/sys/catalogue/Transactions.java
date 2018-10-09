@@ -18,12 +18,12 @@ public class Transactions {
 	
 	public Catalogue catalogue;
 	
-	public HashMap<Integer, HashSet> gameTransaction;
+	public HashMap<Integer, ArrayList> gameTransaction;
 	
 	public Transactions() throws IOException
 	{
 		this.catalogue = new Catalogue("examples/gridphysics/");
-		this.gameTransaction = new HashMap<Integer, HashSet>();
+		this.gameTransaction = new HashMap<Integer, ArrayList>();
 	}
 	
 	public void printTransactions() throws IOException
@@ -31,7 +31,8 @@ public class Transactions {
 		PrintWriter writer = new PrintWriter("recommender/input.txt", "UTF-8");
 		for(Integer i: gameTransaction.keySet())
 		{
-			 	Set<String> transaction = gameTransaction.get(i);
+			    System.out.println(i);
+			 	ArrayList<String> transaction = gameTransaction.get(i);
 			 	String transNumbers = "";
 			 	int idTrans [] = new int [transaction.size()];
 			 	int j = 0;
@@ -55,13 +56,13 @@ public class Transactions {
 		return sprites;
 	}
 	
-	public HashSet<String> getGameTransactions(JSONArray spriteSet, HashSet<String> set)
+	public ArrayList<String> getGameTransactions(JSONArray spriteSet, ArrayList<String> set)
 	{
 		for(int i = 0; i < spriteSet.size(); i++)
 		{
 			JSONObject obj = (JSONObject) spriteSet.get(i);
 			String referenceClass = (String) obj.get("referenceClass");
-			if(referenceClass != null)
+			if(referenceClass != null && !set.contains(referenceClass))
 				set.add(referenceClass);
 			JSONArray children = (JSONArray) obj.get("children");
 			if(children.size() > 0)
@@ -79,17 +80,24 @@ public class Transactions {
 		{
 			JSONObject obj = gameCollection.get(i);
 			JSONArray spriteSet = (JSONArray) obj.get("SpriteSet");
-			HashSet transaction = getGameTransactions(spriteSet, new HashSet<String>());
+			ArrayList transaction = getGameTransactions(spriteSet, new ArrayList());
 			this.gameTransaction.put(i, transaction);
 		}
 	}
 	
 	public static void main(String[] args) throws IOException {
 		Transactions t = new Transactions();
-		JSONObject obj = t.catalogue.loadSingleGame("bomber.txt", "examples/gridphysics/");
-		HashSet<String> arr = t.getGameTransactions((JSONArray)obj.get("SpriteSet"), new HashSet<String>());
 		t.allTransactions();
 		t.printTransactions();
+//		for (JSONObject obj : t.catalogue.allGames) 
+//		{
+//		JSONObject obj = t.catalogue.loadSingleGame("camelRace.txt", "examples/gridphysics/");
+//		ArrayList<String> arr = t.getGameTransactions((JSONArray)obj.get("SpriteSet"), new ArrayList<String>());
+//		t.allTransactions();
+//		t.printTransactions();
+//		System.out.println();
+
+//		}
 		System.out.println();
 	}
 

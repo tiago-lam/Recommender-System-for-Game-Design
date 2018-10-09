@@ -2,6 +2,7 @@ package _._.jetty.server;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -14,8 +15,10 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import _.myParser.ParserGameDescription;
+import rec.sys.basics.RecommendationSpriteData;
 import rec.sys.constants.SpriteNumberTable;
 import rec.sys.sprite.recommender.SpriteRecommender;
+import rec.sys.sprite.recommender.SpriteSetRecommender;
 
 @SuppressWarnings("serial")
 public class GetRecommendations extends HttpServlet
@@ -26,28 +29,37 @@ public class GetRecommendations extends HttpServlet
                           HttpServletResponse response ) throws ServletException,
                                                         IOException
     {
-    	String type = request.getParameter("type");
-    	SpriteRecommender recommender = new SpriteRecommender(
-    			"recommender/itemsInUse.txt", "recommender/transactionsInUse.txt");
-    	ArrayList<JSONObject> list = null;
-		try {
-			int typeNumberId = SpriteNumberTable.retrieveSpriteID(type);
-			list = recommender.recommend(typeNumberId);
-		} catch (NumberFormatException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-    	JSONArray recommendationList = new JSONArray();
-    	for (JSONObject object : list) 
+//    	String type = request.getParameter("type");
+//    	SpriteRecommender recommender = new SpriteRecommender(
+//    			"recommender/itemsInUse.txt", "recommender/transactionsInUse.txt");
+    	String toSend = "";
+    	String elements = request.getParameter("askForRecommendations");
+    	String [] setElements = elements.split(" ");
+    	ArrayList<Integer> arr = new ArrayList<>();
+    	for(int i = 0; i < setElements.length; i++)
     	{
-    		recommendationList.add(object);
+    		arr.add(SpriteNumberTable.retrieveSpriteID(setElements[i]));
+    	}
+    	SpriteSetRecommender ssr = new SpriteSetRecommender();
+    	ArrayList<RecommendationSpriteData> recs;
+		try {
+			recs = ssr.recommendationsBasedOnSpriteSet(arr);
+			JSONArray toRecommend = new JSONArray();
+	    	for (RecommendationSpriteData r : recs) 
+	    	{
+				JSONObject obj = new JSONObject();
+				obj.put("type", r.typeName);
+				obj.put("confidence", r.confidence);
+				obj.put("common", r.common);
+				obj.put("specialized", r.specialized);
+				toRecommend.add(obj);
+				toSend = toRecommend.toJSONString();
+			}
+		} catch (ParseException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
 		}
     	
-    	String toSend = recommendationList.toJSONString();
-		
     	response.setContentType("text/html");
         response.setStatus(HttpServletResponse.SC_OK);
         response.getWriter().println(toSend);

@@ -1,0 +1,11 @@
+BasicGame 
+    SpriteSet 
+    	background > Immovable img=oryx/space1
+    LevelMapping
+        b > background
+
+    TerminationSet
+    	
+        
+    InteractionSet
+        background  EOS  > stepBack

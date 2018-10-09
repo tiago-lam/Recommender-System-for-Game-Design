@@ -5,7 +5,7 @@ function addNewSpriteToSpriteSet(spriteSet) {
     {
         object.children = [];
         object.parameters = {};
-        object.referenceClass = defineRefClass();
+        object.referenceClass = "Regular";
 
         // if("img" in object.parameters) {
         //     var background = getLevelBackgroundIdentifierForThisLevel();
@@ -27,7 +27,6 @@ function addNewSpriteToSpriteSet(spriteSet) {
         // }
         spriteSet.push(object);
         refreshGame(gameObj);
-        askForRecommendations(object.referenceClass);
     }
 }
 

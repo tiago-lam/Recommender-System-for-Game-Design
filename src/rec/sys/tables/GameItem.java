@@ -1,19 +1,19 @@
 package rec.sys.tables;
 
-import java.util.List;
+import java.util.HashSet;
 
 public class GameItem {
 	
 	public int gameNumber;
 	public String gameName;
-	public List<Integer> spriteItems;//spriteSet;
+	public HashSet<Integer> spriteItems;//spriteSet;
 	
 	public GameItem()
 	{
 		
 	}
 	
-	public GameItem(int gameNumber, String gameName, List<Integer> spriteItems)
+	public GameItem(int gameNumber, String gameName, HashSet<Integer> spriteItems)
 	{
 		this.gameNumber = gameNumber;
 		this.gameName = gameName;

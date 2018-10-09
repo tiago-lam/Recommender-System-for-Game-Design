@@ -8,7 +8,6 @@
     <link rel="stylesheet" type="text/css" href="css/components/slider.css">
     <link rel="stylesheet" type="text/css" href="css/components/checkboxes.css">
     <link rel="stylesheet" type="text/css" href="css/components/select.css">
-    <link rel="stylesheet" type="text/css" href="css/tabs/tabs.css">
     <link rel="stylesheet" type="text/css" href="css/interaction.css">
     <link rel="stylesheet" type="text/css" href="css/termination.css">
     <link rel="stylesheet" type="text/css" href="css/levelMap.css">
@@ -24,7 +23,7 @@
 
     <script src="js/refreshSpriteSet.js"></script>
 
-    <div class="tabbed" id="levelDivId">
+    <div class="tabbed" id="levelDivId" style="display: block">
         <input type="radio" name="tabs" id="levelMap" checked>
         <label for="levelMap">Level Map</label>
         <input type="radio" name="tabs" id="spriteSet">
@@ -35,9 +34,11 @@
         <label for="terminationSet">Termination Set</label>
         <input type="radio" name="tabs" id="load">
         <label for="load">Load</label>
+        <input type="radio" name="tabs" id="settings">
+        <label for="settings">Settings</label>
 
         <div class="tabs">
-            <div><h2>Level Map</h2>
+            <div id="levelMapDiv"><h2>Level Map</h2>
                 <div>
 
                     <div id="createTableDiv" style="display: none">
@@ -55,11 +56,6 @@
                         </div>
                     </div>
 
-                    <div id="paintModeDiv">
-                        <input id="paintModeInput" name="paint mode" type="checkbox" onclick="changeMode()">
-                       <label for="paintModeInput">Paint Mode</label>
-                    </div>
-
                     <div id="playDiv">
                         <div id="agentSelectionDiv">
                             <span>Select Agent</span>
@@ -74,6 +70,10 @@
                     </div>
 
                     <div id="level">
+                        <div id="paintModeDiv">
+                            <input id="paintModeInput" name="paint mode" type="checkbox" onclick="changeMode()">
+                            <label for="paintModeInput">Paint Mode</label>
+                        </div>
                         <div id="imageListDiv">
                             <ul id="imageListUl"></ul>
                         </div>
@@ -89,7 +89,6 @@
             </div>
 
             <div id="spriteSetDiv">
-                <h2>Sprite Set</h2>
                 <div><input type="button" onclick="addNewSpriteToSpriteSet(gameObj['SpriteSet'])">Add Sprite</input></div>
                 <div class="dd" id="spriteSetContainer" oncontextmenu="return false" onchange="updateObj();">
                     <ul id="spriteList"></ul>
@@ -101,17 +100,17 @@
                     <div id="analogueParameters">
 
                         <div id="shrinkFactor" class="contentSliders">
-                            <label id="shrinkLabel" for="shrinkLabel">Shrink Factor: <span id="shrinkValue">0.5</span></label>
+                            <label id="shrinkLabel" for="shrinkLabel">Shrink Factor: <span id="shrinkValue" class="inspectorValues">0.5</span></label>
                             <input class="bars sliders" type="range" min="0.0" max="1.0" value="0.5" step="0.1" class="slider" id="shrinkControl" oninput="updateShrinkValue(this.value, updateObjParamValue)">
                         </div>
 
                         <div id="speed" class="contentSliders">
-                            <label id="speedLabel" for="speedLabel">Speed: <span id="speedValue">5</span></label>
+                            <label id="speedLabel" for="speedLabel">Speed: <span id="speedValue" class="inspectorValues">5</span></label>
                             <input class="bars sliders" type="range" min="0.0" max="10.0" value="1.0" step="0.05" class="slider" id="speedControl" oninput="updateSpeedValue(this.value, updateObjParamValue)">
                         </div>
 
                         <div id="cooldown" class="contentSliders">
-                            <label id="cooldownLabel" for="cooldownLabel">cooldown: <span id="cooldownValue">5</span></label>
+                            <label id="cooldownLabel" for="cooldownLabel">cooldown: <span id="cooldownValue" class="inspectorValues">5</span></label>
                             <input class="bars sliders" type="range" min="1" max="10" value="1" step="1" class="slider" id="cooldownControl" oninput="updateCooldownValue(this.value, updateObjParamValue)">
                         </div>
                     </div><!-- end div anologue parameters -->
@@ -173,10 +172,10 @@
                                 <option value="Regular">Regular</option>
                                 <option value="ShootAvatar">ShootAvatar</option>
                                 <option value="FlakAvatar">FlakAvatar</option>
-                                <option value="MovingAvatar">ShootAvatar</option>
-                                <option value="HorizontalAvatar">VerticalAvatar</option>
+                                <option value="MovingAvatar">MovingAvatar</option>
+                                <option value="VerticalAvatar">VerticalAvatar</option>
                                 <option value="HorizontalAvatar">HorizontalAvatar</option>
-                                <option value="HorizontalAvatar">MissileAvatar</option>
+                                <option value="MissileAvatar">MissileAvatar</option>
                                 <option value="OrientedAvatar">OrientedAvatar</option>
                                 <option value="OngoingAvatar">OngoingAvatar</option>
                                 <option value="OngoingTurningAvatar">OngoingTurningAvatar</option>
@@ -205,7 +204,7 @@
                         <!--<button id="inputButtonConfirmId" type="button" onclick="action(spriteSetObj)">Confirm</button>-->
                     <!--</div>-->
                     <div id="saveSpriteSetDiv">
-                        <button id="saveSpriteSetButtonId" type="button" onclick="saveGameState()">Save Sprite Set</button>
+                        <button id="saveSpriteSetButtonId" type="button" onclick="sendSpriteTypesToTheServe(gameObj.SpriteSet)">Recommendations</button>
                     </div>
                 </div><!--End div inspector-->
 
@@ -217,6 +216,7 @@
                 </div>
 
                 <div id="recommenderDiv">
+                    <span id="suggestedSpan">Suggested sprites</span>
                     <ul id="recommenderUl"></ul>
                 </div>
 
@@ -275,6 +275,24 @@
                </div>
             </div>
 
+            <div><h2>Settings</h2>
+                <div id="recommendationOnOffDiv">
+                    <input type="radio">
+                </div>
+
+                    <!--<script>-->
+                        <!--function loadGame()-->
+                        <!--{-->
+                            <!--var gameSelect = document.getElementById('chooseGameSelect');-->
+                            <!--getGameParam = "game=" + gameSelect.value;-->
+                            <!--localStorage.setItem("varGetGameParam", getGameParam);-->
+                            <!--location.reload();-->
+                        <!--}-->
+                    <!--</script>-->
+                    <!--<input type="button" onclick="loadGame()">Load Game</input>-->
+                </div>
+            </div>
+
         </div>
     </div>
 
@@ -315,7 +333,7 @@
     <script type="text/javascript" src="js/imageLoader/imageLoader.js"></script>
     <script type="text/javascript" src="js/convertToVGDL/gameObjToVGDL.js"></script>
     <script type="text/javascript" src="js/gettingImages/gettingimages.js"></script>
-    <script type="text/javascript" src="js/recommendations/getRecommendations.js"></script
+    <script type="text/javascript" src="js/recommendations/getRecommendations.js"></script>
 
 </body>
 </html>

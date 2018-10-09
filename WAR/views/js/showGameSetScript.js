@@ -101,6 +101,23 @@ function initializeGameObject(response) {
     console.log(levelMatrixObject);
 }
 
+function initializationProtocol(obj) {
+    initializeGameObject(obj);
+    structureTheSpriteSetOnHtml();
+    buildTheInteractionSet(interactionSetObj);
+    buildTerminationSet(terminationSetObj);
+    appendWallToMappingObj();
+    findObjectsWithoutSymbols();
+    var rows = levelMatrixObject.rows;
+    var columns = levelMatrixObject.columns;
+    createTable(rows, columns);
+    createImgList(spriteSetObj);
+    drawLevel();
+    saveGameState();
+    startLevelObserver();
+    document.onkeydown = redoProcedureByPressingCtrlZ;
+}
+
 /**
  * Function responsible for perform the GET response
  */
@@ -108,22 +125,8 @@ xmlhttp.onreadystatechange = function() {
 
     if (this.readyState == 4 && this.status == 200) {
 
-        console.log(this.responseText);
-
-        initializeGameObject(this.responseText);
-        structureTheSpriteSetOnHtml();
-        buildTheInteractionSet(interactionSetObj);
-        buildTerminationSet(terminationSetObj);
-        appendWallToMappingObj();
-        findObjectsWithoutSymbols();
-        var rows = levelMatrixObject.rows;
-        var columns = levelMatrixObject.columns;
-        createTable(rows, columns);
-        createImgList(spriteSetObj);
-        drawLevel();
-        saveGameState();
-        startLevelObserver();
-        document.onkeydown = redoProcedureByPressingCtrlZ;
+        var obj = this.responseText;
+        initializationProtocol(obj);
     }
 };
 /**

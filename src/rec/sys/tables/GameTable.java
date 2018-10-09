@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Scanner;
 
 import rec.sys.constants.TableIDGame;
@@ -33,7 +34,7 @@ public class GameTable {
             while((line = bufferedReader.readLine()) != null) {
             	GameItem g = new GameItem();
             	Scanner scanner = new Scanner(line);
-            	ArrayList<Integer> items = new ArrayList<>();
+            	HashSet<Integer> items = new HashSet<>();
             	while(scanner.hasNextInt())
             	{
             		items.add(scanner.nextInt());

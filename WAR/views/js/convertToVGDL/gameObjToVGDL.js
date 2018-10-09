@@ -26,8 +26,14 @@ function JSONtoString(obj, ident) {
     }
 
     for (var paramKey in obj.parameters) {
-        if(paramKey == "img") {
-            obj.parameters[paramKey] = obj.parameters[paramKey].replace("http://localhost:9001/WAR/views/", "")
+        if(paramKey == "img")
+        {
+            obj.parameters[paramKey] =
+                obj.parameters[paramKey].replace("http://localhost:9001/WAR/views/", "")
+            if(!obj.parameters[paramKey].includes(".png"))
+            {
+                obj.parameters[paramKey] = obj.parameters[paramKey] + ".png";
+            }
         }
         objString = objString + " " + paramKey + "=" + obj.parameters[paramKey];
     }

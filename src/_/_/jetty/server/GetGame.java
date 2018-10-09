@@ -29,7 +29,7 @@ public class GetGame extends HttpServlet
 		String toSend = "";
 		if(gameToServe == null)
 		{
-			toSend = getGameJSONObject("examples/gridphysics/" + "_" + ".txt");
+			toSend = getGameJSONObject("emptyGame/" + "_" + ".txt");
 		}
 		else
 		{

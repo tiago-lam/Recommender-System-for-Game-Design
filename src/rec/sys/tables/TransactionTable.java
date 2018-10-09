@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Scanner;
 
 public class TransactionTable {
@@ -32,7 +33,6 @@ public class TransactionTable {
             while((line = bufferedReader.readLine()) != null) {
             	Transaction t = new Transaction();
             	Scanner scanner = new Scanner(line);
-            	System.out.println(line);
             	t.transactionNumber = transactionCounter++;
             	t.transactionSupport = scanner.nextInt();
             	ArrayList<Integer> transactions = new ArrayList<Integer>();
@@ -66,9 +66,9 @@ public class TransactionTable {
 		{
 			System.out.println(t.transactionNumber);
 			System.out.println(t.transactionSupport);
-			for (int i = 0; i < t.spriteItems.size(); i++) 
+			for (Integer i : t.spriteItems) 
 			{
-				System.out.println(t.spriteItems.get(i));
+				System.out.println(i);
 			}
 		}
 	}

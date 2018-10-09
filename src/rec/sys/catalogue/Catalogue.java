@@ -3,12 +3,9 @@ package rec.sys.catalogue;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import org.json.simple.JSONObject;
-
-import core.Node;
-import core.VGDLParser;
-import tools.IO;
 
 public class Catalogue {
 	
@@ -37,6 +34,7 @@ public class Catalogue {
 					gameNames.add(listOfFiles[i].getName());
 			}
 		}
+		Collections.sort(gameNames);
 		return gameNames;
 	}
 	
@@ -54,6 +52,16 @@ public class Catalogue {
 			JSONObject gameObj = loadSingleGame(game, gamesDirectory);
 			allGames.add(gameObj);
 		}
+	}
+	
+	public void generateInputForApriori()
+	{
+		
+	}
+	
+	public static void main(String[] args) throws IOException {
+		Catalogue c = new Catalogue("examples/gridphysics/");
+		System.out.println();
 	}
 	
 }

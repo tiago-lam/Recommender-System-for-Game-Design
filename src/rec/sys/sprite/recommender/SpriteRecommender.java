@@ -9,6 +9,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Scanner;
@@ -29,7 +30,7 @@ public class SpriteRecommender {
 	public TransactionTable transactionTable;
 	public GameTable gameTable;
 	public ArrayList<Transaction> transactionsInUse;
-	public HashSet<Integer> itemsInUse;
+	public ArrayList<Integer> itemsInUse;
 	private int MAX_PROTOCOL_REPS = 100;
 	
 	public SpriteRecommender()
@@ -37,7 +38,7 @@ public class SpriteRecommender {
 		transactionTable = new TransactionTable();
 		gameTable = new GameTable();
 		transactionsInUse = new ArrayList<>();
-		itemsInUse = new HashSet<Integer>();
+		itemsInUse = new ArrayList<Integer>();
 	}
 	
 	public SpriteRecommender(String itemsInUseFile, String transactionsInUseFile)
@@ -51,7 +52,7 @@ public class SpriteRecommender {
 	
 	public void initializeItemsInUse(String itemsInUseFile)
 	{
-		itemsInUse = new HashSet<Integer>();
+		itemsInUse = new ArrayList<Integer>();
 		addAvatarSpritesToTheItemsInUse();
 		String line = null;
 
@@ -166,10 +167,10 @@ public class SpriteRecommender {
 	{
 		ArrayList<Transaction> transactions = transactionTable.transactions;
 		
-		for(int i = 0; i < transactions.size(); i++)
+		for(Transaction t : transactions)
 		{
-			Transaction trans = transactions.get(i);
-			List<Integer> items = trans.spriteItems;
+			Transaction trans = t;
+			ArrayList<Integer> items = trans.spriteItems;
 			if(items.contains(new Integer(spriteTypeNumber)))
 			{
 				return trans;
@@ -180,7 +181,7 @@ public class SpriteRecommender {
 	
 	public int recommendSprite(int spriteTypeInUse, Transaction trans) throws IOException
 	{
-		List<Integer> items = trans.spriteItems;
+		ArrayList<Integer> items = trans.spriteItems;
 		items.remove(new Integer(spriteTypeInUse));
 		trans.spriteItems = items;
 		if(items.size() > 0)
@@ -190,7 +191,7 @@ public class SpriteRecommender {
 		return -1;
 	}
 
-	public int getTheRightItemToRecommend(Transaction trans, List<Integer> items) throws IOException 
+	public int getTheRightItemToRecommend(Transaction trans, ArrayList<Integer> items) throws IOException 
 	{
 		for(Integer type : items)
 		{
@@ -234,13 +235,13 @@ public class SpriteRecommender {
 	{	
 		ArrayList<Integer> gamesWithTheCombination = new ArrayList<>();
 		ArrayList<GameItem> games = gameTable.games;
-		for (int i = 0; i < games.size(); i++) 
+		for (GameItem g : games) 
 		{
-			GameItem tempGame = games.get(i);
-			ArrayList<Integer> tempGameList = (ArrayList<Integer>) tempGame.spriteItems;
+			GameItem tempGame = g;
+			HashSet<Integer> tempGameList = (HashSet<Integer>) tempGame.spriteItems;
 			HashSet<Integer> spriteSetTemp = new HashSet<>();
-			for(Integer sp : tempGameList) { spriteSetTemp.add(sp); }
-			
+			for(Integer sp : tempGameList) { spriteSetTemp.add(sp); 
+		}	
 			if(DoesSetContainsSprites(sprites, spriteSetTemp))
 				gamesWithTheCombination.add(tempGame.gameNumber);
 		}
@@ -328,10 +329,11 @@ public class SpriteRecommender {
 		ArrayList<Integer> sprites = new ArrayList<>(); sprites.add(type); sprites.add(stype);
 		ArrayList<Integer> games = retrieveAllTheGamesWithThisCombinationOfSprites(sprites);
 		ArrayList<JSONObject> recommendations = retrieveAllTheSpritesToRecommend(games, SpriteNumberTable.retrieveSpriteNameID(stype));
+		ArrayList<JSONObject> recommendations2 = recommendations;
+		Collections.sort(recommendations, new SortRecommendations());
+		
 		return recommendations;
 	}
-	
-	
 	
 	public static void main(String[] args) throws ParseException, FileNotFoundException 
 	{
