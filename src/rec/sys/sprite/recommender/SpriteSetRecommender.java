@@ -222,6 +222,7 @@ public class SpriteSetRecommender extends SpriteRecommender
 			}
 		}
 		Collections.sort(toRecommend, new SortRecommendationsByConfidence());
+		Collections.reverse(toRecommend);
 		return toRecommend;
 	}
 	
