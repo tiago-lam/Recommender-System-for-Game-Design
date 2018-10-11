@@ -70,6 +70,19 @@ function createReccomendationList(recommendationList)
         var containerDiv = document.createElement('div');
         containerDiv.id = "containerDiv";
 
+        var gameNameDiv = document.createElement('div');
+        gameNameDiv.id = "gameNameDiv";
+
+        var gameNameSpan = document.createElement('span');
+        gameNameSpan.id = 'gameNameSpan';
+        gameNameSpan.classList.add('descriptionSpan');
+        gameNameSpan.innerHTML = "From: ";
+
+        var gameNameValueSpan = document.createElement('span');
+        gameNameValueSpan.id = 'gameNameValueSpan';
+        gameNameValueSpan.classList.add('spanValue');
+        gameNameValueSpan.innerHTML = r['game'];
+
         var groupSpanDiv = document.createElement('div');
         groupSpanDiv.id = "groupSpanDiv";
 
@@ -121,7 +134,6 @@ function createReccomendationList(recommendationList)
         var commonDiv = document.createElement('div');
         commonDiv.id = "commonDiv" + i;
         commonDiv.classList.add("commonDiv");
-        //commonDiv.setAttribute("onmouseover", "retrieveRecommendationObj(this.id)");
         mapRecommendationToObj.set(commonDiv.id, commObj);
 
         var commonSpriteImg = document.createElement('img');
@@ -140,22 +152,33 @@ function createReccomendationList(recommendationList)
         var specObj = retrieveRecommendationObj(specializedDiv.id);
         var specInfoDiv = divObj(specObj);
         specializedDiv.appendChild(specInfoDiv);
+        specializedDiv.setAttribute("onclick", "getRecObj(this.id)");
 
         commonDiv.appendChild(commonSpriteImg);
         var obj = retrieveRecommendationObj(commonDiv.id);
         var commonInfoDiv = divObj(obj);
         commonDiv.appendChild(commonInfoDiv);
+        commonDiv.setAttribute("onclick", "getRecObj(this.id)");
 
         spriteContainerDiv.appendChild(specializedSpan);
         spriteContainerDiv.appendChild(specializedDiv);
         spriteContainerDiv.appendChild(commonSpan);
         spriteContainerDiv.appendChild(commonDiv);
 
+        gameNameDiv.appendChild(gameNameSpan);
+        gameNameDiv.appendChild(gameNameValueSpan);
+
+        containerDiv.appendChild(gameNameDiv);
         containerDiv.appendChild(groupSpanDiv);
         containerDiv.appendChild(spriteContainerDiv);
 
         ul.appendChild(containerDiv);
     }
+}
+
+function show()
+{
+    alert('Show!');
 }
 
 function divObj(obj)

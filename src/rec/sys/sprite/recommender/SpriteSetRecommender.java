@@ -214,13 +214,14 @@ public class SpriteSetRecommender extends SpriteRecommender
 						if(spriteList.size() > 0)
 						{
 							Collections.sort(spriteList, new SortRecommendations());
-							RecommendationSpriteData rsd = new RecommendationSpriteData(sc.spriteType, spName, sc.confidence, spriteList.get(0), spriteList.get(spriteList.size()-1));
+							RecommendationSpriteData rsd = new RecommendationSpriteData(sc.spriteType, spName, sc.confidence, spriteList.get(0), spriteList.get(spriteList.size()-1), gi.gameName);
 							toRecommend.add(rsd);
 						}
 					}
 				}
 			}
 		}
+		Collections.sort(toRecommend, new SortRecommendationsByConfidence());
 		return toRecommend;
 	}
 	
@@ -262,13 +263,12 @@ public class SpriteSetRecommender extends SpriteRecommender
 					if(spriteList.size() > 0)
 					{
 						Collections.sort(spriteList, new SortRecommendations());
-						RecommendationSpriteData rsd = new RecommendationSpriteData(sc.spriteType, spName, sc.confidence, spriteList.get(0), spriteList.get(spriteList.size()-1));
+						RecommendationSpriteData rsd = new RecommendationSpriteData(sc.spriteType, spName, sc.confidence, spriteList.get(0), spriteList.get(spriteList.size()-1), gi.gameName);
 						toRecommend.add(rsd);
 					}
 				}
 			}
 		}
-		
 		System.out.println();
 	}
 }

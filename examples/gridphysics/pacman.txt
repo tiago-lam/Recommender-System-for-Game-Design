@@ -5,7 +5,7 @@ BasicGame square_size=20 obs=wall
             fruit > color=PINK img=newset/cherries2
             pellet > color=LIGHTYELLOW shrinkfactor=0.5 img=oryx/gold2
             power  > Resource color=LIGHTGREEN shrinkfactor=0.8 img=oryx/orb2
-        nest > SpawnPoint img=portal portal=True invisible=True
+        nest > SpawnPoint img=oryx/door2 portal=True invisible=True
             redspawn > stype=redOk
             orangespawn > stype=orangeOk
             bluespawn > stype=blueOk

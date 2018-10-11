@@ -9,18 +9,20 @@ public class RecommendationSpriteData
 	public double confidence;
 	public JSONObject common;
 	public JSONObject specialized;
+	public String gameTheyBelongTo;
 	
 	public RecommendationSpriteData()
 	{
 		
 	}
 	
-	public RecommendationSpriteData(int type, String typeName, double confidence, JSONObject common, JSONObject specialized)
+	public RecommendationSpriteData(int type, String typeName, double confidence, JSONObject common, JSONObject specialized, String gameTheyBelongTo)
 	{
 		this.type = type;
 		this.typeName = typeName;
 		this.confidence = confidence;
 		this.common = common;
 		this.specialized = specialized;
+		this.gameTheyBelongTo = gameTheyBelongTo;
 	}
 }

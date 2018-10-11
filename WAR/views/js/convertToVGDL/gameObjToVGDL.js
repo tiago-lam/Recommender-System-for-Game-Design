@@ -35,7 +35,10 @@ function JSONtoString(obj, ident) {
                 obj.parameters[paramKey] = obj.parameters[paramKey] + ".png";
             }
         }
-        objString = objString + " " + paramKey + "=" + obj.parameters[paramKey];
+
+        if(obj.parameters[paramKey] != "none") {
+            objString = objString + " " + paramKey + "=" + obj.parameters[paramKey];
+        }
     }
 
     for (var i = 0; i < ident; i++) {
@@ -150,27 +153,115 @@ function fromObjToString()
 
 function play()
 {
-    console.log("play");
-    xhr = new XMLHttpRequest();
-    var agent = document.getElementById('agentGameSelect');
-    var url = "http://localhost:9001/play?" + "agent=" + agent.options[agent.selectedIndex].value;
-    xhr.open("POST", url, true);
-    xhr.setRequestHeader("Content-type", "text/plain");
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState == 4 && xhr.status == 200) {
-            var resp = xhr.responseText;
-            console.log(resp);
-        }
-    }
-    var data = fromObjToString();
-    data = JSON.stringify(data);
-    xhr.send(data);
+    var hasAvatar = checkIfSpriteSetHasAnAvatar(gameObj["SpriteSet"])
 
-    setInterval(getImage(), 200);
+        console.log("play");
+        xhr = new XMLHttpRequest();
+        var agent = document.getElementById('agentGameSelect');
+        var url = "http://localhost:9001/play?" + "agent=" + agent.options[agent.selectedIndex].value;
+        xhr.open("POST", url, true);
+        xhr.setRequestHeader("Content-type", "text/plain");
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                var resp = xhr.responseText;
+                console.log(resp);
+            }
+        }
+        var data = fromObjToString();
+        data = JSON.stringify(data);
+        xhr.send(data);
+
+        setInterval(getImage(), 200);
+
 }
 
 function getImage()
 {
     frameXmlhttp.open("GET", "http://localhost:9001/frames", true);
     frameXmlhttp.send();
+}
+
+/*******************compiling********************************/
+
+function checkIfSpriteSetHasAnAvatar(spriteSet)
+{
+    for(var i = 0; i < spriteSet.length; i++)
+    {
+        var obj = spriteSet[i];
+        if(obj.referenceClass != null && obj.referenceClass.includes("Avatar"))
+        {
+            return true;
+        }
+
+        if(obj.children.length > 0)
+        {
+            var childs = obj.children;
+            for(var j = 0; j < childs.length; j++)
+            {
+                checkIfSpriteSetHasAnAvatar(childs);
+            }
+        }
+    }
+    return false;
+}
+
+function getAvatarIdentifier()
+{
+    var spriteSet = gameObj["SpriteSet"];
+    for(var i = 0; i < spriteSet.length; i++)
+    {
+        var obj = spriteSet[i];
+        if(obj.referenceClass.includes("Avatar"))
+        {
+            return obj.identifier;
+        }
+
+        if(obj.children.length > 0)
+        {
+            var childs = obj.children;
+            for(var j = 0; j < childs.length; j++)
+            {
+                checkIfSpriteSetHasAnAvatar(childs);
+            }
+        }
+    }
+    return "No avatar found";
+}
+
+function gettingAvatarMapId()
+{
+    var avatarId = getAvatarIdentifier();
+    if(avatarId != "No avatar found")
+    {
+        var levelMapping = gameObj["LevelMapping"];
+        for(attr in levelMapping)
+        {
+            var elems = levelMapping[attr];
+            if(elems.includes(avatarId))
+            {
+                return attr;
+            }
+        }
+    }
+    return "none";
+}
+
+function checkHowManyAvatarsAreInTheMap()
+{
+    var count = 0;
+    var avatarMapId = gettingAvatarMapId();
+
+    var lv = gameObj["Level"];
+    for(var i = 0; i < lv.length; i++)
+    {
+        for(var j = 0; j < lv[i].length; j++)
+        {
+          if(lv[i][j] == avatarMapId)
+          {
+              count++;
+          }
+        }
+    }
+
+    return count;
 }
