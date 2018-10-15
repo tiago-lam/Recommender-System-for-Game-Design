@@ -14,326 +14,326 @@
     <link rel="stylesheet" type="text/css" href="css/tabs/tabs.css">
     <link rel="stylesheet" type="text/css" href="css/recommendation.css">
 
-	<title>Sprite Set</title>
+    <title>Sprite Set</title>
 </head>
 <body>
 
-    <script
+<script
         src="libs/jquery.js"></script>
 
-    <script src="js/refreshSpriteSet.js"></script>
+<script src="js/refreshSpriteSet.js"></script>
 
-    <div class="tabbed" id="levelDivId" style="display: block">
-        <input type="radio" name="tabs" id="levelMap" checked>
-        <label for="levelMap">Level Map</label>
-        <input type="radio" name="tabs" id="spriteSet">
-        <label for="spriteSet">Sprite Set</label>
-        <input type="radio" name="tabs" id="interactionSet">
-        <label for="interactionSet">Interaction Set</label>
-        <input type="radio" name="tabs" id="terminationSet">
-        <label for="terminationSet">Termination Set</label>
-        <input type="radio" name="tabs" id="load">
-        <label for="load">Load</label>
-        <input type="radio" name="tabs" id="settings">
-        <label for="settings">Settings</label>
+<div class="tabbed" id="levelDivId" style="display: block">
+    <input type="radio" name="tabs" id="levelMap" checked>
+    <label for="levelMap">Level Map</label>
+    <input type="radio" name="tabs" id="spriteSet">
+    <label for="spriteSet">Sprite Set</label>
+    <input type="radio" name="tabs" id="interactionSet">
+    <label for="interactionSet">Interaction Set</label>
+    <input type="radio" name="tabs" id="terminationSet">
+    <label for="terminationSet">Termination Set</label>
+    <input type="radio" name="tabs" id="load">
+    <label for="load">Load</label>
+    <input type="radio" name="tabs" id="settings">
+    <label for="settings">Settings</label>
 
-        <div class="tabs">
-            <div id="levelMapDiv"><h2>Level Map</h2>
-                <div>
+    <div class="tabs">
+        <div id="levelMapDiv"><h2>Level Map</h2>
+            <div>
 
-                    <div id="createTableDiv" style="display: none">
-                        <div id="inputRowDivId">
-                            <span id="rowSpanId">number of rows</span>
-                            <input id="rowInput" type="number">
-                        </div>
-                        <div id="inputColumnDivId">
-                            <span id="colSpanId">number of columns</span>
-                            <input id="colInput" type="number">
-                        </div>
-                        <div id="createTableButtonDivId">
-                            <span id="createTableSpanId">Create Level Grid</span>
-                            <input id="createTabeleInputId" type="button" onclick="createTableByInput()">OK</input>
-                        </div>
+                <div id="createTableDiv" style="display: none">
+                    <div id="inputRowDivId">
+                        <span id="rowSpanId">number of rows</span>
+                        <input id="rowInput" type="number">
                     </div>
-
-                    <div id="playDiv">
-                        <div id="agentSelectionDiv">
-                            <span>Select Agent</span>
-                            <select id="agentGameSelect">
-                                <option value="Human">Human</option>
-                                <option value="MCTS">MCTS</option>
-                                <option value="Genetic">Genetic</option>
-                            </select>
-                        </div>
-                        <input id="playInput" name="play" type="button" onclick="play()">Play!</input>
-                        <!--<label for="playInput">Paint Mode</label>-->
+                    <div id="inputColumnDivId">
+                        <span id="colSpanId">number of columns</span>
+                        <input id="colInput" type="number">
                     </div>
-
-                    <div id="level">
-                        <div id="paintModeDiv">
-                            <input id="paintModeInput" name="paint mode" type="checkbox" onclick="changeMode()">
-                            <label for="paintModeInput">Paint Mode</label>
-                        </div>
-                        <div id="imageListDiv">
-                            <ul id="imageListUl"></ul>
-                        </div>
-                        <div id="tableGridContainer">
-                        </div>
-                        <div id="gameRunWindowDiv" style="display: none">
-                            <img id="gameRunImg">
-                        </div>
-                    </div>
-
-                    <!--<input id="sendInput" name="create table" type="button" onclick="createTableOnInput()">create table</input>-->
-                </div>
-            </div>
-
-            <div id="spriteSetDiv">
-                <div><button onclick="addNewSpriteToSpriteSet(gameObj['SpriteSet'])">Add Sprite</button></div>
-                <div class="dd" id="spriteSetContainer" oncontextmenu="return false" onchange="updateObj();">
-                    <ul id="spriteList"></ul>
-                </div><!--End div spriteSetContainer-->
-
-                <div id="inspector">
-                    <p id="name">1</p> <img id="image" onclick="openImagePicker()" src="">
-
-                    <div id="analogueParameters">
-
-                        <div id="shrinkFactor" class="contentSliders">
-                            <label id="shrinkLabel" for="shrinkLabel">Shrink Factor: <span id="shrinkValue" class="inspectorValues">0.5</span></label>
-                            <input class="bars sliders" type="range" min="0.0" max="1.0" value="0.5" step="0.1" class="slider" id="shrinkControl" oninput="updateShrinkValue(this.value, updateObjParamValue)">
-                        </div>
-
-                        <div id="speed" class="contentSliders">
-                            <label id="speedLabel" for="speedLabel">Speed: <span id="speedValue" class="inspectorValues">5</span></label>
-                            <input class="bars sliders" type="range" min="0.0" max="10.0" value="1.0" step="0.05" class="slider" id="speedControl" oninput="updateSpeedValue(this.value, updateObjParamValue)">
-                        </div>
-
-                        <div id="cooldown" class="contentSliders">
-                            <label id="cooldownLabel" for="cooldownLabel">cooldown: <span id="cooldownValue" class="inspectorValues">5</span></label>
-                            <input class="bars sliders" type="range" min="1" max="10" value="1" step="1" class="slider" id="cooldownControl" oninput="updateCooldownValue(this.value, updateObjParamValue)">
-                        </div>
-                    </div><!-- end div anologue parameters -->
-
-                    <!--<div id="staticParameters">-->
-
-                    <div id="invisible">
-                        <div class="toggle_switch">
-                            <span class="checkBoxSpan">Invisible</span>
-                            <input id="invisibleCheckBoxId" type="checkbox" class="switch_3" oninput="updateInvisibleValue(this.checked, updateObjParamValue)">
-                            <svg class="checkbox" xmlns="http://www.w3.org/2000/svg" style="isolation:isolate" viewBox="0 0 168 80">
-                                <path class="outer-ring" d="M41.534 9h88.932c17.51 0 31.724 13.658 31.724 30.482 0 16.823-14.215 30.48-31.724 30.48H41.534c-17.51 0-31.724-13.657-31.724-30.48C9.81 22.658 24.025 9 41.534 9z" fill="none" stroke="#233043" stroke-width="3" stroke-linecap="square" stroke-miterlimit="3"/>
-                                <path class="is_checked" d="M17 39.482c0-12.694 10.306-23 23-23s23 10.306 23 23-10.306 23-23 23-23-10.306-23-23z"/>
-                                <path class="is_unchecked" d="M132.77 22.348c7.705 10.695 5.286 25.617-5.417 33.327-2.567 1.85-5.38 3.116-8.288 3.812 7.977 5.03 18.54 5.024 26.668-.83 10.695-7.706 13.122-22.634 5.418-33.33-5.855-8.127-15.88-11.474-25.04-9.23 2.538 1.582 4.806 3.676 6.66 6.25z"/>
-                            </svg>
-                        </div>
-                    </div>
-                    <div id="singleton">
-                        <div class="toggle_switch">
-                            <span class="checkBoxSpan">Singleton</span>
-                            <input id="singletonCheckBoxId" type="checkbox" class="switch_3" oninput="updateSingletonValue(this.checked, updateObjParamValue)">
-                            <svg class="checkbox" xmlns="http://www.w3.org/2000/svg" style="isolation:isolate" viewBox="0 0 168 80">
-                                <path class="outer-ring" d="M41.534 9h88.932c17.51 0 31.724 13.658 31.724 30.482 0 16.823-14.215 30.48-31.724 30.48H41.534c-17.51 0-31.724-13.657-31.724-30.48C9.81 22.658 24.025 9 41.534 9z" fill="none" stroke="#233043" stroke-width="3" stroke-linecap="square" stroke-miterlimit="3"/>
-                                <path class="is_checked" d="M17 39.482c0-12.694 10.306-23 23-23s23 10.306 23 23-10.306 23-23 23-23-10.306-23-23z"/>
-                                <path class="is_unchecked" d="M132.77 22.348c7.705 10.695 5.286 25.617-5.417 33.327-2.567 1.85-5.38 3.116-8.288 3.812 7.977 5.03 18.54 5.024 26.668-.83 10.695-7.706 13.122-22.634 5.418-33.33-5.855-8.127-15.88-11.474-25.04-9.23 2.538 1.582 4.806 3.676 6.66 6.25z"/>
-                            </svg>
-                        </div>
-                    </div>
-
-                    <div id="rotateInPlace">
-                        <div class="toggle_switch">
-                            <span class="checkBoxSpan">Rotate In Place</span>
-                            <input id="rotateCheckBoxId" type="checkbox" class="switch_3" oninput="updateRotateValue(this.checked, updateObjParamValue)">
-                            <svg class="checkbox" xmlns="http://www.w3.org/2000/svg" style="isolation:isolate" viewBox="0 0 168 80">
-                                <path class="outer-ring" d="M41.534 9h88.932c17.51 0 31.724 13.658 31.724 30.482 0 16.823-14.215 30.48-31.724 30.48H41.534c-17.51 0-31.724-13.657-31.724-30.48C9.81 22.658 24.025 9 41.534 9z" fill="none" stroke="#233043" stroke-width="3" stroke-linecap="square" stroke-miterlimit="3"/>
-                                <path class="is_checked" d="M17 39.482c0-12.694 10.306-23 23-23s23 10.306 23 23-10.306 23-23 23-23-10.306-23-23z"/>
-                                <path class="is_unchecked" d="M132.77 22.348c7.705 10.695 5.286 25.617-5.417 33.327-2.567 1.85-5.38 3.116-8.288 3.812 7.977 5.03 18.54 5.024 26.668-.83 10.695-7.706 13.122-22.634 5.418-33.33-5.855-8.127-15.88-11.474-25.04-9.23 2.538 1.582 4.806 3.676 6.66 6.25z"/>
-                                -</svg>
-                        </div>
-                    </div>
-                    <!--</div>-->
-                    <div id="divSelect">
-                        <span class="checkBoxSpan spanCenteredText">Orientation</span>
-                        <div class="styled-select blue rounded">
-                            <select id="orientationSelectId" oninput="updateOrientationSelectValue(this.selectedIndex, updateObjParamValue)">
-                                <option value="NONE">None</option>
-                                <option value="LEFT">Left</option>
-                                <option value="RIGHT">Right</option>
-                                <option value="UP">Up</option>
-                                <option value="DOWN">Down</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div id="divSpecialParameters">
-                        <!--<span id="refClassSpanId" class="checkBoxSpan">Regular</span>-->
-                        <div id="refClassDivId">
-                            <select id="refClassSelectId" onchange="updateParametersOfTheReferenceClass(retrieveObjectByTarget(document.getElementById('name').innerText) ,this.value)">
-                                <option value="Regular">Regular</option>
-                                <option value="ShootAvatar">ShootAvatar</option>
-                                <option value="FlakAvatar">FlakAvatar</option>
-                                <option value="MovingAvatar">MovingAvatar</option>
-                                <option value="VerticalAvatar">VerticalAvatar</option>
-                                <option value="HorizontalAvatar">HorizontalAvatar</option>
-                                <option value="MissileAvatar">MissileAvatar</option>
-                                <option value="OrientedAvatar">OrientedAvatar</option>
-                                <option value="OngoingAvatar">OngoingAvatar</option>
-                                <option value="OngoingTurningAvatar">OngoingTurningAvatar</option>
-                                <option value="Immovable">Immovable</option>
-                                <option value="Passive">Passive</option>
-                                <option value="Flicker">Flicker</option>
-                                <option value="OrientedFlicker">OrientedFlicker</option>
-                                <option value="Missile">Missile</option>
-                                <option value="RandomMissile">RandomMissile</option>
-                                <option value="RandomNPC">RandomNPC</option>
-                                <option value="Chaser">Chaser</option>
-                                <option value="Fleeing">Fleeing</option>
-                                <option value="AlternateChaser">AlternateChaser</option>
-                                <option value="RandomPathAltChaser">RandomPathAltChaser</option>
-                                <option value="SpawnPoint">SpawnPoint</option>
-                                <option value="Bomber">Bomber</option>
-                                <option value="RandomBomber">RandomBomber</option>
-                                <option value="Spreader">Spreader</option>
-                                <option value="Door">Door</option>
-                                <option value="Portal">Portal</option>
-                                <option value="Resource">Resource</option>
-                            </select>
-                        </div>
-                    </div>
-                    <!--<div id="divButtonConfirm">-->
-                        <!--<button id="inputButtonConfirmId" type="button" onclick="action(spriteSetObj)">Confirm</button>-->
-                    <!--</div>-->
-                    <div id="saveSpriteSetDiv">
-                        <button id="saveSpriteSetButtonId" type="button" onclick="sendSpriteTypesToTheServe(gameObj.SpriteSet)">Ask for recommendations</button>
-                    </div>
-                </div><!--End div inspector-->
-
-                <div id="imgPickerInputDiv">
-                    <input id="hideImgPickerInput" type="button" onclick="closeImagePicker()">
-                    <div id="imagePickerDiv">
-                        <div id="imagePickerListDiv"></div>
+                    <div id="createTableButtonDivId">
+                        <span id="createTableSpanId">Create Level Grid</span>
+                        <input id="createTabeleInputId" type="button" onclick="createTableByInput()">OK</input>
                     </div>
                 </div>
 
-                <div id="recommenderDiv">
-                    <span id="suggestedSpan">Suggested sprites</span>
-                    <ul id="recommenderUl"></ul>
-                </div>
-
-            </div>
-
-            <div><h2>Interaction Set</h2>
-                <div><input type="button" onclick="addNewInteractionToInteractionSet(interactionSetObj)">Add Interaction</input></div>
-                <div id="interactionSetContainer">
-                    <ul id="interactionList"></ul>
-                </div>
-
-                <div id="interactionInspector">
-
-                    <div id="interactionSprite1Div"></div>
-
-                    <div id="interactionDiv">
-                        <div id="interactionContainerDiv"></div>
-                    </div>
-
-                    <div id="spritesToInteractDiv"></div>
-
-                </div>
-
-            </div>
-
-            <div><h2>Termination Set</h2>
-                <div id="terminationContainer">
-                    <ul id="terminationList"></ul>
-                </div>
-                <div id="terminationInspector">
-                    <div id="terminationSelectDiv"></div>
-                </div>
-            </div>
-
-            <div><h2>Load</h2>
-               <div id="gameSelectDiv">
-                   <div id="gameSelectionDiv">
-                        <span>Select Game</span>
-                        <select id="chooseGameSelect">
-                            <option value="zelda">zelda</option>
-                            <option value="pacman">pacman</option>
-                            <option value="aliens">aliens</option>
+                <div id="playDiv">
+                    <div id="agentSelectionDiv">
+                        <span>Select Agent</span>
+                        <select id="agentGameSelect">
+                            <option value="Human">Human</option>
+                            <option value="MCTS">MCTS</option>
+                            <option value="Genetic">Genetic</option>
                         </select>
-                   </div>
+                    </div>
+                    <input id="playInput" name="play" type="button" onclick="play()">Play!</input>
+                    <!--<label for="playInput">Paint Mode</label>-->
+                </div>
 
-                   <script>
-                       function loadGame()
-                       {
-                           var gameSelect = document.getElementById('chooseGameSelect');
-                           getGameParam = "game=" + gameSelect.value;
-                           localStorage.setItem("varGetGameParam", getGameParam);
-                           location.reload();
-                       }
-                   </script>
-                   <input type="button" onclick="loadGame()">Load Game</input>
-               </div>
+                <div id="level">
+                    <div id="paintModeDiv">
+                        <input id="paintModeInput" name="paint mode" type="checkbox" onclick="changeMode()">
+                        <label for="paintModeInput">Paint Mode</label>
+                    </div>
+                    <div id="imageListDiv">
+                        <ul id="imageListUl"></ul>
+                    </div>
+                    <div id="tableGridContainer">
+                    </div>
+                    <div id="gameRunWindowDiv" style="display: none">
+                        <img id="gameRunImg">
+                    </div>
+                </div>
+
+                <!--<input id="sendInput" name="create table" type="button" onclick="createTableOnInput()">create table</input>-->
+            </div>
+        </div>
+
+        <div id="spriteSetDiv">
+            <div><button onclick="addNewSpriteToSpriteSet(gameObj['SpriteSet'])">Add Sprite</button></div>
+            <div class="dd" id="spriteSetContainer" oncontextmenu="return false" onchange="updateObj();">
+                <ul id="spriteList"></ul>
+            </div><!--End div spriteSetContainer-->
+
+            <div id="inspector">
+                <p id="name">1</p> <img id="image" onclick="openImagePicker()" src="">
+
+                <div id="analogueParameters">
+
+                    <div id="shrinkFactor" class="contentSliders">
+                        <label id="shrinkLabel" for="shrinkLabel">Shrink Factor: <span id="shrinkValue" class="inspectorValues">0.5</span></label>
+                        <input class="bars sliders" type="range" min="0.0" max="1.0" value="0.5" step="0.1" class="slider" id="shrinkControl" oninput="updateShrinkValue(this.value, updateObjParamValue)">
+                    </div>
+
+                    <div id="speed" class="contentSliders">
+                        <label id="speedLabel" for="speedLabel">Speed: <span id="speedValue" class="inspectorValues">5</span></label>
+                        <input class="bars sliders" type="range" min="0.0" max="10.0" value="1.0" step="0.05" class="slider" id="speedControl" oninput="updateSpeedValue(this.value, updateObjParamValue)">
+                    </div>
+
+                    <div id="cooldown" class="contentSliders">
+                        <label id="cooldownLabel" for="cooldownLabel">cooldown: <span id="cooldownValue" class="inspectorValues">5</span></label>
+                        <input class="bars sliders" type="range" min="1" max="10" value="1" step="1" class="slider" id="cooldownControl" oninput="updateCooldownValue(this.value, updateObjParamValue)">
+                    </div>
+                </div><!-- end div anologue parameters -->
+
+                <!--<div id="staticParameters">-->
+
+                <div id="invisible">
+                    <div class="toggle_switch">
+                        <span class="checkBoxSpan">Invisible</span>
+                        <input id="invisibleCheckBoxId" type="checkbox" class="switch_3" oninput="updateInvisibleValue(this.checked, updateObjParamValue)">
+                        <svg class="checkbox" xmlns="http://www.w3.org/2000/svg" style="isolation:isolate" viewBox="0 0 168 80">
+                            <path class="outer-ring" d="M41.534 9h88.932c17.51 0 31.724 13.658 31.724 30.482 0 16.823-14.215 30.48-31.724 30.48H41.534c-17.51 0-31.724-13.657-31.724-30.48C9.81 22.658 24.025 9 41.534 9z" fill="none" stroke="#233043" stroke-width="3" stroke-linecap="square" stroke-miterlimit="3"/>
+                            <path class="is_checked" d="M17 39.482c0-12.694 10.306-23 23-23s23 10.306 23 23-10.306 23-23 23-23-10.306-23-23z"/>
+                            <path class="is_unchecked" d="M132.77 22.348c7.705 10.695 5.286 25.617-5.417 33.327-2.567 1.85-5.38 3.116-8.288 3.812 7.977 5.03 18.54 5.024 26.668-.83 10.695-7.706 13.122-22.634 5.418-33.33-5.855-8.127-15.88-11.474-25.04-9.23 2.538 1.582 4.806 3.676 6.66 6.25z"/>
+                        </svg>
+                    </div>
+                </div>
+                <div id="singleton">
+                    <div class="toggle_switch">
+                        <span class="checkBoxSpan">Singleton</span>
+                        <input id="singletonCheckBoxId" type="checkbox" class="switch_3" oninput="updateSingletonValue(this.checked, updateObjParamValue)">
+                        <svg class="checkbox" xmlns="http://www.w3.org/2000/svg" style="isolation:isolate" viewBox="0 0 168 80">
+                            <path class="outer-ring" d="M41.534 9h88.932c17.51 0 31.724 13.658 31.724 30.482 0 16.823-14.215 30.48-31.724 30.48H41.534c-17.51 0-31.724-13.657-31.724-30.48C9.81 22.658 24.025 9 41.534 9z" fill="none" stroke="#233043" stroke-width="3" stroke-linecap="square" stroke-miterlimit="3"/>
+                            <path class="is_checked" d="M17 39.482c0-12.694 10.306-23 23-23s23 10.306 23 23-10.306 23-23 23-23-10.306-23-23z"/>
+                            <path class="is_unchecked" d="M132.77 22.348c7.705 10.695 5.286 25.617-5.417 33.327-2.567 1.85-5.38 3.116-8.288 3.812 7.977 5.03 18.54 5.024 26.668-.83 10.695-7.706 13.122-22.634 5.418-33.33-5.855-8.127-15.88-11.474-25.04-9.23 2.538 1.582 4.806 3.676 6.66 6.25z"/>
+                        </svg>
+                    </div>
+                </div>
+
+                <div id="rotateInPlace">
+                    <div class="toggle_switch">
+                        <span class="checkBoxSpan">Rotate In Place</span>
+                        <input id="rotateCheckBoxId" type="checkbox" class="switch_3" oninput="updateRotateValue(this.checked, updateObjParamValue)">
+                        <svg class="checkbox" xmlns="http://www.w3.org/2000/svg" style="isolation:isolate" viewBox="0 0 168 80">
+                            <path class="outer-ring" d="M41.534 9h88.932c17.51 0 31.724 13.658 31.724 30.482 0 16.823-14.215 30.48-31.724 30.48H41.534c-17.51 0-31.724-13.657-31.724-30.48C9.81 22.658 24.025 9 41.534 9z" fill="none" stroke="#233043" stroke-width="3" stroke-linecap="square" stroke-miterlimit="3"/>
+                            <path class="is_checked" d="M17 39.482c0-12.694 10.306-23 23-23s23 10.306 23 23-10.306 23-23 23-23-10.306-23-23z"/>
+                            <path class="is_unchecked" d="M132.77 22.348c7.705 10.695 5.286 25.617-5.417 33.327-2.567 1.85-5.38 3.116-8.288 3.812 7.977 5.03 18.54 5.024 26.668-.83 10.695-7.706 13.122-22.634 5.418-33.33-5.855-8.127-15.88-11.474-25.04-9.23 2.538 1.582 4.806 3.676 6.66 6.25z"/>
+                            -</svg>
+                    </div>
+                </div>
+                <!--</div>-->
+                <div id="divSelect">
+                    <span class="checkBoxSpan spanCenteredText">Orientation</span>
+                    <div class="styled-select blue rounded">
+                        <select id="orientationSelectId" oninput="updateOrientationSelectValue(this.selectedIndex, updateObjParamValue)">
+                            <option value="NONE">None</option>
+                            <option value="LEFT">Left</option>
+                            <option value="RIGHT">Right</option>
+                            <option value="UP">Up</option>
+                            <option value="DOWN">Down</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div id="divSpecialParameters">
+                    <!--<span id="refClassSpanId" class="checkBoxSpan">Regular</span>-->
+                    <div id="refClassDivId">
+                        <select id="refClassSelectId" onchange="updateParametersOfTheReferenceClass(retrieveObjectByTarget(document.getElementById('name').innerText) ,this.value)">
+                            <option value="Regular">Regular</option>
+                            <option value="ShootAvatar">ShootAvatar</option>
+                            <option value="FlakAvatar">FlakAvatar</option>
+                            <option value="MovingAvatar">MovingAvatar</option>
+                            <option value="VerticalAvatar">VerticalAvatar</option>
+                            <option value="HorizontalAvatar">HorizontalAvatar</option>
+                            <option value="MissileAvatar">MissileAvatar</option>
+                            <option value="OrientedAvatar">OrientedAvatar</option>
+                            <option value="OngoingAvatar">OngoingAvatar</option>
+                            <option value="OngoingTurningAvatar">OngoingTurningAvatar</option>
+                            <option value="Immovable">Immovable</option>
+                            <option value="Passive">Passive</option>
+                            <option value="Flicker">Flicker</option>
+                            <option value="OrientedFlicker">OrientedFlicker</option>
+                            <option value="Missile">Missile</option>
+                            <option value="RandomMissile">RandomMissile</option>
+                            <option value="RandomNPC">RandomNPC</option>
+                            <option value="Chaser">Chaser</option>
+                            <option value="Fleeing">Fleeing</option>
+                            <option value="AlternateChaser">AlternateChaser</option>
+                            <option value="RandomPathAltChaser">RandomPathAltChaser</option>
+                            <option value="SpawnPoint">SpawnPoint</option>
+                            <option value="Bomber">Bomber</option>
+                            <option value="RandomBomber">RandomBomber</option>
+                            <option value="Spreader">Spreader</option>
+                            <option value="Door">Door</option>
+                            <option value="Portal">Portal</option>
+                            <option value="Resource">Resource</option>
+                        </select>
+                    </div>
+                </div>
+                <!--<div id="divButtonConfirm">-->
+                <!--<button id="inputButtonConfirmId" type="button" onclick="action(spriteSetObj)">Confirm</button>-->
+                <!--</div>-->
+                <div id="saveSpriteSetDiv">
+                    <button id="saveSpriteSetButtonId" type="button" onclick="sendSpriteTypesToTheServe(gameObj.SpriteSet)">Ask for recommendations</button>
+                </div>
+            </div><!--End div inspector-->
+
+            <div id="imgPickerInputDiv">
+                <input id="hideImgPickerInput" type="button" onclick="closeImagePicker()">
+                <div id="imagePickerDiv">
+                    <div id="imagePickerListDiv"></div>
+                </div>
             </div>
 
-            <div><h2>Settings</h2>
-                <div id="recommendationOnOffDiv">
-                    <input type="radio">
-                </div>
-
-                    <!--<script>-->
-                        <!--function loadGame()-->
-                        <!--{-->
-                            <!--var gameSelect = document.getElementById('chooseGameSelect');-->
-                            <!--getGameParam = "game=" + gameSelect.value;-->
-                            <!--localStorage.setItem("varGetGameParam", getGameParam);-->
-                            <!--location.reload();-->
-                        <!--}-->
-                    <!--</script>-->
-                    <!--<input type="button" onclick="loadGame()">Load Game</input>-->
-                </div>
+            <div id="recommenderDiv">
+                <span id="suggestedSpan">Suggested sprites</span>
+                <ul id="recommenderUl"></ul>
             </div>
 
         </div>
+
+        <div><h2>Interaction Set</h2>
+            <div><input type="button" onclick="addNewInteractionToInteractionSet(interactionSetObj)">Add Interaction</input></div>
+            <div id="interactionSetContainer">
+                <ul id="interactionList"></ul>
+            </div>
+
+            <div id="interactionInspector">
+
+                <div id="interactionSprite1Div"></div>
+
+                <div id="interactionDiv">
+                    <div id="interactionContainerDiv"></div>
+                </div>
+
+                <div id="spritesToInteractDiv"></div>
+
+            </div>
+
+        </div>
+
+        <div><h2>Termination Set</h2>
+            <div id="terminationContainer">
+                <ul id="terminationList"></ul>
+            </div>
+            <div id="terminationInspector">
+                <div id="terminationSelectDiv"></div>
+            </div>
+        </div>
+
+        <div><h2>Load</h2>
+            <div id="gameSelectDiv">
+                <div id="gameSelectionDiv">
+                    <span>Select Game</span>
+                    <select id="chooseGameSelect">
+                        <option value="zelda">zelda</option>
+                        <option value="pacman">pacman</option>
+                        <option value="aliens">aliens</option>
+                    </select>
+                </div>
+
+                <script>
+                    function loadGame()
+                    {
+                        var gameSelect = document.getElementById('chooseGameSelect');
+                        getGameParam = "game=" + gameSelect.value;
+                        localStorage.setItem("varGetGameParam", getGameParam);
+                        location.reload();
+                    }
+                </script>
+                <input type="button" onclick="loadGame()">Load Game</input>
+            </div>
+        </div>
+
+        <div><h2>Settings</h2>
+            <div id="recommendationOnOffDiv">
+                <input type="radio">
+            </div>
+
+            <!--<script>-->
+            <!--function loadGame()-->
+            <!--{-->
+            <!--var gameSelect = document.getElementById('chooseGameSelect');-->
+            <!--getGameParam = "game=" + gameSelect.value;-->
+            <!--localStorage.setItem("varGetGameParam", getGameParam);-->
+            <!--location.reload();-->
+            <!--}-->
+            <!--</script>-->
+            <!--<input type="button" onclick="loadGame()">Load Game</input>-->
+        </div>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.6/prefixfree.min.js"></script>
-    <script type="text/javascript" src="js/utils/util.js"></script>
-    <script type="text/javascript" src="js/nestable/nestable.js"></script>
+</div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.6/prefixfree.min.js"></script>
+<script type="text/javascript" src="js/utils/util.js"></script>
+<script type="text/javascript" src="js/nestable/nestable.js"></script>
 <!--//    <script type="text/javascript" src="js/mapping/mapping.js"></script>-->
-    <script type="text/javascript" src="js/nestable/nestable.js"></script>
-    <script type="text/javascript" src="js/constants/Interactions/interactions.js"></script>
-    <script type="text/javascript" src="js/constants/Terminations/terminations.js"></script>
-    <script type="text/javascript" src="js/observers/levelObserver.js"></script>
-    <script type="text/javascript" src="js/observers/spriteSetObserver.js"></script>
-    <script type="text/javascript" src="js/showGameSetScript.js"></script>
-    <script type="text/javascript" src="js/interactions/updateInteractionInspector.js" ></script>
-    <script type="text/javascript" src="js/interactions/showInteractionSetScript.js" ></script>
-    <script type="text/javascript" src="js/interactions/managingInteractionParameters.js" ></script>
-    <script type="text/javascript" src="js/termination/showTerminationSetScript.js" ></script>
-    <script type="text/javascript" src="js/termination/updateTerminationInspector.js" ></script>
-    <script type="text/javascript" src="js/Experiments.js"></script>
-    <script type="text/javascript" src="js/constants/AvatarTypes/avatarTypes.js"></script>
-    <script type="text/javascript" src="js/constants/OtherTypes/otherTypes.js"></script>
-    <script type="text/javascript" src="js/constants/Parameters/emptyParameters.js"></script>
-    <script type="text/javascript" src="js/controlSpriteParameters/spriteParameterComponents.js"></script>
-    <script type="text/javascript" src="js/controlSpriteParameters/avatarSpriteParameter.js"></script>
-    <script type="text/javascript" src="js/controlSpriteParameters/otherSpriteParameter.js"></script>
-    <script type="text/javascript" src="js/controlSpriteParameters/chooseParameterBasedOnSpriteType.js"></script>
-    <script type="text/javascript" src="js/retrieveObjectsForStypeList.js"></script>
-    <script type="text/javascript" src="js/controlSpriteParameters/specialTypeParameters.js"></script>
-    <script type="text/javascript" src="js/updateInspectorScript.js"></script>
-    <script type="text/javascript" src="js/refreshSpriteSet.js"></script>
-    <script type="text/javascript" src="js/level/symbols.js"></script>
-    <script type="text/javascript" src="js/redo/redo.js"></script>
-    <script type="text/javascript" src="js/level/levelMap.js"></script>
-    <script type="text/javascript" src="js/level/showLevelMap.js"></script>
-    <script type="text/javascript" src="js/convertToVGDL/gameObjToVGDL.js"></script>
-    <script type="text/javascript" src="js/save/save.js"></script>
-    <script type="text/javascript" src="js/Experiments.js"></script>
-    <script type="text/javascript" src="js/imageLoader/imageLoader.js"></script>
-    <script type="text/javascript" src="js/convertToVGDL/gameObjToVGDL.js"></script>
-    <script type="text/javascript" src="js/gettingImages/gettingimages.js"></script>
-    <script type="text/javascript" src="js/recommendations/getRecommendations.js"></script>
+<script type="text/javascript" src="js/nestable/nestable.js"></script>
+<script type="text/javascript" src="js/constants/Interactions/interactions.js"></script>
+<script type="text/javascript" src="js/constants/Terminations/terminations.js"></script>
+<script type="text/javascript" src="js/observers/levelObserver.js"></script>
+<script type="text/javascript" src="js/observers/spriteSetObserver.js"></script>
+<script type="text/javascript" src="js/showGameSetScript.js"></script>
+<script type="text/javascript" src="js/interactions/updateInteractionInspector.js" ></script>
+<script type="text/javascript" src="js/interactions/showInteractionSetScript.js" ></script>
+<script type="text/javascript" src="js/interactions/managingInteractionParameters.js" ></script>
+<script type="text/javascript" src="js/termination/showTerminationSetScript.js" ></script>
+<script type="text/javascript" src="js/termination/updateTerminationInspector.js" ></script>
+<script type="text/javascript" src="js/Experiments.js"></script>
+<script type="text/javascript" src="js/constants/AvatarTypes/avatarTypes.js"></script>
+<script type="text/javascript" src="js/constants/OtherTypes/otherTypes.js"></script>
+<script type="text/javascript" src="js/constants/Parameters/emptyParameters.js"></script>
+<script type="text/javascript" src="js/controlSpriteParameters/spriteParameterComponents.js"></script>
+<script type="text/javascript" src="js/controlSpriteParameters/avatarSpriteParameter.js"></script>
+<script type="text/javascript" src="js/controlSpriteParameters/otherSpriteParameter.js"></script>
+<script type="text/javascript" src="js/controlSpriteParameters/chooseParameterBasedOnSpriteType.js"></script>
+<script type="text/javascript" src="js/retrieveObjectsForStypeList.js"></script>
+<script type="text/javascript" src="js/controlSpriteParameters/specialTypeParameters.js"></script>
+<script type="text/javascript" src="js/updateInspectorScript.js"></script>
+<script type="text/javascript" src="js/refreshSpriteSet.js"></script>
+<script type="text/javascript" src="js/level/symbols.js"></script>
+<script type="text/javascript" src="js/redo/redo.js"></script>
+<script type="text/javascript" src="js/level/levelMap.js"></script>
+<script type="text/javascript" src="js/level/showLevelMap.js"></script>
+<script type="text/javascript" src="js/convertToVGDL/gameObjToVGDL.js"></script>
+<script type="text/javascript" src="js/save/save.js"></script>
+<script type="text/javascript" src="js/Experiments.js"></script>
+<script type="text/javascript" src="js/imageLoader/imageLoader.js"></script>
+<script type="text/javascript" src="js/convertToVGDL/gameObjToVGDL.js"></script>
+<script type="text/javascript" src="js/gettingImages/gettingimages.js"></script>
+<script type="text/javascript" src="js/recommendations/getRecommendations.js"></script>
 
 </body>
 </html>

@@ -17,6 +17,12 @@ var mapChildToParent;
 var spriteNameCollection = [];
 
 /**
+ * Stores all the types available in the set
+ * @type {Array}
+ */
+var typeSetCollection = []
+
+/**
  * Stores the main Ul element responsible for the Sprite Set hierarchy
  * @type {HTMLElement | null}
  */
@@ -185,6 +191,9 @@ function updateObjectsAfterListChange()
 function getObjectData(obj, upperUl)
 {
     var currentObj = obj;
+    if(obj.referenceClass != null && !typeSetCollection.includes(obj.referenceClass)) {
+        typeSetCollection.push(obj.referenceClass);
+    }
     var identifier = currentObj.identifier;
     spriteNameCollection.push(identifier);
     var parameters = currentObj.parameters;
@@ -318,11 +327,22 @@ function deleteSpriteHierarchyList()
     }
 }
 
+function removeTypeFromTypeList(objName)
+{
+    var obj = mapIdentifierToObject.get(objName);
+    var index = typeSetCollection.indexOf(obj.referenceClass);
+    if(index > -1)
+    {
+        typeSetCollection.splice(index, 1);
+    }
+}
+
 function removeSpriteNamesFromArraysAndMaps(obj)
 {
     var familyMNames = storeNamesOfThisObjAndItsKids(obj, []);
     for(var i = 0; i < familyMNames.length; i++)
     {
+        removeTypeFromTypeList(familyMNames[i]);
         removeItemFrom(spriteNameCollection, familyMNames[i]);
         mapIdentifierToObject.delete(familyMNames[i]);
         removeSelectItemFrom(document.getElementById('sprite1SelectId'), familyMNames[i]);

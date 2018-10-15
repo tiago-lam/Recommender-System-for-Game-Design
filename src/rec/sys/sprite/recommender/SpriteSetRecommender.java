@@ -201,7 +201,6 @@ public class SpriteSetRecommender extends SpriteRecommender
 		for(SpriteConfidence sc : mapSpriteTypeToItsGame.keySet())
 		{
 			ArrayList<GameItem> gamesForThisSprite = mapSpriteTypeToItsGame.get(sc);
-			ArrayList<RecommendationSpriteData> spritesToRecommend = new ArrayList<>();
 			if(gamesForThisSprite != null)
 			{
 				for(GameItem gi : gamesForThisSprite)
