@@ -51,6 +51,7 @@
     display: block;
     visibility: visible;
     cursor: pointer;
+    z-index: 100;
 }
 
 .commonDiv
@@ -68,6 +69,7 @@
     display: block;
     visibility: visible;
     cursor: pointer;
+    z-index: 100;
 }
 
 .spanValue
@@ -89,7 +91,7 @@
     position: relative;
     background-color: #4EC6DE;
     height: 50px;
-    z-index: 1;
+    z-index: 0;
 }
 
 .descriptionSpan
@@ -106,19 +108,25 @@
 
 #recommenderUl
 {
-    width:200px;
+    width:350px;
+    left: 420px;
+    top: 12px;
+    position: absolute;
+    height: 530px;
+    overflow-y: auto;
 }
 
 /*********************/
 #parContainerDiv
 {
     position: absolute;
-    width: 200px;
+    width: 160px;
     border: 1px solid black;
     background-color: rgba(214, 127, 67, 0.564);
-    left: 120px;
+    left: 65px;
     top: 0px;
     display: none;
+    z-index: 90;
 }
 
 #nameDiv
@@ -139,6 +147,11 @@
 {
     border: 1px solid black;
     margin-bottom: 20px;
+}
+
+#recommenderDiv
+{
+
 }
 
 

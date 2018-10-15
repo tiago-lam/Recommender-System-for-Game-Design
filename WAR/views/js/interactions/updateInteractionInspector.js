@@ -276,4 +276,5 @@ function openImagePicker()
 {
     document.getElementById('imagePickerDiv').style.display = "block";
     document.getElementById('hideImgPickerInput').style.display = "block";
+    document.getElementById('inspector').style.display = "none";
 }

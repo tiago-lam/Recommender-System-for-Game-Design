@@ -1,6 +1,6 @@
 #inspector
 {
-	width: 20%;
+	width: 175px;
 }
 
 #inspector p
@@ -126,18 +126,21 @@ input[type="range"]
 
 #imagePickerDiv
 {
+	position: relative;
 	float: left;
 	width: 20%;
-	height: 360px;
+	height: 522px;
 	margin-left: 5%;
-
+	left:20px;
+	top:10px;
 }
 
 #imagePickerListDiv
 {
-	width: 100%;
+	width: 150px;
 	height: 100%;
 	overflow-y: scroll;
+	margin-left: 50px;
 }
 
 .singleImgPickerDiv
@@ -165,11 +168,14 @@ input[type="range"]
 	background-repeat: no-repeat;
 	background-position: 50% 50%;
 	/* put the height and width of your image here */
-	height: 24px;
-	width: 24px;
+	height: 18px;
+	width: 18px;
+	top: 8px;
+	left: 350px;
 	border: none;
 	display: block;
 	float: right;
+	position: absolute;
 }
 
 #imgPickerInputDiv

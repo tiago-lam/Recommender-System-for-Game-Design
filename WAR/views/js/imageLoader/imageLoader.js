@@ -54,6 +54,7 @@ function transferImgToInspector(id)
     currentObj.parameters['img'] = img.src;
     createLevelMappingForThisImage(currentObj.identifier);
     refreshGame(gameObj);
+    closeImagePicker();
 }
 
 function getImageNameFrom(imgAdrress)
@@ -90,6 +91,7 @@ function closeImagePicker()
     var imgPickerInput = document.getElementById('hideImgPickerInput');
     imgPicker.style.display = "none";
     imgPickerInput.style.display = "none"
+    document.getElementById('inspector').style.display = 'block';
 }
 
 function createLevelMappingForThisImage(identifier)
