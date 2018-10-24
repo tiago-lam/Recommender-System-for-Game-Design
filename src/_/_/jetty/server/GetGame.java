@@ -50,7 +50,6 @@ public class GetGame extends HttpServlet
 	}
 	
 	
-	
 	public String findIdentifierType(String identifier, JSONArray spriteSet)
 	{
 		for(int i = 0; i < spriteSet.size(); i++)
@@ -73,14 +72,7 @@ public class GetGame extends HttpServlet
 		JSONParser parser = new JSONParser();
 		try {
 			JSONObject gameObj = (JSONObject) parser.parse(gameString);
-			JSONArray spriteSet = (JSONArray) gameObj.get("SpriteSet");
 			
-			JSONArray interactionSet = (JSONArray) gameObj.get("InteractionSet");
-			for (int i = 0; i < interactionSet.size(); i++) 
-			{
-				JSONObject interaction = (JSONObject) interactionSet.get(i);
-				String identifier = (String) interaction.get("sprite1");
-			}
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

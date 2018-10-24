@@ -62,10 +62,10 @@ public class LevelMatrix extends HttpServlet
 		return mapObject;
 	}
 	
-//	public static void main(String[] args) {
-//		String s = new LevelMapping().getLevelMapJSONObject("examples/gridphysics/aliens_lvl0.txt");
-//		System.out.println(s);
-//	}
+	public static void main(String[] args) {
+		String s = new LevelMatrix().getLevelMatrixJSONObject("examples/gridphysics/aliens_lvl0.txt");
+		System.out.println(s);
+	}
 }
 
 

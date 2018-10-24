@@ -25,7 +25,6 @@ public class ContextualServer {
         spriteSerialize.addServletWithMapping(GetFrames.class, "/frames");
         spriteSerialize.addServletWithMapping(GetRecommendations.class, "/recc");
 
-
         ResourceHandler resource_handler = new ResourceHandler();
         resource_handler.setDirectoriesListed(true);
         resource_handler.setWelcomeFiles(new String[]
