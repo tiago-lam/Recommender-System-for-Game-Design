@@ -41,7 +41,7 @@ public class SpriteSetSerializer implements HttpHandler{
     		{
     			if(n.content.identifier.equals("SpriteSet"))
     			{
-    				JSONArray arr = parser.generate(n);
+    				JSONArray arr = parser.generate(n, "solarfox");
     				response =  arr.toJSONString();
     			}
     		}

@@ -16,6 +16,7 @@ function extractImageFrom(ev) {
     img.src = imgSrc;
     img.draggable = true;
     img.setAttribute('ondragstart', "drag(event)");
+    img.setAttribute('ondragend', "cancel()");
     return img;
 }
 
@@ -47,11 +48,36 @@ function allowDrop(ev) {
                 }
             }
         }
-
     }
 }
 
+function cancel()
+{
+    console.log("GGGGGGG");
+    var tiles = document.getElementsByClassName('suggestedTile');
+    for(var i = 0; i < tiles.length; i++)
+    {
+        tiles[i].classList.remove('suggestedTile');
+        i = 0;
+    }
+    tiles[0].classList.remove('suggestedTile');
+}
+
 function drag(ev) {
+    var id = ev.target.id;
+    id = id.replace("drag_", "");
+    id = id.replace("DragImgIdId", "");
+    var refClass = (mapIdentifierToObject.get(id).referenceClass);
+
+    var posToSuggest = mapTypeToPositions.get(refClass);
+
+    for(var i = 0; i < posToSuggest.length; i++)
+    {
+        var p = posToSuggest[i];
+        var x = p['x']; var y = p['y'];
+        document.getElementById(x + " " + y).classList.add("suggestedTile");
+    }
+
     ev.dataTransfer.setData("key", ev.target.id);
     imgSrc = ev.target.src;
     for(var i = 0; i < ev.target.classList.length; i++)
@@ -60,6 +86,7 @@ function drag(ev) {
     }
     parentId = ev.target.parentNode.id;
     isDragEnabled = !isDragEnabled;
+    console.log('dragging');
 }
 
 function drop(ev) {
@@ -79,6 +106,7 @@ function drop(ev) {
             newImg.draggable = true;
             newImg.setAttribute('ondragstart', "drag(event)");
             newImg.setAttribute('onmousedown', "createImgId(this.classList[0])");
+            newImg.setAttribute('ondragend', "cancel()");
 
             for(var i = 0; i < img.classList.length; i++)
             {
@@ -109,6 +137,7 @@ function drop(ev) {
         }
 
     }
+    console.log('drop');
 }
 
 function createDiv(id)
@@ -262,6 +291,7 @@ function configureImages(sprite)
         }
         imgCopy.setAttribute('ondragstart', "drag(event)");
         imgCopy.setAttribute('onmousedown', "createImgId(this.classList[0])");
+        imgCopy.setAttribute('ondragend', "cancel()");
 
         if("img" in sprite.parameters) {
             li.append(imgCopy);

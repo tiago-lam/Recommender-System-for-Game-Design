@@ -45,7 +45,8 @@ public class GetSpriteSet extends HttpServlet
     		{
     			if(n.content.identifier.equals("SpriteSet"))
     			{
-    				JSONArray arr = parser.generate(n);
+    				String gameName = gamePath.replace("examples/gridphysics/", "").replace(".txt", "");
+    				JSONArray arr = parser.generate(n, gameName);
     				toSend =  arr.toJSONString();
     				
     			}

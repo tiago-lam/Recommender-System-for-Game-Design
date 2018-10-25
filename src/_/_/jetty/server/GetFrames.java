@@ -55,7 +55,8 @@ public class GetFrames extends HttpServlet
     		{
     			if(n.content.identifier.equals("SpriteSet"))
     			{
-    				spriteSet = parser.generate(n);
+    				String gameName = gamePath.replace("examples/gridphysics/", "").replace(".txt", "");
+    				spriteSet = parser.generate(n, gameName);
     			}
     			
     			if(n.content.identifier.equals("LevelMapping"))

@@ -123,8 +123,8 @@ public class CalculateDistance
 			for(Vector v : vs)
 			{
 				JSONObject posObj = new JSONObject();
-				posObj.put("x", v.destiny.x);
-				posObj.put("y", v.destiny.y);
+				posObj.put("x", v.destiny.x.intValue());
+				posObj.put("y", v.destiny.y.intValue());
 				position.add(posObj);
 			}
 			obj.put("posCollection", position);

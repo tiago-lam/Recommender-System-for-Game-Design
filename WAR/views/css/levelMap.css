@@ -131,3 +131,8 @@ table {
 {
     width: 1600px;
 }
+
+.suggestedTile
+{
+    background-color: rgb(0,0,255);
+}

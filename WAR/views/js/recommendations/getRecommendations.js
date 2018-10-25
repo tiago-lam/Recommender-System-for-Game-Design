@@ -1,6 +1,7 @@
 var mapRecommendationToObj = new Map();
 
 var xmlhttp = new XMLHttpRequest();
+
 /**
  * Function responsible for perform the GET response
  */
@@ -210,10 +211,14 @@ function retrieveRecommendationObj(id)
     return mapRecommendationToObj.get(id);
 }
 
+
 function getRecObj(id)
 {
     var recObj = retrieveRecommendationObj(id);
     addToSpriteSet(recObj);
+    askForPositions(recObj['gameItBelongsTo'], recObj['referenceClass']);
+    //retrieve suggested position for this sprite type - if any
+    //associate them in the map like (recObj.referenceClass) -> (0,1), (11,10)
 }
 
 function addToSpriteSet(obj)

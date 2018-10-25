@@ -213,7 +213,11 @@ public class SpriteSetRecommender extends SpriteRecommender
 						if(spriteList.size() > 0)
 						{
 							Collections.sort(spriteList, new SortRecommendations());
-							RecommendationSpriteData rsd = new RecommendationSpriteData(sc.spriteType, spName, sc.confidence, spriteList.get(0), spriteList.get(spriteList.size()-1), gi.gameName);
+							JSONObject obj0 = spriteList.get(0);
+							obj0.put("gameItBelongsTo", gi.gameName);
+							JSONObject objLast = spriteList.get(spriteList.size()-1);
+							objLast.put("gameItBelongsTo", gi.gameName);
+							RecommendationSpriteData rsd = new RecommendationSpriteData(sc.spriteType, spName, sc.confidence, obj0, objLast, gi.gameName);
 							toRecommend.add(rsd);
 						}
 					}
