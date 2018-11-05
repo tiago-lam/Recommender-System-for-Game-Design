@@ -53,6 +53,7 @@ public class GetRecommendations extends HttpServlet
 				obj.put("common", r.common);
 				obj.put("specialized", r.specialized);
 				obj.put("game", r.gameTheyBelongTo);
+				obj.put("stypes", r.sprites);
 				toRecommend.add(obj);
 				toSend = toRecommend.toJSONString();
 			}

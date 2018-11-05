@@ -31,11 +31,8 @@ public class ContextualServer {
         resource_handler.setWelcomeFiles(new String[]
         		{ 
         				"WAR/views/main.html",
-        				"WAR/views/showSpriteSet.html",
-        				"WAR/views/js/showSpriteSetScript.js",
-        				"WAR/views/css/spriteSetStyle.css",
-        				"WAR/views/css/panelLayout.css",
-        				"WAR/views/css/inspectorStyles.css",
+        				"WAR/views/js/",
+        				"WAR/views/css/",
         				"sprites/",
         				"images/"
         		});

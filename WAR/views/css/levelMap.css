@@ -134,5 +134,9 @@ table {
 
 .suggestedTile
 {
-    background-color: rgb(0,0,255);
+    /*background-color: rgb(0,0,255);*/
+    border-color: #00de79;
+    border-style: solid;
+    border-radius: 7px;
+    border-width: 1px;
 }

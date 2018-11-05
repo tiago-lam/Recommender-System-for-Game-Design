@@ -8,9 +8,11 @@ BasicGame
             avatar > ShootAvatar frameRate=8 stype=sword
                 nokey > ShootAvatar frameRate=8 img=oryx/swordman1_0.png stype=sword
                 withkey > ShootAvatar frameRate=8 img=oryx/swordmankey1_0.png color=ORANGE stype=sword
+            enemy >
+                monsterQuick > RandomNPC img=oryx/bat1.png cooldown=2 cons=6
+                monsterNormal > RandomNPC img=oryx/spider2.png cooldown=4 cons=8
+                monsterSlow > RandomNPC img=oryx/scorpion1.png cooldown=8 cons=12
             wall > Immovable img=oryx/wall3.png autotiling=true
-        slowHell > SpawnPoint prob=0.005 img=oryx/spike3.png color=RED stype=zombie portal=True
-        zombie > Bomber prob=0.005 img=newset/zombie.png orientation=LEFT color=BROWN stype=key speed=0.1
 
     LevelMapping
         1 > floor monsterQuick
@@ -26,13 +28,13 @@ BasicGame
         £ > floor movable
         ¤ > floor avatar
         ¥ > floor enemy
-        ¦ > floor slowHell
-        § > floor zombie
         
     InteractionSet
         movable wall > stepBack
         nokey goal > stepBack
         goal withkey > killSprite scoreChange=1
+        enemy sword > killSprite scoreChange=2
+        enemy enemy > stepBack
         avatar enemy > killSprite scoreChange=-1
         nokey key > transformTo killSecond=True scoreChange=1 stype=withkey
         

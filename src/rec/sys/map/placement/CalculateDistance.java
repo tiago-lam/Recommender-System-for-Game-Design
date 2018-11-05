@@ -70,8 +70,8 @@ public class CalculateDistance
 		for (int i = 0; i < levelAmount; i++) {
 			TuplePosition avatarPos = retrieveFirstPositionOfThis(avatarId, i);
 
-			int rows = gameLevel.get(i).length;
-			int columns = gameLevel.get(i)[0].length();
+			int rows = gameLevel.get(i).length - 1;
+			int columns = gameLevel.get(i)[0].length() - 1;
 			JSONArray entries = ExpandMapEntry.expandedMap(game);
 			for(int e = 0; e < entries.size(); e++)
 			{

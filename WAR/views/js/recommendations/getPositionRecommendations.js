@@ -13,6 +13,7 @@ xmlhttpPos.onreadystatechange = function() {
             var typePositions = JSON.parse(this.responseText);
             var t = typePositions['type'];
             var ps = typePositions['posCollection'];
+            //ps = applyFilterMapPosition(ps);
             mapTypeToPositions.set(t, ps);
         }
         else
@@ -29,4 +30,22 @@ function askForPositions(gameName, type) {
 
     xmlhttpPos.open("GET", "http://localhost:9001/pos" + "?askForPosIn=" + gameName + "&type=" + type, true);
     xmlhttpPos.send();
+}
+
+function applyFilterMapPosition(ps)
+{
+    var newPs = [];
+
+    var row = gameObj["Level"].length;
+    var column = gameObj["Level"][0].length;
+
+    for(var i = 0; i < ps.length; i++)
+    {
+        var p = ps[i];
+        if( ( (p['x'] >= 0 && p['y'] <= row-1) && (p['y'] >= 0 && p['y'] <= column-1) ))
+        {
+            newPs.push(ps);
+        }
+    }
+    return newPs;
 }

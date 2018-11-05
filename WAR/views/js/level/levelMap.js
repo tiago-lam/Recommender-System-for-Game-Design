@@ -55,29 +55,16 @@ function cancel()
 {
     console.log("GGGGGGG");
     var tiles = document.getElementsByClassName('suggestedTile');
-    for(var i = 0; i < tiles.length; i++)
-    {
-        tiles[i].classList.remove('suggestedTile');
-        i = 0;
+    if(tiles.length > 0) {
+        for (var i = 0; i < tiles.length; i++) {
+            tiles[i].classList.remove('suggestedTile');
+            i = 0;
+        }
+        tiles[0].classList.remove('suggestedTile');
     }
-    tiles[0].classList.remove('suggestedTile');
 }
 
 function drag(ev) {
-    var id = ev.target.id;
-    id = id.replace("drag_", "");
-    id = id.replace("DragImgIdId", "");
-    var refClass = (mapIdentifierToObject.get(id).referenceClass);
-
-    var posToSuggest = mapTypeToPositions.get(refClass);
-
-    for(var i = 0; i < posToSuggest.length; i++)
-    {
-        var p = posToSuggest[i];
-        var x = p['x']; var y = p['y'];
-        document.getElementById(x + " " + y).classList.add("suggestedTile");
-    }
-
     ev.dataTransfer.setData("key", ev.target.id);
     imgSrc = ev.target.src;
     for(var i = 0; i < ev.target.classList.length; i++)
@@ -87,6 +74,23 @@ function drag(ev) {
     parentId = ev.target.parentNode.id;
     isDragEnabled = !isDragEnabled;
     console.log('dragging');
+    var id = ev.target.id;
+
+    id = id.replace("drag_", "");
+    id = id.replace("DragImgIdId", "");
+    var refClass = (mapIdentifierToObject.get(id).referenceClass);
+
+    var posToSuggest = mapTypeToPositions.get(refClass);
+
+    if(posToSuggest != undefined) {
+        for (var i = 0; i < posToSuggest.length; i++) {
+            var p = posToSuggest[i];
+            var x = p['x'];
+            var y = p['y'];
+            document.getElementById(x + " " + y).classList.add("suggestedTile");
+        }
+    }
+
 }
 
 function drop(ev) {

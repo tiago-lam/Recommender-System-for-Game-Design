@@ -1,5 +1,7 @@
 var mapRecommendationToObj = new Map();
 
+var mapIdToCarrySprirtes = new Map();
+
 var xmlhttp = new XMLHttpRequest();
 
 /**
@@ -53,6 +55,7 @@ function createReccomendationList(recommendationList)
         var type = r['type'];
         var specObj = r['specialized'];
         var commObj = r['common'];
+        var stypes = r['sprites'];
 
         var containerDiv = document.createElement('div');
         containerDiv.id = "containerDiv";
@@ -106,7 +109,7 @@ function createReccomendationList(recommendationList)
         specializedDiv.id = "specializedDiv" + i;
         specializedDiv.classList.add('specializedDiv');
         mapRecommendationToObj.set(specializedDiv.id, specObj);
-
+        mapIdToCarrySprirtes.set(specializedDi.idv, sprites);
         var specializedSpan = document.createElement('span');
         specializedSpan.id = 'specializedSpan';
         specializedSpan.innerHTML = 'Specialized';
@@ -121,6 +124,7 @@ function createReccomendationList(recommendationList)
         var commonDiv = document.createElement('div');
         commonDiv.id = "commonDiv" + i;
         commonDiv.classList.add("commonDiv");
+        mapIdToCarrySprirtes.set(commonDiv.id, sprites);
         mapRecommendationToObj.set(commonDiv.id, commObj);
 
         var commonSpriteImg = document.createElement('img');
@@ -216,6 +220,14 @@ function getRecObj(id)
 {
     var recObj = retrieveRecommendationObj(id);
     addToSpriteSet(recObj);
+    var stypes = mapIdToCarrySprirtes.get(id);
+
+    for(var i = 0; i < stypes.length; i++)
+    {
+        var obj = stypes[i];
+        addToSpriteSet(obj);
+    }
+
     askForPositions(recObj['gameItBelongsTo'], recObj['referenceClass']);
     //retrieve suggested position for this sprite type - if any
     //associate them in the map like (recObj.referenceClass) -> (0,1), (11,10)

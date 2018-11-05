@@ -291,6 +291,7 @@ public class SpriteRecommender {
 		return parser.getGameObject(gamePath);
 	}
 	
+	//use GameDesignBreakdown
 	public JSONArray getSpriteSet(String gamePath) throws ParseException
 	{
 		JSONParser parser = new JSONParser();

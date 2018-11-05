@@ -217,7 +217,8 @@ public class SpriteSetRecommender extends SpriteRecommender
 							obj0.put("gameItBelongsTo", gi.gameName);
 							JSONObject objLast = spriteList.get(spriteList.size()-1);
 							objLast.put("gameItBelongsTo", gi.gameName);
-							RecommendationSpriteData rsd = new RecommendationSpriteData(sc.spriteType, spName, sc.confidence, obj0, objLast, gi.gameName);
+							JSONArray collection = getComplimentarySprites(spriteList, objLast, new JSONArray());
+							RecommendationSpriteData rsd = new RecommendationSpriteData(sc.spriteType, spName, sc.confidence, obj0, objLast, collection, gi.gameName);
 							toRecommend.add(rsd);
 						}
 					}
@@ -229,50 +230,79 @@ public class SpriteSetRecommender extends SpriteRecommender
 		return toRecommend;
 	}
 	
-	public static void main(String [] args) throws ParseException
+	public JSONArray getComplimentarySprites(ArrayList<JSONObject> spriteList, JSONObject obj, JSONArray collection)
 	{
-		ArrayList<RecommendationSpriteData> toRecommend = new ArrayList<>();
-		ArrayList<Integer> set = new ArrayList<>();
-		set.add(6); set.add(18); set.add(21); set.add(22);
-		SpriteSetRecommender ssr = new SpriteSetRecommender();
-		HashMap<Integer, Double> map = ssr.recommenderProtocol(set);
-		ArrayList<GameItem> games = ssr.gamesWithTheSpriteSetIn(set);
-		
-		HashMap<SpriteConfidence, ArrayList<GameItem>> spritesAndGames = new HashMap<>();
-		for(Integer i : map.keySet())
+		HashMap<String, String> params = (HashMap<String, String>) obj.get("parameters");
+		if(params.containsKey("stype"))
 		{
-			ArrayList<GameItem> gs = ssr.allTheGamesWithThisSprite(games, i);
-			SpriteConfidence sc = new SpriteConfidence(i, map.get(i));
-			spritesAndGames.put(sc, gs);
-		}
-		
-		HashMap<SpriteConfidence, ArrayList<GameItem>> mapSpriteTypeToItsGame = new HashMap<>();
-		for(SpriteConfidence sc : spritesAndGames.keySet())
-		{
-			ArrayList<GameItem> gamesToRecommend = ssr.retrieveGamesWithThisSprite(games, sc.spriteType);
-			mapSpriteTypeToItsGame.put(sc, gamesToRecommend);
-		}
-		
-		for(SpriteConfidence sc : mapSpriteTypeToItsGame.keySet())
-		{
-			ArrayList<GameItem> gamesForThisSprite = mapSpriteTypeToItsGame.get(sc);
-			ArrayList<RecommendationSpriteData> spritesToRecommend = new ArrayList<>();
-			if(gamesForThisSprite != null)
+			String objName = params.get("stype");
+			JSONObject tempObj = lookForObject(spriteList, objName);
+			if(tempObj != null)
 			{
-				for(GameItem gi : gamesForThisSprite)
-				{
-					JSONArray gameSpriteSet = ssr.getSpriteSet("examples/gridphysics/" + gi.gameName + ".txt");
-					String spName = SpriteNumberTable.retrieveSpriteNameID(sc.spriteType);
-					ArrayList<JSONObject> spriteList = ssr.retrieveObjectsWithThisType(spName, gameSpriteSet, new ArrayList<JSONObject>());
-					if(spriteList.size() > 0)
-					{
-						Collections.sort(spriteList, new SortRecommendations());
-						RecommendationSpriteData rsd = new RecommendationSpriteData(sc.spriteType, spName, sc.confidence, spriteList.get(0), spriteList.get(spriteList.size()-1), gi.gameName);
-						toRecommend.add(rsd);
-					}
-				}
+				collection.add(tempObj);
+				collection = getComplimentarySprites(spriteList, tempObj, collection);
 			}
 		}
-		System.out.println();
+		return collection;
+	}
+	
+	public JSONObject lookForObject(ArrayList<JSONObject> spriteList, String objName)
+	{
+		for(int i = 0; i < spriteList.size(); i++)
+		{
+			JSONObject tempObj = spriteList.get(i);
+			if(tempObj.get("identifier").equals(objName));
+			{
+				return tempObj;
+			}
+		}	
+		return null;
+	}
+	
+	public static void main(String [] args) throws ParseException
+	{
+//		ArrayList<RecommendationSpriteData> toRecommend = new ArrayList<>();
+//		ArrayList<Integer> set = new ArrayList<>();
+//		set.add(6); set.add(18); set.add(21); set.add(22);
+//		SpriteSetRecommender ssr = new SpriteSetRecommender();
+//		HashMap<Integer, Double> map = ssr.recommenderProtocol(set);
+//		ArrayList<GameItem> games = ssr.gamesWithTheSpriteSetIn(set);
+//		
+//		HashMap<SpriteConfidence, ArrayList<GameItem>> spritesAndGames = new HashMap<>();
+//		for(Integer i : map.keySet())
+//		{
+//			ArrayList<GameItem> gs = ssr.allTheGamesWithThisSprite(games, i);
+//			SpriteConfidence sc = new SpriteConfidence(i, map.get(i));
+//			spritesAndGames.put(sc, gs);
+//		}
+//		
+//		HashMap<SpriteConfidence, ArrayList<GameItem>> mapSpriteTypeToItsGame = new HashMap<>();
+//		for(SpriteConfidence sc : spritesAndGames.keySet())
+//		{
+//			ArrayList<GameItem> gamesToRecommend = ssr.retrieveGamesWithThisSprite(games, sc.spriteType);
+//			mapSpriteTypeToItsGame.put(sc, gamesToRecommend);
+//		}
+//		
+//		for(SpriteConfidence sc : mapSpriteTypeToItsGame.keySet())
+//		{
+//			ArrayList<GameItem> gamesForThisSprite = mapSpriteTypeToItsGame.get(sc);
+//			ArrayList<RecommendationSpriteData> spritesToRecommend = new ArrayList<>();
+//			if(gamesForThisSprite != null)
+//			{
+//				for(GameItem gi : gamesForThisSprite)
+//				{
+//					JSONArray gameSpriteSet = ssr.getSpriteSet("examples/gridphysics/" + gi.gameName + ".txt");
+//					String spName = SpriteNumberTable.retrieveSpriteNameID(sc.spriteType);
+//					ArrayList<JSONObject> spriteList = ssr.retrieveObjectsWithThisType(spName, gameSpriteSet, new ArrayList<JSONObject>());
+//					if(spriteList.size() > 0)
+//					{
+//						Collections.sort(spriteList, new SortRecommendations());
+//						RecommendationSpriteData rsd = new RecommendationSpriteData(sc.spriteType, spName, sc.confidence, spriteList.get(0), spriteList.get(spriteList.size()-1), gi.gameName);
+//						toRecommend.add(rsd);
+//					}
+//				}
+//			}
+//		}
+//		System.out.println();
 	}
 }
