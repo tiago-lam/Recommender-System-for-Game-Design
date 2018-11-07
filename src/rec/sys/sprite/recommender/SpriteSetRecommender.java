@@ -268,9 +268,13 @@ public class SpriteSetRecommender extends SpriteRecommender
 							Collections.sort(spriteList, new SortRecommendations());
 							JSONObject objLast = spriteList.get(spriteList.size()-1);
 							objLast.put("gameItBelongsTo", gi.gameName);
-							ArrayList<JSONObject> arr = getComplimentarySpritesIfAny(gi, (String) objLast.get("identifier")); arr.remove(0);
-							RecommendationSpriteData rsd = new RecommendationSpriteData(sc.spriteType, spName, sc.confidence, objLast, arr, gi.gameName);
-							toRecommend.add(rsd);
+							JSONObject params = (JSONObject) objLast.get("parameters");
+							if(params.containsKey("img"))
+							{
+								ArrayList<JSONObject> arr = getComplimentarySpritesIfAny(gi, (String) objLast.get("identifier")); arr.remove(0);
+								RecommendationSpriteData rsd = new RecommendationSpriteData(sc.spriteType, spName, sc.confidence, objLast, arr, gi.gameName);
+								toRecommend.add(rsd);
+							}
 						}
 					}
 				}
