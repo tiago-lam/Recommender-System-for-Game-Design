@@ -22,6 +22,7 @@ public class GetImages extends HttpServlet{
 				imageToServe);
 		byte[] data = Files.readAllBytes(path);
 		
+		resp.addHeader("Access-Control-Allow-Origin", "*");
 		resp.setContentType("image/png");
         resp.setStatus(HttpServletResponse.SC_OK);
         resp.getOutputStream().write(data);

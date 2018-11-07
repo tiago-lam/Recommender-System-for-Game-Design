@@ -43,7 +43,7 @@ public class GetRecommendations extends HttpServlet
     	SpriteSetRecommender ssr = new SpriteSetRecommender();
     	ArrayList<RecommendationSpriteData> recs;
 		try {
-			recs = ssr.recommendationsBasedOnSpriteSet(arr);
+			recs = ssr.recommendationsBasedOnSpriteSet2(arr);
 			JSONArray toRecommend = new JSONArray();
 	    	for (RecommendationSpriteData r : recs) 
 	    	{
@@ -53,7 +53,7 @@ public class GetRecommendations extends HttpServlet
 				obj.put("common", r.common);
 				obj.put("specialized", r.specialized);
 				obj.put("game", r.gameTheyBelongTo);
-				obj.put("stypes", r.sprites);
+				obj.put("stypes", r.complimentarySprites);
 				toRecommend.add(obj);
 				toSend = toRecommend.toJSONString();
 			}
@@ -62,6 +62,7 @@ public class GetRecommendations extends HttpServlet
 			e1.printStackTrace();
 		}
     	
+		response.addHeader("Access-Control-Allow-Origin", "*");
     	response.setContentType("text/html");
         response.setStatus(HttpServletResponse.SC_OK);
         response.getWriter().println(toSend);
@@ -74,8 +75,6 @@ public class GetRecommendations extends HttpServlet
 		ParserGameDescription parser = new ParserGameDescription();
 		return parser.getGameObject(gamePath);
 	}
-	
-	
 	
 	public String findIdentifierType(String identifier, JSONArray spriteSet)
 	{
@@ -114,4 +113,3 @@ public class GetRecommendations extends HttpServlet
 	}
 
 }
-

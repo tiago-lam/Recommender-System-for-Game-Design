@@ -93,6 +93,15 @@ public class GameDesignBreakdown {
 					arr.add(temp);
 				returnStypeObjects((String) temp.get("identifier"), spriteSet, arr);
 			}
+			else if(params.keySet().contains("stypeMissile"))
+			{
+				stype = (String) params.get("stypeMissile");
+				JSONObject temp = findSprite(stype, spriteSet, 0);
+				resetObj();
+				if(!arr.contains(temp))
+					arr.add(temp);
+				returnStypeObjects((String) temp.get("identifier"), spriteSet, arr);
+			}
 		}
 		
 		return arr;
@@ -102,10 +111,7 @@ public class GameDesignBreakdown {
 	{
 		GameDesignBreakdown gdb = new GameDesignBreakdown();
 		JSONObject obj = gdb.gameJSON("examples/gridphysics/zelda.txt");
-		//JSONObject o = gdb.findSprite("", (JSONArray) obj.get("SpriteSet"));
 		JSONArray spSet = (JSONArray) obj.get("SpriteSet");
-		JSONObject op = gdb.findSprite("zombie", spSet, 0);
-		gdb.obj = new JSONObject();
 		ArrayList<JSONObject> arr = (ArrayList<JSONObject>) gdb.returnStypeObjects("withkey", spSet, new ArrayList<>());
 		System.out.println();
 	}

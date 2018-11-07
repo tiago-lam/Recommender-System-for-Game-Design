@@ -33,6 +33,7 @@ public class ContextualServer {
         				"WAR/views/main.html",
         				"WAR/views/js/",
         				"WAR/views/css/",
+        				"WAR/",
         				"sprites/",
         				"images/"
         		});

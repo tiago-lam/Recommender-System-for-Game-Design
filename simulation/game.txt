@@ -1,44 +1,18 @@
 BasicGame
     SpriteSet
-        floor > Immovable img=oryx/floor3.png hidden=True randomtiling=0.9
-        goal > Door img=oryx/doorclosed1.png color=GREEN
-        key > Immovable img=oryx/key2.png color=ORANGE
-        sword > OrientedFlicker singleton=True img=oryx/slash1.png limit=5
-        movable >
-            avatar > ShootAvatar frameRate=8 stype=sword
-                nokey > ShootAvatar frameRate=8 img=oryx/swordman1_0.png stype=sword
-                withkey > ShootAvatar frameRate=8 img=oryx/swordmankey1_0.png color=ORANGE stype=sword
-            enemy >
-                monsterQuick > RandomNPC img=oryx/bat1.png cooldown=2 cons=6
-                monsterNormal > RandomNPC img=oryx/spider2.png cooldown=4 cons=8
-                monsterSlow > RandomNPC img=oryx/scorpion1.png cooldown=8 cons=12
-            wall > Immovable img=oryx/wall3.png autotiling=true
+        background > Immovable img=oryx/space1.png
+        missile > Missile img=oryx/orb1.png shrinkfactor=0.5 speed=0.6
+        avatar > ShootAvatar img=newset/cop1.png healthPoints=5 stype=bullet
+        bullet > Missile singleton=True img=oryx/orb3.png shrinkfactor=0.5
 
     LevelMapping
-        1 > floor monsterQuick
-        2 > floor monsterNormal
-        3 > floor monsterSlow
-        A > floor nokey
-        g > floor goal
-        w > wall
-        + > floor key
-        . > floor
-        ¡ > floor sword
-        ¢ > floor withkey
-        £ > floor movable
-        ¤ > floor avatar
-        ¥ > floor enemy
+        b > background
+        ¡ > missile background
+        ¢ > avatar background
+        £ > bullet background
         
     InteractionSet
-        movable wall > stepBack
-        nokey goal > stepBack
-        goal withkey > killSprite scoreChange=1
-        enemy sword > killSprite scoreChange=2
-        enemy enemy > stepBack
-        avatar enemy > killSprite scoreChange=-1
-        nokey key > transformTo killSecond=True scoreChange=1 stype=withkey
+        background EOS > stepBack
         
     TerminationSet
-        SpriteCounter stype=goal win=True
-        SpriteCounter stype=avatar win=False
         

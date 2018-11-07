@@ -53,9 +53,9 @@ function createReccomendationList(recommendationList)
         var r = recommendationList[i];
         var confidence = r['confidence'];
         var type = r['type'];
-        var specObj = r['specialized'];
+        //var specObj = r['specialized'];
         var commObj = r['common'];
-        var stypes = r['sprites'];
+        var stypes = r['stypes'];
 
         var containerDiv = document.createElement('div');
         containerDiv.id = "containerDiv";
@@ -102,14 +102,14 @@ function createReccomendationList(recommendationList)
 
         var spriteContainerDiv = document.createElement('div');
         spriteContainerDiv.id = 'spriteContainerDiv';
-        var spanSpecialized = document.createElement('div');
-        spanSpecialized.innerHTML = "Specialized";
+        //var spanSpecialized = document.createElement('div');
+        //spanSpecialized.innerHTML = "Specialized";
 
         var specializedDiv = document.createElement('div');
         specializedDiv.id = "specializedDiv" + i;
         specializedDiv.classList.add('specializedDiv');
-        mapRecommendationToObj.set(specializedDiv.id, specObj);
-        mapIdToCarrySprirtes.set(specializedDi.idv, sprites);
+        //mapRecommendationToObj.set(specializedDiv.id, specObj);
+        //mapIdToCarrySprirtes.set(specializedDiv.id, stypes);
         var specializedSpan = document.createElement('span');
         specializedSpan.id = 'specializedSpan';
         specializedSpan.innerHTML = 'Specialized';
@@ -119,12 +119,12 @@ function createReccomendationList(recommendationList)
         commonSpan.innerHTML = 'Common';
 
         var specializedSpriteImg = document.createElement('img');
-        specializedSpriteImg.src = specObj.parameters['img'] + ".png";
+        //specializedSpriteImg.src = specObj.parameters['img'] + ".png";
 
         var commonDiv = document.createElement('div');
         commonDiv.id = "commonDiv" + i;
         commonDiv.classList.add("commonDiv");
-        mapIdToCarrySprirtes.set(commonDiv.id, sprites);
+        mapIdToCarrySprirtes.set(commonDiv.id, stypes);
         mapRecommendationToObj.set(commonDiv.id, commObj);
 
         var commonSpriteImg = document.createElement('img');
@@ -139,11 +139,11 @@ function createReccomendationList(recommendationList)
         groupSpanDiv.appendChild(confDiv);
         groupSpanDiv.appendChild(typeDiv);
 
-        specializedDiv.appendChild(specializedSpriteImg);
+        //specializedDiv.appendChild(specializedSpriteImg);
         var specObj = retrieveRecommendationObj(specializedDiv.id);
-        var specInfoDiv = divObj(specObj);
-        specializedDiv.appendChild(specInfoDiv);
-        specializedDiv.setAttribute("onclick", "getRecObj(this.id)");
+        //var specInfoDiv = divObj(specObj);
+        //specializedDiv.appendChild(specInfoDiv);
+        //specializedDiv.setAttribute("onclick", "getRecObj(this.id)");
 
         commonDiv.appendChild(commonSpriteImg);
         var obj = retrieveRecommendationObj(commonDiv.id);
@@ -151,8 +151,8 @@ function createReccomendationList(recommendationList)
         commonDiv.appendChild(commonInfoDiv);
         commonDiv.setAttribute("onclick", "getRecObj(this.id)");
 
-        spriteContainerDiv.appendChild(specializedSpan);
-        spriteContainerDiv.appendChild(specializedDiv);
+        //spriteContainerDiv.appendChild(specializedSpan);
+        //spriteContainerDiv.appendChild(specializedDiv);
         spriteContainerDiv.appendChild(commonSpan);
         spriteContainerDiv.appendChild(commonDiv);
 
@@ -219,25 +219,24 @@ function retrieveRecommendationObj(id)
 function getRecObj(id)
 {
     var recObj = retrieveRecommendationObj(id);
-    addToSpriteSet(recObj);
-    var stypes = mapIdToCarrySprirtes.get(id);
-
-    for(var i = 0; i < stypes.length; i++)
-    {
-        var obj = stypes[i];
-        addToSpriteSet(obj);
-    }
-
+    addToSpriteSet(recObj, id);
     askForPositions(recObj['gameItBelongsTo'], recObj['referenceClass']);
     //retrieve suggested position for this sprite type - if any
     //associate them in the map like (recObj.referenceClass) -> (0,1), (11,10)
 }
 
-function addToSpriteSet(obj)
+function addToSpriteSet(obj, id)
 {
     if (confirm("Add to sprite set?")) {
         gameObj["SpriteSet"].push(obj);
         createLevelMappingForThisImage(obj.identifier);
+        var sprites = mapIdToCarrySprirtes.get(id);
+        for(var i = 0; i < sprites.length; i++)
+        {
+            var extra = sprites[i];
+            gameObj["SpriteSet"].push(extra);
+            createLevelMappingForThisImage(extra.identifier);
+        }
         refreshGame(gameObj);
     }
 }

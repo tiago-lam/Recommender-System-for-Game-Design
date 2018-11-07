@@ -58,6 +58,7 @@ public class GetRecommendationPositions extends HttpServlet
     	}
     	
     	toSend = posToSend.toJSONString();
+    	response.addHeader("Access-Control-Allow-Origin", "*");
     	response.setContentType("text/html");
         response.setStatus(HttpServletResponse.SC_OK);
         response.getWriter().println(toSend);
