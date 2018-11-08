@@ -219,8 +219,15 @@ function retrieveRecommendationObj(id)
 function getRecObj(id)
 {
     var recObj = retrieveRecommendationObj(id);
-    addToSpriteSet(recObj, id);
-    askForPositions(recObj['gameItBelongsTo'], recObj['referenceClass']);
+    if(!spriteNameCollection.includes(recObj.identifier))
+    {
+        addToSpriteSet(recObj, id);
+        askForPositions(recObj['gameItBelongsTo'], recObj['referenceClass']);
+    }
+    else
+    {
+        alert("Sprite already presented in the sprite set");
+    }
     //retrieve suggested position for this sprite type - if any
     //associate them in the map like (recObj.referenceClass) -> (0,1), (11,10)
 }
