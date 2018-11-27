@@ -47,11 +47,10 @@ function defineRefClass() {
 function addNewInteractionToInteractionSet(interactionSet)
 {
     var object = new Object();
-    var lastInteraction = interactionSet[interactionSet.length - 1];
-    object.interactionName = lastInteraction.interactionName;
-    object.parameters = lastInteraction.parameters;
-    object.sprite2 = lastInteraction.sprite2;
-    object.sprite1 = lastInteraction.sprite1;
+    object.interactionName = "stepBack";
+    object.parameters = {};
+    object.sprite2 = ["EOS"];
+    object.sprite1 = "background";
     interactionSet.push(object);
     refreshGame(gameObj);
 }

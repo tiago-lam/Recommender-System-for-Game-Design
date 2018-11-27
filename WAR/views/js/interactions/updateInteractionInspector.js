@@ -171,13 +171,13 @@ function updateSpritesToInteractList(value, spriteName)
     var spriteNameToInteract = spriteName;
     if(value == true)
     {
-        currentInteractionObj.sprite2.push(spriteNameToInteract);
+        currentInteractionObj["sprite2"].push(spriteNameToInteract);
     }
     else
     {
-        var index = currentInteractionObj.sprite2.indexOf(spriteNameToInteract);
+        var index = currentInteractionObj["sprite2"].indexOf(spriteNameToInteract);
         if (index > -1) {
-            currentInteractionObj.sprite2.splice(index, 1);
+            currentInteractionObj["sprite2"].splice(index, 1);
         }
     }
     setTextOfDivElement(currentInteractionElementId);
@@ -251,7 +251,13 @@ function createScoreChangeField(value)
     scoreInput.setAttribute('oninput', 'updateScoreParameter(this.value)');
     scoreInput.id = 'scoreInputId';
     scoreInput.type = 'number';
-    scoreInput.value = value;
+    if(value != undefined) {
+        scoreInput.value = value;
+        currentInteractionObj.parameters.scoreChange = value;
+    }else{
+        scoreInput.value = 0;
+        currentInteractionObj.parameters.scoreChange = 0;
+    }
 
     scoreDiv.append(scoreSpan);
     scoreDiv.append(scoreInput);

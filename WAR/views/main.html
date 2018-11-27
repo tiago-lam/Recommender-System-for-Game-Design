@@ -255,11 +255,11 @@
             <div id="gameSelectDiv">
                 <div id="gameSelectionDiv">
                     <span>Select Game</span>
-                    <select id="chooseGameSelect">
-                        <option value="zelda">zelda</option>
-                        <option value="pacman">pacman</option>
-                        <option value="aliens">aliens</option>
-                    </select>
+                    <select id="chooseGameSelect"></select>
+                    <script type="text/javascript" src="js/helperFiles/gameNames.js"></script>
+                    <script>
+                        gamesToSelect();
+                    </script>
                 </div>
 
                 <script>
@@ -279,17 +279,6 @@
             <div id="recommendationOnOffDiv">
                 <input type="radio">
             </div>
-
-            <!--<script>-->
-            <!--function loadGame()-->
-            <!--{-->
-            <!--var gameSelect = document.getElementById('chooseGameSelect');-->
-            <!--getGameParam = "game=" + gameSelect.value;-->
-            <!--localStorage.setItem("varGetGameParam", getGameParam);-->
-            <!--location.reload();-->
-            <!--}-->
-            <!--</script>-->
-            <!--<input type="button" onclick="loadGame()">Load Game</input>-->
         </div>
     </div>
 
@@ -299,7 +288,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.6/prefixfree.min.js"></script>
 <script type="text/javascript" src="js/utils/util.js"></script>
 <script type="text/javascript" src="js/nestable/nestable.js"></script>
-<!--//    <script type="text/javascript" src="js/mapping/mapping.js"></script>-->
 <script type="text/javascript" src="js/nestable/nestable.js"></script>
 <script type="text/javascript" src="js/constants/Interactions/interactions.js"></script>
 <script type="text/javascript" src="js/constants/Terminations/terminations.js"></script>

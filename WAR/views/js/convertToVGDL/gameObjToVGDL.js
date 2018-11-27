@@ -32,7 +32,7 @@ function JSONtoString(obj, ident) {
                 obj.parameters[paramKey].replace("http://localhost:9001/WAR/views/", "")
             if(!obj.parameters[paramKey].includes(".png"))
             {
-                obj.parameters[paramKey] = obj.parameters[paramKey] + ".png";
+                obj.parameters[paramKey] = obj.parameters[paramKey];
             }
         }
 

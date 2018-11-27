@@ -1,15 +1,19 @@
 BasicGame
     SpriteSet
-        background > Immovable img=oryx/space1.png
-        missile > Missile img=oryx/orb1.png shrinkfactor=0.5 speed=0.6
-        avatar > ShootAvatar img=newset/cop1.png healthPoints=5 stype=bullet
-        bullet > Missile singleton=True img=oryx/orb3.png shrinkfactor=0.5
+        background > Immovable img=oryx/space1
+        barrier > Immovable img=oryx/grass_0.png
+        ship > FlakAvatar img=oryx/spaceship1.png stype=bomb minAmmo=0 ammoCost=1
+        bomb > Missile img=oryx/fireup2.png orientation=UP
 
     LevelMapping
         b > background
-        ¡ > missile background
-        ¢ > avatar background
-        £ > bullet background
+        ¢ > megaman background
+        £ > bomb background
+        ¤ > wall background
+        ¥ > goal background
+        ¦ > rand background
+        § > barrier background
+        ¨ > ship background
         
     InteractionSet
         background EOS > stepBack

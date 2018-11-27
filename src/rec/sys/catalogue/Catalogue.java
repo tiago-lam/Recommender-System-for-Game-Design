@@ -61,6 +61,11 @@ public class Catalogue {
 	
 	public static void main(String[] args) throws IOException {
 		Catalogue c = new Catalogue("examples/gridphysics/");
+		ArrayList<String> arr = c.getGameNames("examples/gridphysics/");
+		for(String s : arr)
+		{
+			System.out.println(s);
+		}
 		System.out.println();
 	}
 	
