@@ -45,3 +45,33 @@ function storeNamesOfThisObjAndItsKids(obj, familyNames)
     }
     return familyNames;
 }
+
+var targetObject;
+
+function getObjFromSpriteName(spriteSet, spriteName)
+{
+    for(var i = 0; i < spriteSet.length; i++)
+    {
+        var obj = spriteSet[i];
+        if(obj.identifier == spriteName)
+        {
+            targetObject = obj;
+        }
+
+
+        for(var j = 0; j < obj.children.length; j++)
+        {
+            getObjFromSpriteName(obj.children, spriteName);
+        }
+    }
+}
+
+function retrieveObjFromSpriteName(spriteSet, spriteName)
+{
+    getObjFromSpriteName(spriteSet, spriteName);
+    var retrievedObj = targetObject;
+    targetObject = undefined;
+    return retrievedObj;
+}
+
+

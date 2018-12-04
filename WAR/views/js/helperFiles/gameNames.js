@@ -94,5 +94,3 @@ function gamesToSelect() {
         selectGames.appendChild(option);
     }
 }
-
-function loadGames
