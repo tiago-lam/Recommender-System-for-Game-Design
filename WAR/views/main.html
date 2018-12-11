@@ -18,8 +18,9 @@
 </head>
 <body>
 
-<script
-        src="libs/jquery.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.11/lodash.min.js"></script>
+
+<script src="libs/jquery.js"></script>
 
 <script src="js/refreshSpriteSet.js"></script>
 
@@ -240,6 +241,12 @@
 
             </div>
 
+
+            <div><input type="button" onclick="recommendInteractionsMainCall()">Suggest interactions</input></div>
+            <div id="recommenderInteractions">
+                <ul id="suggestionList"></ul>
+            </div>
+
         </div>
 
         <div><h2>Termination Set</h2>
@@ -324,6 +331,8 @@
 <script type="text/javascript" src="js/recommendations/getPositionRecommendations.js"></script>
 <script type="text/javascript" src="js/recommendations/getRecommendations.js"></script>
 <script type="text/javascript" src="gamesJSON/collection.js"></script>
+<script type="text/javascript" src="gamesJSON/storeInteraction.js"></script>
+<script src="tdd/test.js"></script>
 
 </body>
 </html>

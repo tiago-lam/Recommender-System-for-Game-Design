@@ -51,6 +51,18 @@
             parentElement.append(div);
         }
 
+        function createDivForRecommendationTextObj(textToPutInTheDiv, parentElement, id, interactionObj)
+        {
+            var div = document.createElement('div');
+            div.classList.add('interactionDiv');
+            div.id = id;
+            div.innerHTML = textToPutInTheDiv;
+            mapIdToInteraction.set(id, interactionObj);
+            //div.setAttribute("onclick", "getInteractionForUpdatingOnMouseClick(this.id)");
+            div.setAttribute("onmousedown", "addToTheInteractionSet(event)");
+            parentElement.append(div);
+        }
+
         function rightButton(e)
         {
             var isRightMB;
@@ -68,6 +80,28 @@
                     saveGameState();
                     removeObjectFromTheInteractionSet(e);
                     removeObjectFromTheInteractionList(e.target.id);
+                }
+            }
+        }
+
+        function addToTheInteractionSet(e)
+        {
+            var isRightMB;
+            e = e || window.event;
+
+            if ("which" in e)  // Gecko (Firefox), WebKit (Safari/Chrome) & Opera
+                isRightMB = e.which == 3;
+            else if ("button" in e)  // IE, Opera
+                isRightMB = e.button == 2;
+
+            if(isRightMB)
+            {
+                var isOkToRemove = confirm("Do you want to use this item?");
+                if(isOkToRemove) {
+
+                    var interactionObject = extractInteractionFromDivText(e.target.id);
+                    addRecommendedInteraction(gameObj.InteractionSet, interactionObject);
+                    removeObjectFromTheRecommendationList(e.target.id);
                 }
             }
         }
@@ -93,6 +127,11 @@
         }
 
         function removeObjectFromTheInteractionList(id)
+        {
+            document.getElementById(id).remove();
+        }
+
+        function removeObjectFromTheRecommendationList(id)
         {
             document.getElementById(id).remove();
         }
@@ -160,6 +199,41 @@
                 objectInteraction.push(interactionToObject);
             }
             return objectInteraction;
+        }
+
+        function recommendInteractionsMainCall()
+        {
+            var recs = getInteractionsToRecommend();
+            for(var i = 0; i < recs.length; i++)
+            {
+                var recObj = {};
+                recObj["interactionName"] = recs[i].interaction;
+                recObj["sprite1"] = recs[i].pair.type1;
+                recObj["sprite2"] = recs[i].pair.type2;
+                recObj["parameters"] = {};
+                var objId = i;
+                buildRecommendInteraction(recObj, objId);
+            }
+        }
+
+        function buildRecommendInteraction(interactionObj, objId)
+        {
+            var unorderedList = document.getElementById('suggestionList');
+            var textObj = convertObjectToText(interactionObj);
+            createDivForRecommendationTextObj(textObj, unorderedList, "recInteraction" + objId, interactionObj);
+        }
+
+        function extractInteractionFromDivText(divText)
+        {
+            var text = document.getElementById(divText).innerHTML;
+            var textSplitted = text.split(" ");
+            var interactionObject = {};
+            interactionObject.interactionName = textSplitted[0];
+            interactionObject.sprite1 = textSplitted[1];
+            interactionObject.sprite2 = [textSplitted[2]];
+            interactionObject.parameters = {};
+
+            return interactionObject;
         }
 
 

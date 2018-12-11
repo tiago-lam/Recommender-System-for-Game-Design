@@ -105,6 +105,127 @@ function buildPairInteractionTable()
     }
 }
 
+function createSpriteTypeCombinations()
+{
+    var array = Array.from(mapIdentifierToObject.keys());
+    var results = [];
+
+    for (var i = 0; i < array.length - 1; i++) {
+        for (var j = i + 1; j < array.length; j++) {
+            var obj1 = mapIdentifierToObject.get(array[i]);
+            var obj2 = mapIdentifierToObject.get(array[j]);
+
+            if(obj1.referenceClass != "Regular" && obj2.referenceClass != "Regular")
+            {
+                results.push(new Pair(obj1.referenceClass, obj2.referenceClass));
+            }
+        }
+    }
+
+    return results;
+}
+
+function recommendInteractions ()
+{
+    var recomm = [];
+    var list = createSpriteTypeCombinations();
+    for( var i = 0; i < list.length; i++)
+    {
+        var p = list[i];
+        if(p in pairInteractionTable)
+        {
+            recomm.push([p, pairInteractionTable[p]]);
+        }
+    }
+    return recomm;
+};
+
+function getAllObjectsOfThisType(type)
+{
+    var sprites = []
+    var keys = Array.from(mapIdentifierToObject.keys());
+
+    for(var i = 0; i < keys.length; i++)
+    {
+        var obj = mapIdentifierToObject.get(keys[i]);
+        if(obj.referenceClass == type)
+        {
+            sprites.push(keys[i]);
+        }
+    }
+    return sprites;
+}
+
+function modifyPair(p, interaction)
+{
+    var pairCollection = {};
+    var sp1 = getAllObjectsOfThisType(p.type1);
+    var sp2 = getAllObjectsOfThisType(p.type2);
+    for(var i = 0; i < sp1.length; i++)
+    {
+        var n1 = sp1[i];
+        for(var j = 0; j < sp2.length; j++)
+        {
+            var n2 = sp2[j];
+            pairCollection[new Pair(n1, n2)] = interaction;
+        }
+    }
+
+    return pairCollection;
+}
+
+function modifyPairs()
+{
+      var rec = recommendInteractions();
+      var pairCollection = rec.flatMap(([p, interactions]) => {
+        var sp1 = getAllObjectsOfThisType(p.type1);
+        var sp2 = getAllObjectsOfThisType(p.type2);
+
+
+        var recommendedInteractions = sp1.flatMap(s1 => sp2.flatMap(s2 => interactions.map(interaction => {return {
+            "pair" : new Pair(s1, [s2]),
+                "interaction" : interaction,
+                "interactionConfidence" :  getConfidenceForThisInteraction(interaction, interactions)
+        }})));
+
+        return recommendedInteractions
+    })
+
+    return _.uniqBy(pairCollection, obj => obj.pair.type1+obj.pair.type2+obj.interaction)
+}
+
+function getInteractionsToRecommend()
+{
+    buildPairInteractionTable();
+    var recommendations =  modifyPairs();
+    recommendations = recommendations.sort(compareConfidence);
+    return recommendations;
+}
+
+function countInArray(array, what) {
+    var count = 0;
+    for (var i = 0; i < array.length; i++) {
+        if (array[i] === what) {
+            count++;
+        }
+    }
+    return count;
+}
+
+function getConfidenceForThisInteraction(interaction, array)
+{
+    return countInArray(array, interaction) / array.length;
+}
+
+function compareConfidence(a,b) {
+    if (a.interactionConfidence < b.interactionConfidence)
+        return -1;
+    if (a.interactionConfidence > b.interactionConfidence)
+        return 1;
+    return 0;
+}
+
+//Object Pair
 function Pair(type1, type2)
 {
     this.type1 = type1;
@@ -115,3 +236,36 @@ Pair.prototype.toString = function()
     return "Pair(" + this.type1 + " , " + this.type2 + ")";
 };
 
+//legacy
+// function modifyPairs()
+// {
+//     var pairCollection = [];
+//     var rec = recommendInteractions();
+//     for(var p in rec) {
+//         var t1 = p.substring(p.indexOf("(")+1, p.indexOf(",")-1);
+//         var t2 = p.substring(p.indexOf(",")+2, p.indexOf(")"));
+//
+//         var sp1 = getAllObjectsOfThisType(t1);
+//         var sp2 = getAllObjectsOfThisType(t2);
+//         for (var i = 0; i < sp1.length; i++) {
+//             var n1 = sp1[i];
+//             for (var j = 0; j < sp2.length; j++) {
+//                 var n2 = sp2[j];
+//                 for(var m = 0; m < rec[p].length; m++) {
+//                     var interaction = rec[p][m];
+//                     var obj =
+//                         {
+//                             "pair" : new Pair(n1, n2),
+//                             "interaction" : interaction,
+//                             "interactionConfidence" :  getConfidenceForThisInteraction(interaction, rec[p])
+//                         };
+//                     if(!pairCollection.includes(obj)) {
+//                         pairCollection.push(obj);
+//                     }
+//                 }
+//             }
+//         }
+//     }
+//
+//     return pairCollection;
+// }

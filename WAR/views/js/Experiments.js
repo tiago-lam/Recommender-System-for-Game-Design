@@ -55,6 +55,17 @@ function addNewInteractionToInteractionSet(interactionSet)
     refreshGame(gameObj);
 }
 
+function addRecommendedInteraction(interactionSet, interaction)
+{
+    var object = new Object();
+    object.interactionName = interaction.interactionName;
+    object.parameters = {};
+    object.sprite1 = interaction.sprite1;
+    object.sprite2 = interaction.sprite2;
+    interactionSet.push(object);
+    refreshGame(gameObj);
+}
+
 function addNewTerminationToTerminationSet(interactionSet)
 {
 
