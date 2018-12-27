@@ -191,8 +191,12 @@ function updateObjectsAfterListChange()
 function getObjectData(obj, upperUl)
 {
     var currentObj = obj;
-    if(obj.referenceClass != null && !typeSetCollection.includes(obj.referenceClass)) {
-        typeSetCollection.push(obj.referenceClass);
+    if(obj.referenceClass != null && !typeSetCollection.includes(obj.referenceClass))
+    {
+        if(obj.referenceClass != "Regular")
+        {
+            typeSetCollection.push(obj.referenceClass);
+        }
     }
     var identifier = currentObj.identifier;
     spriteNameCollection.push(identifier);

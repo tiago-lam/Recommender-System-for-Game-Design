@@ -5,26 +5,7 @@ function addNewSpriteToSpriteSet(spriteSet) {
     {
         object.children = [];
         object.parameters = {};
-        object.referenceClass = "Regular";
-
-        // if("img" in object.parameters) {
-        //     var background = getLevelBackgroundIdentifierForThisLevel();
-        //     var mapEntry;
-        //     if (background != "this level has no backnd") {
-        //         var position = whereDoesTheLevelBGAppearsInTheArray();
-        //
-        //         if (position == 0) {
-        //             mapEntry = [background, object.identifier];
-        //         }
-        //         else {
-        //             mapEntry = [object.identifier, background];
-        //         }
-        //     }
-        //     else {
-        //         mapEntry = [object.identifier];
-        //     }
-        //     mappingObj[symbols[pointer++]] = mapEntry;
-        // }
+        object.referenceClass = "Immovable";
         spriteSet.push(object);
         refreshGame(gameObj);
     }

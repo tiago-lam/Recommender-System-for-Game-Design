@@ -27,7 +27,7 @@ input[type="checkbox"].switch_3{
 
 svg.checkbox .outer-ring{
   stroke-dasharray: 375;
-  stroke-dashoffset: 375;
+  stroke-dashoffset: 375%;
   -webkit-animation: resetRing .35s ease-in-out forwards;
   animation: resetRing .35s ease-in-out forwards;
 }

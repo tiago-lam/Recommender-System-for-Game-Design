@@ -1,5 +1,5 @@
 const killSprite = "killSprite";
-const killAll = 'killAll';
+const killBoth = 'killBoth';
 const killIfHasMore = 'killIfHasMore';
 const killIfHasLess = 'killIfHasLess';
 const killIfFromAbove = 'killIfFromAbove';
@@ -34,7 +34,7 @@ const bounceForward = 'bounceForward';
 const collectResource = 'collectResource';
 const changeResource = 'changeResource';
 
-var interactionCollection = [killSprite, killAll, killIfHasMore, killIfHasLess, killIfFromAbove, killIfOtherHasMore,
+var interactionCollection = [killSprite, killBoth, killIfHasMore, killIfHasLess, killIfFromAbove, killIfOtherHasMore,
     transformToSingleton, spawnBehind, spawnIfHasMore, spawnIfHasLess, cloneSprite, transformTo,
     transformToRandomChild, removeScore, addHealthPoints, addHealthPointsToMax, subtractHealthPoints,
     increaseSpeedToAll, decreaseSpeedToAll, setSpeedForAll, stepBack, undoAll, flipDirection, reverseDirection,
