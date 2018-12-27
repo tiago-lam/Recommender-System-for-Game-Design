@@ -42,7 +42,7 @@ function redoGame() {
     if(gameStates.count > 0) {
         var game = gameStates.states[gameStates.count - 1];
         gameStates.count--;
-        if(gameStates.count == 0) { gameStates.count = gameStates.capacity};
+        if(gameStates.count == 0) { gameStates.count = gameStates.states.length};
         game = JSON.parse(game);
         refreshGame(game);
     }
@@ -59,7 +59,7 @@ function refreshGame(game)
 function redoProcedureByPressingCtrlZ(e) {
 
     var evtobj = window.event ? event : e
-    if (evtobj.keyCode == 90 && evtobj.ctrlKey) {
+    if (evtobj.keyCode == 17 && evtobj.ctrlKey) {
         redoGame();
     }
 

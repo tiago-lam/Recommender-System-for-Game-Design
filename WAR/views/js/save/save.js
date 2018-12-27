@@ -7,7 +7,6 @@ function saveProcedure()
     }
     gameObj["Level"] = saveLevelState();
     let game = Object.freeze(JSON.stringify(gameObj));
-    gameStates.states[gameStates.count] = game;
-    gameStates.count++;
+    gameStates.states[gameStates.count++] = game;
     //alert("game and level changes saved");
 }

@@ -10,7 +10,7 @@ var callback = function(mutationsList) {
         // if (mutation.type == 'childList') {
         //     console.log('A child node has been added or removed.');
         // }
-        if (mutation.type == 'attributes' || mutation.type == 'childList') {
+        if (mutation.type == 'attributes') {
             saveGameState();
         }
     }

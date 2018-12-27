@@ -1,4 +1,4 @@
-var gameStates = {count: 0, capacity: 20, states: []};
+var gameStates = {count: 0, capacity: 10, states: []};
 
 function saveGameState()
 {

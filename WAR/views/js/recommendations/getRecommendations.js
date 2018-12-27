@@ -17,7 +17,7 @@ xmlhttp.onreadystatechange = function() {
         }
         else
         {
-            console.log("nothing to recommend, sorry");
+            alert("nothing to recommend, sorry");
         }
     }
 };
