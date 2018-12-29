@@ -15,6 +15,16 @@
     background-color: rgba(61, 88, 88, 0.316);
 }
 
+.pullLeft
+{
+    float: left;
+}
+
+.pullRight
+{
+    float: right;
+}
+
 #interactionList
 {
     float: left;

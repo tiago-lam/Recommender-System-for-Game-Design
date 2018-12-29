@@ -24,11 +24,12 @@
                 var interaction = obj.interactionName;
                 var sprite1 = obj.sprite1;
                 var sprite2 = obj.sprite2; // this is a collection (array), not a single string;
-                var interactionText = interaction + " " +
-                    sprite1 + " ";
+                var interactionText =
+                    "<span style='color: #50d2ff'>" + sprite1 + "</span>";
+
                 for(var i = 0; i < sprite2.length; i++)
                 {
-                    interactionText = interactionText + sprite2[i] + ' ';
+                    interactionText = interactionText + "<span style='color:#3bfffa'> X </span>" + sprite2[i] + ' ';
                 }
                 var parameters = obj.parameters; // this is a collection;
                 for(var i = 0; i < parameters.length; i++)
@@ -36,14 +37,47 @@
                     interactionText = interactionText + parameters[i];
                 }
 
+                interactionText = interactionText + "<span style='color: #8088ff'>=></span>" + " <span style='color: #f45e52'>" + interaction + "</span>";
+
                 return interactionText;
+        }
+
+        function createDivSpanImage(element) {
+            var divType1 = document.createElement('div');
+            var imgType1 = document.createElement('img');
+            var spanType1 = document.createElement('span');
+            var sp1 = retrieveObjectByTarget(element);
+
+            if(element == "EOS")
+            {
+                spanType1.innerHTML = "EOS";
+                imgType1.src = "oryx/noimage.png";
+            }
+            else
+            {
+                spanType1.innerHTML = sp1.identifier;
+                if ('img' in sp1.parameters)
+                    imgType1.src = sp1.parameters['img'] + ".png";
+                else
+                    imgType1.src = "oryx/noimage.png";
+            }
+
+            divType1.append(spanType1);
+            divType1.append(imgType1);
+            return divType1;
         }
 
         function createDivForThisTextObj(textToPutInTheDiv, parentElement, id, interactionObj)
         {
+
             var div = document.createElement('div');
             div.classList.add('interactionDiv');
             div.id = id;
+
+            //var elements = textToPutInTheDiv.split(" ");
+            // div.appendChild(createDivSpanImage(elements[1]));
+            // div.appendChild(createDivSpanImage(elements[2]));
+
             div.innerHTML = textToPutInTheDiv;
             mapIdToInteraction.set(id, interactionObj);
             div.setAttribute("onclick", "getInteractionForUpdatingOnMouseClick(this.id)");
@@ -203,6 +237,7 @@
 
         function recommendInteractionsMainCall()
         {
+            deleteElementsFrom(document.getElementById('suggestionList'));
             var recs = getInteractionsToRecommend();
             for(var i = 0; i < recs.length; i++)
             {
