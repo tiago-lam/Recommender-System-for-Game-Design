@@ -135,7 +135,7 @@
                 var isOkToRemove = confirm("Do you want to use this item?");
                 if(isOkToRemove) {
 
-                    var interactionObject = extractInteractionFromDivText(e.target.id);
+                    var interactionObject = extractInteractionFromDivHTMLText(e.target);
                     addRecommendedInteraction(gameObj.InteractionSet, interactionObject);
                     removeObjectFromTheRecommendationList(e.target.id);
                 }
@@ -243,7 +243,6 @@
             deleteElementsFrom(document.getElementById('suggestionList'));
             var recs = getInteractionsToRecommend();
 
-
             for(var i = 0; i < recs.length; i++)
             {
                 var recObj = {};
@@ -271,6 +270,17 @@
             interactionObject.interactionName = textSplitted[0];
             interactionObject.sprite1 = textSplitted[1];
             interactionObject.sprite2 = [textSplitted[2]];
+            interactionObject.parameters = {};
+
+            return interactionObject;
+        }
+
+        function extractInteractionFromDivHTMLText(element)
+        {
+            var interactionObject = {};
+            interactionObject.interactionName = element.childNodes[5].innerText;
+            interactionObject.sprite1 = element.childNodes[0].innerText;
+            interactionObject.sprite2 = [element.childNodes[2].textContent.trim()];
             interactionObject.parameters = {};
 
             return interactionObject;
@@ -304,6 +314,7 @@
         function prepareSelectionSortComponent()
         {
             var select = document.getElementById('sortSuggestionSelect');
+            if(select.options.length > 2) return;
             for (var i = 0; i < spriteNameCollection.length; i++) {
                 var option = document.createElement("option");
                 var elementName = spriteNameCollection[i];
