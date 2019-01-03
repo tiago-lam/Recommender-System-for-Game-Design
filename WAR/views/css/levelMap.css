@@ -66,10 +66,22 @@ table {
 }
 
 #createTableDiv {
-    width: 30%;
+    width: 150px;
     display: inline-flex;
     border: 1px solid black;
     float: left;
+}
+
+#createTableDiv input
+{
+    width: 35px;
+    margin-left: 50px;
+}
+
+#createTableDiv button
+{
+    width: 35px;
+    margin-left: 50px;
 }
 
 #createTableDiv span {
