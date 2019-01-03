@@ -24,7 +24,7 @@ function allowDrop(ev) {
 
     ev.preventDefault();
 
-    if(paintMode)
+    if(!paintMode)
     {
         if(ev.target.childNodes.length == 0)
         {
@@ -95,7 +95,7 @@ function drag(ev) {
 
 function drop(ev) {
     ev.preventDefault();
-    if(!paintMode)
+    if(paintMode)
     {
         var data = ev.dataTransfer.getData("key");
         var img = document.getElementById(data);
