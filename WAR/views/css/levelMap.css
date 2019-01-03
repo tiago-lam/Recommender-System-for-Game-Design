@@ -68,8 +68,9 @@ table {
 #createTableDiv {
     width: 150px;
     display: inline-flex;
-    border: 1px solid black;
+    border: 1px solid #51c6db;
     float: left;
+    margin-bottom: 30px;
 }
 
 #createTableDiv input
@@ -141,7 +142,7 @@ table {
 
 #levelMapDiv
 {
-    width: 1600px;
+    width: 1200px;
 }
 
 .suggestedTile
@@ -151,4 +152,11 @@ table {
     border-style: solid;
     border-radius: 7px;
     border-width: 1px;
+}
+
+#playDiv
+{
+    width: 150px;
+    float: left;
+    border: 1px solid #51c6db;
 }
