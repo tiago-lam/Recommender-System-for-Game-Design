@@ -242,7 +242,13 @@
             </div>
 
 
-            <div><input type="button" onclick="recommendInteractionsMainCall()">Suggest interactions</input></div>
+            <div><input type="button" onclick="recommendInteractionsMainCall()">Suggest interactions</input>
+                <div id="selectSuggestionInteractionId">
+                    <span>Interactions with: </span>
+                    <select id="sortSuggestionSelect" class="style-rounded blue rounded">
+                    </select>
+                </div>
+            </div>
             <div id="recommenderInteractions">
                 <ul id="suggestionList"></ul>
             </div>

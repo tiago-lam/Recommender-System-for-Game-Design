@@ -17,6 +17,8 @@
                 if(document.getElementById('interactionContainerDiv').childNodes.length == 0)
                 {    createInteractionSelectList(); }
                 createCheckBoxList();
+
+                prepareSelectionSortComponent();
         }
 
         function convertObjectToText(obj)
@@ -237,8 +239,11 @@
 
         function recommendInteractionsMainCall()
         {
+            document.getElementById('selectSuggestionInteractionId').style.display = 'block';
             deleteElementsFrom(document.getElementById('suggestionList'));
             var recs = getInteractionsToRecommend();
+
+
             for(var i = 0; i < recs.length; i++)
             {
                 var recObj = {};
@@ -294,4 +299,41 @@
             interactionsStringfyeid = eliminateDuplicates(interactionsStringfyeid);
             gameObj["InteractionSet"] = objectifyInteractionSet(interactionsStringfyeid);
             refreshGame(gameObj);
+        }
+
+        function prepareSelectionSortComponent()
+        {
+            var select = document.getElementById('sortSuggestionSelect');
+            for (var i = 0; i < spriteNameCollection.length; i++) {
+                var option = document.createElement("option");
+                var elementName = spriteNameCollection[i];
+                option.value = elementName;
+                option.text = elementName;
+                select.appendChild(option);
+            }
+            select.setAttribute('oninput', "sortSuggestionBy(this.selectedIndex)");
+        }
+
+        function sortSuggestionBy(element)
+        {
+            var item = findItemBySelect( document.getElementById('sortSuggestionSelect'), element);
+            var newList = [];
+            var recs = getInteractionsToRecommend();
+            recs.forEach(function(el) {if(el['pair']['type1'] == item) {newList.push(el)}})
+            if(newList.length == 0)
+            {
+                alert('no interactions to recommend with ' + item);
+                return;
+            }
+            deleteElementsFrom(document.getElementById('suggestionList'));
+            for(var i = 0; i < newList.length; i++)
+            {
+                var recObj = {};
+                recObj["interactionName"] = newList[i].interaction;
+                recObj["sprite1"] = newList[i].pair.type1;
+                recObj["sprite2"] = newList[i].pair.type2;
+                recObj["parameters"] = {};
+                var objId = i;
+                buildRecommendInteraction(recObj, objId);
+            }
         }

@@ -199,8 +199,31 @@ function getInteractionsToRecommend()
     buildPairInteractionTable();
     var recommendations =  modifyPairs();
     recommendations = recommendations.sort(compareConfidence);
+    //filter background
+    recommendations = recommendations.filter(el => el['pair']['type1'] != 'background');
+    recommendations = recommendations.filter(el => !el['pair']['type2'].includes('background'));
+    //filter repeated interaction
+    recommendations = filterRepeatedInteractions(recommendations);
+
     return recommendations;
 }
+
+function filterRepeatedInteractions(recs)
+{
+    var recF = []; var list = [];
+    var itrs = gameObj.InteractionSet;
+    list = itrs.filter(el => list.push({interaction: el.interactionName, sp1: el['sprite1'], sp2: el.sprite2}));
+    for(var i = 0; i < recs.length; i++){
+        var o = {interaction: recs[i]['interaction'], sp1: recs[i]['pair']['type1'], sp2: recs[i]['pair']['type2']};
+        for(var j = 0; j < list.length; j++)
+        {
+            var l = list[j];
+            if(l.interactionName != o.interaction && l.sprite1 != o.sp1 && l['sprite2'][0] != o['sp2'][0])
+                recF.push(recs[i]); break;
+        }
+    }
+    return recF;
+};
 
 function countInArray(array, what) {
     var count = 0;
@@ -235,37 +258,3 @@ Pair.prototype.toString = function()
 {
     return "Pair(" + this.type1 + " , " + this.type2 + ")";
 };
-
-//legacy
-// function modifyPairs()
-// {
-//     var pairCollection = [];
-//     var rec = recommendInteractions();
-//     for(var p in rec) {
-//         var t1 = p.substring(p.indexOf("(")+1, p.indexOf(",")-1);
-//         var t2 = p.substring(p.indexOf(",")+2, p.indexOf(")"));
-//
-//         var sp1 = getAllObjectsOfThisType(t1);
-//         var sp2 = getAllObjectsOfThisType(t2);
-//         for (var i = 0; i < sp1.length; i++) {
-//             var n1 = sp1[i];
-//             for (var j = 0; j < sp2.length; j++) {
-//                 var n2 = sp2[j];
-//                 for(var m = 0; m < rec[p].length; m++) {
-//                     var interaction = rec[p][m];
-//                     var obj =
-//                         {
-//                             "pair" : new Pair(n1, n2),
-//                             "interaction" : interaction,
-//                             "interactionConfidence" :  getConfidenceForThisInteraction(interaction, rec[p])
-//                         };
-//                     if(!pairCollection.includes(obj)) {
-//                         pairCollection.push(obj);
-//                     }
-//                 }
-//             }
-//         }
-//     }
-//
-//     return pairCollection;
-// }

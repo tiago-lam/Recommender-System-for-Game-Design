@@ -13,6 +13,12 @@ function removeItemFrom(array, obj)
     }
 }
 
+function findItemBySelect(selectElement, index)
+{
+    var opts = selectElement.options;
+    return opts[index].value;
+}
+
 function findItemIndexInSelectElement(selectElement, item)
 {
     var opts = selectElement.options;
