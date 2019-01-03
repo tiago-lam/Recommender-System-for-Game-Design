@@ -153,7 +153,7 @@ function createReccomendationList(recommendationList)
 
         //spriteContainerDiv.appendChild(specializedSpan);
         //spriteContainerDiv.appendChild(specializedDiv);
-        spriteContainerDiv.appendChild(commonSpan);
+        //spriteContainerDiv.appendChild(commonSpan);
         spriteContainerDiv.appendChild(commonDiv);
 
         gameNameDiv.appendChild(gameNameSpan);

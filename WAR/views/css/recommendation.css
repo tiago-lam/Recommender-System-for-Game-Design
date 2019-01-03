@@ -9,9 +9,9 @@
 
 #spriteContainerDiv img
 {
-    width: 20px;
-    height: 20px;
-    margin-left: 14px;
+    width: 40px;
+    height: 40px;
+    /*margin-left: 14px;*/
 }
 
 #spriteContainerDiv #specializedSpan
@@ -58,7 +58,8 @@
 {
     position: relative;
     border: 1px solid #FFFFFF;
-    width: 50px;
+    width: 40px;
+    height: 40px;
     margin-left: 43px;
     background: #CDE8C2;
     z-index: 3;

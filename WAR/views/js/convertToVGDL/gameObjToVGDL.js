@@ -39,6 +39,13 @@ function JSONtoString(obj, ident) {
         if(obj.parameters[paramKey] != "none") {
             objString = objString + " " + paramKey + "=" + obj.parameters[paramKey];
         }
+        else
+        {
+            if(paramKey == "stype" || paramKey == "stype1" || paramKey == "stype2") {
+                alert(obj['identifier'] + " param: " + paramKey + ", needs to be signed");
+                return;
+            }
+        }
     }
 
     for (var i = 0; i < ident; i++) {
