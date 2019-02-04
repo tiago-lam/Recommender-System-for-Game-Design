@@ -180,12 +180,28 @@ function divObj(obj)
     var nameDiv = document.createElement('div');
     nameDiv.id = 'nameDiv';
 
+    var typeDiv = document.createElement('div');
+    typeDiv.id = 'typeDiv';
+
     var nameSpan = document.createElement('span');
     nameSpan.id = 'nameSpan';
     nameSpan.innerHTML = 'id: ' + obj.identifier;
 
+    var typeClass = document.createElement('span');
+    typeClass.id = 'typeClassId';
+    typeClass.innerHTML = 'type:';
+    typeClass.classList.add('parKeySpan');
+
+    var typeSpan = document.createElement('span');
+    typeSpan.id = 'typeSpan';
+    typeSpan.innerHTML = 'type:   ' + obj.referenceClass;
+
     nameDiv.appendChild(nameSpan);
+    typeDiv.appendChild(typeSpan);
+
     parContainerDiv.appendChild(nameDiv);
+    parContainerDiv.appendChild(typeDiv);
+
 
     for(var par in obj.parameters)
     {

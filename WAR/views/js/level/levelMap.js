@@ -79,7 +79,7 @@ function drag(ev) {
     id = id.replace("drag_", "");
     id = id.replace("DragImgIdId", "");
     var refClass = (mapIdentifierToObject.get(id).referenceClass);
-
+ 
     var posToSuggest = mapTypeToPositions.get(refClass);
 
     if(posToSuggest != undefined) {

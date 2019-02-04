@@ -1,9 +1,13 @@
 BasicGame
     SpriteSet
-undefinedundefined
+        background > Immovable img=oryx/space1
+        avatar > ShootAvatar img=newset/cop1 healthPoints=5 stype=bullet
+        bullet > Missile img=oryx/orb3 shrinkfactor=0.5
+
     LevelMapping
         b > background
-        ¢ > ghghgh background
+        ¡ > avatar background
+        ¢ > bullet background
         
     InteractionSet
         background EOS > stepBack

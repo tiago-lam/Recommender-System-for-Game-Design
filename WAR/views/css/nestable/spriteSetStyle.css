@@ -9,7 +9,7 @@
 .dd-item,
 .dd-empty,
 .dd-placeholder { display: block; position: relative; margin: 0 0px; padding: 0 0px; min-height: 20px; font-size: 13px; line-height: 20px; font-family: "Lucida Console", Monaco, monospace; text-align: center; }
-.dd-handle { display: block; width: 90%; height: 80%; margin: 5px 0; padding: 5px 10px; color: #020202; text-decoration: none; font-weight: bold; border: 1px solid #FFFFFF; background: #3D5858; /*background: -webkit-linear-gradient(top, lightsteelblue 0%, aliceblue 100%) #D40505;*/ /*background: -moz-linear-gradient(top, #FAFAFA 0%, #EEE 100%) #AC0909;*/ /*background: linear-gradient(to top, #FAFAFA 0%, #EEE 100%) #E20B0B;*/ -webkit-border-radius: 3px; border-radius: 3px; box-sizing: border-box; -moz-box-sizing: border-box; }
+.dd-handle { display: block; width: 90%; height: 80%; margin: 5px 0; padding: 5px 10px; color: #020202; text-decoration: none; font-weight: bold; border: 1px solid #FFFFFF; background: #ab8ad8; /*background: -webkit-linear-gradient(top, lightsteelblue 0%, aliceblue 100%) #D40505;*/ /*background: -moz-linear-gradient(top, #FAFAFA 0%, #EEE 100%) #AC0909;*/ /*background: linear-gradient(to top, #FAFAFA 0%, #EEE 100%) #E20B0B;*/ -webkit-border-radius: 3px; border-radius: 3px; box-sizing: border-box; -moz-box-sizing: border-box; z-index: 10;}
 .dd-handle:hover { color: #D5EAF5; background: rgba(33, 252, 246, 0.410); }
 .dd-item > button { float: left; display: block; position: relative; cursor: pointer; width: 9px; height: 50%; margin: 5px 0; padding: 0; text-indent: 100%; white-space: nowrap; overflow: hidden; border: 0; background: transparent; font-size: 12px; line-height: 1; text-align: center; font-weight: bold; white-space: normal; }
 .dd-item > button:before { float: left; content: '+'; display: block; position: absolute; text-indent: 0; }
@@ -22,4 +22,5 @@
 .dd-dragel > .dd-item .dd-handle { margin-top: 0; }
 .dd-dragel .dd-handle { -webkit-box-shadow: 2px 4px 6px 0 rgba(0,0,0,.1); box-shadow: 2px 4px 6px 0 rgba(0, 0, 0, 0.1); }
 #button_make_container { border: 1px outset blue; background-color: lightblue; float: right; }
-img { display: block; margin-left: auto; margin-right: auto; /*width: 20%;*/ /*//    height: 40%;*/ }
+img { display: block; margin-left: auto; margin-right: auto; /*width: 20%;*/  height: 40%; z-index: -10}
+

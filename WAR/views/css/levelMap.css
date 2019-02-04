@@ -30,7 +30,8 @@ li {
     /*border: 1px solid #000;*/
     width: 20px;
     height: 20px;
-    margin: -4px 0px 0px -6px;
+    margin: -10px 0px 0px -10px;
+    image-rendering: pixelated;
 }
 
 table {

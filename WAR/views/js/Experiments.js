@@ -7,7 +7,8 @@ function addNewSpriteToSpriteSet(spriteSet) {
         object.parameters = {};
         object.referenceClass = "Immovable";
         spriteSet.push(object);
-        refreshGame(gameObj);
+        refreshGame(gameObj, false);
+        updateSelectSortComponent();
     }
 }
 
@@ -33,7 +34,7 @@ function addNewInteractionToInteractionSet(interactionSet)
     object.sprite2 = ["EOS"];
     object.sprite1 = "background";
     interactionSet.push(object);
-    refreshGame(gameObj);
+    refreshGame(gameObj, false);
 }
 
 function addRecommendedInteraction(interactionSet, interaction)
@@ -44,7 +45,7 @@ function addRecommendedInteraction(interactionSet, interaction)
     object.sprite1 = interaction.sprite1;
     object.sprite2 = interaction.sprite2;
     interactionSet.push(object);
-    refreshGame(gameObj);
+    refreshGame(gameObj, false);
 }
 
 function addNewTerminationToTerminationSet(interactionSet)

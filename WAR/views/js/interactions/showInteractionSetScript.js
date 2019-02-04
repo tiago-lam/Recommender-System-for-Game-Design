@@ -325,9 +325,25 @@
             select.setAttribute('oninput', "sortSuggestionBy(this.selectedIndex)");
         }
 
+        function updateSelectSortComponent()
+        {
+            var select = document.getElementById('sortSuggestionSelect');
+            while(select.childNodes.length > 0)
+            {
+                select.removeChild(select.lastChild);
+            }
+            for (var i = 0; i < spriteNameCollection.length; i++) {
+                var option = document.createElement("option");
+                var elementName = spriteNameCollection[i];
+                option.value = elementName;
+                option.text = elementName;
+                select.appendChild(option);
+            }
+        }
+
         function sortSuggestionBy(element)
         {
-            var item = findItemBySelect( document.getElementById('sortSuggestionSelect'), element);
+            var item = findItemBySelect(document.getElementById('sortSuggestionSelect'), element);
             var newList = [];
             var recs = getInteractionsToRecommend();
             recs.forEach(function(el) {if(el['pair']['type1'] == item) {newList.push(el)}})

@@ -100,6 +100,7 @@ function initializeGameObject(response) {
         terminationSetObj = gameObj["TerminationSet"];
         levelMatrixObject = gameObj["Level"];
     }
+
     console.log(spriteSetObj);
     console.log(mappingObj);
     console.log(interactionSetObj);
@@ -168,7 +169,7 @@ function activateHierarchyListSort()
  */
 function getObjectForUpdatingOnMouseClick()
 {
-    $(".dd-handle")
+    $(".dd-item")
         .mousedown(function(e) {
             var obj = retrieveObjectByTarget(e.target.id);
             updateInspector(obj);
@@ -252,12 +253,6 @@ function getObjectData(obj, upperUl)
             getObjectData(innerCurrentObj, innerOl);
             li.appendChild(innerOl);
         }
-
-        // return Promise.all(objChildren.map(new Promise(function() {
-        //
-        //     apChildToParent.set(innerCurrentObj.identifier, currentObj.identifier);
-        //     getObjectData(innerCurrentObj, innerOl);
-        //     li.append(innerOl)})));
     }
 }
 
@@ -311,14 +306,32 @@ function getMapListObject()
     return mapIdentifierToObject;
 }
 
-function removeObjectFromTheSpriteSet(obj)
+function detachObjFromList(obj, list)
 {
-    var index = spriteSetObj.indexOf(obj);
+    var index = list.indexOf(obj);
     if (index > -1) {
-        spriteSetObj.splice(index, 1);
+        list.splice(index, 1);
     }
-
     removeSpriteNamesFromArraysAndMaps(obj);
+}
+
+function removeObjectFromTheSpriteSet(obj, spriteSet)
+{
+    for(var i = 0; i < spriteSet.length; i++)
+    {
+        var sprite = spriteSet[i];
+        if(sprite.identifier == obj.identifier)
+        {
+            detachObjFromList(obj, spriteSet);
+            return;
+        }
+
+        var children = sprite.children;
+        for(var j = 0; j < children.length; j++)
+        {
+            removeObjectFromTheSpriteSet(obj, children);
+        }
+    }
 }
 
 function deleteSpriteHierarchyList()

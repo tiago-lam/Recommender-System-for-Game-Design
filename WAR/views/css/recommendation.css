@@ -54,6 +54,8 @@
     z-index: 100;
 }
 
+.expandDiv:hover
+
 .commonDiv
 {
     position: relative;
@@ -76,7 +78,7 @@
 .spanValue
 {
     float: right;
-    width: 55px;
+    width: 65px;
     /*border: 1px solid black;*/
     word-break: normal;
     display: table-header-group;
@@ -87,6 +89,7 @@
     margin-left: 0;
     color: #FFFFFF;
 }
+
 #groupSpanDiv
 {
     position: relative;
@@ -135,6 +138,12 @@
     margin-left: 50px;
     color:  #000000;
 }
+
+/*#typeDiv*/
+/*{*/
+    /*margin-left: 50px;*/
+    /*color:  #000000;*/
+/*}*/
 
 .parKeySpan
 {
