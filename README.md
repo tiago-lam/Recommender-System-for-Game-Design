@@ -30,10 +30,10 @@ I want to see how the recommendation works
 
 1. Start by adding sprites, which you can do at the Sprite Set tab (or removing them if you want it)
 2. Click on the button (Ask for recommendations)
-3. You see a list of sprites showing up at the right side of the screen
+3. You will see a list of sprites showing up at the right side of the screen
 4. Click on them and add they to your game sprite set (left side of the screen)
 
 Keep coming back to check more news!
 Best Regards!
 
-p.s.: as we are working to remove bugs, if you see them happen, please report!
+p.s.: as we are working to remove bugs, if you see them happen, please report! Thx!
