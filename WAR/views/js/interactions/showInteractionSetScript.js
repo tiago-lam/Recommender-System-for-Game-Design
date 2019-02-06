@@ -71,20 +71,28 @@
 
         function createDivForThisTextObj(textToPutInTheDiv, parentElement, id, interactionObj)
         {
-
+            var divWrapper = document.createElement('div');
+            divWrapper.id = 'wrapper';
+            divWrapper.classList.add('wrapInteractionDiv');
             var div = document.createElement('div');
             div.classList.add('interactionDiv');
             div.id = id;
-
-            //var elements = textToPutInTheDiv.split(" ");
-            // div.appendChild(createDivSpanImage(elements[1]));
-            // div.appendChild(createDivSpanImage(elements[2]));
-
             div.innerHTML = textToPutInTheDiv;
             mapIdToInteraction.set(id, interactionObj);
-            div.setAttribute("onclick", "getInteractionForUpdatingOnMouseClick(this.id)");
-            div.setAttribute("onmousedown", "rightButton(event)");
-            parentElement.append(div);
+            divWrapper.append(div);
+
+            var divCancel = document.createElement('div');
+            divCancel.id = 'cancel_' + id;
+            divCancel.classList.add("cancelDiv");
+            divCancel.setAttribute("onclick", "getInteractionForUpdatingOnMouseClick('"+id+"')");
+            divCancel.setAttribute("onmousedown", "removeInteractionButton(event)");
+            var img = document.createElement('img');
+            img.id = 'cancel_' + 'img_' + id;
+            //img.src = "https://www.iconsdb.com/icons/preview/red/cancel-xxl.png";
+            img.src = "http://localhost:9001/WAR/views/css/cancel.png";
+            divCancel.append(img);
+            divWrapper.append(divCancel);
+            parentElement.append(divWrapper);
         }
 
         function createDivForRecommendationTextObj(textToPutInTheDiv, parentElement, id, interactionObj)
@@ -99,25 +107,14 @@
             parentElement.append(div);
         }
 
-        function rightButton(e)
+        function removeInteractionButton(e)
         {
-            var isRightMB;
-            e = e || window.event;
-
-            if ("which" in e)  // Gecko (Firefox), WebKit (Safari/Chrome) & Opera
-                isRightMB = e.which == 3;
-            else if ("button" in e)  // IE, Opera
-                isRightMB = e.button == 2;
-
-            if(isRightMB)
-            {
                 var isOkToRemove = confirm("Are you sure yo want to remove this item?");
                 if(isOkToRemove) {
                     saveGameState();
                     removeObjectFromTheInteractionSet(e);
                     removeObjectFromTheInteractionList(e.target.id);
                 }
-            }
         }
 
         function addToTheInteractionSet(e)
@@ -144,6 +141,7 @@
 
         function getInteractionForUpdatingOnMouseClick(e)
         {
+            console.log(e);
             var interactionObj = mapIdToInteraction.get(e);
             showInfo(interactionObj, e);
         }
@@ -155,6 +153,7 @@
         function removeObjectFromTheInteractionSet(e)
         {
             var objID = e.target.id;
+            objID = objID.replace("cancel_img_", "");
             var obj = mapIdToInteraction.get(objID);
             deleteObjectInTheInteractionSet(obj);
 
@@ -164,7 +163,8 @@
 
         function removeObjectFromTheInteractionList(id)
         {
-            document.getElementById(id).remove();
+            console.log("id", id);
+            document.getElementById(id).parentElement.parentElement.remove();
         }
 
         function removeObjectFromTheRecommendationList(id)

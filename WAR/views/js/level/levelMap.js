@@ -33,7 +33,7 @@ function allowDrop(ev) {
         }
         else
         {
-            var imgToModify = document.getElementById('drag_' + ev.target.id);
+            var imgToModify = document.getElementById(ev.target.id);
 
             if(imgToModify.src != imgSrc) {
 
