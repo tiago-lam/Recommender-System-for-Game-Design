@@ -78,13 +78,14 @@
             div.classList.add('interactionDiv');
             div.id = id;
             div.innerHTML = textToPutInTheDiv;
+            div.setAttribute("onclick", "getInteractionForUpdatingOnMouseClick('"+id+"')");
             mapIdToInteraction.set(id, interactionObj);
             divWrapper.append(div);
 
             var divCancel = document.createElement('div');
             divCancel.id = 'cancel_' + id;
             divCancel.classList.add("cancelDiv");
-            divCancel.setAttribute("onclick", "getInteractionForUpdatingOnMouseClick('"+id+"')");
+            //divCancel.setAttribute("onclick", "getInteractionForUpdatingOnMouseClick('"+id+"')");
             divCancel.setAttribute("onmousedown", "removeInteractionButton(event)");
             var img = document.createElement('img');
             img.id = 'cancel_' + 'img_' + id;
@@ -102,7 +103,7 @@
             div.id = id;
             div.innerHTML = textToPutInTheDiv;
             mapIdToInteraction.set(id, interactionObj);
-            //div.setAttribute("onclick", "getInteractionForUpdatingOnMouseClick(this.id)");
+            div.setAttribute("onclick", "getInteractionForUpdatingOnMouseClick(this.id)");
             div.setAttribute("onmousedown", "addToTheInteractionSet(event)");
             parentElement.append(div);
         }
