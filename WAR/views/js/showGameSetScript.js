@@ -171,7 +171,17 @@ function getObjectForUpdatingOnMouseClick()
 {
     $(".dd-item")
         .mousedown(function(e) {
-            var obj = retrieveObjectByTarget(e.target.id);
+            console.log("element", e);
+            var id;
+            if(e.target.localName == 'div')
+            {
+                id = e.target.id;
+            }
+            else
+            {
+                id = e.target.parentNode.id;
+            }
+            var obj = retrieveObjectByTarget(id);
             updateInspector(obj);
         });
 }
