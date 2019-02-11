@@ -229,26 +229,37 @@
 
         </div>
 
-        <div><h2>Interaction Set</h2>
-            <div><input type="button" onclick="addNewInteractionToInteractionSet(interactionSetObj)">Add Interaction</input></div>
-            <div id="interactionSetContainer">
+        <div id="interactionPanelDiv"><h2>Interaction Set</h2>
+
+            <!--Add Interaction-->
+            <div id='popup'>
+                <input type="button" onclick="hideout()">
+                <input type="button" onclick="addInteractionTo(interactionSetObj)">
+            </div>
+
+            <div class="mask" style="height: 600px">
+
+
+            <div id="show"><input type="button" onclick="addNewInteractionToInteractionSet(interactionSetObj)">Add Interaction</input></div>
+            <div  class="mask" id="interactionSetContainer">
                 <ul id="interactionList"></ul>
             </div>
 
-            <div id="interactionInspector">
+                <div class="mask">
+                    <div id="interactionInspector">
 
-                <div id="interactionSprite1Div"></div>
+                        <div id="interactionSprite1Div"></div>
 
-                <div id="interactionDiv">
-                    <div id="interactionContainerDiv"></div>
+                        <div id="interactionDiv">
+                            <div id="interactionContainerDiv"></div>
+                        </div>
+
+                        <div id="spritesToInteractDiv"></div>
+
+                    </div>
                 </div>
 
-                <div id="spritesToInteractDiv"></div>
-
-            </div>
-
-
-            <div><input type="button" onclick="recommendInteractionsMainCall()">Suggest interactions</input>
+            <div class="mask"><input type="button" onclick="recommendInteractionsMainCall()">Suggest interactions</input>
                 <div id="selectSuggestionInteractionId">
                     <span>Interactions with: </span>
                     <select id="sortSuggestionSelect" class="style-rounded blue rounded">
@@ -257,6 +268,9 @@
             </div>
             <div id="recommenderInteractions">
                 <ul id="suggestionList"></ul>
+            </div>
+
+
             </div>
 
         </div>

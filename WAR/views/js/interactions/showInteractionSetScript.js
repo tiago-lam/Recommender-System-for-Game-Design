@@ -19,6 +19,8 @@
                 createCheckBoxList();
 
                 prepareSelectionSortComponent();
+
+                content();
         }
 
         function convertObjectToText(obj)
@@ -365,3 +367,6 @@
                 buildRecommendInteraction(recObj, objId);
             }
         }
+
+        // -------------------------------------------
+

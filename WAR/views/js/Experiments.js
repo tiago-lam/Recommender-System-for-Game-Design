@@ -37,6 +37,14 @@ function addNewInteractionToInteractionSet(interactionSet)
     refreshGame(gameObj, false);
 }
 
+function addInteractionTo(interactionSet)
+{
+    console.log(interactionObjX);
+    interactionSet.push(interactionObjX);
+    refreshGame(gameObj, false);
+    hideout();
+}
+
 function addRecommendedInteraction(interactionSet, interaction)
 {
     var object = new Object();

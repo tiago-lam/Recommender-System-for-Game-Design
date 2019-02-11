@@ -16,7 +16,44 @@
     background-color: rgba(61, 88, 88, 0.316);
 }
 
+#interactionDiv
+{
+    width: 46%;
+    float: left;
+    /*background: rgba(61, 88, 88, 0.316);*/
+}
+
+#interactionDivAdd
+{
+    width: 46%;
+    float: left;
+    /*background: rgba(61, 88, 88, 0.316);*/
+}
+
 .interactionDiv span
+{
+    z-index: -10;
+}
+
+#interactionDivAdd
+{
+    margin-bottom: 10px;
+    border: 1px solid black;
+    width: 250px;
+    margin-left: 0%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    float: left;
+    /*+border-radius: 5px;*/
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -khtml-border-radius: 5px;
+    border-radius: 5px;
+    background-color: rgba(61, 88, 88, 0.316);
+}
+
+#interactionDivAdd span
 {
     z-index: -10;
 }
@@ -52,18 +89,22 @@
     background: rgba(61, 88, 88, 0.316);
 }
 
+#interactionInspectorAdd
+{
+    width: 500px;
+    height: 229px;
+    position: relative;
+    float: left;
+    margin-left: 30px;
+    border: 1px solid black;
+    background: rgba(61, 88, 88, 0.316);
+}
+
 #interactionSprite1Div
 {
     width: 20%;
     float: left;
     display: inline;
-}
-
-#interactionDiv
-{
-    width: 46%;
-    float: left;
-    /*background: rgba(61, 88, 88, 0.316);*/
 }
 
 #interactionSelect
@@ -73,6 +114,15 @@
 }
 
 #spritesToInteractDiv
+{
+    width: 33%;
+    height: 100%;
+    float: left;
+    display: grid;
+    overflow: scroll;
+}
+
+#spritesToInteractDivAdd
 {
     width: 33%;
     height: 100%;
@@ -171,6 +221,12 @@
     margin-left: 7%;
 }
 
+#interactionContainerDivAdd
+{
+    width: 80%;
+    margin-left: 7%;
+}
+
 .cancelDiv
 {
     height: 50px;
@@ -184,4 +240,30 @@
 .wrapInteractionDiv
 {
     width: 280px;
+}
+
+
+/*--------------------------------------------------*/
+
+* { margin: 0, padding 0}
+
+.mask{
+    display: block;
+    z-index: 10000;
+}
+
+#popup
+{
+    top: 0;
+    left: 0;
+    width: 950px;
+    height: 660px;
+    margin: 10px auto;
+    border: 1px solid #333;
+    background-color: #eee;
+    cursor: pointer;
+    padding: 10px;
+    position: relative;
+    z-index: 10001;
+    display: none;
 }

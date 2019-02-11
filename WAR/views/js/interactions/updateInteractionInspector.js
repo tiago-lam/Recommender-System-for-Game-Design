@@ -1,5 +1,11 @@
 var currentInteractionObj;
 var currentInteractionElementId;
+var interactionObjX = {
+    interactionName: 'stepBack',
+    parameters: {scoreChange: 0},
+    sprite1: '',
+    sprite2: []
+};
 
 function updateOrCreateImg(identifier, divToBeAppendedId, imgElementId)
 {
@@ -156,8 +162,8 @@ function updateSprite1InsideTheObj(value)
 function updateInteractionInsideTheObj(value)
 {
     currentInteractionObj.interactionName = value;
-    setTextOfDivElement(currentInteractionElementId);
-
+    if(currentInteractionElementId)
+    {setTextOfDivElement(currentInteractionElementId);}
     var scoreValue = currentInteractionObj.parameters.scoreChange;
     currentInteractionObj.parameters = {};
     currentInteractionObj.parameters['scoreChange'] = scoreValue;
@@ -283,4 +289,170 @@ function openImagePicker()
     document.getElementById('imagePickerDiv').style.display = "block";
     document.getElementById('hideImgPickerInput').style.display = "block";
     document.getElementById('inspector').style.display = "none";
+}
+
+//-------------------------------------------------------------------------//
+
+
+$(document).ready(function() {
+
+    $("#show").click(function() {
+        showPopup();
+    });
+
+    $("#popup").click(function() {
+
+        // $(this).hide();
+        // $(".mask").show();
+
+    });
+
+});
+
+function createInteractionX()
+{
+    var interactionObjectX = new Object();
+    interactionObjectX["interactionName"] = 'stepBack';
+    interactionObjectX["sprite1"] = spriteNameCollection[0];
+    interactionObjectX["sprite2"] = [];
+    interactionObjectX["parameters"] = {scoreChange: 0};
+    return interactionObjectX;
+}
+
+function hideout() {
+     $('#popup').hide();
+     $(".mask").show();
+    var insp = document.getElementById('interactionInspector');
+    var inspClone = insp.cloneNode(true);
+    var div = document.getElementById('interactionPanelDiv');
+    if(!div.contains(insp))
+    {
+        div.appendChild(inspClone);
+    }
+    var pop = document.getElementById("popup");
+    if(pop.childNodes.length > 1)
+    {
+        pop.removeChild(pop.lastChild);
+    }
+}
+
+function consoleData()
+{
+
+
+}
+
+
+function showPopup() {
+    // show the mask
+
+    //$(".mask").fadeTo(1000, 0.0);
+    $(".mask").hide();
+
+    // show the popup
+    $("#popup").show();
+
+    var div = document.getElementById('popup');
+    if(!div.contains(document.getElementById('interactionInspector'))) {
+        var insp = document.getElementById('interactionInspector');
+        var inspClone = insp.cloneNode(true);
+        div.appendChild(inspClone);
+    }
+
+    interactionObjX = createInteractionX();
+    showInfo(interactionObjX);
+
+}
+
+function content()
+{
+    // createSprite1SelectListAdd();
+    // createInteractionSelectListAdd();
+    // createCheckBoxListAdd();
+}
+
+function createSprite1SelectListAdd()
+{
+    var divParent = document.getElementById('interactionSprite1DivAdd');
+    var sprite1Select = document.createElement('select');
+    sprite1Select.id = "sprite1SelectIdAdd";
+    sprite1Select.classList.add('style-rounded');
+    sprite1Select.classList.add('blue');
+    sprite1Select.classList.add('rounded');
+
+    for (var i = 0; i < spriteNameCollection.length; i++) {
+        var option = document.createElement("option");
+        var spriteName = spriteNameCollection[i];
+        option.value = spriteName;
+        option.text = spriteName;
+        sprite1Select.appendChild(option);
+    }
+
+    sprite1Select.setAttribute('oninput', 'updateSprite1InsideTheObj(this.value)');
+
+    divParent.append(sprite1Select);
+}
+
+
+function createInteractionSelectListAdd()
+{
+    var divParent = document.getElementById('interactionContainerDivAdd');
+    var interactionSelect = document.createElement('select');
+    interactionSelect.id = "interactionSelectAdd";
+    interactionSelect.classList.add('style-rounded');
+    interactionSelect.classList.add('blue');
+    interactionSelect.classList.add('rounded');
+
+    for (var i = 0; i < interactionCollection.length; i++) {
+        var option = document.createElement("option");
+        var interaction = interactionCollection[i];
+        option.value = interaction;
+        option.text = interaction;
+        interactionSelect.appendChild(option);
+    }
+
+    interactionSelect.setAttribute('oninput', 'updateInteractionInsideTheObj(this.value)');
+
+    divParent.append(interactionSelect);
+}
+
+function createCheckBoxListAdd()
+{
+    addNoneAndEosOptions();
+    var divParent = document.getElementById('spritesToInteractDivAdd');
+    for (var i = 0; i < spriteNameCollection.length; i++) {
+        var divForCheckBoxContents = document.createElement('div');
+        divForCheckBoxContents.id = 'checkBoxContents' + i + 'IdAdd';
+        divForCheckBoxContents.classList.add('checkboxImgDiv');
+        var inputCheckBox = document.createElement('input');
+        inputCheckBox.type = 'checkbox';
+        inputCheckBox.classList.add('interactionCheckBox');
+        inputCheckBox.id = spriteNameCollection[i] + 'CheckBoxIdAdd';
+        var label = document.createElement('label');
+        label.htmlFor = 'inputCheckBox.id';
+        label.innerHTML = spriteNameCollection[i];
+
+        inputCheckBox.setAttribute('oninput', 'updateSpritesToInteractList(this.checked, this.id)');
+
+        divForCheckBoxContents.append(inputCheckBox);
+        divForCheckBoxContents.append(label);
+
+        var obj = mapIdentifierToObject.get(spriteNameCollection[i]);
+        if(obj != undefined) {
+            if ("img" in obj.parameters) {
+                var img = document.createElement('img');
+                img.id = 'imgOption' + i + 'Id';
+                var imgPath = obj.parameters['img'];
+                if (!imgPath.includes('.png')) {
+                    imgPath = imgPath + '.png';
+                }
+                img.src = imgPath;
+                divForCheckBoxContents.append(img);
+            }
+        }
+
+        divParent.append(divForCheckBoxContents);
+    }
+    return divParent;
+
 }
