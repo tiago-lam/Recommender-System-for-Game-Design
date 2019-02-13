@@ -85,6 +85,9 @@ function load()
     })
 }
 
+$("#imagePickerDiv").hide();
+$("#hideImgPickerInput").hide();
+
 function closeImagePicker()
 {
     var imgPicker = document.getElementById('imagePickerDiv');

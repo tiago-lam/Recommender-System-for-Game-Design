@@ -31,23 +31,6 @@ var coldStart = [
 
     {
         "specialized": null,
-        "game": "whackamole",
-        "common": {
-            "identifier": "avatar",
-            "children": [],
-            "gameItBelongsTo": "whackamole",
-            "parameters": {
-                "img": "oryx/cyclop1"
-            },
-            "referenceClass": "MovingAvatar"
-        },
-        "confidence": 0.24481327800829875,
-        "type": "MovingAvatar",
-        "stypes": []
-    },
-
-    {
-        "specialized": null,
         "game": "aliens",
         "common": {
             "identifier": "avatar",
@@ -73,6 +56,23 @@ var coldStart = [
                 "referenceClass": "Missile"
             }
         ]
+    },
+
+    {
+        "specialized": null,
+        "game": "whackamole",
+        "common": {
+            "identifier": "avatar",
+            "children": [],
+            "gameItBelongsTo": "whackamole",
+            "parameters": {
+                "img": "oryx/cyclop1"
+            },
+            "referenceClass": "MovingAvatar"
+        },
+        "confidence": 0.24481327800829875,
+        "type": "MovingAvatar",
+        "stypes": []
     }];
 
 function coldStartRecommendations()

@@ -231,7 +231,11 @@
             document.getElementById("name").innerHTML = obj.identifier;
             var img = document.getElementById("image");
             if('img' in obj.parameters) {
-                img.src = obj.parameters['img'] + ".png";
+                img.src = obj.parameters['img'];
+                if(!img.src.includes(".png"))
+                {
+                        img.src = img.src + ".png";
+                }
             }
         }
 
