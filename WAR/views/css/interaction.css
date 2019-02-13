@@ -3,6 +3,7 @@
     margin-bottom: 10px;
     border: 1px solid black;
     width: 250px;
+    cursor: pointer;
     margin-left: 0%;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -260,7 +261,7 @@
     height: 660px;
     margin: 10px auto;
     border: 1px solid #333;
-    background-color: #eee;
+    background-color: #1a1a1a00;
     cursor: pointer;
     padding: 10px;
     position: relative;

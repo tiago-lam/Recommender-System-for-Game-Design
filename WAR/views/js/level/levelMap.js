@@ -215,6 +215,34 @@ function removeTable()
     }
 }
 
+function updateGameLevelObject(nRow, nColumn) {
+    var newMapRows = []; newMapRows.length = nRow;
+    for (var i = 0; i < newMapRows.length; i++)
+    {
+        newMapRows[i] = [];
+        newMapRows[i].length = nColumn;
+    }
+
+    levelMatrixObject.rows = nRow;
+    levelMatrixObject.columns = nColumn;
+    levelMatrixObject.map = newMapRows;
+
+    gameObj.Level = levelMatrixObject.map;
+}
+
+function fillLevelWithThisSprite(symbol)
+{
+    for(var i = 0; i < levelMatrixObject.map.length; i++)
+    {
+        for(var j = 0; j < levelMatrixObject.map[i].length; j++)
+        {
+            levelMatrixObject.map[i][j] = symbol;
+        }
+    }
+
+    gameObj["Level"] = levelMatrixObject.map;
+}
+
 function createTableByInput()
 {
     if (confirm("This will override all your level information. Press OK if you want to proceed?"))
@@ -238,8 +266,13 @@ function createTableByInput()
             table.append(row);
         }
 
+        updateGameLevelObject(nRow, nColumn);
+        fillLevelWithThisSprite("");
+
         document.getElementById('tableGridContainer').append(table);
         console.log("here");
+
+        startLevelObserver();
     }
 }
 

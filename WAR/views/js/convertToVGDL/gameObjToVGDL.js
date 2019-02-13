@@ -154,7 +154,8 @@ function fromObjToString()
     string += interactionSetToString(gameObj["InteractionSet"]);
     string += terminationSetToString(gameObj["TerminationSet"]);
 
-    var description = {game: string, level: levelObjToString(gameObj["Level"])};
+    var stringLevel = levelObjToString(gameObj["Level"]);
+    var description = {game: string, level: stringLevel};
     return description;
 }
 
