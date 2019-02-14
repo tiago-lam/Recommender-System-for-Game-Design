@@ -135,6 +135,7 @@ xmlhttp.onreadystatechange = function() {
         var obj = this.responseText;
         initializationProtocol(obj);
     }
+    startSpriteListObserver();
 };
 /**
  * Prepare and send the GET request to the server

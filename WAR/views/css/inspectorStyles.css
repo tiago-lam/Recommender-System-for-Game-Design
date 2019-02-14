@@ -1,6 +1,13 @@
+#spriteSetDiv
+{
+	width: 1000px;
+}
+
 #inspector
 {
 	width: 175px;
+	border: 3px solid #4EC6DE;
+	float: right;
 }
 
 #inspector p
@@ -20,6 +27,16 @@
 	display: block;
 	margin: auto;
 	border-radius: 7px;
+}
+
+#inspecorHeaderDiv
+{
+	border: 3px solid #4EC6DE;
+}
+
+#inspecorHeaderDiv h2
+{
+	margin-left: 10px;
 }
 
 #analogueParameters
@@ -127,7 +144,7 @@ input[type="range"]
 #imagePickerDiv
 {
 	position: relative;
-	float: left;
+	float: right;
 	width: 20%;
 	height: 522px;
 	margin-left: 5%;
@@ -139,6 +156,7 @@ input[type="range"]
 {
 	width: 150px;
 	height: 100%;
+	float: right;
 	overflow-y: scroll;
 	margin-left: 50px;
 }
@@ -171,7 +189,8 @@ input[type="range"]
 	height: 18px;
 	width: 18px;
 	top: 8px;
-	left: 350px;
+	right: 10px;
+	/*left: 600px;*/
 	border: none;
 	display: block;
 	float: right;
@@ -181,6 +200,7 @@ input[type="range"]
 #imgPickerInputDiv
 {
 	width: 50%;
+	float: right;
 }
 
 #gameSelectDiv span
@@ -200,5 +220,5 @@ input[type="range"]
 
 #agentSelectionDiv span
 {
-	float: left;;
+	float: left;
 }
