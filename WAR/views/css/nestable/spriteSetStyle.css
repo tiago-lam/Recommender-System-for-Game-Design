@@ -22,5 +22,5 @@
 .dd-dragel > .dd-item .dd-handle { margin-top: 0; }
 .dd-dragel .dd-handle { -webkit-box-shadow: 2px 4px 6px 0 rgba(0,0,0,.1); box-shadow: 2px 4px 6px 0 rgba(0, 0, 0, 0.1); }
 #button_make_container { border: 1px outset blue; background-color: lightblue; float: right; }
-img { display: block; margin-left: auto; margin-right: auto; /*width: 20%;*/  height: 40%; z-index: -10}
+/*img { display: block; margin-left: auto; margin-right: auto; !*width: 20%;*!  height: 40%; z-index: -10}*/
 

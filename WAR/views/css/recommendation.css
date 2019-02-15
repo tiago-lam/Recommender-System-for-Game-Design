@@ -112,9 +112,9 @@
 
 #recommenderUl
 {
-    width:350px;
-    left: 420px;
-    top: 12px;
+    width:240px;
+    left: 0px;
+    top: 55px;
     position: absolute;
     height: 530px;
     overflow-y: auto;
@@ -127,7 +127,7 @@
     width: 160px;
     border: 1px solid black;
     background-color: rgba(214, 127, 67, 1);
-    left: 65px;
+    left: 20px;
     top: 0px;
     display: none;
     z-index: 90;
@@ -161,7 +161,22 @@
 
 #recommenderDiv
 {
+    left: 120px;
+    float: left;
+    position: relative;
+    border: 3px solid #4EC6DE;
+    height: 787px;
+    width: 250px;
+}
 
+#recommenderHeaderDiv
+{
+    border: 3px solid #4EC6DE;
+}
+
+#recommenderHeaderDiv h2
+{
+    margin-left: 50px;
 }
 
 

@@ -1,5 +1,9 @@
 #spriteSetContainer {
 	float: left;
+	width: 150px;
+	border: 3px solid #4ec3ec;
+	height: 787px;
+	overflow: auto;
 }
 
 #inspector {

@@ -1,13 +1,15 @@
 #spriteSetDiv
 {
 	width: 1000px;
+	height: 800px;
 }
 
 #inspector
 {
-	width: 175px;
+	width: 25%;
 	border: 3px solid #4EC6DE;
-	float: right;
+	float: left;
+	height: 788px;
 }
 
 #inspector p
@@ -145,11 +147,12 @@ input[type="range"]
 {
 	position: relative;
 	float: right;
-	width: 20%;
-	height: 522px;
+	width: 165px;
+	height: 767px;
 	margin-left: 5%;
 	left:20px;
 	top:10px;
+	border: 3px solid #4EC6DE;
 }
 
 #imagePickerListDiv
@@ -180,45 +183,57 @@ input[type="range"]
 	float: right;
 }
 
-#hideImgPickerInput
-{
-	background-image: url("cancel.png");
+#hideImgPickerInput {
+	background-image: url(http://localhost:9001/WAR/views/css/cancel.png);
 	background-repeat: no-repeat;
 	background-position: 50% 50%;
-	/* put the height and width of your image here */
 	height: 18px;
 	width: 18px;
-	top: 8px;
-	right: 10px;
-	/*left: 600px;*/
+	top: 4px;
+	/* right: 10px; */
+	left: 308px;
 	border: none;
 	display: block;
-	float: right;
+	float: left;
 	position: absolute;
 }
 
-#imgPickerInputDiv
+#imgPickerInputDiv {
+	width: 200px;
+	float: left;
+}
+
+#gameSelectDiv span
 {
-	width: 50%;
+	width: 100px;
+}
+
+#agentSelectionDiv span
+{
+	width: 100px;
+}
+
+#gameSelectDiv span
+{
+	float: left;
+}
+
+#agentSelectionDiv span
+{
+	float: left;
+}
+
+.spriteCancelDiv
+{
+	height: 5px;
 	float: right;
+	right: -7px;
+	top: 0px;
+	position: absolute;
 }
 
-#gameSelectDiv span
+.spriteCancelDiv img
 {
-	width: 100px;
-}
-
-#agentSelectionDiv span
-{
-	width: 100px;
-}
-
-#gameSelectDiv span
-{
-	float: left;
-}
-
-#agentSelectionDiv span
-{
-	float: left;
+	z-index: 100;
+	width: 20px;
 }

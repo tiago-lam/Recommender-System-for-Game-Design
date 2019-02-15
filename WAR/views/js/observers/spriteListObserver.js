@@ -1,4 +1,4 @@
-/ Select the node that will be observed for mutations
+// Select the node that will be observed for mutations
 var spriteListTarget;
 
 // Options for the observer (which mutations to observe)

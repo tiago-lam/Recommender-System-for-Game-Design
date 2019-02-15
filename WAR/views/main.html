@@ -94,8 +94,8 @@
         </div>
 
         <div id="spriteSetDiv">
-            <div><button onclick="addNewSpriteToSpriteSet(gameObj['SpriteSet'])">Add Sprite</button></div>
             <div class="dd" id="spriteSetContainer" oncontextmenu="return false" onchange="updateObj();">
+                <div><button onclick="addNewSpriteToSpriteSet(gameObj['SpriteSet'])">Add Sprite</button></div>
                 <ul id="spriteList"></ul>
             </div><!--End div spriteSetContainer-->
 
@@ -227,6 +227,9 @@
             </div>
 
             <div id="recommenderDiv">
+                <div id="recommenderHeaderDiv">
+                    <h2>Suggestions</h2>
+                </div>
                 <!--<span id="suggestedSpan">Suggested sprites</span>-->
                 <ul id="recommenderUl"></ul>
             </div>

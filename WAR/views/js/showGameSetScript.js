@@ -135,7 +135,7 @@ xmlhttp.onreadystatechange = function() {
         var obj = this.responseText;
         initializationProtocol(obj);
     }
-    startSpriteListObserver();
+    //startSpriteListObserver();
 };
 /**
  * Prepare and send the GET request to the server
@@ -170,7 +170,7 @@ function activateHierarchyListSort()
  */
 function getObjectForUpdatingOnMouseClick()
 {
-    $(".dd-item")
+    $(".dd-handle")
         .mousedown(function(e) {
             console.log("element", e);
             var id;
@@ -244,6 +244,15 @@ function getObjectData(obj, upperUl)
     div.appendChild(imgSrc);
     li.appendChild(div);
 
+    var cancelDiv = document.createElement('div');
+    cancelDiv.classList.add('spriteCancelDiv');
+    cancelDiv.id = "delete_" + identifier;
+    cancelDiv.setAttribute("onmousedown", "removeSpriteElement(event)");
+    var cancelImg = document.createElement('img');
+    cancelImg.src = "http://localhost:9001/WAR/views/css/cancel.png";
+    cancelDiv.appendChild(cancelImg);
+    li.appendChild(cancelDiv);
+
     var textElement = identifier;
 
     li.setAttribute('data-obj', currentObj);
@@ -264,6 +273,19 @@ function getObjectData(obj, upperUl)
             getObjectData(innerCurrentObj, innerOl);
             li.appendChild(innerOl);
         }
+    }
+}
+
+function removeSpriteElement(e) {
+    var isOkToRemove = confirm("Are you sure you want to remove this item?");
+    if (isOkToRemove) {
+        var id = e.target.id.replace("delete_", "");
+        e.target.parentNode.parentNode.remove();
+        var obj = retrieveObjectByTarget(id);
+        removeObjectFromTheSpriteSet(obj, gameObj['SpriteSet']);
+        removeItemFrom(spriteNameCollection, id);
+        updateObj();
+        saveGameState();
     }
 }
 

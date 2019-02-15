@@ -93,15 +93,15 @@
              */
             var onStartEvent = function(e)
             {
-                var isRightMB;
-                e = e || window.event;
+                // var isRightMB;
+                // e = e || window.event;
+                //
+                // if ("which" in e)  // Gecko (Firefox), WebKit (Safari/Chrome) & Opera
+                //     isRightMB = e.which == 3;
+                // else if ("button" in e)  // IE, Opera
+                //     isRightMB = e.button == 2;
 
-                if ("which" in e)  // Gecko (Firefox), WebKit (Safari/Chrome) & Opera
-                    isRightMB = e.which == 3;
-                else if ("button" in e)  // IE, Opera
-                    isRightMB = e.button == 2;
-
-                if(!isRightMB) {
+                // if(!isRightMB) {
                     var handle = $(e.target);
                     if (!handle.hasClass(list.options.handleClass)) {
                         if (handle.closest('.' + list.options.noDragClass).length) {
@@ -121,19 +121,19 @@
 
                     e.preventDefault();
                     list.dragStart(e.touches ? e.touches[0] : e);
-                }
-                else
-                {
-                    var isOkToRemove = confirm("Are you sure yo want to remove this item?");
-                    if(isOkToRemove) {
-                        e.target.parentNode.remove();
-                        var obj = retrieveObjectByTarget(e.target.id);
-                        removeObjectFromTheSpriteSet(obj, gameObj['SpriteSet']);
-                        removeItemFrom(spriteNameCollection, e.target.id);
-                        updateObj();
-                        saveGameState();
-                    }
-                }
+                //}
+                // else
+                // // {
+                // //     // var isOkToRemove = confirm("Are you sure you want to remove this item?");
+                // //     // if(isOkToRemove) {
+                // //     //     e.target.parentNode.remove();
+                // //     //     var obj = retrieveObjectByTarget(e.target.id);
+                // //     //     removeObjectFromTheSpriteSet(obj, gameObj['SpriteSet']);
+                // //     //     removeItemFrom(spriteNameCollection, e.target.id);
+                // //     //     updateObj();
+                // //     //     saveGameState();
+                // //     }
+                // // }
             };
 
             var onMoveEvent = function(e)
