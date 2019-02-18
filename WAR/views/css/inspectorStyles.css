@@ -74,7 +74,8 @@
 /*}*/
 .contentSliders
 {
-	padding: 10px;
+	padding: 0px;
+	height: 50px;
 	margin-bottom: 5px;
 	border-width: 2px;
 	border-style: solid;
@@ -236,4 +237,10 @@ input[type="range"]
 {
 	z-index: 100;
 	width: 20px;
+}
+
+#addSpriteDialogId
+{
+	border: 1px solid #4EC6DE;
+	background-color: #4EC6DE;
 }

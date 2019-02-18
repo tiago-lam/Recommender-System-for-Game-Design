@@ -66,6 +66,11 @@ var levelMatrixObject;
 var xmlhttp = new XMLHttpRequest();
 
 /**
+ * Keeps track of the object (sprite) list size
+ * */
+var listCurrentLength;
+
+/**
  * Build the whole sprite set as an HTML hierarchy list
  * @param spriteSetObj
  * @param ulElement
@@ -149,6 +154,13 @@ function structureTheSpriteSetOnHtml()
     activateHierarchyListSort();
     getObjectForUpdatingOnMouseClick();
     updateObjectsAfterListChange();
+    updateObjectListSize();
+}
+
+function updateObjectListSize()
+{
+    listCurrentLength =
+        document.getElementById('spriteList').childNodes.length;
 }
 
 function addNoneAndEosOptions()
@@ -279,7 +291,7 @@ function getObjectData(obj, upperUl)
 function removeSpriteElement(e) {
     var isOkToRemove = confirm("Are you sure you want to remove this item?");
     if (isOkToRemove) {
-        var id = e.target.id.replace("delete_", "");
+        var id = e.target.parentNode.id.replace("delete_", "");
         e.target.parentNode.parentNode.remove();
         var obj = retrieveObjectByTarget(id);
         removeObjectFromTheSpriteSet(obj, gameObj['SpriteSet']);

@@ -378,7 +378,7 @@
         function checkIfItsParentHasParam(obj, param)
         {
             var htmlElement = document.getElementById(obj.identifier);
-
+            if(htmlElement == null) return;
             var parent = htmlElement.parentNode;
 
                 if (parent.id == 'spriteList') {

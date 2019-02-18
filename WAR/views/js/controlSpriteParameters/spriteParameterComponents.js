@@ -23,18 +23,21 @@ function createAmmoSelectList(divToBePartOf, listId)
     divStypeAmmoSelect.classList.add("rounded");
 
     var ammoSpritesCollection = retrievingAmmoSprites(stypeCollection);
-   //console.log(ammoSpritesCollection);
 
     var listAmmoResource = document.createElement("select");
     listAmmoResource.id = listId;
     listAmmoResource.setAttribute("oninput", "updateSelectAmmoValue(this.selectedIndex, updateObjParamValue)");
     divStypeAmmoSelect.appendChild(listAmmoResource);
 
+    var option = document.createElement("option");
+    option.value = "none";
+    option.text = "none";
+    listAmmoResource.appendChild(option);
     for (var i = 0; i < ammoSpritesCollection.length; i++) {
         var option = document.createElement("option");
-        spriteName = ammoSpritesCollection[i];
-        option.value = spriteName;
-        option.text = spriteName;
+        var spriteName = ammoSpritesCollection[i];
+        option.value = spriteName.name;
+        option.text = spriteName.name;
         listAmmoResource.appendChild(option);
     }
 
@@ -193,12 +196,6 @@ function updateInputRange(parameterValue, inputId, spanRangeId)
 
 function removeElements(parentElement)
 {
-    // while (parentElement.firstChild) {
-    //         var elem = parentElement.firstChild;
-    //         if(elem.id != "refClassDivId") {
-    //             parentElement.removeChild(parentElement.firstChild);
-    //         }
-    // }
     var storeSpecialParameters = [];
     while (parentElement.lastChild.id !== 'refClassDivId') {
         var elem = parentElement.lastChild;
@@ -210,16 +207,6 @@ function removeElements(parentElement)
         }
         parentElement.removeChild(elem);
     }
-
-    // for(var i = 0; i < storeSpecialParameters.length; i++)
-    // {
-    //     if(storeSpecialParameters[i] in currentObj.parameters)
-    //     {
-    //         delete currentObj.parameters[storeSpecialParameters[i]];
-    //     }
-    // }
-    //
-    // console.log(currentObj);
 }
 
 function updateSelectParameter(selectId, parameterValue)

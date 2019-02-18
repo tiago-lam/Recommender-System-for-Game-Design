@@ -261,6 +261,7 @@ function addToSpriteSet(obj, id)
             createLevelMappingForThisImage(extra.identifier);
         }
         refreshGame(gameObj);
+        sendSpriteTypesToTheServe(gameObj["SpriteSet"]);
     }
 }
 
@@ -273,4 +274,14 @@ function resetRecommendations()
     }
 
     mapRecommendationToObj = new Map();
+}
+
+function callRecommendationsIfSpriteObjectListIncreases()
+{
+    var listElements = document.getElementById('spriteList');
+    if(listCurrentLength < listElements.childNodes.length)
+    {
+        listCurrentLength = listElements;
+        sendSpriteTypesToTheServe(gameObj["SpriteSet"]);
+    }
 }

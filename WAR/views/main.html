@@ -17,6 +17,8 @@
     <link rel="stylesheet" type="text/css" href="css/tabs/tabs.css">
     <link rel="stylesheet" type="text/css" href="css/recommendation.css">
     <link rel="stylesheet" type="text/css" href="css/general.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
 
     <title>Sprite Set</title>
 </head>
@@ -24,7 +26,10 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.11/lodash.min.js"></script>
 
-<script src="libs/jquery.js"></script>
+<!--<script src="libs/jquery.js"></script>-->
+
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 <script src="js/refreshSpriteSet.js"></script>
 
@@ -95,7 +100,7 @@
 
         <div id="spriteSetDiv">
             <div class="dd" id="spriteSetContainer" oncontextmenu="return false" onchange="updateObj();">
-                <div><button onclick="addNewSpriteToSpriteSet(gameObj['SpriteSet'])">Add Sprite</button></div>
+                <div><button onclick="popupDialogBox()">Add Sprite</button></div>
                 <ul id="spriteList"></ul>
             </div><!--End div spriteSetContainer-->
 
@@ -325,9 +330,23 @@
 </div>
 </div>
 
+<div style="display: none"
+     id="addSpriteDialogId" class="ui-dialog-content ui-widget-content"
+     style="display: block; width: auto; min-height: 128px; max-height: none;
+     height: auto;">
+        <p>Please enter object's name</p>
+        <input type="text" id="inputNameId">
+        <p>Please, select object type</p>
+        <select id="selectTypeId"
+        ><option value="Immovable">Immovable</option><option value="MovingAvatar">MovingAvatar</option>
+            <option value="OrientedAvatar">OrientedAvatar</option>
+            <option value="ShootAvatar">ShootAvatar</option><option value="FlakAvatar">FlakAvatar</option>
+            <option value="MissileAvatar">MissileAvatar</option><option value="OngoingAvatar">OngoingAvatar</option>
+            <option value="Passive">Passive</option><option value="Flicker">Flicker</option><option value="OrientedFlicker">OrientedFlicker</option><option value="Missile">Missile</option><option value="RandomMissile">RandomMissile</option><option value="RandomNPC">RandomNPC</option><option value="Chaser">Chaser</option><option value="AlternateChaser">AlternateChaser</option><option value="Fleeing">Fleeing</option><option value="RandomPathAltChaser">RandomPathAltChaser</option><option value="SpawnPoint">SpawnPoint</option><option value="Bomber">Bomber</option><option value="RandomBomber">RandomBomber</option><option value="Spreader">Spreader</option><option value="Door">Door</option><option value="Portal">Portal</option><option value="Resource">Resource</option></select>
+        <input type="button" value="Add Object" onclick="addSpriteObj(inputNameId, selectTypeId)">
+</div>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.6/prefixfree.min.js"></script>
-<script type="text/javascript" src="js/utils/util.js"></script>
-<script type="text/javascript" src="js/nestable/nestable.js"></script>
 <script type="text/javascript" src="js/nestable/nestable.js"></script>
 <script type="text/javascript" src="js/constants/Interactions/interactions.js"></script>
 <script type="text/javascript" src="js/constants/Terminations/terminations.js"></script>
@@ -340,9 +359,9 @@
 <script type="text/javascript" src="js/interactions/managingInteractionParameters.js" ></script>
 <script type="text/javascript" src="js/termination/showTerminationSetScript.js" ></script>
 <script type="text/javascript" src="js/termination/updateTerminationInspector.js" ></script>
-<script type="text/javascript" src="js/Experiments.js"></script>
 <script type="text/javascript" src="js/constants/AvatarTypes/avatarTypes.js"></script>
 <script type="text/javascript" src="js/constants/OtherTypes/otherTypes.js"></script>
+<script type="text/javascript" src="js/utils/util.js"></script>
 <script type="text/javascript" src="js/constants/Parameters/emptyParameters.js"></script>
 <script type="text/javascript" src="js/controlSpriteParameters/spriteParameterComponents.js"></script>
 <script type="text/javascript" src="js/controlSpriteParameters/avatarSpriteParameter.js"></script>
@@ -358,7 +377,6 @@
 <script type="text/javascript" src="js/level/showLevelMap.js"></script>
 <script type="text/javascript" src="js/convertToVGDL/gameObjToVGDL.js"></script>
 <script type="text/javascript" src="js/save/save.js"></script>
-<script type="text/javascript" src="js/Experiments.js"></script>
 <script type="text/javascript" src="js/imageLoader/imageLoader.js"></script>
 <script type="text/javascript" src="js/convertToVGDL/gameObjToVGDL.js"></script>
 <script type="text/javascript" src="js/gettingImages/gettingimages.js"></script>
@@ -367,10 +385,13 @@
 <script type="text/javascript" src="js/recommendations/coldStart.js"></script>
 <script type="text/javascript" src="gamesJSON/collection.js"></script>
 <script type="text/javascript" src="gamesJSON/storeInteraction.js"></script>
+<script type="text/javascript" src="js/sendDataToServer/spriteSetToServer.js"></script>
+<script type="text/javascript" src="js/Experiments.js"></script>
 <script src="tdd/test.js"></script>
 
 <script>
     coldStartRecommendations();
+    callRecommendationsIfSpriteObjectListIncreases();
 </script>
 
 </body>

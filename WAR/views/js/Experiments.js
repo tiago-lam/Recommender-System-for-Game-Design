@@ -1,3 +1,7 @@
+var allTypes = [Immovable, ShootAvatar, FlakAvatar, "MovingAvatar",
+    "MissileAvatar", "OrientedAvatar", "OngoingAvatar", Passive, Flicker, OrientedFlicker, Missile, RandomMissile, RandomNPC,
+    Chaser, AlternateChaser, Fleeing, RandomPathAltChaser, SpawnPoint, Bomber, RandomBomber, Spreader, Door, Portal];
+
 function addNewSpriteToSpriteSet(spriteSet) {
     var object = new Object();
     object.identifier = defineIdentifier();
@@ -19,6 +23,74 @@ function defineIdentifier() {
         identifier = prompt("name already exists, please try again");
     }
     return identifier;
+}
+
+function createDialogBox()
+{
+    var div = document.createElement('div');
+    div.id = "addSpriteDialogId";
+    var p = document.createElement('p');
+    p.innerHTML = "Please enter object's name";
+    var input = document.createElement("input");
+    input.setAttribute("type", "text");
+    input.id = 'inputNameId';
+    input.setAttribute("required", "");
+    var p2 = document.createElement('p');
+    p2.innerHTML = "Please, select object type";
+    var select = document.createElement('select');
+    select.id = 'selectTypeId';
+
+    for(var i = 0; i < allTypes.length; i++)
+    {
+        var option = document.createElement('option');
+        option.value = allTypes[i];
+        option.text = allTypes[i];
+        select.appendChild(option);
+    }
+
+    var button = document.createElement("input");
+    button.setAttribute("type", "button");
+    button.value = "Add Object";
+    button.innerHTML = "Add Object";
+    button.setAttribute("onclick", "addSpriteObj(inputNameId, selectTypeId)");
+
+    div.appendChild(p);
+    div.appendChild(input);
+    div.appendChild(p2);
+    div.appendChild(select);
+    div.appendChild(button);
+    if(!document.getElementById('addSpriteDialogId')) {
+        document.getElementsByTagName("BODY")[0].appendChild(div);
+    }
+    $('#addSpriteDialogId').hide();
+
+}
+
+function popupDialogBox()
+{
+    //createDialogBox();
+    $("#addSpriteDialogId").dialog();
+}
+
+function addSpriteObj(name, type)
+{
+    if(spriteNameCollection.includes(name.value)) {
+        alert("name already exists, please try again");
+        return;
+    }
+    var object = new Object();
+    object.identifier = name.value;
+
+    if(object.identifier != null && object.identifier != "")
+    {
+        object.children = [];
+        object.parameters = {};
+        object.referenceClass = type.value;
+        gameObj["SpriteSet"].push(object);
+        refreshGame(gameObj, false);
+        updateSelectSortComponent();
+        sendSpriteTypesToTheServe(gameObj["SpriteSet"]);
+    }
 }
 
 function defineRefClass() {

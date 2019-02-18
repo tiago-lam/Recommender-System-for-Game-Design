@@ -49,7 +49,7 @@ function retrievingAmmoSprites(stypeCollection)
 {
     var resourceSprites = [];
 
-    resourceSprites.push("none");//gives the user the option to choose nothing
+    //resourceSprites.push("none");//gives the user the option to choose nothing
 
     stypeCollection.forEach(function(element)
         {

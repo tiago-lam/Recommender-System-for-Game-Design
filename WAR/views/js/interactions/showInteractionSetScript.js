@@ -252,7 +252,8 @@
                 recObj["interactionName"] = recs[i].interaction;
                 recObj["sprite1"] = recs[i].pair.type1;
                 recObj["sprite2"] = recs[i].pair.type2;
-                recObj["parameters"] = {};
+                recObj["parameters"] =
+                    createParametersForTheInteractionsRecommendations(recs[i].interaction);
                 var objId = i;
                 buildRecommendInteraction(recObj, objId);
             }
@@ -370,3 +371,42 @@
 
         // -------------------------------------------
 
+function createParametersForTheInteractionsRecommendations(interaction)
+{
+    var params = {};
+    params["score"] = 0;
+
+    if(interaction == transformToSingleton || interaction == spawnBehind || interaction == spawnIfHasMore
+        || interaction == spawnIfHasLess || interaction == transformTo || interaction == transformToRandomChild
+        || interaction == removeScore || interaction == subtractHealthPoints
+        || interaction == increaseSpeedToAll || interaction == decreaseSpeedToAll || interaction == setSpeedForAll)
+    {
+        params["stype"] = spriteNameCollection[0];
+    }
+
+    if(interaction == killIfHasMore || interaction == killIfHasLess || interaction == killIfOtherHasMore
+        || interaction == spawnIfHasMore || interaction == spawnIfHasLess || interaction == changeResource)
+    {
+        params["resource"] = "none";
+    }
+
+    if(interaction == transformToSingleton)
+    {
+        params["stypeOther"] = spriteNameCollection[0];
+    }
+
+    if(interaction == killIfHasMore || interaction == killIfHasLess || interaction == killIfOtherHasMore
+        || interaction == spawnIfHasMore || interaction == spawnIfHasLess)
+    {
+       params["limit"] = 1;
+    }
+
+    if(interaction == addHealthPoints || interaction == addHealthPointsToMax || interaction == subtractHealthPoints
+        || interaction == increaseSpeedToAll || interaction == decreaseSpeedToAll || interaction == setSpeedForAll
+        || interaction == changeResource)
+    {
+       params["value"] = 1;
+    }
+
+    return params;
+}
