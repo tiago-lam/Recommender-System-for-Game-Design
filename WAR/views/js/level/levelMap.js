@@ -33,18 +33,20 @@ function allowDrop(ev) {
         }
         else
         {
-            var imgToModify = document.getElementById(ev.target.id);
+            var imgToModify = document.getElementById('drag_' + ev.target.id);
 
-            if(imgToModify.src != imgSrc) {
+            if(imgToModify != null) {
+                if (imgToModify.src != imgSrc) {
 
-                imgToModify.src = imgSrc;
+                    imgToModify.src = imgSrc;
 
-                while (imgToModify.classList.length > 0) {
-                    imgToModify.classList.remove(imgToModify.classList[imgToModify.classList.length - 1]);
-                }
+                    while (imgToModify.classList.length > 0) {
+                        imgToModify.classList.remove(imgToModify.classList[imgToModify.classList.length - 1]);
+                    }
 
-                for (var i = 0; i < imgLogicClass.length; i++) {
-                    imgToModify.classList.add(imgLogicClass[i]);
+                    for (var i = 0; i < imgLogicClass.length; i++) {
+                        imgToModify.classList.add(imgLogicClass[i]);
+                    }
                 }
             }
         }
@@ -74,22 +76,22 @@ function drag(ev) {
     parentId = ev.target.parentNode.id;
     isDragEnabled = !isDragEnabled;
     console.log('dragging');
-    var id = ev.target.id;
+//    var id = ev.target.id;
 
-    id = id.replace("drag_", "");
-    id = id.replace("DragImgIdId", "");
-    var refClass = (mapIdentifierToObject.get(id).referenceClass);
+//     id = id.replace("drag_", "");
+//     id = id.replace("DragImgIdId", "");
+//     var refClass = (mapIdentifierToObject.get(id).referenceClass);
  
-    var posToSuggest = mapTypeToPositions.get(refClass);
+//     var posToSuggest = mapTypeToPositions.get(refClass);
 
-    if(posToSuggest != undefined) {
-        for (var i = 0; i < posToSuggest.length; i++) {
-            var p = posToSuggest[i];
-            var x = p['x'];
-            var y = p['y'];
-            document.getElementById(x + " " + y).classList.add("suggestedTile");
-        }
-    }
+//     if(posToSuggest != undefined) {
+//         for (var i = 0; i < posToSuggest.length; i++) {
+//             var p = posToSuggest[i];
+//             var x = p['x'];
+//             var y = p['y'];
+//             document.getElementById(x + " " + y).classList.add("suggestedTile");
+//         }
+//     }
 
 }
 
@@ -247,6 +249,7 @@ function createTableByInput()
 {
     if (confirm("This will override all your level information. Press OK if you want to proceed?"))
     {
+        resetGameStates();
         removeTable();
         var nRow = document.getElementById('rowInput').value;
         var nColumn = document.getElementById('colInput').value;
@@ -286,8 +289,6 @@ function changeMode()
 {
     paintMode = !paintMode;
 }
-
-
 
 function removeAllElementsFromTheImgList()
 {
@@ -343,6 +344,17 @@ function configureImages(sprite)
                 configureImages(sprite.children[i]);
             }
         }
+}
+
+function paintLevelWithThisSprite(image)
+{
+
+   var divs = document.getElementsByClassName('div1');
+   for(var i = 0; i < divs.length; i++)
+   {
+       var img = divs[i].getElementsByTagName('img')[0];
+       img.src = image;
+   }
 }
 
 /////////////

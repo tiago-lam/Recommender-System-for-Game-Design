@@ -1,12 +1,9 @@
 BasicGame
     SpriteSet
         background > Immovable img=oryx/space1
-        avatar > OngoingTurningAvatar img=newset/cop1 healthPoints=5
 
     LevelMapping
         b > background
-        ¡ > avatar background
-        ¢ > bullet background
         
     InteractionSet
         background EOS > stepBack

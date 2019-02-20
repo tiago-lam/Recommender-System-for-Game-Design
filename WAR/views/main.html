@@ -17,6 +17,7 @@
     <link rel="stylesheet" type="text/css" href="css/tabs/tabs.css">
     <link rel="stylesheet" type="text/css" href="css/recommendation.css">
     <link rel="stylesheet" type="text/css" href="css/general.css">
+    <link rel="stylesheet" type="text/css" href="css/warning.css">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="/resources/demos/style.css">
 
@@ -24,12 +25,9 @@
 </head>
 <body>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.11/lodash.min.js"></script>
-
-<!--<script src="libs/jquery.js"></script>-->
-
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.11/lodash.min.js"></script>
 
 <script src="js/refreshSpriteSet.js"></script>
 
@@ -271,17 +269,17 @@
                     </div>
                 </div>
 
-            <div class="mask"><input type="button" onclick="recommendInteractionsMainCall()">Suggest interactions</input>
+            <div id="suggestionContainer" class="mask">
+                <input type="button" value="Suggest Interactions" onclick="recommendInteractionsMainCall()">
                 <div id="selectSuggestionInteractionId">
                     <span>Interactions with: </span>
                     <select id="sortSuggestionSelect" class="style-rounded blue rounded">
                     </select>
+                    <div id="recommenderInteractions">
+                        <ul id="suggestionList"></ul>
+                    </div>
                 </div>
             </div>
-            <div id="recommenderInteractions">
-                <ul id="suggestionList"></ul>
-            </div>
-
 
             </div>
 
@@ -375,7 +373,6 @@
 <script type="text/javascript" src="js/redo/redo.js"></script>
 <script type="text/javascript" src="js/level/levelMap.js"></script>
 <script type="text/javascript" src="js/level/showLevelMap.js"></script>
-<script type="text/javascript" src="js/convertToVGDL/gameObjToVGDL.js"></script>
 <script type="text/javascript" src="js/save/save.js"></script>
 <script type="text/javascript" src="js/imageLoader/imageLoader.js"></script>
 <script type="text/javascript" src="js/convertToVGDL/gameObjToVGDL.js"></script>
@@ -391,7 +388,6 @@
 
 <script>
     coldStartRecommendations();
-    callRecommendationsIfSpriteObjectListIncreases();
 </script>
 
 </body>

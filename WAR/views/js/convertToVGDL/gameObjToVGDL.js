@@ -136,6 +136,16 @@ function terminationSetToString(terminationSet)
 
 function levelObjToString(levelMap)
 {
+    var avatarsInTheMap = checkHowManyAvatarsAreInTheMap();
+
+    if(avatarsInTheMap == 0 || avatarsInTheMap > 1) {
+
+        $(  "<div class=warning' title='Warning'>" +
+                "To run the game, make sure to have only one avatar object in the level map" +
+            "</div>")
+        .dialog();
+    }
+
     var string = "";
     for(var i = 0; i < levelMap.length; i++)
     {

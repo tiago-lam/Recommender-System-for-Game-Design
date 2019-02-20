@@ -61,7 +61,9 @@
 
 #selectSuggestionInteractionId
 {
-    display: none;
+    display: block;
+    width: 500px;
+    /* height: 20px; *//* width: 600px; *//* float: right; */
 }
 
 .pullLeft
@@ -268,4 +270,24 @@
     position: relative;
     z-index: 10001;
     display: none;
+}
+
+#suggestionContainer
+{
+    display: block;
+    width: 600px;
+    float: right;
+}
+
+#recommenderInteractions
+{
+    width: 500px;
+    float: right;
+    border: 5px solid #4ec3ec;
+    top: -200px;
+}
+
+#sortSuggestionSelect
+{
+
 }
