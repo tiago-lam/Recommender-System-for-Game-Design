@@ -98,7 +98,7 @@
             parentElement.append(divWrapper);
         }
 
-        function createDivForRecommendationTextObj(textToPutInTheDiv, parentElement, id, interactionObj)
+        function createDivForRecommendationTextObj(textToPutInTheDiv, parentElement, id, interactionObj, conf)
         {
             var div = document.createElement('div');
             div.classList.add('interactionDiv');
@@ -107,6 +107,11 @@
             mapIdToInteraction.set(id, interactionObj);
             div.setAttribute("onclick", "getInteractionForUpdatingOnMouseClick(this.id)");
             div.setAttribute("onmousedown", "addToTheInteractionSet(event)");
+            var divConf = document.createElement('div');
+            var spanConf = document.createElement('span');
+            spanConf.innerHTML = "conf.: " + Number(conf).toFixed(4);
+            divConf.appendChild(spanConf);
+            div.appendChild(divConf);
             parentElement.append(div);
         }
 
@@ -245,6 +250,7 @@
             document.getElementById('selectSuggestionInteractionId').style.display = 'block';
             deleteElementsFrom(document.getElementById('suggestionList'));
             var recs = getInteractionsToRecommend();
+            recs.sort( function ( a, b ) { return b.interactionConfidence - a.interactionConfidence; } );
 
             for(var i = 0; i < recs.length; i++)
             {
@@ -255,15 +261,15 @@
                 recObj["parameters"] =
                     createParametersForTheInteractionsRecommendations(recs[i].interaction);
                 var objId = i;
-                buildRecommendInteraction(recObj, objId);
+                buildRecommendInteraction(recObj, objId, recs[i].interactionConfidence);
             }
         }
 
-        function buildRecommendInteraction(interactionObj, objId)
+        function buildRecommendInteraction(interactionObj, objId, conf)
         {
             var unorderedList = document.getElementById('suggestionList');
             var textObj = convertObjectToText(interactionObj);
-            createDivForRecommendationTextObj(textObj, unorderedList, "recInteraction" + objId, interactionObj);
+            createDivForRecommendationTextObj(textObj, unorderedList, "recInteraction" + objId, interactionObj, conf);
         }
 
         function extractInteractionFromDivText(divText)
