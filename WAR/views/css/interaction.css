@@ -80,6 +80,7 @@
 {
     border: 1px solid #4ec3ec;
     float: left;
+    overflow: auto;
 }
 
 #interactionInspector
