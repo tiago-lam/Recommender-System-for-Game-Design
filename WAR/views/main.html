@@ -285,12 +285,74 @@
 
         </div>
 
-        <div><h2>Termination Set</h2>
+        <div id="terminationSetId">
+            <h2>Termination Set</h2>
             <div id="terminationContainer">
                 <ul id="terminationList"></ul>
             </div>
+            <span>Select Termination Condition: </span>
             <div id="terminationInspector">
-                <div id="terminationSelectDiv"></div>
+                <!--<div id="terminationSelectDiv"></div>-->
+                <!--/*Termination Templates*/-->
+                <!--/*Sprite Counter*/-->
+                <div id="selectTerminationDivId">
+                <select id="selectTerminationConditionId" class="blue">
+                    <option value="SpriteCounter">Sprite Counter</option>
+                    <option value="MultiSpriteCounter">Multi Sprite Counter</option>
+                    <option value="TimeOut">Time Out</option>
+                </select>
+                </div>
+                <div id="spriteCounterId" style="display: none">
+                    <div>
+                        <span>If number of = </span>
+                        <select id="sprite1Id" class="blue">
+
+                        </select>
+                    </div>
+                    <div>
+                        <span>Reaches </span>
+                        <input id="inputSpriteCounterId"type="number">
+                    </div>
+                    <div>
+                        <select id="gameOverScId" class="blue">
+                            <option value="Win">Lose</option>
+                            <option value="Lose">Win</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!--/*Timeout*/-->
+                <div id="timeOutId" style="display: none">
+                    <div>
+                        <span>If Time = </span>
+                        <input id="timeOutInputId" type="number">
+                        <span> => </span>
+                        <select id="gameOverToId" class="blue">
+                            <option value="Win">Lose</option>
+                            <option value="Lose">Win</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!--/*Multi Sprite Counter*/-->
+                <div id="multiSpriteCounterId" style="display: none">
+                    <div>
+                        <span>If </span>
+                        <select id="sprite1mscId" class="blue"></select>
+
+                        <span> Or </span>
+                        <select id="sprite2mscId" class="blue"></select>
+
+                        <span> = </span>
+                        <input id="inputMspriteCounterId" type="number" class="blue">
+                        <span> => </span>
+                        <select id="gameOverMscId" class="blue">
+                            <option value="Win">Lose</option>
+                            <option value="Lose">Win</option>
+                        </select>
+                    </div>
+                </div>
+
             </div>
         </div>
 
@@ -383,6 +445,7 @@
 <script type="text/javascript" src="gamesJSON/collection.js"></script>
 <script type="text/javascript" src="gamesJSON/storeInteraction.js"></script>
 <script type="text/javascript" src="js/sendDataToServer/spriteSetToServer.js"></script>
+<script type="text/javascript" src="js/termination/chooseTerminationCondition.js"></script>
 <script type="text/javascript" src="js/Experiments.js"></script>
 <script src="tdd/test.js"></script>
 

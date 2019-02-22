@@ -1,12 +1,27 @@
 BasicGame
     SpriteSet
         background > Immovable img=oryx/space1
+        avatar > ShootAvatar img=newset/cop1 healthPoints=5 stype=bullet
+        bullet > Missile img=oryx/orb3 shrinkfactor=0.5
+        exitdoor > Door img=oryx/door2 color=GREEN
+        lcleft > SpawnPoint img=newset/lasercannon_3 stype=lleft
+        lleft > Missile orientation=LEFT img=newset/laser1_1 shrinkfactor=0.5 color=YELLOW speed=0.1
+        boulder > Passive img=newset/block2
 
     LevelMapping
         b > background
+        ¡ > avatar background
+        ¢ > bullet background
+        £ > exitdoor background
+        ¤ > lcleft background
+        ¥ > lleft background
+        ¦ > boulder background
         
     InteractionSet
+        avatar boulder > stepBack scoreChange=0
+        exitdoor avatar > killSprite scoreChange=5
         background EOS > stepBack
+        boulder bullet > killSprite scoreChange=0
         
     TerminationSet
         
