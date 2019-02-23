@@ -46,3 +46,40 @@
 {
     float: right;
 }
+
+.terminationContainerSc
+{
+    background-color: rgba(61, 88, 88, 0.316);
+    margin-bottom: 15px;
+    border: 1px solid black;
+}
+
+.terminationContainerSc span
+{
+    color: #4EC6DE;
+}
+
+.terminationContainerTo
+{
+    background-color: rgba(61, 88, 88, 0.316);
+    margin-bottom: 15px;
+    border: 1px solid black;
+}
+
+.terminationContainerSc span
+{
+    color: #4EC6DE;
+}
+
+.terminationContainerMsc
+{
+    background-color: rgba(61, 88, 88, 0.316);
+    margin-bottom: 15px;
+    border: 1px solid black;
+}
+
+
+.terminationContainerMsc span
+{
+    color: #4EC6DE;
+}

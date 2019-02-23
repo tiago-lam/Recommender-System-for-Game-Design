@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+/*Inspector Panel*/
+/*Sprite Counter*/
+    <div id="spriteCounterId" style="display: none">
+        <div>
+            <span>If number of = </span>
+            <select>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+            </select>
+        </div>
+        <div>
+            <span>Reaches </span>
+            <input type="number">
+        </div>
+        <div>
+            <select>
+                <option value="Lose">Lose</option>
+                <option value="Win">Win</option>
+            </select>
+        </div>
+    </div>
+
+/*Timeout*/
+    <div>
+        <div>
+            <span>If Time = </span>
+            <input type="number">
+            <span> => </span>
+            <select>
+                <option value="Lose">Lose</option>
+                <option value="Win">Win</option>
+            </select>
+        </div>
+    </div>
+
+/*Multi Sprite Counter*/
+    <div>
+        <div>
+            <span>If </span>
+            <select>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+            </select>
+            <span> Or </span>
+            <select>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+            </select>
+            <span> = </span>
+            <input type="number">
+            <span> => </span>
+            <select>
+                <option value="Lose">Lose</option>
+                <option value="Win">Win</option>
+            </select>
+        </div>
+    </div>
+
+/*Termination List*/
+/*Sprite Counter*/
+<div class="terminationContainerSc">
+    <span>Sprite Counter</span>
+    <div>
+        If N# of <span id="sprite1Id"></span> = <span id="countId"></span> => <span id="winStatusId"></span>
+    </div>
+</div>
+
+/*Multi Sprite Count*/
+<div class="terminationContainerMsc">
+    <span>Multi Sprite Counter</span>
+    <div>
+        If N# of <span id="sprite1MscId"></span> or <span id="sprite2MscId"></span> = <span id="countMscId"></span>
+         => <span id="winStatusMscId"></span>
+    </div>
+</div>
+
+/*Time outt*/
+<div class="terminationContainerTo">
+    <span>Time Out</span>
+    <div>
+        If time = <span id="countTimeId"></span> => <span id="winStatusToId"></span>
+    </div>
+</div>
+
+</body>
+</html>
