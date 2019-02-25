@@ -1,6 +1,22 @@
 var mapIdToTermination = new Map();
 var mapTerminationIdToTerminationObj = [];
+var currentTerminationId;
 
+function deleteTerminationDiv(index)
+{
+    var content = "";
+    var div = document.createElement('div')
+    div.id = "cancel_termination" + index;
+    div.classList.add('cancelDiv');
+    div.setAttribute('onmousedown', "removeTerminationButton(event)");
+
+    var img = document.createElement('img');
+    img.id = 'cancel_img_' + index;
+    img.src = 'http://localhost:9001/WAR/views/css/cancel.png';
+    div.appendChild(img);
+    content = div.outerHTML;
+    return content;
+}
 
 function buildTerminationSet(terminationSetObj)
 {
@@ -58,7 +74,9 @@ function renderTerminationList(terminationList)
 }
 
 function convertTerminationObjToHTML(terminationObj, index) {
+    var div = document.createElement('div');
     var parameters = terminationObj["parameters"];
+    let htmlString = "";
     var result = ""
 
     if (parameters['win'] == 'False') {
@@ -69,7 +87,6 @@ function convertTerminationObjToHTML(terminationObj, index) {
 
     if (terminationObj["termination"] == "SpriteCounter") {
 
-        var div = document.createElement('div');
         var divContent =
             "<div id=termination" + index + " class=terminationContainerSc>\n" +
             "    <span>Sprite Counter</span>\n" +
@@ -77,7 +94,9 @@ function convertTerminationObjToHTML(terminationObj, index) {
             "        If number of <span>" + parameters['stype'] + "</span> = <span>" + parameters['limit'] + "</span>" +
             " => <span>" + result + "</span>\n" +
             "    </div>\n" +
+                deleteTerminationDiv(index) +
             "</div>";
+        htmlString = divContent;
         div.innerHTML = divContent;
         mapTerminationIdToTerminationObj['termination' + index] = terminationObj;
         document.getElementById('terminationList').appendChild(div);
@@ -85,15 +104,17 @@ function convertTerminationObjToHTML(terminationObj, index) {
     }
 
     if (terminationObj["termination"] == "Timeout") {
-        var div = document.createElement('div');
+
         var divContent =
             "<div id=termination" + index + " class=terminationContainerTo>\n" +
             "    <span>Time Out</span>\n" +
             "    <div>\n" +
             "        If time = <span>" + parameters['limit'] + "</span> => <span>" + result + "</span>\n" +
             "    </div>\n" +
+                deleteTerminationDiv(index) +
             "</div>"
         div.innerHTML = divContent;
+        htmlString = divContent;
         mapTerminationIdToTerminationObj['termination' + index] = terminationObj;
         document.getElementById('terminationList').appendChild(div);
         div.setAttribute("onmousedown", "showTerminationOnInspector('"+ 'termination' + index + "')");
@@ -101,32 +122,83 @@ function convertTerminationObjToHTML(terminationObj, index) {
 
     if(terminationObj['termination'] == "MultiSpriteCounter")
     {
-        var div = document.createElement('div');
+
         var divContent =
-            "<div id=termination\" + index + class=terminationContainerMsc>\n" +
+            "<div id=termination" + index + " class=terminationContainerMsc>\n" +
             "    <span>Multi Sprite Counter</span>\n" +
             "    <div>\n" +
             "        If number of <span>" + parameters['stype1'] + "</span> or <span>" + parameters['stype2'] + "</span> =" + parameters['limit'] + " <span></span>\n" +
             "         => <span>" + result + "</span>\n" +
             "    </div>\n" +
+                deleteTerminationDiv(index) +
             "</div>"
         div.innerHTML = divContent;
+        htmlString = divContent;
         mapTerminationIdToTerminationObj['termination' + index] = terminationObj;
         document.getElementById('terminationList').appendChild(div);
         div.setAttribute("onmousedown", "showTerminationOnInspector('"+ 'termination' + index + "')");
     }
+    return htmlString;
+}
 
+function setTerminationObjToHTML(terminationObj, index) {
+
+    var parameters = terminationObj["parameters"];
+    let htmlString = "";
+    var result = ""
+
+    if (parameters['win'] == 'False') {
+        result = "Lose";
+    } else {
+        result = "Win"
+    }
+
+    if (terminationObj["termination"] == "SpriteCounter") {
+
+        var divContent =
+            "    <span>Sprite Counter</span>\n" +
+            "    <div>\n" +
+            "        If number of <span>" + parameters['stype'] + "</span> = <span>" + parameters['limit'] + "</span>" +
+            " => <span>" + result + "</span>\n" +
+            "    </div>\n";
+        htmlString = divContent;
+    }
+
+    if (terminationObj["termination"] == "Timeout") {
+
+        var divContent =
+            "    <span>Time Out</span>\n" +
+            "    <div>\n" +
+            "        If time = <span>" + parameters['limit'] + "</span> => <span>" + result + "</span>\n" +
+            "    </div>\n";
+        htmlString = divContent;
+    }
+
+    if(terminationObj['termination'] == "MultiSpriteCounter")
+    {
+
+        var divContent =
+            "    <span>Multi Sprite Counter</span>\n" +
+            "    <div>\n" +
+            "        If number of <span>" + parameters['stype1'] + "</span> or <span>" + parameters['stype2'] + "</span> =" + parameters['limit'] + " <span></span>\n" +
+            "         => <span>" + result + "</span>\n" +
+            "    </div>\n";
+        htmlString = divContent;
+    }
+    return htmlString;
 }
 
 function showTerminationOnInspector(id)
 {
+    currentTerminationId = id;
     var terminationObj = mapTerminationIdToTerminationObj[id];
     if(terminationObj["termination"] == "SpriteCounter")
     {
         renderTerminationCondition('SpriteCounter');
         document.getElementById('sprite1Id').value = terminationObj['parameters']['stype'];
         document.getElementById('inputSpriteCounterId').value = terminationObj['parameters']['limit'];
-        var winLose = terminationObj['parameters']['win'] ? "Win" : "Lose";
+        var winLose =
+            (terminationObj['parameters']['win'] == "True") ? "Win" : "Lose";
         document.getElementById('gameOverScId').value = winLose;
 
     }
@@ -134,7 +206,8 @@ function showTerminationOnInspector(id)
     {
         renderTerminationCondition("TimeOut");
         document.getElementById('timeOutInputId').value = terminationObj['parameters']['limit'];
-        var winLose =  terminationObj['parameters']['win'] ? "Win" : "Lose";
+        var winLose =
+            (terminationObj['parameters']['win'] == "True") ? "Win" : "Lose";
         document.getElementById('gameOverToId').value = winLose;
     }
 
@@ -144,11 +217,51 @@ function showTerminationOnInspector(id)
         document.getElementById('sprite1mscId').value = terminationObj['parameters']['stype1'];
         document.getElementById('sprite2mscId').value = terminationObj['parameters']['stype2'];
         document.getElementById('inputMspriteCounterId').value = terminationObj['parameters']['limit'];
-        var winLose = terminationObj['parameters']['win'] ? "Win" : "Lose";
+        var winLose =
+            (terminationObj['parameters']['win'] == "True") ? "Win" : "Lose";
         document.getElementById('gameOverMscId').value = winLose;
     }
 
 }
+
+function updateThisParameterInsideObj(value, param)
+{
+    var terminationObj = mapTerminationIdToTerminationObj[currentTerminationId];
+    if(param == 'win') {
+        terminationObj['parameters'][param] = (value == 'Win') ? 'True' : 'False';
+    }
+    else {
+        terminationObj['parameters'][param] = value;
+    }
+     var htmlString = setTerminationObjToHTML(terminationObj,
+         currentTerminationId.replace("termination", ""));
+    document.getElementById(currentTerminationId).innerHTML
+        = htmlString;
+}
+
+function removeTerminationButton(e)
+{
+    var isOkToRemove = confirm("Are you sure yo want to remove this item?");
+    if(isOkToRemove) {
+        saveGameState();
+        removeObjectFromTheTerminationSet(e);
+    }
+}
+
+function removeObjectFromTheTerminationSet(e)
+{
+    var objID = e.target.id;
+    objID = "termination" + objID.replace("cancel_img_", "");
+    var obj = mapTerminationIdToTerminationObj[objID];
+    deleteObjectInTheTerminationSet(obj);
+    document.getElementById(objID).remove();
+    delete mapTerminationIdToTerminationObj[objID];
+}
+
+function deleteObjectInTheTerminationSet(obj) {
+    removeItemFrom(terminationSetObj, obj);
+}
+
 
 
 

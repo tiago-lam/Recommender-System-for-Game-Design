@@ -140,7 +140,7 @@ function levelObjToString(levelMap)
 
     if(avatarsInTheMap == 0 || avatarsInTheMap > 1) {
 
-        $(  "<div class=warning' title='Warning'>" +
+        $("<div class=warning' title='Warning'>" +
                 "To run the game, make sure to have only one avatar object in the level map" +
             "</div>")
         .dialog();

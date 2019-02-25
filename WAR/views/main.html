@@ -287,6 +287,7 @@
 
         <div id="terminationSetId">
             <h2>Termination Set</h2>
+            <input type="button" value="Add Termination" onclick="addTermination()">
             <div id="terminationContainer">
                 <ul id="terminationList"></ul>
             </div>
@@ -305,16 +306,18 @@
                 <div id="spriteCounterId" style="display: none">
                     <div>
                         <span>If number of = </span>
-                        <select id="sprite1Id" class="blue">
-
+                        <select id="sprite1Id" class="blue"
+                                oninput="updateThisParameterInsideObj(this.value, 'stype')">
                         </select>
                     </div>
                     <div>
                         <span>Reaches </span>
-                        <input id="inputSpriteCounterId"type="number">
+                        <input id="inputSpriteCounterId"type="number"
+                            oninput="updateThisParameterInsideObj(this.value, 'limit')">
                     </div>
                     <div>
-                        <select id="gameOverScId" class="blue">
+                        <select id="gameOverScId" class="blue"
+                            oninput="updateThisParameterInsideObj(this.value, 'win')">
                             <option value="Win">Win</option>
                             <option value="Lose">Lose</option>
                         </select>
@@ -325,9 +328,11 @@
                 <div id="timeOutId" style="display: none">
                     <div>
                         <span>If Time = </span>
-                        <input id="timeOutInputId" type="number">
+                        <input id="timeOutInputId" type="number"
+                            oninput="updateThisParameterInsideObj(this.value, 'limit')">
                         <span> => </span>
-                        <select id="gameOverToId" class="blue">
+                        <select id="gameOverToId" class="blue"
+                            oninput="updateThisParameterInsideObj(this.value, 'win')">
                             <option value="Win">Win</option>
                             <option value="Lose">Lose</option>
                         </select>
@@ -338,15 +343,21 @@
                 <div id="multiSpriteCounterId" style="display: none">
                     <div>
                         <span>If </span>
-                        <select id="sprite1mscId" class="blue"></select>
+                        <select id="sprite1mscId" class="blue"
+                            oninput="updateThisParameterInsideObj(this.value, 'stype1')">
+                        </select>
 
                         <span> Or </span>
-                        <select id="sprite2mscId" class="blue"></select>
+                        <select id="sprite2mscId" class="blue"
+                            oninput="updateThisParameterInsideObj(this.value, 'stype2')">
+                        </select>
 
                         <span> = </span>
-                        <input id="inputMspriteCounterId" type="number" class="blue">
+                        <input id="inputMspriteCounterId" type="number" class="blue"
+                            oninput="updateThisParameterInsideObj(this.value, 'limit')">
                         <span> => </span>
-                        <select id="gameOverMscId" class="blue">
+                        <select id="gameOverMscId" class="blue"
+                            oninput="updateThisParameterInsideObj(this.value, 'win')">
                             <option value="Win">Win</option>
                             <option value="Lose">Lose</option>
                         </select>

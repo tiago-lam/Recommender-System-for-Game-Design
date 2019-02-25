@@ -150,6 +150,8 @@ function removeElementsFromUl()
     return upperUl;
 }
 
+/*----------------------------------------------------------------------------------*/
+
 function action(spriteSet)
 {
     // addNewSpriteToSpriteSet(spriteSet);

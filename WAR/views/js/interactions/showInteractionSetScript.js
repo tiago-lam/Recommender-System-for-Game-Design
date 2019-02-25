@@ -74,7 +74,7 @@
         function createDivForThisTextObj(textToPutInTheDiv, parentElement, id, interactionObj)
         {
             var divWrapper = document.createElement('div');
-            divWrapper.id = 'wrapper';
+            divWrapper.id = 'wrapper'+id;
             divWrapper.classList.add('wrapInteractionDiv');
             var div = document.createElement('div');
             div.classList.add('interactionDiv');
@@ -172,7 +172,15 @@
         function removeObjectFromTheInteractionList(id)
         {
             console.log("id", id);
-            document.getElementById(id).parentElement.parentElement.remove();
+            if(id.includes('cancel'))
+            {
+                var idReplacement = id.replace("cancel_img_", "");
+                document.getElementById(idReplacement).parentElement.remove();
+            }
+            else
+            {
+                document.getElementById(id).parentElement.remove();
+            }
         }
 
         function removeObjectFromTheRecommendationList(id)
