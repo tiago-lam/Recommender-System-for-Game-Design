@@ -78,9 +78,12 @@ function updateHierarchies(ddItem)
             verified.push(ddItem.id);
         }else{
             var obj = retrieveObjectByTarget(ddItem.id);
-            if(obj.children.length > 0)
+            if(obj != undefined)
             {
-                obj.children = [];
+                if(obj.children.length > 0)
+                {
+                    obj.children = [];
+                }
             }
         }
     }

@@ -336,12 +336,6 @@ function hideout() {
     }
 }
 
-function consoleData()
-{
-
-
-}
-
 
 function showPopup() {
     // show the mask

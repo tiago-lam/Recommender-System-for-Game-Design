@@ -37,6 +37,13 @@ function redoInteractionSet(game)
     buildTheInteractionSet(interactions);
 }
 
+function redoTerminationSet(game)
+{
+    var terminations = game['TerminationSet'];
+    deleteTerminationList();
+    buildTerminationSet(terminations);
+}
+
 function redoGame(refreshLevel) {
 
     if(gameStates.count > 0) {

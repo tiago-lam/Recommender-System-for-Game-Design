@@ -1,27 +1,58 @@
 BasicGame
     SpriteSet
-        background > Immovable img=oryx/space1
-        avatar > ShootAvatar img=newset/cop1 healthPoints=5 stype=bullet
-        bullet > Missile img=oryx/orb3 shrinkfactor=0.5
-        exitdoor > Door img=oryx/door2 color=GREEN
-        lcleft > SpawnPoint img=newset/lasercannon_3 stype=lleft
-        lleft > Missile orientation=LEFT img=newset/laser1_1 shrinkfactor=0.5 color=YELLOW speed=0.1
-        boulder > Passive img=newset/block2
+        sky > Immovable img=oryx/backLBlue
+        trunk > Immovable img=newset/cloud1 color=BROWN
+        cursed > Immovable img=newset/cursedman color=YELLOW
+        movable >
+            demon > Bomber prob=0.15 frameRate=8 img=oryx/devil1 stype=bolt cooldown=6 speed=0.4
+            angel > Bomber prob=0.05 frameRate=8 img=oryx/angel1 stype=salvation cooldown=6 speed=0.45
+            citizen > Chaser img=newset/man2 stype=output speed=0.4
+            blessed > Chaser img=newset/blessedman stype=output speed=0.4
+        avatar > MovingAvatar frameRate=10 img=newset/girl4
+        input > SpawnPoint img=oryx/dooropen1 stype=citizen cooldown=16 portal=True
+        output > Immovable img=oryx/dooropen1 portal=True
+        box > Passive img=newset/cloud2 shrinkfactor=0.8
+        missile > Missile
+            bolt > Missile orientation=DOWN img=oryx/firedown1 color=RED speed=0.2
+            salvation > Missile orientation=DOWN img=oryx/icedown1 color=RED speed=0.2
+        wall > Immovable img=oryx/wall3 autotiling=True
 
     LevelMapping
-        b > background
-        ¡ > avatar background
-        ¢ > bullet background
-        £ > exitdoor background
-        ¤ > lcleft background
-        ¥ > lleft background
-        ¦ > boulder background
+        a > sky angel
+        A > sky avatar
+        d > sky demon
+        t > sky trunk
+        w > wall
+        x > sky box
+        i > sky input
+        . > sky
+        o > sky output
+        ¡ > sky cursed
+        ¢ > sky citizen
+        £ > sky blessed
+        ¤ > sky bolt
+        ¥ > sky salvation
+        ¦ > sky movable
+        § > sky missile
         
     InteractionSet
-        avatar boulder > stepBack scoreChange=0
-        exitdoor avatar > killSprite scoreChange=5
-        background EOS > stepBack
-        boulder bullet > killSprite scoreChange=0
+        movable wall > reverseDirection
+        movable wall > stepBack
+        avatar wall EOS > stepBack
+        box avatar > bounceForward
+        box box > bounceForward repeat=10
+        box wall > killSprite
+        bolt wall > killSprite scoreChange=-1
+        bolt box > killSprite scoreChange=1
+        citizen bolt > transformTo killSecond=True scoreChange=-1 stype=cursed
+        bolt avatar > killSprite scoreChange=-5
+        salvation wall > killSprite scoreChange=1
+        salvation box > killSprite scoreChange=-1
+        citizen salvation > transformTo killSecond=True scoreChange=100 stype=blessed
+        citizen output > killSprite
+        blessed output > killSprite
         
     TerminationSet
+        Timeout limit=1000 win=True
+        MultiSpriteCounter limit=1 stype1=cursed win=False
         

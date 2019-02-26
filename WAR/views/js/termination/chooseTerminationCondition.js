@@ -29,6 +29,32 @@ function initializeRender() {
     sel.setAttribute("oninput", "renderTerminationCondition(this.value)");
 }
 
+function renderTerminationConditionAdd(termination)
+{
+
+    if(termination == 'SpriteCounter')
+    {
+        loadSpriteSelect('sprite1IdAdd');
+        document.getElementById('spriteCounterIdAdd').style.display = 'block';
+        document.getElementById('timeOutIdAdd').style.display = 'none';
+        document.getElementById('multiSpriteCounterIdAdd').style.display = 'none';
+    }
+    else if(termination == 'TimeOut')
+    {
+        document.getElementById('timeOutIdAdd').style.display = 'block';
+        document.getElementById('spriteCounterIdAdd').style.display = 'none';
+        document.getElementById('multiSpriteCounterIdAdd').style.display = 'none';
+    }
+    else if(termination == 'MultiSpriteCounter')
+    {
+        loadSpriteSelect('sprite1mscIdAdd');
+        loadSpriteSelect('sprite2mscIdAdd');
+        document.getElementById('multiSpriteCounterIdAdd').style.display = 'block';
+        document.getElementById('timeOutIdAdd').style.display = 'none';
+        document.getElementById('spriteCounterIdAdd').style.display = 'none';
+    }
+}
+
 function loadSpriteSelect(id)
 {
     var sel = document.getElementById(id);

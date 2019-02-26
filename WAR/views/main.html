@@ -2,7 +2,9 @@
 <html>
 <head>
     <style>
-        img {image-rendering: pixelated;}
+        img {
+            image-rendering: pixelated;
+        }
     </style>
     <link rel="stylesheet" type="text/css" href="css/nestable/spriteSetStyle.css">
     <link rel="stylesheet" type="text/css" href="css/panelLayout.css">
@@ -98,7 +100,9 @@
 
         <div id="spriteSetDiv">
             <div class="dd" id="spriteSetContainer" oncontextmenu="return false" onchange="updateObj();">
-                <div><button onclick="popupDialogBox()">Add Sprite</button></div>
+                <div>
+                    <button onclick="popupDialogBox()">Add Sprite</button>
+                </div>
                 <ul id="spriteList"></ul>
             </div><!--End div spriteSetContainer-->
 
@@ -111,18 +115,26 @@
                 <div id="analogueParameters">
 
                     <div id="shrinkFactor" class="contentSliders">
-                        <label id="shrinkLabel" for="shrinkLabel">Shrink Factor: <span id="shrinkValue" class="inspectorValues">0.5</span></label>
-                        <input class="bars sliders" type="range" min="0.0" max="1.0" value="0.5" step="0.1" class="slider" id="shrinkControl" oninput="updateShrinkValue(this.value, updateObjParamValue)">
+                        <label id="shrinkLabel" for="shrinkLabel">Shrink Factor: <span id="shrinkValue"
+                                                                                       class="inspectorValues">0.5</span></label>
+                        <input class="bars sliders" type="range" min="0.0" max="1.0" value="0.5" step="0.1"
+                               class="slider" id="shrinkControl"
+                               oninput="updateShrinkValue(this.value, updateObjParamValue)">
                     </div>
 
                     <div id="speed" class="contentSliders">
-                        <label id="speedLabel" for="speedLabel">Speed: <span id="speedValue" class="inspectorValues">5</span></label>
-                        <input class="bars sliders" type="range" min="0.0" max="10.0" value="1.0" step="0.05" class="slider" id="speedControl" oninput="updateSpeedValue(this.value, updateObjParamValue)">
+                        <label id="speedLabel" for="speedLabel">Speed: <span id="speedValue"
+                                                                             class="inspectorValues">5</span></label>
+                        <input class="bars sliders" type="range" min="0.0" max="10.0" value="1.0" step="0.05"
+                               class="slider" id="speedControl"
+                               oninput="updateSpeedValue(this.value, updateObjParamValue)">
                     </div>
 
                     <div id="cooldown" class="contentSliders">
-                        <label id="cooldownLabel" for="cooldownLabel">cooldown: <span id="cooldownValue" class="inspectorValues">5</span></label>
-                        <input class="bars sliders" type="range" min="1" max="10" value="1" step="1" class="slider" id="cooldownControl" oninput="updateCooldownValue(this.value, updateObjParamValue)">
+                        <label id="cooldownLabel" for="cooldownLabel">cooldown: <span id="cooldownValue"
+                                                                                      class="inspectorValues">5</span></label>
+                        <input class="bars sliders" type="range" min="1" max="10" value="1" step="1" class="slider"
+                               id="cooldownControl" oninput="updateCooldownValue(this.value, updateObjParamValue)">
                     </div>
                 </div><!-- end div anologue parameters -->
 
@@ -132,11 +144,18 @@
                     <div class="toggle_switch">
                         <span class="checkBoxSpan">Invisible</span>
                         <!--<input id="invisibleCheckBoxId" type="checkbox" class="switch_3" oninput="updateInvisibleValue(this.checked, updateObjParamValue)">-->
-                        <input id="invisibleCheckBoxId" type="checkbox" oninput="updateInvisibleValue(this.checked, updateObjParamValue)">
-                        <svg class="checkbox" xmlns="http://www.w3.org/2000/svg" style="isolation:isolate" viewBox="0 0 168 80">
-                            <path class="outer-ring" d="M41.534 9h88.932c17.51 0 31.724 13.658 31.724 30.482 0 16.823-14.215 30.48-31.724 30.48H41.534c-17.51 0-31.724-13.657-31.724-30.48C9.81 22.658 24.025 9 41.534 9z" fill="none" stroke="#233043" stroke-width="3" stroke-linecap="square" stroke-miterlimit="3"/>
-                            <path class="is_checked" d="M17 39.482c0-12.694 10.306-23 23-23s23 10.306 23 23-10.306 23-23 23-23-10.306-23-23z"/>
-                            <path class="is_unchecked" d="M132.77 22.348c7.705 10.695 5.286 25.617-5.417 33.327-2.567 1.85-5.38 3.116-8.288 3.812 7.977 5.03 18.54 5.024 26.668-.83 10.695-7.706 13.122-22.634 5.418-33.33-5.855-8.127-15.88-11.474-25.04-9.23 2.538 1.582 4.806 3.676 6.66 6.25z"/>
+                        <input id="invisibleCheckBoxId" type="checkbox"
+                               oninput="updateInvisibleValue(this.checked, updateObjParamValue)">
+                        <svg class="checkbox" xmlns="http://www.w3.org/2000/svg" style="isolation:isolate"
+                             viewBox="0 0 168 80">
+                            <path class="outer-ring"
+                                  d="M41.534 9h88.932c17.51 0 31.724 13.658 31.724 30.482 0 16.823-14.215 30.48-31.724 30.48H41.534c-17.51 0-31.724-13.657-31.724-30.48C9.81 22.658 24.025 9 41.534 9z"
+                                  fill="none" stroke="#233043" stroke-width="3" stroke-linecap="square"
+                                  stroke-miterlimit="3"/>
+                            <path class="is_checked"
+                                  d="M17 39.482c0-12.694 10.306-23 23-23s23 10.306 23 23-10.306 23-23 23-23-10.306-23-23z"/>
+                            <path class="is_unchecked"
+                                  d="M132.77 22.348c7.705 10.695 5.286 25.617-5.417 33.327-2.567 1.85-5.38 3.116-8.288 3.812 7.977 5.03 18.54 5.024 26.668-.83 10.695-7.706 13.122-22.634 5.418-33.33-5.855-8.127-15.88-11.474-25.04-9.23 2.538 1.582 4.806 3.676 6.66 6.25z"/>
                         </svg>
                     </div>
                 </div>
@@ -144,11 +163,18 @@
                     <div class="toggle_switch">
                         <span class="checkBoxSpan">Singleton</span>
                         <!--<input id="singletonCheckBoxId" type="checkbox" class="switch_3" oninput="updateSingletonValue(this.checked, updateObjParamValue)">-->
-                        <input id="singletonCheckBoxId" type="checkbox" oninput="updateSingletonValue(this.checked, updateObjParamValue)">
-                        <svg class="checkbox" xmlns="http://www.w3.org/2000/svg" style="isolation:isolate" viewBox="0 0 168 80">
-                            <path class="outer-ring" d="M41.534 9h88.932c17.51 0 31.724 13.658 31.724 30.482 0 16.823-14.215 30.48-31.724 30.48H41.534c-17.51 0-31.724-13.657-31.724-30.48C9.81 22.658 24.025 9 41.534 9z" fill="none" stroke="#233043" stroke-width="3" stroke-linecap="square" stroke-miterlimit="3"/>
-                            <path class="is_checked" d="M17 39.482c0-12.694 10.306-23 23-23s23 10.306 23 23-10.306 23-23 23-23-10.306-23-23z"/>
-                            <path class="is_unchecked" d="M132.77 22.348c7.705 10.695 5.286 25.617-5.417 33.327-2.567 1.85-5.38 3.116-8.288 3.812 7.977 5.03 18.54 5.024 26.668-.83 10.695-7.706 13.122-22.634 5.418-33.33-5.855-8.127-15.88-11.474-25.04-9.23 2.538 1.582 4.806 3.676 6.66 6.25z"/>
+                        <input id="singletonCheckBoxId" type="checkbox"
+                               oninput="updateSingletonValue(this.checked, updateObjParamValue)">
+                        <svg class="checkbox" xmlns="http://www.w3.org/2000/svg" style="isolation:isolate"
+                             viewBox="0 0 168 80">
+                            <path class="outer-ring"
+                                  d="M41.534 9h88.932c17.51 0 31.724 13.658 31.724 30.482 0 16.823-14.215 30.48-31.724 30.48H41.534c-17.51 0-31.724-13.657-31.724-30.48C9.81 22.658 24.025 9 41.534 9z"
+                                  fill="none" stroke="#233043" stroke-width="3" stroke-linecap="square"
+                                  stroke-miterlimit="3"/>
+                            <path class="is_checked"
+                                  d="M17 39.482c0-12.694 10.306-23 23-23s23 10.306 23 23-10.306 23-23 23-23-10.306-23-23z"/>
+                            <path class="is_unchecked"
+                                  d="M132.77 22.348c7.705 10.695 5.286 25.617-5.417 33.327-2.567 1.85-5.38 3.116-8.288 3.812 7.977 5.03 18.54 5.024 26.668-.83 10.695-7.706 13.122-22.634 5.418-33.33-5.855-8.127-15.88-11.474-25.04-9.23 2.538 1.582 4.806 3.676 6.66 6.25z"/>
                         </svg>
                     </div>
                 </div>
@@ -157,19 +183,28 @@
                     <div class="toggle_switch">
                         <span class="checkBoxSpan">Rotate In Place</span>
                         <!--<input id="rotateCheckBoxId" type="checkbox" class="switch_3" oninput="updateRotateValue(this.checked, updateObjParamValue)">-->
-                        <input id="rotateCheckBoxId" type="checkbox" oninput="updateRotateValue(this.checked, updateObjParamValue)">
-                        <svg class="checkbox" xmlns="http://www.w3.org/2000/svg" style="isolation:isolate" viewBox="0 0 168 80">
-                            <path class="outer-ring" d="M41.534 9h88.932c17.51 0 31.724 13.658 31.724 30.482 0 16.823-14.215 30.48-31.724 30.48H41.534c-17.51 0-31.724-13.657-31.724-30.48C9.81 22.658 24.025 9 41.534 9z" fill="none" stroke="#233043" stroke-width="3" stroke-linecap="square" stroke-miterlimit="3"/>
-                            <path class="is_checked" d="M17 39.482c0-12.694 10.306-23 23-23s23 10.306 23 23-10.306 23-23 23-23-10.306-23-23z"/>
-                            <path class="is_unchecked" d="M132.77 22.348c7.705 10.695 5.286 25.617-5.417 33.327-2.567 1.85-5.38 3.116-8.288 3.812 7.977 5.03 18.54 5.024 26.668-.83 10.695-7.706 13.122-22.634 5.418-33.33-5.855-8.127-15.88-11.474-25.04-9.23 2.538 1.582 4.806 3.676 6.66 6.25z"/>
-                            -</svg>
+                        <input id="rotateCheckBoxId" type="checkbox"
+                               oninput="updateRotateValue(this.checked, updateObjParamValue)">
+                        <svg class="checkbox" xmlns="http://www.w3.org/2000/svg" style="isolation:isolate"
+                             viewBox="0 0 168 80">
+                            <path class="outer-ring"
+                                  d="M41.534 9h88.932c17.51 0 31.724 13.658 31.724 30.482 0 16.823-14.215 30.48-31.724 30.48H41.534c-17.51 0-31.724-13.657-31.724-30.48C9.81 22.658 24.025 9 41.534 9z"
+                                  fill="none" stroke="#233043" stroke-width="3" stroke-linecap="square"
+                                  stroke-miterlimit="3"/>
+                            <path class="is_checked"
+                                  d="M17 39.482c0-12.694 10.306-23 23-23s23 10.306 23 23-10.306 23-23 23-23-10.306-23-23z"/>
+                            <path class="is_unchecked"
+                                  d="M132.77 22.348c7.705 10.695 5.286 25.617-5.417 33.327-2.567 1.85-5.38 3.116-8.288 3.812 7.977 5.03 18.54 5.024 26.668-.83 10.695-7.706 13.122-22.634 5.418-33.33-5.855-8.127-15.88-11.474-25.04-9.23 2.538 1.582 4.806 3.676 6.66 6.25z"/>
+                            -
+                        </svg>
                     </div>
                 </div>
                 <!--</div>-->
                 <div id="divSelect">
                     <span class="checkBoxSpan spanCenteredText">Orientation</span>
                     <div class="styled-select blue rounded">
-                        <select id="orientationSelectId" oninput="updateOrientationSelectValue(this.selectedIndex, updateObjParamValue)">
+                        <select id="orientationSelectId"
+                                oninput="updateOrientationSelectValue(this.selectedIndex, updateObjParamValue)">
                             <option value="NONE">None</option>
                             <option value="LEFT">Left</option>
                             <option value="RIGHT">Right</option>
@@ -182,7 +217,8 @@
                 <div id="divSpecialParameters">
                     <!--<span id="refClassSpanId" class="checkBoxSpan">Regular</span>-->
                     <div id="refClassDivId">
-                        <select id="refClassSelectId" onchange="updateParametersOfTheReferenceClass(retrieveObjectByTarget(document.getElementById('name').innerText) ,this.value)">
+                        <select id="refClassSelectId"
+                                onchange="updateParametersOfTheReferenceClass(retrieveObjectByTarget(document.getElementById('name').innerText) ,this.value)">
                             <option value="Regular">Regular</option>
                             <option value="ShootAvatar">ShootAvatar</option>
                             <option value="FlakAvatar">FlakAvatar</option>
@@ -218,7 +254,9 @@
                 <!--<button id="inputButtonConfirmId" type="button" onclick="action(spriteSetObj)">Confirm</button>-->
                 <!--</div>-->
                 <div id="saveSpriteSetDiv">
-                    <button id="saveSpriteSetButtonId" type="button" onclick="sendSpriteTypesToTheServe(gameObj.SpriteSet)">Ask for recommendations</button>
+                    <button id="saveSpriteSetButtonId" type="button"
+                            onclick="sendSpriteTypesToTheServe(gameObj.SpriteSet)">Ask for recommendations
+                    </button>
                 </div>
             </div><!--End div inspector-->
 
@@ -244,16 +282,20 @@
             <!--Add Interaction-->
             <div id='popup'>
                 <input type="button" value="Cancel" onclick="hideout()">Cancel</input>
-                <input type="button" value="Add Interaction" onclick="addInteractionTo(interactionSetObj)">Add Interaction</input>
+                <input type="button" value="Add Interaction" onclick="addInteractionTo(interactionSetObj)">Add
+                Interaction</input>
             </div>
 
             <div class="mask" style="height: 600px">
 
 
-            <div id="show"><input type="button" onclick="addNewInteractionToInteractionSet(interactionSetObj)">Add Interaction</input></div>
-            <div  class="mask" id="interactionSetContainer">
-                <ul id="interactionList"></ul>
-            </div>
+                <div id="show">
+                    <input type="button" onclick="addNewInteractionToInteractionSet(interactionSetObj)">Add
+                    Interaction</input>
+                </div>
+                <div class="mask" id="interactionSetContainer">
+                    <ul id="interactionList"></ul>
+                </div>
 
                 <div class="mask">
                     <div id="interactionInspector">
@@ -269,101 +311,113 @@
                     </div>
                 </div>
 
-            <div id="suggestionContainer" class="mask">
-                <input type="button" value="Suggest Interactions" onclick="recommendInteractionsMainCall()">
-                <div id="selectSuggestionInteractionId">
-                    <span>Interactions with: </span>
-                    <select id="sortSuggestionSelect" class="style-rounded blue rounded">
-                    </select>
-                    <div id="recommenderInteractions">
-                        <ul id="suggestionList"></ul>
+                <div id="suggestionContainer" class="mask">
+                    <input type="button" value="Suggest Interactions" onclick="recommendInteractionsMainCall()">
+                    <div id="selectSuggestionInteractionId">
+                        <span>Interactions with: </span>
+                        <select id="sortSuggestionSelect" class="style-rounded blue rounded">
+                        </select>
+                        <div id="recommenderInteractions">
+                            <ul id="suggestionList"></ul>
+                        </div>
                     </div>
                 </div>
-            </div>
 
             </div>
 
         </div>
 
-        <div id="terminationSetId">
-            <h2>Termination Set</h2>
-            <input type="button" value="Add Termination" onclick="addTermination()">
-            <div id="terminationContainer">
-                <ul id="terminationList"></ul>
+        <div id="terminationSetId"><h2>Termination Set</h2>
+
+            <div id="showTerminationComposePanel">
+                <input type="button" value="Compose new Termination" class="terminationMask">
             </div>
-            <span>Select Termination Condition: </span>
-            <div id="terminationInspector">
-                <!--<div id="terminationSelectDiv"></div>-->
-                <!--/*Termination Templates*/-->
-                <!--/*Sprite Counter*/-->
-                <div id="selectTerminationDivId">
-                <select id="selectTerminationConditionId" class="blue">
-                    <option value="SpriteCounter">Sprite Counter</option>
-                    <option value="MultiSpriteCounter">Multi Sprite Counter</option>
-                    <option value="TimeOut">Time Out</option>
-                </select>
+
+            <!--Add Interaction-->
+            <div id='terminationPopup'>
+                <input type="button" value="Cancel" onclick="hideoutTerminationPopup()">
+                <input type="button" value="Add Termination" onclick="addTerminationMainCall()">
+            </div>
+
+            <div class="terminationMask">
+                <div id="terminationContainer">
+                    <ul id="terminationList"></ul>
                 </div>
-                <div id="spriteCounterId" style="display: none">
-                    <div>
-                        <span>If number of = </span>
-                        <select id="sprite1Id" class="blue"
-                                oninput="updateThisParameterInsideObj(this.value, 'stype')">
+                <span>Select Termination Condition: </span>
+
+                <div id="terminationInspector">
+                    <!--<div id="terminationSelectDiv"></div>-->
+                    <!--/*Termination Templates*/-->
+                    <!--/*Sprite Counter*/-->
+                    <div id="selectTerminationDivId">
+                        <select id="selectTerminationConditionId" class="blue">
+                            <option value="SpriteCounter">Sprite Counter</option>
+                            <option value="MultiSpriteCounter">Multi Sprite Counter</option>
+                            <option value="TimeOut">Time Out</option>
                         </select>
                     </div>
-                    <div>
-                        <span>Reaches </span>
-                        <input id="inputSpriteCounterId"type="number"
-                            oninput="updateThisParameterInsideObj(this.value, 'limit')">
+                    <div id="spriteCounterId" style="display: none">
+                        <div>
+                            <span>If number of = </span>
+                            <select id="sprite1Id" class="blue"
+                                    oninput="updateThisParameterInsideObj(this.value, 'stype')">
+                            </select>
+                        </div>
+                        <div>
+                            <span>Reaches </span>
+                            <input id="inputSpriteCounterId" type="number"
+                                   oninput="updateThisParameterInsideObj(this.value, 'limit')">
+                        </div>
+                        <div>
+                            <select id="gameOverScId" class="blue"
+                                    oninput="updateThisParameterInsideObj(this.value, 'win')">
+                                <option value="Win">Win</option>
+                                <option value="Lose">Lose</option>
+                            </select>
+                        </div>
                     </div>
-                    <div>
-                        <select id="gameOverScId" class="blue"
-                            oninput="updateThisParameterInsideObj(this.value, 'win')">
-                            <option value="Win">Win</option>
-                            <option value="Lose">Lose</option>
-                        </select>
+
+                    <!--/*Timeout*/-->
+                    <div id="timeOutId" style="display: none">
+                        <div>
+                            <span>If Time = </span>
+                            <input id="timeOutInputId" type="number"
+                                   oninput="updateThisParameterInsideObj(this.value, 'limit')">
+                            <span> => </span>
+                            <select id="gameOverToId" class="blue"
+                                    oninput="updateThisParameterInsideObj(this.value, 'win')">
+                                <option value="Win">Win</option>
+                                <option value="Lose">Lose</option>
+                            </select>
+                        </div>
                     </div>
+
+                    <!--/*Multi Sprite Counter*/-->
+                    <div id="multiSpriteCounterId" style="display: none">
+                        <div>
+                            <span>If </span>
+                            <select id="sprite1mscId" class="blue"
+                                    oninput="updateThisParameterInsideObj(this.value, 'stype1')">
+                            </select>
+
+                            <span> Or </span>
+                            <select id="sprite2mscId" class="blue"
+                                    oninput="updateThisParameterInsideObj(this.value, 'stype2')">
+                            </select>
+
+                            <span> = </span>
+                            <input id="inputMspriteCounterId" type="number" class="blue"
+                                   oninput="updateThisParameterInsideObj(this.value, 'limit')">
+                            <span> => </span>
+                            <select id="gameOverMscId" class="blue"
+                                    oninput="updateThisParameterInsideObj(this.value, 'win')">
+                                <option value="Win">Win</option>
+                                <option value="Lose">Lose</option>
+                            </select>
+                        </div>
+                    </div>
+
                 </div>
-
-                <!--/*Timeout*/-->
-                <div id="timeOutId" style="display: none">
-                    <div>
-                        <span>If Time = </span>
-                        <input id="timeOutInputId" type="number"
-                            oninput="updateThisParameterInsideObj(this.value, 'limit')">
-                        <span> => </span>
-                        <select id="gameOverToId" class="blue"
-                            oninput="updateThisParameterInsideObj(this.value, 'win')">
-                            <option value="Win">Win</option>
-                            <option value="Lose">Lose</option>
-                        </select>
-                    </div>
-                </div>
-
-                <!--/*Multi Sprite Counter*/-->
-                <div id="multiSpriteCounterId" style="display: none">
-                    <div>
-                        <span>If </span>
-                        <select id="sprite1mscId" class="blue"
-                            oninput="updateThisParameterInsideObj(this.value, 'stype1')">
-                        </select>
-
-                        <span> Or </span>
-                        <select id="sprite2mscId" class="blue"
-                            oninput="updateThisParameterInsideObj(this.value, 'stype2')">
-                        </select>
-
-                        <span> = </span>
-                        <input id="inputMspriteCounterId" type="number" class="blue"
-                            oninput="updateThisParameterInsideObj(this.value, 'limit')">
-                        <span> => </span>
-                        <select id="gameOverMscId" class="blue"
-                            oninput="updateThisParameterInsideObj(this.value, 'win')">
-                            <option value="Win">Win</option>
-                            <option value="Lose">Lose</option>
-                        </select>
-                    </div>
-                </div>
-
             </div>
         </div>
 
@@ -379,8 +433,7 @@
                 </div>
 
                 <script>
-                    function loadGame()
-                    {
+                    function loadGame() {
                         var gameSelect = document.getElementById('chooseGameSelect');
                         getGameParam = "game=" + gameSelect.value;
                         localStorage.setItem("varGetGameParam", getGameParam);
@@ -401,20 +454,118 @@
 </div>
 </div>
 
+
 <div style="display: none"
      id="addSpriteDialogId" class="ui-dialog-content ui-widget-content"
      style="display: block; width: auto; min-height: 128px; max-height: none;
      height: auto;">
-        <p>Please enter object's name</p>
-        <input type="text" id="inputNameId">
-        <p>Please, select object type</p>
-        <select id="selectTypeId"
-        ><option value="Immovable">Immovable</option><option value="MovingAvatar">MovingAvatar</option>
-            <option value="OrientedAvatar">OrientedAvatar</option>
-            <option value="ShootAvatar">ShootAvatar</option><option value="FlakAvatar">FlakAvatar</option>
-            <option value="MissileAvatar">MissileAvatar</option><option value="OngoingAvatar">OngoingAvatar</option>
-            <option value="Passive">Passive</option><option value="Flicker">Flicker</option><option value="OrientedFlicker">OrientedFlicker</option><option value="Missile">Missile</option><option value="RandomMissile">RandomMissile</option><option value="RandomNPC">RandomNPC</option><option value="Chaser">Chaser</option><option value="AlternateChaser">AlternateChaser</option><option value="Fleeing">Fleeing</option><option value="RandomPathAltChaser">RandomPathAltChaser</option><option value="SpawnPoint">SpawnPoint</option><option value="Bomber">Bomber</option><option value="RandomBomber">RandomBomber</option><option value="Spreader">Spreader</option><option value="Door">Door</option><option value="Portal">Portal</option><option value="Resource">Resource</option></select>
-        <input type="button" value="Add Object" onclick="addSpriteObj(inputNameId, selectTypeId)">
+    <p>Please enter object's name</p>
+    <input type="text" id="inputNameId">
+    <p>Please, select object type</p>
+    <select id="selectTypeId"
+    >
+        <option value="Immovable">Immovable</option>
+        <option value="MovingAvatar">MovingAvatar</option>
+        <option value="OrientedAvatar">OrientedAvatar</option>
+        <option value="ShootAvatar">ShootAvatar</option>
+        <option value="FlakAvatar">FlakAvatar</option>
+        <option value="MissileAvatar">MissileAvatar</option>
+        <option value="OngoingAvatar">OngoingAvatar</option>
+        <option value="Passive">Passive</option>
+        <option value="Flicker">Flicker</option>
+        <option value="OrientedFlicker">OrientedFlicker</option>
+        <option value="Missile">Missile</option>
+        <option value="RandomMissile">RandomMissile</option>
+        <option value="RandomNPC">RandomNPC</option>
+        <option value="Chaser">Chaser</option>
+        <option value="AlternateChaser">AlternateChaser</option>
+        <option value="Fleeing">Fleeing</option>
+        <option value="RandomPathAltChaser">RandomPathAltChaser</option>
+        <option value="SpawnPoint">SpawnPoint</option>
+        <option value="Bomber">Bomber</option>
+        <option value="RandomBomber">RandomBomber</option>
+        <option value="Spreader">Spreader</option>
+        <option value="Door">Door</option>
+        <option value="Portal">Portal</option>
+        <option value="Resource">Resource</option>
+    </select>
+    <input type="button" value="Add Object" onclick="addSpriteObj(inputNameId, selectTypeId)">
+</div>
+
+
+<!--<div id="terminationInspectorAdd" style="display: none">-->
+<!--&lt;!&ndash;<div id="terminationSelectDiv"></div>&ndash;&gt;-->
+<!--&lt;!&ndash;/*Termination Templates*/&ndash;&gt;-->
+<!--&lt;!&ndash;/*Sprite Counter*/&ndash;&gt;-->
+<!--<div id="selectTerminationDivIdAdd" style="display: none">-->
+<!--<select id="selectTerminationConditionIdAdd" class="blue"-->
+<!--oninput="renderTerminationConditionAdd(this.value)">-->
+<!--<option value="SpriteCounter">Sprite Counter</option>-->
+<!--<option value="MultiSpriteCounter">Multi Sprite Counter</option>-->
+<!--<option value="TimeOut">Time Out</option>-->
+<!--</select>-->
+<!--</div>-->
+<!--<div id="spriteCounterIdAdd" style="display: block">-->
+<!--<div>-->
+<!--<span>If number of = </span>-->
+<!--<select id="sprite1IdAdd" class="blue"-->
+<!--&gt;-->
+<!--</select>-->
+<!--</div>-->
+<!--<div>-->
+<!--<span>Reaches </span>-->
+<!--<input id="inputSpriteCounterIdAdd"type="number"-->
+<!--&gt;-->
+<!--</div>-->
+<!--<div>-->
+<!--<select id="gameOverScIdAdd" class="blue"-->
+<!--&gt;-->
+<!--<option value="Win">Win</option>-->
+<!--<option value="Lose">Lose</option>-->
+<!--</select>-->
+<!--</div>-->
+<!--</div>-->
+
+<!--&lt;!&ndash;/*Timeout*/&ndash;&gt;-->
+<!--<div id="timeOutIdAdd" style="display: none">-->
+<!--<div>-->
+<!--<span>If Time = </span>-->
+<!--<input id="timeOutInputIdAdd" type="number"-->
+<!--&gt;-->
+<!--<span> => </span>-->
+<!--<select id="gameOverToIdAdd" class="blue"-->
+<!--&gt;-->
+<!--<option value="Win">Win</option>-->
+<!--<option value="Lose">Lose</option>-->
+<!--</select>-->
+<!--</div>-->
+<!--</div>-->
+
+<!--&lt;!&ndash;/*Multi Sprite Counter*/&ndash;&gt;-->
+<!--<div id="multiSpriteCounterIdAdd" style="display: none">-->
+<!--<div>-->
+<!--<span>If </span>-->
+<!--<select id="sprite1mscIdAdd" class="blue"-->
+<!--&gt;-->
+<!--</select>-->
+
+<!--<span> Or </span>-->
+<!--<select id="sprite2mscIdAdd" class="blue"-->
+<!--&gt;-->
+<!--</select>-->
+
+<!--<span> = </span>-->
+<!--<input id="inputMspriteCounterIdAdd" type="number" class="blue"-->
+<!--&gt;-->
+<!--<span> => </span>-->
+<!--<select id="gameOverMscIdAdd" class="blue"-->
+<!--&gt;-->
+<!--<option value="Win">Win</option>-->
+<!--<option value="Lose">Lose</option>-->
+<!--</select>-->
+<!--</div>-->
+<!--</div>-->
+
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.6/prefixfree.min.js"></script>
@@ -425,11 +576,11 @@
 <script type="text/javascript" src="js/observers/spriteSetObserver.js"></script>
 <script type="text/javascript" src="js/observers/spriteListObserver.js"></script>
 <script type="text/javascript" src="js/showGameSetScript.js"></script>
-<script type="text/javascript" src="js/interactions/updateInteractionInspector.js" ></script>
-<script type="text/javascript" src="js/interactions/showInteractionSetScript.js" ></script>
-<script type="text/javascript" src="js/interactions/managingInteractionParameters.js" ></script>
-<script type="text/javascript" src="js/termination/showTerminationList.js" ></script>
-<script type="text/javascript" src="js/termination/showTerminationSetScript.js" ></script>
+<script type="text/javascript" src="js/interactions/updateInteractionInspector.js"></script>
+<script type="text/javascript" src="js/interactions/showInteractionSetScript.js"></script>
+<script type="text/javascript" src="js/interactions/managingInteractionParameters.js"></script>
+<script type="text/javascript" src="js/termination/showTerminationList.js"></script>
+<script type="text/javascript" src="js/termination/showTerminationSetScript.js"></script>
 <!--<script type="text/javascript" src="js/termination/updateTerminationInspector.js" ></script>-->
 <script type="text/javascript" src="js/constants/AvatarTypes/avatarTypes.js"></script>
 <script type="text/javascript" src="js/constants/OtherTypes/otherTypes.js"></script>

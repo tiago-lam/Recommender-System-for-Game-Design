@@ -78,8 +78,30 @@
     border: 1px solid black;
 }
 
-
 .terminationContainerMsc span
 {
     color: #4EC6DE;
+}
+
+.cancelTerminationDiv
+{
+    height: 20px;
+    width: 20px;
+}
+
+.cancelTerminationDiv img
+{
+    height: 20px;
+    width: 20px;
+    margin-left: 120px;
+}
+
+.terminationMask
+{
+    display: block;
+}
+
+.terminationPopup
+{
+    display: none;
 }

@@ -229,9 +229,12 @@ function getAvatarIdentifier()
     for(var i = 0; i < spriteSet.length; i++)
     {
         var obj = spriteSet[i];
-        if(obj.referenceClass.includes("Avatar"))
+        if(obj.referenceClass != null && obj.referenceClass.includes("Avatar"))
         {
-            return obj.identifier;
+            if(obj.referenceClass.includes("Avatar"))
+            {
+                return obj.identifier;
+            }
         }
 
         if(obj.children.length > 0)

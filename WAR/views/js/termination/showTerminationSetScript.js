@@ -7,7 +7,7 @@ function deleteTerminationDiv(index)
     var content = "";
     var div = document.createElement('div')
     div.id = "cancel_termination" + index;
-    div.classList.add('cancelDiv');
+    div.classList.add('cancelTerminationDiv');
     div.setAttribute('onmousedown', "removeTerminationButton(event)");
 
     var img = document.createElement('img');
@@ -227,6 +227,7 @@ function showTerminationOnInspector(id)
 function updateThisParameterInsideObj(value, param)
 {
     var terminationObj = mapTerminationIdToTerminationObj[currentTerminationId];
+    if(terminationObj == undefined) return;
     if(param == 'win') {
         terminationObj['parameters'][param] = (value == 'Win') ? 'True' : 'False';
     }
@@ -260,6 +261,149 @@ function removeObjectFromTheTerminationSet(e)
 
 function deleteObjectInTheTerminationSet(obj) {
     removeItemFrom(terminationSetObj, obj);
+}
+
+function addTermination()
+{
+    var selectChoice = document.getElementById('selectTerminationConditionId').value;
+
+    var terminationObj = new Object();
+    terminationObj['parameters'] = {};
+
+    if(selectChoice == 'SpriteCounter')
+    {
+        terminationObj['termination'] = 'SpriteCounter';
+        var stype = document.getElementById('sprite1Id').value;
+        terminationObj['parameters']['stype'] = stype;
+        var limit = document.getElementById('inputSpriteCounterId').value;
+        terminationObj['parameters']['limit'] = limit;
+        var win = document.getElementById('gameOverScId').value;
+        terminationObj['parameters']['win'] = (win == 'Win') ? 'True' : 'False';
+        if(checkIfTerminalObjHasEmptyKey(terminationObj)) { return; }
+        return terminationObj;
+    }
+
+    if(selectChoice == 'MultiSpriteCounter')
+    {
+        terminationObj['termination'] = 'MultiSpriteCounter';
+        var stype1 = document.getElementById('sprite1mscId').value;
+        terminationObj['parameters']['stype1'] = stype1;
+        var stype2 = document.getElementById('sprite2mscId').value;
+        terminationObj['parameters']['stype2'] = stype2;
+        var limit = document.getElementById('inputMspriteCounterId').value;
+        terminationObj['parameters']['limit'] = limit;
+        var win = document.getElementById('gameOverMscId').value;
+        terminationObj['parameters']['win'] = (win == 'Win') ? 'True' : 'False';
+        if(checkIfTerminalObjHasEmptyKey(terminationObj)) { return; }
+        return terminationObj;
+    }
+
+    if(selectChoice == "TimeOut")
+    {
+         terminationObj['termination'] = 'Timeout';
+        var limit = document.getElementById('timeOutInputId').value;
+        terminationObj['parameters']['limit'] = limit;
+        var win = document.getElementById('gameOverToId').value;
+        terminationObj['parameters']['win'] = (win == 'Win') ? 'True' : 'False';
+        if(checkIfTerminalObjHasEmptyKey(terminationObj)) { return; }
+        return terminationObj;
+    }
+
+}
+
+function checkIfTerminalObjHasEmptyKey(terminalObj)
+{
+    for(var k in terminalObj)
+    {
+        if(terminalObj[k] == "" || terminalObj[k] == undefined)
+        {
+            $("<div class=warning' title='Warning'>" +
+                "Cannot add this termination: parameter " + k + " is empty or not defined" +
+                "</div>")
+                .dialog();
+           return true;
+        }
+    }
+    return false;
+}
+
+function addTerminationToTerminationSet(terminationObj)
+{
+    gameObj["TerminationSet"].push(terminationObj);
+    refreshGame(gameObj, false);
+    hideoutTerminationPopup();
+}
+
+function addTerminationMainCall()
+{
+    var terminationObj = addTermination();
+    if(terminationObj == undefined)
+    {
+        return;
+    }
+    else
+    {
+        addTerminationToTerminationSet(terminationObj);
+        redoTerminationSet(gameObj);
+    }
+}
+
+$(document).ready(function() {
+
+    $("#showTerminationComposePanel").click(function() {
+        showTerminationPopup();
+    });
+
+    $("#popup").click(function() {
+
+        // $(this).hide();
+        // $(".mask").show();
+
+    });
+
+});
+
+function hideoutTerminationPopup() {
+    $('#terminationPopup').hide();
+    $(".terminationMask").show();
+    var insp = document.getElementById('terminationInspector');
+    var inspClone = insp.cloneNode(true);
+    var div = document.getElementById('terminationSetId');
+    if(!div.contains(insp))
+    {
+        div.appendChild(inspClone);
+    }
+    var pop = document.getElementById("terminationPopup");
+    if(pop.childNodes.length > 1)
+    {
+        pop.removeChild(pop.lastChild);
+    }
+}
+
+function showTerminationPopup() {
+    // show the mask
+
+    //$(".mask").fadeTo(1000, 0.0);
+    $(".terminationMask").hide();
+
+    // show the popup
+    $("#terminationPopup").show();
+
+    var div = document.getElementById('terminationPopup');
+    if(!div.contains(document.getElementById('terminationInspector'))) {
+        var insp = document.getElementById('terminationInspector');
+        var inspClone = insp.cloneNode(true);
+        div.appendChild(inspClone);
+    }
+
+    // interactionObjX = createInteractionX();
+    // showInfo(interactionObjX);
+}
+
+function deleteTerminationList()
+{
+    var terminationList = document.getElementById('terminationList');
+    deleteElementsFrom(terminationList);
 }
 
 
