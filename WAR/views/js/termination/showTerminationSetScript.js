@@ -234,10 +234,11 @@ function updateThisParameterInsideObj(value, param)
     else {
         terminationObj['parameters'][param] = value;
     }
-     var htmlString = setTerminationObjToHTML(terminationObj,
+    var index = currentTerminationId.replace("termination", "");
+    var htmlString = setTerminationObjToHTML(terminationObj,
          currentTerminationId.replace("termination", ""));
     document.getElementById(currentTerminationId).innerHTML
-        = htmlString;
+        = htmlString + deleteTerminationDiv(index);
 }
 
 function removeTerminationButton(e)
