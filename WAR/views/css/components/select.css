@@ -4,7 +4,7 @@
 /* -------------------- Source: http://bavotasan.com/2011/style-select-box-using-only-css/ */
 .styled-select { background: url(http://i62.tinypic.com/15xvbd5.png) no-repeat 96% 0; height: 20px; overflow: hidden; width: 50%; height: 65%; font-family: "Lucida Console", Monaco, monospace; text-align: left; border: 1px; border-style: solid; border-color: lightsteelblue; border-radius: 7px; /*border: 6px solid black;*/ float: right; margin-left: -114px; margin-top: 4px; padding: 0px 0; }
 
-.styled-select select { background: transparent; border: none; font-family: "Lucida Console", Monaco, monospace; font-size: 14px; height: 0px; padding: 5px; /* If you add too much padding here, the options won't show in IE */ width: 268px; }
+.styled-select select { background: transparent; border: none; font-family: "Lucida Console", Monaco, monospace; font-size: 14px; padding: 5px; /* If you add too much padding here, the options won't show in IE */ width: 268px; }
 
 .styled-select.slate { background: url(http://i62.tinypic.com/2e3ybe1.jpg) no-repeat right center; height: 34px; width: 240px; }
 
