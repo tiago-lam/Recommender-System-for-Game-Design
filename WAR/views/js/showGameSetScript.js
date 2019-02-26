@@ -409,6 +409,7 @@ function removeSpriteNamesFromArraysAndMaps(obj)
         mapIdentifierToObject.delete(familyMNames[i]);
         removeSelectItemFrom(document.getElementById('sprite1SelectId'), familyMNames[i]);
         removeInteractionObjectWithThisSprite(familyMNames[i]);
+        removeTerminationObjectWithThisSprite(familyMNames[i]);
         removeFromTheSpriteCheckBoxList(familyMNames[i]);
         removeSpriteFromLevelSpriteList(familyMNames[i]);
         removeSpriteInTheGridLevel(familyMNames[i]);

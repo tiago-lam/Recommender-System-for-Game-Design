@@ -179,7 +179,11 @@
             }
             else
             {
-                document.getElementById(id).parentElement.remove();
+                var elem = document.getElementById(id);
+                if(elem != undefined)
+                {
+                    elem.parentElement.remove();
+                }
             }
         }
 
@@ -204,7 +208,7 @@
             for(var key of mapIdToInteraction.keys())
             {
                 var interactionObj = mapIdToInteraction.get(key);
-                if(interactionObj.sprite1 == sprite || sprite in interactionObj.sprite2)
+                if(interactionObj.sprite1 == sprite || interactionObj['sprite2'].includes(sprite))
                 {
                     deleteObjectInTheInteractionSet(interactionObj);
                     mapIdToInteraction.delete(key);

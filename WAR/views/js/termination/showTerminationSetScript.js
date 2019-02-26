@@ -407,6 +407,24 @@ function deleteTerminationList()
     deleteElementsFrom(terminationList);
 }
 
+function removeTerminationObjectWithThisSprite(sprite)
+{
+    for(var key in mapTerminationIdToTerminationObj)
+    {
+        var obj = mapTerminationIdToTerminationObj[key];
+        var params = obj['parameters'];
+        for(var args in params)
+        {
+            if(params[args] == sprite)
+            {
+                removeItemFrom(gameObj['TerminationSet'], obj);
+                document.getElementById(key).remove();
+                delete mapTerminationIdToTerminationObj[key];
+            }
+        }
+    }
+}
+
 
 
 
