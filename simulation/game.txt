@@ -1,58 +1,36 @@
 BasicGame
     SpriteSet
-        sky > Immovable img=oryx/backLBlue
-        trunk > Immovable img=newset/cloud1 color=BROWN
-        cursed > Immovable img=newset/cursedman color=YELLOW
-        movable >
-            demon > Bomber prob=0.15 frameRate=8 img=oryx/devil1 stype=bolt cooldown=6 speed=0.4
-            angel > Bomber prob=0.05 frameRate=8 img=oryx/angel1 stype=salvation cooldown=6 speed=0.45
-            citizen > Chaser img=newset/man2 stype=output speed=0.4
-            blessed > Chaser img=newset/blessedman stype=output speed=0.4
-        avatar > MovingAvatar frameRate=10 img=newset/girl4
-        input > SpawnPoint img=oryx/dooropen1 stype=citizen cooldown=16 portal=True
-        output > Immovable img=oryx/dooropen1 portal=True
-        box > Passive img=newset/cloud2 shrinkfactor=0.8
+        background > Immovable img=oryx/space1 hidden=True
+        base > Immovable img=oryx/planet color=WHITE
+        avatar > FlakAvatar img=oryx/spaceship1 stype=sam
         missile > Missile
-            bolt > Missile orientation=DOWN img=oryx/firedown1 color=RED speed=0.2
-            salvation > Missile orientation=DOWN img=oryx/icedown1 color=RED speed=0.2
-        wall > Immovable img=oryx/wall3 autotiling=True
+            sam > Missile singleton=True orientation=UP img=oryx/bullet1 color=BLUE
+            bomb > Missile orientation=DOWN img=oryx/bullet2 color=RED speed=0.5
+        portal > hidden=True invisible=True
+            portalSlow > SpawnPoint total=20 img=oryx/door2 hidden=True stype=sam cooldown=16 invisible=True
+            portalFast > SpawnPoint total=20 img=oryx/dooropen1 hidden=True stype=sam cooldown=12 invisible=True
 
     LevelMapping
-        a > sky angel
-        A > sky avatar
-        d > sky demon
-        t > sky trunk
-        w > wall
-        x > sky box
-        i > sky input
-        . > sky
-        o > sky output
-        ¡ > sky cursed
-        ¢ > sky citizen
-        £ > sky blessed
-        ¤ > sky bolt
-        ¥ > sky salvation
-        ¦ > sky movable
-        § > sky missile
+        0 > background base
+        1 > background portalSlow
+        2 > background portalFast
+        A > background avatar
+        . > background
+        ¡ > background sam
+        ¢ > background bomb
+        £ > background alienGreen
+        ¤ > background alienBlue
+        ¥ > background missile
+        ¦ > background alien
+        § > background portal
         
     InteractionSet
-        movable wall > reverseDirection
-        movable wall > stepBack
-        avatar wall EOS > stepBack
-        box avatar > bounceForward
-        box box > bounceForward repeat=10
-        box wall > killSprite
-        bolt wall > killSprite scoreChange=-1
-        bolt box > killSprite scoreChange=1
-        citizen bolt > transformTo killSecond=True scoreChange=-1 stype=cursed
-        bolt avatar > killSprite scoreChange=-5
-        salvation wall > killSprite scoreChange=1
-        salvation box > killSprite scoreChange=-1
-        citizen salvation > transformTo killSecond=True scoreChange=100 stype=blessed
-        citizen output > killSprite
-        blessed output > killSprite
+        avatar EOS > stepBack
+        missile EOS > killSprite
+        base bomb > killBoth
+        base sam > killBoth scoreChange=1
+        avatar bomb > killSprite scoreChange=-1
         
     TerminationSet
-        Timeout limit=1000 win=True
-        MultiSpriteCounter limit=1 stype1=cursed win=False
+        SpriteCounter stype=avatar limit=0 win=False
         

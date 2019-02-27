@@ -1,3 +1,5 @@
+var checker = false;
+
 function spriteSetToString(spriteSet)
 {
     var string = "BasicGame" + "\n";
@@ -36,6 +38,15 @@ function JSONtoString(obj, ident) {
             }
         }
 
+        if(paramKey == "stype" || paramKey == "stype1" || paramKey == "stype2")
+        {
+            if(!mapIdentifierToObject.has(obj.parameters[paramKey]))
+            {
+                alert(obj['identifier'] + " param: " + paramKey + ", needs to be signed");
+                checker = true;
+            }
+        }
+
         if(obj.parameters[paramKey] != "none") {
             objString = objString + " " + paramKey + "=" + obj.parameters[paramKey];
         }
@@ -43,7 +54,7 @@ function JSONtoString(obj, ident) {
         {
             if(paramKey == "stype" || paramKey == "stype1" || paramKey == "stype2") {
                 alert(obj['identifier'] + " param: " + paramKey + ", needs to be signed");
-                return;
+                checker = true;
             }
         }
     }
@@ -144,6 +155,7 @@ function levelObjToString(levelMap)
                 "To run the game, make sure to have only one avatar object in the level map" +
             "</div>")
         .dialog();
+        return;
     }
 
     var string = "";
@@ -173,23 +185,33 @@ function play()
 {
     var hasAvatar = checkIfSpriteSetHasAnAvatar(gameObj["SpriteSet"])
 
-        console.log("play");
-        xhr = new XMLHttpRequest();
-        var agent = document.getElementById('agentGameSelect');
-        var url = "http://localhost:9001/play?" + "agent=" + agent.options[agent.selectedIndex].value;
-        xhr.open("POST", url, true);
-        xhr.setRequestHeader("Content-type", "text/plain");
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState == 4 && xhr.status == 200) {
-                var resp = xhr.responseText;
-                console.log(resp);
-            }
+    console.log("play");
+    xhr = new XMLHttpRequest();
+    var agent = document.getElementById('agentGameSelect');
+    var url = "http://localhost:9001/play?" + "agent=" + agent.options[agent.selectedIndex].value;
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader("Content-type", "text/plain");
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            var resp = xhr.responseText;
+            console.log(resp);
         }
-        var data = fromObjToString();
-        data = JSON.stringify(data);
-        xhr.send(data);
+    }
+    var data = fromObjToString();
+    data = JSON.stringify(data);
 
+    if(!checker) {
+        xhr.send(data);
         setInterval(getImage(), 200);
+    }
+    else
+        {
+            $("<div class=warning' title='Warning'>" +
+                "Errors in the game description. Check your Sprite, Interaction, and Termination sets" +
+                "</div>")
+                .dialog();
+            checker = false;
+        }
 
 }
 

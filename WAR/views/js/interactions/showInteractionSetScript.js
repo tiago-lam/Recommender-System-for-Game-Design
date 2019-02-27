@@ -164,8 +164,6 @@
             objID = objID.replace("cancel_img_", "");
             var obj = mapIdToInteraction.get(objID);
             deleteObjectInTheInteractionSet(obj);
-
-            //todo - we a need a target to get the interaction id from it
             mapIdToInteraction.delete(objID);
         }
 
