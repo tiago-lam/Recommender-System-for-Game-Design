@@ -1,18 +1,22 @@
 #terminationContainer
 {
-    width: 33%;
+    width: 280px;
+    /*height: 300px;*/
     float: left;
-    border: 1px solid black;
+    overflow: auto;
+    /*border: 1px solid #85c6dd;*/
+    /*overflow: auto;*/
 }
 
 #terminationInspector
 {
     float: left;
-    width: 33%;
+    width: 450px;
     margin-right: -11px;
-    border: 1px solid black;
-    margin-left: 10px;
+    border: 1px solid;
+    margin-left: 120px;
     height: 125px;
+    margin-top: 38px;
 }
 
 .terminationDiv
@@ -32,6 +36,17 @@
     margin-bottom: 10px;
     margin-left: -23px;
     margin-top: -4px;
+}
+
+#terminationList
+{
+    list-style-type: none;
+    float: left;
+    border: 1px solid #4ec3ec;
+    overflow: auto;
+    height: 300px;
+    width: 280px;
+    padding: 0px;
 }
 
 .arrangeSpanAndElement
@@ -104,4 +119,29 @@
 .terminationPopup
 {
     display: none;
+    margin-top: 15px;
+}
+
+#inputMspriteCounterId
+{
+    width: 50px;
+}
+
+#inputSpriteCounterId
+{
+    width: 50px;
+}
+
+#selectTerminationDivId
+{
+    margin-bottom: 15px;
+}
+
+#terminationPopupButtons
+{
+    float: right;
+    width: 110px;
+    border: 1px solid;
+    margin-top: 38px;
+    margin-right: 270px;
 }

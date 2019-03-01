@@ -112,9 +112,82 @@ function addNewInteractionToInteractionSet(interactionSet)
 function addInteractionTo(interactionSet)
 {
     console.log(interactionObjX);
+    if(checkInteractionBeforeInsertIt(interactionObjX))
+    {
+        return;
+    }
     interactionSet.push(interactionObjX);
     refreshGame(gameObj, false);
     hideout();
+}
+
+function checkInteractionBeforeInsertIt(interaction)
+{
+    var empty = false;
+    if(interaction.interactionName == "" || interaction.interactionName == undefined)
+    {
+        $("<div>Interaction type must not be empty</div>").dialog();
+        empty = true;
+    }
+
+    if(interaction.sprite1 == "" || interaction.sprite1 == undefined || interaction.sprite2.length == 0)
+    {
+        $("<div>Interaction must have sprites defined</div>").dialog();
+        empty = true;
+    }
+
+    if(interaction.interactionName == transformToSingleton || interaction.interactionName == spawnBehind || interaction.interactionName == spawnIfHasMore
+        || interaction.interactionName == spawnIfHasLess || interaction.interactionName == transformTo || interaction.interactionName == transformToRandomChild
+        || interaction.interactionName == removeScore || interaction.interactionName == subtractHealthPoints
+        || interaction.interactionName == increaseSpeedToAll || interaction.interactionName == decreaseSpeedToAll || interaction.interactionName == setSpeedForAll)
+    {
+        if(interaction['parameters']['stype'] = "" || interaction['parameters']['stype'] == undefined)
+        {
+            $("<div>Interaction parameter stype can't be empty</div>").dialog();
+            empty = true;
+        }
+    }
+
+    if(interaction.interactionName == killIfHasMore || interaction.interactionName == killIfHasLess || interaction.interactionName == killIfOtherHasMore
+        || interaction.interactionName == spawnIfHasMore || interaction.interactionName == spawnIfHasLess || interaction.interactionName == changeResource)
+    {
+        if(interaction['parameters']['resource'] = "" || interaction['parameters']['resource'] == undefined)
+        {
+            $("<div>Interaction parameter resource can't be empty</div>").dialog();
+            empty = true;
+        }
+    }
+
+    if(interaction.interactionName == transformToSingleton)
+    {
+        if(interaction['parameters']['stype_other'] = "" || interaction['parameters']['stype_other'] == undefined)
+        {
+            $("<div>Interaction parameter stype_other can't be empty</div>").dialog();
+            empty = true;
+        }
+    }
+
+    if(interaction.interactionName == killIfHasMore || interaction.interactionName == killIfHasLess || interaction.interactionName == killIfOtherHasMore
+        || interaction.interactionName == spawnIfHasMore || interaction.interactionName == spawnIfHasLess)
+    {
+        if(interaction['parameters']['limit'] = "" || interaction['parameters']['limit'] == undefined)
+        {
+            $("<div>Interaction parameter limit can't be empty</div>").dialog();
+            empty = true;
+        }
+    }
+
+    if(interaction.interactionName == addHealthPoints || interaction.interactionName == addHealthPointsToMax || interaction.interactionName == subtractHealthPoints
+        || interaction.interactionName == increaseSpeedToAll || interaction.interactionName == decreaseSpeedToAll || interaction.interactionName == setSpeedForAll
+        || interaction.interactionName == changeResource)
+    {
+        if(interaction['parameters']['value'] = "" || interaction['parameters']['value'] == undefined)
+        {
+            $("<div>Interaction parameter value can't be empty</div>").dialog();
+            empty = true;
+        }
+    }
+    return empty;
 }
 
 function addRecommendedInteraction(interactionSet, interaction)

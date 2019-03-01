@@ -196,6 +196,7 @@ function getObjectForUpdatingOnMouseClick()
             }
             var obj = retrieveObjectByTarget(id);
             updateInspector(obj);
+            deactivateOpacity();
         });
 }
 

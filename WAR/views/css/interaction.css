@@ -17,11 +17,12 @@
     background-color: rgba(61, 88, 88, 0.316);
 }
 
-#interactionDiv
-{
+#interactionDiv {
     width: 46%;
     float: left;
-    /*background: rgba(61, 88, 88, 0.316);*/
+    border: 2px solid;
+    /* background: rgba(61, 88, 88, 0.316); */
+    height: 100%;
 }
 
 #interactionDivAdd
@@ -59,11 +60,13 @@
     z-index: -10;
 }
 
-#selectSuggestionInteractionId
-{
+#selectSuggestionInteractionId {
     display: block;
-    width: 500px;
-    /* height: 20px; *//* width: 600px; *//* float: right; */
+    width: 200px;
+    margin-top: -65px;
+    /* height: 20px; */
+    /* width: 600px; */
+    /* float: right; */
 }
 
 .pullLeft
@@ -76,28 +79,31 @@
     float: right;
 }
 
-#interactionList
-{
+#interactionList {
     border: 1px solid #4ec3ec;
     float: left;
     overflow: auto;
+    height: 400px;
+    width: 212px;
+    margin-top: 1px;
+    padding-left: 10px;
 }
 
 #interactionInspector
 {
-    width: 500px;
-    height: 229px;
+    width: 455px;
+    height: 254px;
     position: relative;
     float: left;
-    margin-left: 30px;
-    border: 1px solid black;
-    background: rgba(61, 88, 88, 0.316);
+    margin-left: 10px;
+    /*border: 1px solid black;*/
+    /*background: rgba(61, 88, 88, 0.316);*/
 }
 
 #interactionInspectorAdd
 {
     width: 500px;
-    height: 229px;
+    height: 254px;
     position: relative;
     float: left;
     margin-left: 30px;
@@ -105,11 +111,12 @@
     background: rgba(61, 88, 88, 0.316);
 }
 
-#interactionSprite1Div
-{
+#interactionSprite1Div {
     width: 20%;
+    height: 100%;
     float: left;
     display: inline;
+    border: 2px solid;
 }
 
 #interactionSelect
@@ -118,13 +125,13 @@
     width: 100%;
 }
 
-#spritesToInteractDiv
-{
-    width: 33%;
+#spritesToInteractDiv {
+    width: 34%;
     height: 100%;
     float: left;
     display: grid;
     overflow: scroll;
+    border: 2px solid;
 }
 
 #spritesToInteractDivAdd
@@ -136,9 +143,9 @@
     overflow: scroll;
 }
 
-#sprite1SelectId
-{
-    margin-top: 99px;
+#sprite1SelectId {
+    /* margin-top: 0; */
+    margin: 0 0 -10px 0;
 }
 
 #scoreSpanId
@@ -154,10 +161,9 @@
     margin-top: 3%;
 }
 
-#sprite1InteractionImg
-{
-    margin: -86px 0px 0px 12px;
-    width: 30%;
+#sprite1InteractionImg {
+    margin: 30px 0px 0px 0px;
+    width: 100%;
 }
 
 .spanForInteractionParameters
@@ -248,6 +254,12 @@
     width: 280px;
 }
 
+#interactionInspectorLabel
+{
+    height: 25px;
+    border: 2px solid;
+}
+
 
 /*--------------------------------------------------*/
 
@@ -277,15 +289,14 @@
 #suggestionContainer
 {
     display: block;
-    width: 600px;
+    width: 200px;
     float: right;
 }
 
-#recommenderInteractions
-{
-    width: 500px;
-    height: 600px;
-    float: right;
+#recommenderInteractions {
+    width: 215px;
+    height: 400px;
+    /* float: right; */
     border: 1px solid #4ec3ec;
     top: -200px;
     overflow: auto;
@@ -293,5 +304,6 @@
 
 #sortSuggestionSelect
 {
-
+    width: 100px;
+    margin-left: 50px;
 }

@@ -914,7 +914,7 @@ public abstract class Game
 
             //Update the frame title to reflect current score and tick.
             this.setTitle(frame);
-            storeFrame(frame);
+            //storeFrame(frame);
             
             if(firstRun && isHuman){
             	if(CompetitionParameters.dialogBoxOnStartAndEnd){

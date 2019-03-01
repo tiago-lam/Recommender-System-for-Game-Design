@@ -163,7 +163,7 @@ function createInteractionStypeOtherParameter()
     stypeOtherSpan.id = 'stypeOtherInteractionSpanId';
     stypeOtherSpan.classList.add('spanForInteractionParameters');
     stypeOtherSpan.classList.add('spanLimitOverflow');
-    stypeOtherSpan.innerHTML = "stypeOther:";
+    stypeOtherSpan.innerHTML = "stype_other:";
 
     var stypeOtherSelect = document.createElement('select');
     stypeOtherSelect.id = "stypeOtherSelectId";
@@ -191,9 +191,9 @@ function createStypeOtherParameterInsideObject()
     var stypeOther = document.getElementById('stypeOtherSelectId');
     var value = stypeOther.options[stypeOther.selectedIndex].text;
 
-    if(!('stypeOther' in currentInteractionObj.parameters))
+    if(!('stype_other' in currentInteractionObj.parameters))
     {
-        currentInteractionObj.parameters['stypeOther'] = value;
+        currentInteractionObj.parameters['stype_other'] = value;
     }
 }
 

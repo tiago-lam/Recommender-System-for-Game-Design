@@ -338,6 +338,22 @@ function addTerminationToTerminationSet(terminationObj)
 function addTerminationMainCall()
 {
     var terminationObj = addTermination();
+
+    if(terminationObj.termination = "" || terminationObj.termination == undefined)
+    {
+        $("<div>Termination definition can't be empty</div>").dialog();
+        return;
+    }
+
+    for(var k in terminationObj['parameters'])
+    {
+        if(terminationObj['parameters'][k] == "" || terminationObj['parameters'][k] == undefined)
+        {
+            $("<div>Termination parameter " + k + " can't be empty</div>").dialog();
+            return;
+        }
+    }
+
     if(terminationObj == undefined)
     {
         return;

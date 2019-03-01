@@ -404,3 +404,13 @@
             return false;
         }
 
+        function activateOpacity()
+        {
+            document.getElementById('inspector').style.opacity = 0.3;
+        }
+
+        function deactivateOpacity()
+        {
+            document.getElementById('inspector').style.opacity = 1.0;
+        }
+
