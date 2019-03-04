@@ -127,24 +127,14 @@
 
         function addToTheInteractionSet(e)
         {
-            var isRightMB;
-            e = e || window.event;
-
-            if ("which" in e)  // Gecko (Firefox), WebKit (Safari/Chrome) & Opera
-                isRightMB = e.which == 3;
-            else if ("button" in e)  // IE, Opera
-                isRightMB = e.button == 2;
-
-            if(isRightMB)
-            {
+                console.log(e.currentTarget);
                 var isOkToRemove = confirm("Do you want to use this item?");
-                if(isOkToRemove) {
-
-                    var interactionObject = extractInteractionFromDivHTMLText(e.target);
+                if(isOkToRemove)
+                {
+                    var interactionObject = extractInteractionFromDivHTMLText(e.currentTarget);
                     addRecommendedInteraction(gameObj.InteractionSet, interactionObject);
-                    removeObjectFromTheRecommendationList(e.target.id);
+                    removeObjectFromTheRecommendationList(e.currentTarget.id);
                 }
-            }
         }
 
         function getInteractionForUpdatingOnMouseClick(e)

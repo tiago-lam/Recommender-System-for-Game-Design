@@ -80,4 +80,33 @@ function retrieveObjFromSpriteName(spriteSet, spriteName)
     return retrievedObj;
 }
 
+function confirmDialog(message, forWhat, target){
+
+    console.log(target);
+    $('<div></div>').appendTo('body')
+        .html('<div><h6>'+message+'?</h6></div>')
+        .dialog({
+            modal: true, title: 'Delete message', zIndex: 10000, autoOpen: true,
+            width: 'auto', resizable: false,
+            buttons: {
+                Yes: function () {
+                    if(forWhat == 'interaction')
+                    {
+                        var interactionObject = extractInteractionFromDivHTMLText(target);
+                        addRecommendedInteraction(gameObj.InteractionSet, interactionObject);
+                        removeObjectFromTheRecommendationList(target.id);
+                    }
+                    $(this).dialog("close");
+                },
+                No: function () {
+                    //$('body').append('<h1>Confirm Dialog Result: <i>No</i></h1>');
+                    $(this).dialog("close");
+                }
+            },
+            close: function (event, ui) {
+                $(this).remove();
+            }
+        });
+};
+
 

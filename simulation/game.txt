@@ -3,15 +3,24 @@ BasicGame
         background > Immovable img=oryx/space1
         avatar > FlakAvatar img=oryx/spaceship1 stype=sam
         sam > Missile orientation=UP img=oryx/bullet1
-        gold > Resource img=oryx/gold1 shrinkfactor=0.5 color=GOLD limit=11
+        alienBlue > Bomber prob=0.01 img=oryx/alien1 stype=bomb cooldown=3 speed=0.8
+        bomb > Missile orientation=DOWN img=oryx/bullet2 color=RED speed=0.5
+        base > Immovable img=oryx/planet color=WHITE
 
     LevelMapping
         b > background
         ¡ > avatar background
         ¢ > sam background
-        £ > gold background
+        £ > alienBlue background
+        ¤ > bomb background
+        ¥ > base background
         
     InteractionSet
+        avatar alienBlue > killSprite
+        avatar bomb > killSprite
+        base sam > killBoth
+        alienBlue sam > killSprite
+        alienBlue EOS > turnAround scoreChange=0
         
     TerminationSet
         

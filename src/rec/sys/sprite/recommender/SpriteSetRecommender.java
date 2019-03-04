@@ -258,8 +258,8 @@ public class SpriteSetRecommender extends SpriteRecommender
 			{
 				for(GameItem gi : gamesForThisSprite)
 				{
-					if(gi.gameName != null)
-					{
+//					if(gi.gameName != null)
+//					{
 						JSONArray gameSpriteSet = getSpriteSet("examples/gridphysics/" + gi.gameName + ".txt");
 						String spName = SpriteNumberTable.retrieveSpriteNameID(sc.spriteType);
 						ArrayList<JSONObject> spriteList = retrieveObjectsWithThisType(spName, gameSpriteSet, new ArrayList<JSONObject>());
@@ -276,7 +276,7 @@ public class SpriteSetRecommender extends SpriteRecommender
 								toRecommend.add(rsd);
 							}
 						}
-					}
+					//}
 				}
 			}
 		}

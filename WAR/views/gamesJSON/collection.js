@@ -212,15 +212,22 @@ function filterRepeatedInteractions(recs)
 {
     var recF = []; var list = [];
     var itrs = gameObj.InteractionSet;
-    list = itrs.filter(el => list.push({interaction: el.interactionName, sp1: el['sprite1'], sp2: el.sprite2}));
-    for(var i = 0; i < recs.length; i++){
-        var o = {interaction: recs[i]['interaction'], sp1: recs[i]['pair']['type1'], sp2: recs[i]['pair']['type2']};
-        for(var j = 0; j < list.length; j++)
-        {
-            var l = list[j];
-            if(l.interactionName != o.interaction && l.sprite1 != o.sp1 && l['sprite2'][0] != o['sp2'][0])
-                recF.push(recs[i]); break;
+    if(itrs.length > 0)
+    {
+        list = itrs.filter(el => list.push({interaction: el.interactionName, sp1: el['sprite1'], sp2: el.sprite2}));
+        for (var i = 0; i < recs.length; i++) {
+            var o = {interaction: recs[i]['interaction'], sp1: recs[i]['pair']['type1'], sp2: recs[i]['pair']['type2']};
+            for (var j = 0; j < list.length; j++) {
+                var l = list[j];
+                if (l.interactionName != o.interaction && l.sprite1 != o.sp1 && l['sprite2'][0] != o['sp2'][0])
+                    recF.push(recs[i]);
+                break;
+            }
         }
+    }
+    else
+    {
+        return recs;
     }
     return recF;
 };

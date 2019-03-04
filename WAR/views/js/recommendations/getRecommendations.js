@@ -34,7 +34,23 @@ function askForRecommendations(sendSet) {
 var types = [];
 function sendSpriteTypesToTheServe(spriteSet)
 {
+
     types = typeSetCollection;
+    removeItemFrom(typeSetCollection, "Immovable");
+    var send = "";
+    for(var i = 0; i < types.length; i++)
+    {
+        send = types[i] + " " + send;
+    }
+    types = [];
+    askForRecommendations(send);
+}
+
+function sendSpriteTypesToTheServeWithoutConstraint(spriteSet)
+{
+
+    types = typeSetCollection;
+    removeItemFrom(typeSetCollection, "Immovable");
     var send = "";
     for(var i = 0; i < types.length; i++)
     {

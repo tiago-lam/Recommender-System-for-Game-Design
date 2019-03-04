@@ -30,7 +30,7 @@ public class GameTable {
 
             BufferedReader bufferedReader = new BufferedReader(fileReader);
 
-            int gameCounter = 0;
+            int gameCounter = 1;
             while((line = bufferedReader.readLine()) != null) {
             	GameItem g = new GameItem();
             	Scanner scanner = new Scanner(line);
