@@ -32,10 +32,10 @@ public class Play extends HttpServlet{
 			JSONObject json = (JSONObject) parser.parse(descriptions);
 			String game = json.get("game").toString();
 			String level = json.get("level").toString();
-			generateVGDLFile("simulation/game.txt", "simulation/level.txt", game, level);
+			generateVGDLFile("simulation/game.txt", "simulation/game_lvl0.txt", game, level);
 			
 			GameRun gameRun = new GameRun();
-			gameRun.run("simulation/game.txt", "simulation/level.txt", agent);
+			gameRun.run("simulation/game.txt", "simulation/game_lvl0.txt", agent);
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

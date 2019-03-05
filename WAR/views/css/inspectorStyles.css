@@ -204,6 +204,20 @@ input[type="range"]
 	float: left;
 }
 
+#gameSelectDiv
+{
+	border: 1px solid #4EC6DE;
+	width: 200px;
+	float: left;
+}
+
+#gameSelectTypingDiv
+{
+	border: 1px solid #4EC6DE;
+	width: 200px;
+	margin-left: 220px;
+}
+
 #gameSelectDiv span
 {
 	width: 100px;

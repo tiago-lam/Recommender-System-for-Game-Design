@@ -23,7 +23,7 @@ public class ContextualServer {
         spriteSerialize.addServletWithMapping(Play.class, "/play");
         spriteSerialize.addServletWithMapping(GetFrames.class, "/frames");
         spriteSerialize.addServletWithMapping(GetRecommendations.class, "/recc");
-        spriteSerialize.addServletWithMapping(GetRecommendationPositions.class, "/pos");
+        //spriteSerialize.addServletWithMapping(GetRecommendationPositions.class, "/pos");
 
         ResourceHandler resource_handler = new ResourceHandler();
         resource_handler.setDirectoriesListed(true);

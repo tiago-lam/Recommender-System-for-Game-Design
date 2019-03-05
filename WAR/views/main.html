@@ -452,8 +452,22 @@
                         location.reload();
                     }
                 </script>
-                <input type="button" onclick="loadGame()">Load Game</input>
+                <input type="button" value="Load game" onclick="loadGame()">Load Game</input>
             </div>
+            <div id="gameSelectTypingDiv">
+                <span>Type game name</span>
+                <input id="gameSelectionInput" type="text">
+                <script>
+                    function loadGameInput() {
+                        var gameSelect = document.getElementById('gameSelectionInput');
+                        getGameParam = "game=" + gameSelect.value;
+                        localStorage.setItem("varGetGameParam", getGameParam);
+                        location.reload();
+                    }
+                </script>
+                <input type="button" value="Load game" onclick="loadGameInput()">
+            </div>
+
         </div>
 
         <div><h2>Settings</h2>

@@ -31,6 +31,10 @@ public class GetGame extends HttpServlet
 		{
 			toSend = getGameJSONObject("emptyGame/" + "_" + ".txt");
 		}
+		else if(gameToServe.equals("game1"))
+		{
+			toSend = getGameJSONObject("simulation/" + "game" + ".txt");
+		}
 		else
 		{
 			toSend = getGameJSONObject("examples/gridphysics/" + gameToServe + ".txt");

@@ -1,8 +1,4 @@
         var mapIdToInteraction = new Map();
-        /**
-        * access the serve in order to get the sprite set of a game
-        * @type {XMLHttpRequest}
-        * */
 
         function buildTheInteractionSet(interactionObj)
         {
