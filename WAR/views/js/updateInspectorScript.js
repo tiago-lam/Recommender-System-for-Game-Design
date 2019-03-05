@@ -20,7 +20,7 @@
         function updateInvisibleValue(val, updateFunction)
         {
             console.log(val);
-            updateFunction(val, "invisible");
+            updateFunction(val.toString(), "invisible");
         }
 
         /**
@@ -31,7 +31,7 @@
         function updateRotateValue(val, updateFunction)
         {
             console.log(val);
-            updateFunction(val, "rotateInPlace");
+            updateFunction(val.toString(), "rotateInPlace");
         }
 
         /**
@@ -41,8 +41,8 @@
          */
         function updateSingletonValue(val, updateFunction)
         {
-            document.getElementById('shrinkValue').textContent=val;
-            updateFunction(val, "singleton");
+            console.log(val);
+            updateFunction(val.toString(), "singleton");
         }
 
         /**

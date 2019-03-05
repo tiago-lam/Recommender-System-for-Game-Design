@@ -66,7 +66,7 @@ function refreshGame(game, refreshLevel)
 function redoProcedureByPressingCtrlZ(e) {
 
     var evtobj = window.event ? event : e
-    if (evtobj.keyCode == 17 && evtobj.ctrlKey) {
+    if (evtobj.keyCode === 17 && evtobj.ctrlKey) {
         redoGame(true);
     }
 
