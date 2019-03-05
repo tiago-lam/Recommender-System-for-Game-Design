@@ -1,15 +1,18 @@
 BasicGame
     SpriteSet
         background > Immovable img=oryx/space1
-        avatar > ShootAvatar img=newset/cop1 healthPoints=5 stype=bullet
-        bullet > Missile img=oryx/orb3 shrinkfactor=0.5 singleton=true
+        avatar > ShootAvatar img=newset/cop1 healthPoints=5 stype=shovel
+        shovel > OrientedFlicker img=oryx/pickaxe shrinkfactor=0.4 color=LIGHTGRAY limit=1
 
     LevelMapping
         b > background
         ¡ > avatar background
         ¢ > bullet background
+        £ > diamond background
+        ¤ > shovel background
         
     InteractionSet
+        shovel EOS > undoAll scoreChange=0
         
     TerminationSet
         

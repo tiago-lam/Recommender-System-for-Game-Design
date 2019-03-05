@@ -164,13 +164,19 @@
             {
                 var idReplacement = id.replace("cancel_img_", "");
                 document.getElementById(idReplacement).parentElement.remove();
+                document.getElementById(id).remove();
             }
             else
             {
                 var elem = document.getElementById(id);
                 if(elem != undefined)
                 {
-                    elem.parentElement.remove();
+                    elem.remove();
+                    var elemCancel = document.getElementById("cancel_img_" + id);
+                    if(elemCancel != null || elemCancel != undefined)
+                    {
+                        elemCancel.remove();
+                    }
                 }
             }
         }
@@ -263,6 +269,7 @@
                 var objId = i;
                 buildRecommendInteraction(recObj, objId, recs[i].interactionConfidence);
             }
+            fillSortSuggestionSelect();
         }
 
         function buildRecommendInteraction(interactionObj, objId, conf)
@@ -351,8 +358,23 @@
             }
         }
 
+        function fillSortSuggestionSelect()
+        {
+            var select = document.getElementById('sortSuggestionSelect');
+            deleteElementsFrom(select);
+            for(var i = 0; i < spriteNameCollection.length; i++)
+            {
+                var opt = document.createElement('option');
+                opt.value = spriteNameCollection[i];
+                opt.text = spriteNameCollection[i];
+                select.appendChild(opt);
+            }
+        }
+
         function sortSuggestionBy(element)
         {
+            deleteElementsFrom(document.getElementById('suggestionList'));
+            fillSortSuggestionSelect();
             var item = findItemBySelect(document.getElementById('sortSuggestionSelect'), element);
             var newList = [];
             var recs = getInteractionsToRecommend();
@@ -362,16 +384,16 @@
                 alert('no interactions to recommend with ' + item);
                 return;
             }
-            deleteElementsFrom(document.getElementById('suggestionList'));
+
             for(var i = 0; i < newList.length; i++)
             {
                 var recObj = {};
                 recObj["interactionName"] = newList[i].interaction;
                 recObj["sprite1"] = newList[i].pair.type1;
                 recObj["sprite2"] = newList[i].pair.type2;
-                recObj["parameters"] = {};
+                recObj["parameters"] = {scoreChange: 0};
                 var objId = i;
-                buildRecommendInteraction(recObj, objId);
+                buildRecommendInteraction(recObj, objId, newList[i].interactionConfidence);
             }
         }
 
