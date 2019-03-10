@@ -29,7 +29,7 @@ function allowDrop(ev) {
         if(ev.target.childNodes.length == 0)
         {
             var img = extractImageFrom(ev);
-            ev.target.append(img);
+            ev.target = img;
         }
         else
         {
@@ -76,11 +76,11 @@ function drag(ev) {
     parentId = ev.target.parentNode.id;
     isDragEnabled = !isDragEnabled;
     console.log('dragging');
-//    var id = ev.target.id;
-
-//     id = id.replace("drag_", "");
-//     id = id.replace("DragImgIdId", "");
-//     var refClass = (mapIdentifierToObject.get(id).referenceClass);
+    // var id = ev.target.id;
+    //
+    // id = id.replace("drag_", "");
+    // id = id.replace("DragImgIdId", "");
+    // var refClass = (mapIdentifierToObject.get(id).referenceClass);
  
 //     var posToSuggest = mapTypeToPositions.get(refClass);
 
@@ -106,7 +106,11 @@ function drop(ev) {
         img.id = 'drag_' + ev.target.id;
 
         if(!ev.target.hasAttribute('src')) {
-            ev.target.append(img);
+            if(!ev.target.contains(img))
+            {
+                console.log(ev.target);
+                ev.target.append(img);
+            }
             var newImg = document.createElement('img');
             newImg.src = img.src;
             newImg.draggable = true;
@@ -138,7 +142,10 @@ function drop(ev) {
             var parentElement = document.getElementById(parentId);
             if(parentElement.nodeName == 'DIV')
             {
-                parentElement.removeChild(parentElement.childNodes[0]);
+                if(parentElement.childNodes.length > 1)
+                {
+                    parentElement.removeChild(parentElement.childNodes[0]);
+                }
             }
         }
 

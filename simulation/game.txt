@@ -3,19 +3,16 @@ BasicGame
         background > Immovable img=oryx/space1
         avatar > ShootAvatar img=newset/cop1 healthPoints=5 stype=bullet
         bullet > Missile img=oryx/orb3 shrinkfactor=0.5
-        floor > Immovable img=oryx/floor3 hidden=True randomtiling=0.9
-        exitdoor > Door img=oryx/door2 color=GREEN
-        butterfly > RandomNPC img=oryx/bat2 color=PINK cons=1
+        dragon > Bomber img=oryx/dragon2.png stype=bullet prob=0 speed=0.65
 
     LevelMapping
         b > background
         ¡ > avatar background
         ¢ > bullet background
-        £ > floor background
-        ¤ > exitdoor background
-        ¥ > butterfly background
+        £ > dragon background
         
     InteractionSet
+        dragon EOS > turnAround scoreChange=0
         
     TerminationSet
         

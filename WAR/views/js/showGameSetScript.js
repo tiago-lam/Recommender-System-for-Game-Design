@@ -111,23 +111,61 @@ function initializeGameObject(response) {
     console.log(interactionSetObj);
     console.log(terminationSetObj);
     console.log(levelMatrixObject);
+
+    var sets = new Object();
+    sets['iObjs'] = interactionSetObj;
+    sets['tObjs'] = terminationSetObj;
+
+    return sets;
 }
 
 function initializationProtocol(obj) {
-    initializeGameObject(obj);
+    // initializeGameObject(obj);
+    // structureTheSpriteSetOnHtml();
+    // buildTheInteractionSet(interactionSetObj);
+    // buildTerminationSet(terminationSetObj);
+    initGameDescription(obj, initSpriteObjects, interactionSetObj, initInteractionObjects, terminationSetObj, initTerminationObjects, levelBuilder);
+    document.onkeydown = redoProcedureByPressingCtrlZ;
+}
+
+function initGameDescription(obj, structureSpriteObjects, iObjs, structureInteractionObjects, tObjs, structureTerminationObjects, levelComposer)
+{
+    var sets = initializeGameObject(obj);
+    structureSpriteObjects(sets.iObjs, structureInteractionObjects, sets.tObjs, structureTerminationObjects, levelComposer);
+}
+
+function initSpriteObjects(iObjs, structureInteractionObjects, tObjs, structureTerminationObjects, levelComposer)
+{
     structureTheSpriteSetOnHtml();
-    buildTheInteractionSet(interactionSetObj);
-    buildTerminationSet(terminationSetObj);
+    structureInteractionObjects(iObjs, tObjs, structureTerminationObjects, levelComposer);
+}
+
+function initInteractionObjects(iObjs, tObjs, structureTerminationObjects, levelComposer)
+{
+    buildTheInteractionSet(iObjs);
+    structureTerminationObjects(tObjs, levelComposer);
+}
+
+function initTerminationObjects(tObjs, levelComposer)
+{
+    buildTerminationSet(tObjs);
+    levelComposer();
+}
+
+function levelBuilder() {
     appendWallToMappingObj();
     findObjectsWithoutSymbols();
     var rows = levelMatrixObject.rows;
     var columns = levelMatrixObject.columns;
     createTable(rows, columns);
     createImgList(spriteSetObj);
-    drawLevel();
+    drawLevel(saveAndObserver);
+}
+
+function saveAndObserver()
+{
     saveGameState();
     startLevelObserver();
-    document.onkeydown = redoProcedureByPressingCtrlZ;
 }
 
 /**

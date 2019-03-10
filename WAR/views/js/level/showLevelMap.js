@@ -1,7 +1,7 @@
 /**
  * Draw the map
  */
-function drawLevel()
+function drawLevel(savers)
 {
     var rows = levelMatrixObject.rows;
 
@@ -22,6 +22,7 @@ function drawLevel()
             }
         }
     }
+    savers();
 }
 
 
