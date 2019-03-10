@@ -4,6 +4,7 @@ var paintMode = true;
 var imgSrc = '';
 var imgLogicClass = [];
 var isDragEnabled = false;
+var clickedElement = '';
 
 function extractImageFrom(ev) {
 
@@ -23,6 +24,7 @@ function extractImageFrom(ev) {
 function allowDrop(ev) {
 
     ev.preventDefault();
+
 
     if(!paintMode)
     {
@@ -67,6 +69,7 @@ function cancel()
 }
 
 function drag(ev) {
+    clickedElement = ev.currentTarget;
     ev.dataTransfer.setData("key", ev.target.id);
     imgSrc = ev.target.src;
     for(var i = 0; i < ev.target.classList.length; i++)
@@ -139,18 +142,36 @@ function drop(ev) {
         else{
             ev.target.src = img.src;
             ev.target.classList = img.classList;
-            var parentElement = document.getElementById(parentId);
-            if(parentElement.nodeName == 'DIV')
+            if(clickedElement.parentNode.tagName != 'LI')
             {
-                if(parentElement.childNodes.length > 1)
-                {
-                    parentElement.removeChild(parentElement.childNodes[0]);
-                }
+                var bgId = getLevelBackgroundIdentifierForThisLevel();
+                var bgSymbol = getSymbol(bgId);
+                clickedElement.src = getBackGroundImage();
+                clickedElement.classList.replace(clickedElement.classList[0], 'drag_' + bgId + 'DragImgId');
+                clickedElement.classList.replace(clickedElement.classList[1], bgSymbol);
             }
         }
 
     }
     console.log('drop');
+    //             if(parentElement.nodeName == 'DIV')
+//             {
+//                 if(parentElement.childNodes.length > 1)
+//                 {
+//                     parentElement.removeChild(parentElement.childNodes[0]);
+//                 }
+//             }
+
+    // if(ev.target.tagName != "TAG")
+    // {
+    //     var bgId = getLevelBackgroundIdentifierForThisLevel()
+    //     var symbol = getSymbol(bgId)
+    //     var pos = img.id.replace("drag_", "");
+    //     pos = pos.split(' ');
+    //     pos[0] = pos[0].replace("drag_", "");
+    //     document.getElementById('drag_' + pos[0] + " " + pos[1]).remove();
+    //     drawAtPosition(Number(pos[0]), Number(pos[1]), symbol);
+    // }
 }
 
 function createDiv(id)
@@ -563,4 +584,46 @@ function getPositionOfTheLevelBackground(key)
             }
         }
     }return -1;
+}
+
+function drawLevel(savers)
+{
+    var rows = levelMatrixObject.rows;
+
+    for(var i = 0; i < rows; i++)
+    {
+        var rowElements = levelMatrixObject.map[i];
+
+        for(var j = 0; j < rowElements.length; j++)
+        {
+            //todo - deal with 'w' symbol wall not in the levelMapping
+            var symbol = levelMatrixObject.map[i][j];
+            var div = document.getElementById(i + " " + j);
+            var img = document.getElementsByClassName(symbol)[0];
+            if(img != undefined) {
+                var dropImg = img.cloneNode(true);
+                dropImg.id = 'drag_' + i + ' ' + j;
+                div.appendChild(dropImg);
+            }
+        }
+    }
+    savers();
+}
+
+function drawAtPosition(i, j, symbol)
+{
+    var div = document.getElementById(i + " " + j);
+    var img = document.getElementsByClassName(symbol)[0];
+    if(img != undefined) {
+        var dropImg = img.cloneNode(true);
+        dropImg.id = 'drag_' + i + ' ' + j;
+        div.appendChild(dropImg);
+    }
+}
+
+function getBackGroundImage()
+{
+    var id = getLevelBackgroundIdentifierForThisLevel();
+    var obj = mapIdentifierToObject.get(id);
+    return obj['parameters']['img'] + ".png";
 }
