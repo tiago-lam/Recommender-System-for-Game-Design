@@ -1,28 +1,86 @@
-BasicGame
+BasicGame square_size=20 obs=wallBasicGame
     SpriteSet
-        background > Immovable img=oryx/space1
-        avatar > FlakAvatar img=oryx/spaceship1 stype=sam
-        sam > Missile orientation=UP img=oryx/bullet1
-        alienBlue > Bomber prob=0.01 img=oryx/alien1 stype=bomb cooldown=3 speed=0.8
-        bomb > Missile orientation=DOWN img=oryx/bullet2 color=RED speed=0.5
-        base > Immovable img=oryx/planet color=WHITE
+        floor > Immovable img=oryx/floor3
+        food > Immovable
+            fruit > Immovable img=newset/cherries2 color=PINK
+            pellet > Immovable img=oryx/gold2 shrinkfactor=0.5 color=LIGHTYELLOW
+            power > Resource img=oryx/orb2 shrinkfactor=0.8 color=LIGHTGREEN
+        nest > SpawnPoint img=oryx/door2 invisible=True portal=True
+            redspawn > SpawnPoint img=oryx/door2 stype=redOk invisible=True portal=True
+            orangespawn > SpawnPoint img=oryx/door2 stype=orangeOk invisible=True portal=True
+            bluespawn > SpawnPoint img=oryx/door2 stype=blueOk invisible=True portal=True
+            pinkspawn > SpawnPoint img=oryx/door2 stype=pinkOk invisible=True portal=True
+        moving >
+            ghost >
+                red > singleton=True
+                    redOk > RandomPathAltChaser singleton=True img=oryx/ghost3 cooldown=4 stype1=hungry stype2=powered cons=4
+                    redSc > Fleeing singleton=True img=oryx/ghost1 stype=pacman cooldown=2 maxDistance=500
+                blue > singleton=True
+                    blueOk > RandomPathAltChaser singleton=True img=oryx/ghost4 cooldown=4 stype1=hungry stype2=powered cons=4
+                    blueSc > Fleeing singleton=True img=oryx/ghost1 stype=pacman cooldown=2 maxDistance=500
+                pink > singleton=True
+                    pinkOk > RandomPathAltChaser singleton=True img=oryx/ghost5 cooldown=4 stype1=hungry stype2=powered cons=4
+                    pinkSc > Fleeing singleton=True img=oryx/ghost1 stype=pacman cooldown=2 maxDistance=500
+                orange > singleton=True
+                    orangeOk > RandomPathAltChaser singleton=True img=oryx/ghost6 cooldown=4 stype1=hungry stype2=powered cons=4
+                    orangeSc > Fleeing singleton=True img=oryx/ghost1 stype=pacman cooldown=2 maxDistance=500
+            pacman > OrientedAvatar img=newset/pacman rotateInPlace=False speed=0.5
+                hungry > OrientedAvatar img=newset/pacman color=YELLOW rotateInPlace=False speed=0.5
+                powered > OrientedAvatar img=newset/pacman color=ORANGE rotateInPlace=False speed=0.5
+        wall > Immovable img=oryx/wall3 autotiling=True
 
     LevelMapping
-        b > background
-        ¡ > avatar background
-        ¢ > sam background
-        £ > alienBlue background
-        ¤ > bomb background
-        ¥ > base background
+        0 > floor power
+        1 > floor redspawn
+        2 > floor orangespawn
+        3 > floor bluespawn
+        4 > floor pinkspawn
+        A > floor hungry
+        f > floor fruit
+        w > floor wall
+        + > floor
+        . > floor pellet
+        ¡ > floor nest
+        ¢ > floor redOk
+        £ > floor redSc
+        ¤ > floor blueOk
+        ¥ > floor blueSc
+        ¦ > floor pinkOk
+        § > floor pinkSc
+        ¨ > floor orangeOk
+        © > floor orangeSc
+        ª > floor pacman
+        « > floor powered
+        ¬ > floor food
+        ­ > floor moving
+        ® > floor ghost
+        ¯ > floor red
+        ° > floor blue
+        ± > floor pink
+        ² > floor orange
         
     InteractionSet
-        alienBlue sam > killBoth
-        sam base > killBoth
-        bomb base > killBoth
-        alienBlue EOS > turnAround scoreChange=0
-        avatar bomb > killBoth scoreChange=0
-        alienBlue avatar > killBoth scoreChange=0
-        alienBlue base > killSprite scoreChange=0
+        moving wall > stepBack
+        pacman EOS > wrapAround
+        ghost EOS ghost > stepBack
+        power hungry > killSprite
+        hungry ghost > killSprite scoreChange=-1
+        power pacman > killSprite scoreChange=10
+        pellet pacman > killSprite scoreChange=1
+        fruit pacman > killSprite scoreChange=5
+        hungry power > transformToAll stypeTo=redSc stype=redOk
+        hungry power > transformToAll stypeTo=pinkSc stype=pinkOk
+        hungry power > transformToAll stypeTo=blueSc stype=blueOk
+        hungry power > transformToAll stypeTo=orangeSc stype=orangeOk
+        hungry power > addTimer timer=200 killSecond=True ftype=transformToAll stypeTo=redOk stype=redSc
+        hungry power > addTimer timer=200 killSecond=True ftype=transformToAll stypeTo=pinkOk stype=pinkSc
+        hungry power > addTimer timer=200 killSecond=True ftype=transformToAll stypeTo=blueOk stype=blueSc
+        hungry power > addTimer timer=200 killSecond=True ftype=transformToAll stypeTo=orangeOk stype=orangeSc
+        hungry power > addTimer timer=200 ftype=transformToAll stypeTo=hungry stype=powered
+        hungry power > transformTo stype=powered
+        ghost powered > killSprite scoreChange=40
         
     TerminationSet
+        SpriteCounter stype=food win=True
+        SpriteCounter stype=pacman win=False
         

@@ -176,6 +176,12 @@ function fromObjToString()
     string += interactionSetToString(gameObj["InteractionSet"]);
     string += terminationSetToString(gameObj["TerminationSet"]);
 
+    if(getGameParam != null && getGameParam.replace("game=","") == "pacman")
+    {
+        var complete = "BasicGame square_size=20 obs=wall";
+        string = complete + string;
+    }
+
     var stringLevel = levelObjToString(gameObj["Level"]);
     var description = {game: string, level: stringLevel};
     return description;
@@ -291,6 +297,10 @@ function gettingAvatarMapId()
 
 function checkHowManyAvatarsAreInTheMap()
 {
+    //fix it - remove later
+    if(getGameParam != null && getGameParam.replace("game=","") == "pacman")
+    {return 1;}
+    //
     var count = 0;
     var avatarMapId = gettingAvatarMapId();
 

@@ -109,4 +109,13 @@ function confirmDialog(message, forWhat, target){
         });
 };
 
+function stopServer()
+{
+    xhr = new XMLHttpRequest();
+    var url = "http://localhost:9001/stop?" + "command=stop";
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader("Content-type", "text/plain");
+    xhr.send();
+}
+
 
