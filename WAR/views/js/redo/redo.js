@@ -69,5 +69,16 @@ function redoProcedureByPressingCtrlZ(e) {
     if (evtobj.keyCode === 17 && evtobj.ctrlKey) {
         redoGame(true);
     }
+    else if (e.key === "Escape") {
+        var answer = confirm('Are you sure you want to reset the game')
+        {
+            if(answer)
+            {
+                localStorage.setItem("varGetGameParam", "_");
+                location.reload();
+            }
+        }
+    }
+
 
 }
