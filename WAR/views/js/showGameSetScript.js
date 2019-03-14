@@ -212,7 +212,7 @@ function addNoneAndEosOptions()
  */
 function activateHierarchyListSort()
 {
-    $('.dd').nestable('');
+    //$('.dd').nestable('');
 }
 
 /**

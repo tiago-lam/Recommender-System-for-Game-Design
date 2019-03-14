@@ -67,7 +67,7 @@ function redoProcedureByPressingCtrlZ(e) {
 
     var evtobj = window.event ? event : e
     if (evtobj.keyCode === 17 && evtobj.ctrlKey) {
-        redoGame(true);
+        //redoGame(true);
     }
     else if (e.key === "Escape") {
         var answer = confirm('Are you sure you want to reset the game')

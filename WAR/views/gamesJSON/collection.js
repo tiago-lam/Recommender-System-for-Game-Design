@@ -219,9 +219,18 @@ function filterRepeatedInteractions(recs)
             var o = {interaction: recs[i]['interaction'], sp1: recs[i]['pair']['type1'], sp2: recs[i]['pair']['type2']};
             for (var j = 0; j < list.length; j++) {
                 var l = list[j];
-                if (l.interactionName != o.interaction && l.sprite1 != o.sp1 && l['sprite2'][0] != o['sp2'][0])
-                    recF.push(recs[i]);
-                break;
+                if (l.interactionName == o.interaction && l.sprite1 == o.sp1 && l['sprite2'][0] == o['sp2'][0]) {
+                    if(recF.includes(o)) {
+                        removeItemFrom(recF, recs[i]);
+                    }
+                }
+                else
+                {
+                    if(!recF.includes(recs[i]))
+                    {
+                        recF.push(recs[i]);
+                    }
+                }
             }
         }
     }
@@ -229,6 +238,7 @@ function filterRepeatedInteractions(recs)
     {
         return recs;
     }
+
     return recF;
 };
 
