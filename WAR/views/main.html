@@ -253,11 +253,11 @@
                 <!--<div id="divButtonConfirm">-->
                 <!--<button id="inputButtonConfirmId" type="button" onclick="action(spriteSetObj)">Confirm</button>-->
                 <!--</div>-->
-                <div id="saveSpriteSetDiv">
-                    <button id="saveSpriteSetButtonId" type="button"
-                            onclick="sendSpriteTypesToTheServe(gameObj.SpriteSet)">Ask for recommendations
-                    </button>
-                </div>
+                <!--<div id="saveSpriteSetDiv">-->
+                    <!--<button id="saveSpriteSetButtonId" type="button"-->
+                            <!--onclick="sendSpriteTypesToTheServe(gameObj.SpriteSet)">Ask for recommendations-->
+                    <!--</button>-->
+                <!--</div>-->
             </div><!--End div inspector-->
 
             <div id="imgPickerInputDiv">
@@ -267,7 +267,7 @@
                 </div>
             </div>
 
-            <div id="recommenderDiv">
+            <div id="recommenderDiv" style="display: block">
                 <div id="recommenderHeaderDiv">
                     <h2>Suggestions</h2>
                 </div>
@@ -316,7 +316,7 @@
 
                 </div>
 
-                <div id="suggestionContainer" class="mask">
+                <div id="suggestionContainer" class="mask" style="display: block">
                     <div id="selectSuggestionInteractionId">
                         <input type="button" value="Suggest Interactions" onclick="recommendInteractionsMainCall()"
                                style="padding-left: 16px; margin-left: 34px;">
@@ -472,7 +472,8 @@
 
         <div><h2>Settings</h2>
             <div id="recommendationOnOffDiv">
-                <input type="button" value="stop application" onclick="stopServer()">
+                <input type="button" value="start task" onclick="startTask()">
+                <input type="button" value="stop application" onclick="stopTask()">
             </div>
         </div>
     </div>
@@ -638,6 +639,7 @@
 
 <script>
     coldStartRecommendations();
+    document.onkeydown = redoProcedureByPressingCtrlZ;
 </script>
 
 </body>

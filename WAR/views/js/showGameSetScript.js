@@ -125,7 +125,7 @@ function initializationProtocol(obj) {
     // buildTheInteractionSet(interactionSetObj);
     // buildTerminationSet(terminationSetObj);
     initGameDescription(obj, initSpriteObjects, interactionSetObj, initInteractionObjects, terminationSetObj, initTerminationObjects, levelBuilder);
-    document.onkeydown = redoProcedureByPressingCtrlZ;
+    //document.onkeydown = redoProcedureByPressingCtrlZ;
 }
 
 function initGameDescription(obj, structureSpriteObjects, iObjs, structureInteractionObjects, tObjs, structureTerminationObjects, levelComposer)

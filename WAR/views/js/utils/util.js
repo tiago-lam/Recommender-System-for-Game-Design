@@ -109,13 +109,37 @@ function confirmDialog(message, forWhat, target){
         });
 };
 
+function stopTask()
+{
+    var yes = confirm('this will stop the application. Are you sure?');
+    if(yes)
+    {
+        var xhr = new XMLHttpRequest();
+        var url = "http://localhost:9001/stop?" + "command=stop";
+        xhr.open("POST", url, true);
+        xhr.setRequestHeader("Content-type", "text/plain");
+        xhr.send();
+    }
+}
+
 function stopServer()
 {
-    xhr = new XMLHttpRequest();
+    var xhr = new XMLHttpRequest();
     var url = "http://localhost:9001/stop?" + "command=stop";
     xhr.open("POST", url, true);
     xhr.setRequestHeader("Content-type", "text/plain");
     xhr.send();
+    $("<div>Task time is over. The application will not fully work now." +
+        "Please, go back to the guide and submit your forms. Thank you :) </div>").dialog();
+}
+
+function startTask()
+{
+    $("<div>Task started: you have 20 minutes to finish it. To avoid distraction, the " +
+        "time will not be printed. Don't rush yourself, this is not an exam and you are not being tested," +
+        " just try to do as much as " +
+        "you can</div>").dialog();
+    setTimeout(function(){ stopServer(); }, 1200000);
 }
 
 

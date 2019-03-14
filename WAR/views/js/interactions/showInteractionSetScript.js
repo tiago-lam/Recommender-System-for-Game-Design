@@ -369,7 +369,6 @@
 
         function sortSuggestionBy(element)
         {
-            deleteElementsFrom(document.getElementById('suggestionList'));
             fillSortSuggestionSelect();
             var item = findItemBySelect(document.getElementById('sortSuggestionSelect'), element);
             var newList = [];
@@ -380,16 +379,19 @@
                 alert('no interactions to recommend with ' + item);
                 return;
             }
-
-            for(var i = 0; i < newList.length; i++)
-            {
-                var recObj = {};
-                recObj["interactionName"] = newList[i].interaction;
-                recObj["sprite1"] = newList[i].pair.type1;
-                recObj["sprite2"] = newList[i].pair.type2;
-                recObj["parameters"] = {scoreChange: 0};
-                var objId = i;
-                buildRecommendInteraction(recObj, objId, newList[i].interactionConfidence);
+            else
+                {
+                deleteElementsFrom(document.getElementById('suggestionList'));    
+                for (var i = 0; i < newList.length; i++)
+                {
+                    var recObj = {};
+                    recObj["interactionName"] = newList[i].interaction;
+                    recObj["sprite1"] = newList[i].pair.type1;
+                    recObj["sprite2"] = newList[i].pair.type2;
+                    recObj["parameters"] = {scoreChange: 0};
+                    var objId = i;
+                    buildRecommendInteraction(recObj, objId, newList[i].interactionConfidence);
+                }
             }
         }
 

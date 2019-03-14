@@ -1,15 +1,48 @@
 BasicGame
     SpriteSet
-        background > Immovable img=oryx/space1
-        avatar > ShootAvatar img=newset/cop1 healthPoints=5 stype=bullet
-        bullet > Missile img=oryx/orb3 shrinkfactor=0.5
+        floor > Immovable img=newset/floor2 hidden=True
+        avatar > OrientedAvatar img=oryx/prince1 rotateInPlace=false
+        gem > Immovable shrinkfactor=0.7
+            green > Immovable img=oryx/diamond3 shrinkfactor=0.7
+            red > Immovable img=oryx/diamond2 shrinkfactor=0.7
+            blue > Immovable img=oryx/diamond1 shrinkfactor=0.7
+        key > Passive img=oryx/key3 shrinkfactor=0.7
+        keym > Missile img=oryx/key3 shrinkfactor=0.6
+        exit > Immovable img=newset/exit2
+        door > Immovable img=oryx/doorclosed1
+        boulder > Passive img=newset/block3
+        wall > Immovable img=oryx/wall3 autotiling=True
 
     LevelMapping
-        b > background
-        ¡ > avatar background
-        ¢ > bullet background
+        A > avatar floor
+        r > red floor
+        b > blue floor
+        d > door floor
+        e > exit floor
+        g > green floor
+        k > key floor
+        . > floor
+        O > boulder floor
+        w > wall
+        ¡ > keym floor
+        ¢ > gem floor
         
     InteractionSet
+        keym key wall gem boulder > transformTo stype=key
+        avatar wall door > stepBack
+        boulder avatar > bounceForward
+        key avatar > transformTo stype=keym
+        keym avatar > attractGaze
+        avatar key keym > stepBack
+        door keym > killBoth scoreChange=4
+        green avatar > killSprite scoreChange=1
+        blue avatar > killSprite scoreChange=2
+        red avatar > killSprite scoreChange=5
+        boulder wall key gem boulder > undoAll
+        key wall gem key > undoAll
+        exit avatar > killSprite scoreChange=10
         
     TerminationSet
+        SpriteCounter stype=avatar limit=0 win=False
+        SpriteCounter stype=exit limit=0 win=True
         
