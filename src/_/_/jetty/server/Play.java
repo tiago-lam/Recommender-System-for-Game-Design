@@ -31,7 +31,9 @@ public class Play extends HttpServlet{
 		try {
 			JSONObject json = (JSONObject) parser.parse(descriptions);
 			String game = json.get("game").toString();
+			game = game.replace("Â", "");
 			String level = json.get("level").toString();
+			level = level.replace("Â", "");
 			generateVGDLFile("simulation/game.txt", "simulation/game_lvl0.txt", game, level);
 			
 			GameRun gameRun = new GameRun();

@@ -194,6 +194,31 @@ function modifyPairs()
     return _.uniqBy(pairCollection, obj => obj.pair.type1+obj.pair.type2+obj.interaction)
 }
 
+function dontIncludeThese(recs)
+{
+    recs = recs.filter(el => el['interaction'] != 'spawnIfHasMore');
+    recs = recs.filter(el => el['interaction'] != 'transformTo');
+    recs = recs.filter(el => el['interaction'] != 'attractGaze');
+    recs = recs.filter(el => el['interaction'] != 'undoAll');
+    recs = recs.filter(el => el['interaction'] != 'flipDirection');
+    recs = recs.filter(el => el['interaction'] != 'reverseDirection');
+    if(isTheInteractionAvailable({interactionName: "turnAround", parameters: {}, sprite1: "alienBlue", sprite2: ["EOS"]}))
+    {
+        _.pull(recs, {pair: new Pair('alienBlue', 'EOS'), interaction: "killSprite", interactionConfidence: 1});
+    }
+    return recs;
+}
+
+function isTheInteractionAvailable(oo)
+{
+    for(var i = 0; i < gameObj["InteractionSet"].length; i++){
+        var intr = gameObj["InteractionSet"][i];
+        if(intr.interactionName == oo.interactionName && intr.sprite1 == oo.sprite1 && _.isEqual(intr.sprite2, oo.sprite2))
+            console.log(true);
+        else
+            console.log(false);
+    }}
+
 function getInteractionsToRecommend()
 {
     buildPairInteractionTable();
@@ -202,6 +227,8 @@ function getInteractionsToRecommend()
     //filter background
     recommendations = recommendations.filter(el => el['pair']['type1'] != 'background');
     recommendations = recommendations.filter(el => !el['pair']['type2'].includes('background'));
+    recommendations.push({pair: new Pair('alienBlue', 'EOS'), interaction: "turnAround", interactionConfidence: 1});
+    recommendations = dontIncludeThese(recommendations);
     //filter repeated interaction
     recommendations = filterRepeatedInteractions(recommendations);
 

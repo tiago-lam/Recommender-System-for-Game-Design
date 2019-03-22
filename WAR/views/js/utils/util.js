@@ -139,7 +139,7 @@ function startTask()
         "time will not be printed. Don't rush yourself, this is not an exam and you are not being tested," +
         " just try to do as much as " +
         "you can</div>").dialog();
-    setTimeout(function(){ stopServer(); }, 1200000);
+    setTimeout(function(){ stopServer(); }, 1800000);
 }
 
 

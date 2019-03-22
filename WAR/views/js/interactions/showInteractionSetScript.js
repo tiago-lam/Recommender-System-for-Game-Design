@@ -23,7 +23,7 @@ function convertObjectToText(obj)
 {
     var interaction = obj.interactionName;
     var sprite1 = obj.sprite1;
-    var sprite2 = obj.sprite2; // this is a collection (array), not a single string;
+    var sprite2 = [obj.sprite2]; // this is a collection (array), not a single string;
     var interactionText =
         "<span style='color: #50d2ff'>" + sprite1 + "</span>";
 

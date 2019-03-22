@@ -1,13 +1,13 @@
 BasicGame
     SpriteSet
         background > Immovable img=oryx/space1
-        avatar > FlakAvatar img=oryx/spaceship1 stype=sam
-        sam > Missile orientation=UP img=oryx/bullet1
+        avatar > ShootAvatar img=newset/cop1 healthPoints=5 stype=bullet
+        bullet > Missile img=oryx/orb3 shrinkfactor=0.5
 
     LevelMapping
         b > background
         ¡ > avatar background
-        ¢ > sam background
+        ¢ > bullet background
         
     InteractionSet
         
