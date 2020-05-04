@@ -18,7 +18,7 @@ In 5 Steps:
 4. Run the class jetty.server.ContextualServer.java
 5. Type localhost:9001 on your browser (so far, chrome and safari are the ones most suitable for running the project)
 
-I just want to play the games or see the agents playing them:
+If you just want to play the games or seing the agents playing them:
 
 1. Go to the load tab
 2. Select a game from the list
@@ -26,7 +26,7 @@ I just want to play the games or see the agents playing them:
 4. Select the agent you want to see playing the game (or human if you want to play by yourself)
 5. Select play
 
-I want to see how the recommendation works
+If you want to see how the recommendation works
 
 1. Start by adding sprites, which you can do at the Sprite Set tab (or removing them if you want it)
 2. Click on the button (Ask for recommendations)
