@@ -36,4 +36,4 @@ If you want to see how the recommendation works
 Keep coming back to check more news!
 Best Regards!
 
-p.s.: as we are working to remove bugs, if you see them happen, please report! Thx!
+p.s.: as we are working to remove bugs, if you see them happening, please report! Thx!
